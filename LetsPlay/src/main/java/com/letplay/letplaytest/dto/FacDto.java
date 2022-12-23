@@ -6,6 +6,7 @@ public class FacDto {
 	private int facSeq;
 	private String facName;
 	private int spoId;
+	private String spoName;
 	private String facLocation;
 	private String facContact;
 	private String facImg;
@@ -22,13 +23,14 @@ public class FacDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FacDto(int facSeq, String facName, int spoId, String facLocation, String facContact, String facImg,
-			Date facDate, Boolean facParking, Boolean facLent, Boolean facShower, Boolean facLocker, Boolean facLight,
-			Boolean facCost) {
+	public FacDto(int facSeq, String facName, int spoId, String spoName, String facLocation, String facContact,
+			String facImg, Date facDate, Boolean facParking, Boolean facLent, Boolean facShower, Boolean facLocker,
+			Boolean facLight, Boolean facCost) {
 		super();
 		this.facSeq = facSeq;
 		this.facName = facName;
 		this.spoId = spoId;
+		this.spoName = spoName;
 		this.facLocation = facLocation;
 		this.facContact = facContact;
 		this.facImg = facImg;
@@ -58,6 +60,12 @@ public class FacDto {
 	}
 	public void setSpoId(int spoId) {
 		this.spoId = spoId;
+	}
+	public String getSpoName() {
+		return spoName;
+	}
+	public void setSpoName(String spoName) {
+		this.spoName = spoName;
 	}
 	public String getFacLocation() {
 		return facLocation;
@@ -119,6 +127,5 @@ public class FacDto {
 	public void setFacCost(Boolean facCost) {
 		this.facCost = facCost;
 	}
-	
-	
+
 }
