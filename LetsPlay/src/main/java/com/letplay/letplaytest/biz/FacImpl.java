@@ -16,7 +16,7 @@ public class FacImpl implements FacBiz{
 
 	@Override
 	public List<FacDto> selectFacList() {
-		return facMapper.selectFacLisit();
+		return facMapper.selectFacList();
 	}
 	
 	@Override
