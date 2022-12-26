@@ -15,5 +15,8 @@
 <h2><a href="/facility/list">시설</a></h2>
 <br>
 <h2><a href="">레슨</a></h2>
+<br>
+<h2><a href="/notice/list">공지사항</a></h2>
+<br>
 </body>
 </html>

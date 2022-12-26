@@ -2,8 +2,11 @@ package com.letplay.letplaytest.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.letplay.letplaytest.dto.NoticeDto;
 /*`NOTICE_SEQ`	int unsigned auto_increment	NOT NULL,
@@ -14,8 +17,20 @@ import com.letplay.letplaytest.dto.NoticeDto;
 	`NOTICE_MODIDATE`	DATE	NULL*/
 @Mapper
 public interface NoticeMapper {
+	@Select("SELECT *  FROM NOTICE ORDER BY NOTICE_SEQ DESC ")
+	List<NoticeDto> selectNoticeList();
+
+	@Select("SELECT * FROM NOTICE WHERE NOTICE_SEQ=#{noticeSeq} ")
+	NoticeDto selectNoticeOne(int inqSeq);
 	
-	@Select()
-	List<NoticeDto> selectList();
+	@Insert(" INSERT INTO `multi`.`notice` (`NOTICE_SEQ`, `ID`, `NOTICE_TITLE`, `NOTICE_CONTENT`, `NOTICE_DATE`, `NOTICE_MODIDATE`) VALUES (NULL, #{id}, #{noticeTitle}, #{noticeContent}, now(), now()) ")
+	int insertNotice(NoticeDto dto);
+	
+	@Update("UPDATE NOTICE SET NOTICE_TITLE=#{noticeTitle}, NOTICE_CONTENT=#{noticeContent} WHERE NOTICE_SEQ=#{noticeSeq} ")
+	int updateNotice(NoticeDto dto);
+	
+	@Delete("DELETE FROM NOTICE WHERE NOTICE_SEQ=#{noticeSeq} ")
+	int deleteNotice(int noticeSeq);
 
 }
+
