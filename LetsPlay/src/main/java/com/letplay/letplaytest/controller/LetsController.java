@@ -47,15 +47,16 @@ public class LetsController {
 	
 	
 	// 매치controller
+	
 	@GetMapping("/match/list")
-	public String selectList(Model model) {
+	public String selectMatchList(Model model) {
 		model.addAttribute("list",matchBiz.selectList());
 		
 		return "matchlist";
 	}
 	
 	@PostMapping("/match/insert")
-	public String insert(MatchDto dto) {
+	public String insertMatch(MatchDto dto) {
 		if(matchBiz.insert(dto) > 0 ) {
 			return "redirect:/match/list";
 		}else {
@@ -64,16 +65,42 @@ public class LetsController {
 	}
 	
 	@GetMapping("/match/insertform")
-	public String insertForm() {
+	public String insertFormMatch() {
 		return "matchinsert";
 	}
 	
 	@GetMapping("/match/detail")
-	public String selectOne(Model model, int matchSeq) {
-		model.addAttribute("dto",matchBiz.selectOne(matchSeq));
+	public String selectOneMatch(Model model, int matchSeq) {
+		model.addAttribute("dto", matchBiz.selectOne(matchSeq));
 		
 		return "matchdetail";
 	}
+	
+	@GetMapping("/match/updateform")
+	public String updateFormMatch(Model model, int matchSeq) {
+		model.addAttribute("dto", matchBiz.selectOne(matchSeq));
+		return "matchupdate";
+	}
+	
+	@PostMapping("/match/update")
+	public String updateMatch(MatchDto dto) {
+		if(matchBiz.update(dto)>0) {
+			return "redirect:/match/deatil?matchSeq="+dto.getMatchSeq();
+		}else {
+			return "redirect:/match/updateform?matchSeq="+dto.getMatchSeq();
+		}
+	}
+	
+	@GetMapping("/match/delete")
+	public String deleteMatch(int matchSeq) {
+		if(matchBiz.delete(matchSeq)>0) {
+			return "redirect:/match/list";
+		}else {
+			return "redirect:/match/list";
+		}
+	}
+	
+	
 	
 	
 	

@@ -2,9 +2,11 @@ package com.letplay.letplaytest.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.letplay.letplaytest.dto.MatchDto;
 /*	`MATCH_SEQ`	int unsigned auto_increment	NOT NULL PRIMARY KEY,
@@ -77,5 +79,11 @@ public interface MatchMapper {
 
 	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, #{matchRegdate}, #{matchModidate}, #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchCnt}, #{matchLevel}, #{matchFacility}, #{matchStatus}, #{cntComment}) ")
 	int insert(MatchDto dto);
+
+	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MTACH_CNT=#{matchCnt}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility} WHERE MATCH_SEQ=#{matchSeq} ")
+	int update(MatchDto dto);
+
+	@Delete(" DELETE FROM MATCH_BOARD WHERE MATCH_SEQ = #{matchSeq} ")
+	int delete(int matchSeq);
 
 }
