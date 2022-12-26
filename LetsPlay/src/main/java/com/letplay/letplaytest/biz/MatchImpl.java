@@ -31,12 +31,12 @@ public class MatchImpl implements MatchBiz {
 
 	@Override
 	public int update(MatchDto dto) {
-		return 0;
+		return matchMapper.update(dto);
 	}
 
 	@Override
 	public int delete(int matchSeq) {
-		return 0;
+		return matchMapper.delete(matchSeq);
 	}
 
 	

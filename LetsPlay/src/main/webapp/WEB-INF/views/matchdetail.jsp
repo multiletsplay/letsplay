@@ -12,16 +12,7 @@
 <body>
 	<div>
 <script>
-function fn1(){
-	if (confirm("게시글을 삭제하시겠습니까?")) {
-		location.href='/board/delete?boardSeq=${dto.boardSeq}'
-	}
-};
-function fn2(){
-	if (confirm("게시글을 추천하시겠습니까?")) {
-		location.href='/board/updatelike?boardSeq=${dto.boardSeq}'
-	}
-};
+
 </script>
 	</div>
 	
