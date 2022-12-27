@@ -14,7 +14,7 @@ import com.letplay.letplaytest.biz.InquiryBiz;
 import com.letplay.letplaytest.dto.InquiryDto;
 
 @Controller
-@RequestMapping("/facility")
+@RequestMapping("/")
 public class LetsYunaController {
 	@Autowired
 	private FacBiz facBiz;
@@ -44,10 +44,14 @@ public class LetsYunaController {
 	}
 	
 	//1대1문의
-	@GetMapping("/inquiry/list")
+	@GetMapping("/inquiry/list")				/*page:default 페이지, size:한페이지게시글수, sort:정렬기준컬럼, direction:정렬순서*/
 	public String selectInquirylist(Model model) {
-		List<InquiryDto> inqlist = inquiryBiz.selectList();
-		model.addAttribute("inquirylist", inqlist);
+		model.addAttribute("inquirylist", inquiryBiz.selectList());
+		//Page<InquiryDto> inquirylist = inquiryBiz.selectList(pageable);
+		//int nowPage = inquirylist.getPageable().getPageNumber()+1;			//현재페이지, pageable이 갖고 있는 페이지는 0부터 시작
+		//int startPage = Math.max(nowPage -4, 1);							//블럭에서 보여줄 시작 페이지
+		//int endPage = Math.min(nowPage + 5, inquirylist.getTotalPages());	//블럭에서 보여줄 마지막 페이지
+		
 		return "inquirylist";
 	}
 
@@ -58,12 +62,12 @@ public class LetsYunaController {
 	}
 	
 	@GetMapping("/inquiry/insertform")
-	public String insertInquiryForm() {
+	public String insertFormInq() {
 		return "inquiryinsert";
 	}
 	
 	@PostMapping("/inquiry/insert")
-	public String insertInquiry(InquiryDto dto) {
+	public String insertInq(InquiryDto dto) {
 		if(inquiryBiz.insert(dto)>0) {
 			return "redirect:/inquiry/list";
 		}else {
@@ -72,7 +76,7 @@ public class LetsYunaController {
 	}
 	
 	@GetMapping("/inquiry/updateform")
-	public String updateInquiry(Model model, int inqSeq) {
+	public String updateFormInq(Model model, int inqSeq) {
 		model.addAttribute("dto", inquiryBiz.selectOne(inqSeq));
 		return "inquiryupdate";
 	}
