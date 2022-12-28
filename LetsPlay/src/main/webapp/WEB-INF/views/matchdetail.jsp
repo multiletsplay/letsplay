@@ -8,13 +8,73 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<body>
-	<div>
+<body style="background-color: gray">
+        <div class="container col-8 mt-2" style="background-color:white">
 <script>
-
-</script>
+function fn1(){
+	if (confirm("게시글을 삭제하시겠습니까?")) {
+		location.href='/match/delete?matchSeq=${dto.matchSeq}'
+	}
+};
+function fn2(){
+	if (confirm("게시글을 추천하시겠습니까?")) {
+		location.href='/match/updatelike?matchSeq=${dto.matchSeq}'
+	}
+};
+	</script>
+	<table border="1" class="table">
+		<tr class="table-active">
+			<th>작성자</th>
+			<td width="500px">${dto.id }</td>
+		</tr>
+		<tr>
+			<th>제  목</th>
+			<td>${dto.matchTitle }</td>
+		</tr>
+		<tr>
+			<th>내  용</th>
+			<td width="500px"><textarea rows="10" cols="70" readonly="readonly">${dto.matchContent }</textarea></td>
+		</tr>
+		<tr>
+			<td colspan="3" align="right">
+				<input type="button" value="수정" onclick="location.href='/match/updateform?matchSeq=${dto.matchSeq}'">
+				<input type="button" value="삭제"  onclick="javascript:fn1();">
+				<input type="button" value="목록" onclick="location.href='/match/list'">
+				<div style="text-align:center">
+					<input type="image" value="" src="../../img/likebutton.webp" width="35px" onclick="fn2();">
+					<span>${dto.like }</span>
+					
+				</div>
+				<div>
+					<form method="post" action="/match/insertreply?matchSeq=${dto.matchSeq}">
+						<p>
+							<label>댓글 작성자:</label><input type="text" name="id" >
+						</p>
+						<p>
+							<textarea rows="4" cols="100" name="matchContent"></textarea>
+						</p>
+						<p>
+							<input type="submit" value="댓글 작성">
+						</p>
+					</form>
+					
+				</div>
+			</td>
+		</tr>
+		</table>
+		<table border="1">
+		<c:forEach items="${reply }" var="reply">
+			<tr>
+				<td width="100px">${reply.id }</td>
+				<td width="475px">${reply.repContent }</td>
+				<td width="200px"><fmt:formatDate value="${reply.repRegdate}" pattern="yyyy-MM-dd HH:mm:ss" ></fmt:formatDate>
+				<input type="button" value="삭제" onclick="location.href='/match/delreply?repSeq=${reply.repSeq} + &matchSeq=${dto.matchSeq}'"></td>
+			</tr>		
+		</c:forEach>		
+	</table>
 	</div>
-	
 </body>
 </html>

@@ -7,10 +7,43 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<style type="text/css">
+	ul{list-style: none; }
+	li{float: left; margin-right: 10px;}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+$(function() {
+		$('#pagination').on('click', 'a', function(e) {
+			e.preventDefault();
+			console.log($(this));
+			const value = $(this).data('pagenum');
+			console.log(value);
+			document.pageForm.pageNum.value = value;
+			document.pageForm.submit();
+		});
+		
+	})
+</script>
 </head>
 <body>
-<h1>공지사항</h1>
+<h2>공지사항</h2>
+<div class="div2"></div>
+<div class="div2">
+
+<form name="searchFrm" method="post" action="/notice/list">
+	<select name="searchGubun" id="searchGubun">
+		<option value="noticeTitle">제목</option>
+		<option value="id">글쓴이</option>
+		<option value="noticeContent">내용</option>	
+	</select>
+	<input type="text" name="searchText" id="searchText">
+	<button type="submit">검색</button>
+</form>
+
+</div>
+
+
 <div>
 	<table border="1">
 		<col width="100">
@@ -50,15 +83,15 @@
 <div class="paging">
 	<form action="<c:url value='/notice/list'/>" name="pageForm">
 		<ul class="pagination" id="pagination">
-			<c:if test="${paging.prev }">
+<%-- 			<c:if test="${paging.prev ne true }"> --%>
 				<li class="page-item"><a class="page-link" href="<c:url value='/notice/list?page=${paging.startPage-1}'/>" data-pageNum="${paging.startPage-1}">이전</a></li>
-			</c:if>
+<%-- 			</c:if> --%>
 			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
 				<li class="{paging.pageNum == num ? 'page-item active' : ''}" page-item><a class="page-link" href="#" data-pageNum="${num}">${num}</a></li>
 			</c:forEach>
-			<c:if test="${paging.next }">
+<%-- 			<c:if test="${paging.next ne true }"> --%>
 				<li class="page-item"><a class="page-link" href="<c:url value='/notice/list?page=${paging.endPage+1}'/>" data-pageNum="${paging.endPage+1}">다음</a></li>
-			</c:if>
+<%-- 			</c:if> --%>
 		</ul>
 		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}">
         <input type="hidden" name="countPerPage" value="${paging.cri.amount}">

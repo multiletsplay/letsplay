@@ -11,6 +11,7 @@ public interface MatchBiz {
 	public int insertMatch(MatchDto dto);
 	public int updateMatch(MatchDto dto);
 	public int deleteMatch(int matchSeq);
+	public int cntSeq(int matchSeq);
 	
 	public int insertReply(String matchContent, String id, int matchSeq);
 	public List<ReplyDto> selectReplyList(int matchSeq);

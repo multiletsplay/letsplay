@@ -12,6 +12,6 @@ public interface NoticeBiz {
 	public int insertNotice(NoticeDto dto);			//공지등록
 	public int updateNotice(NoticeDto dto);			//공지수정
 	public int deleteNotice(int noticeSeq);			//공지삭제
-	public int getTotal();	//전체 데이터갯수 가져오기
+	public int getTotal();	//전체 데이터개수 가져오기
 	
 }

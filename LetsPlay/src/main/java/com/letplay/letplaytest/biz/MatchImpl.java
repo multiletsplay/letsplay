@@ -60,5 +60,10 @@ public class MatchImpl implements MatchBiz {
 		return matchMapper.delReply(repSeq);
 	}
 
+	@Override
+	public int cntSeq(int matchSeq) {
+		return matchMapper.cntSeq(matchSeq);
+	}
+
 	
 }
