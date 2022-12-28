@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.letplay.letplaytest.biz.FacBiz;
+import com.letplay.letplaytest.biz.InqReplyBiz;
 import com.letplay.letplaytest.biz.InquiryBiz;
 import com.letplay.letplaytest.dto.Criteria;
+import com.letplay.letplaytest.dto.InqReplyDto;
 import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.PageDto;
 
@@ -20,6 +22,8 @@ public class LetsYunaController {
 	private FacBiz facBiz;
 	@Autowired
 	private InquiryBiz inquiryBiz;
+	@Autowired
+	private InqReplyBiz inqreplyBiz;
 	
 	// 시설controller 각 url는 임시
 	@GetMapping("/facility/list")
@@ -59,6 +63,7 @@ public class LetsYunaController {
 	@GetMapping("/inquiry/detail")
 	public String selectInquiryOne(Model model, int inqSeq) {
 		model.addAttribute("dto", inquiryBiz.selectOne(inqSeq));
+		model.addAttribute("reply", inqreplyBiz.select(inqSeq));
 		return "inquirydetail";
 	}
 	
@@ -95,6 +100,40 @@ public class LetsYunaController {
 	public String deleteInq(int inqSeq) {
 		if(inquiryBiz.delete(inqSeq)>0) {
 			return "redirect:/inquiry/list";
+		}else {
+			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
+		}
+	}
+	
+	//문의 댓글
+	@PostMapping("/inquiry/reply/insert")
+	public String insertInqRep(InqReplyDto dto, int inqSeq) {
+		if(inqreplyBiz.insert(dto)>0) {
+			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
+		}else {
+			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
+		}
+	}
+	
+	@GetMapping("/inquiry/reply/updateform")
+	public String updateFormInqRep(Model model, int repSeq) {
+		model.addAttribute("dto", inqreplyBiz.select(repSeq));
+		return "inquiryupdate";
+	}
+	
+	@PostMapping("/inquiry/reply/update")
+	public String updateInqRep(InqReplyDto dto) {
+		if(inqreplyBiz.update(dto)>0) {
+			return "redirect:/inquiry/detail?inqSeq="+dto.getInqSeq();
+		}else {
+			return "redirect:/inquiry/updateform?inqSeq="+dto.getInqSeq();
+		}
+	}
+	
+	@GetMapping("/inquiry/reply/delete")
+	public String deleteInqRep(int repSeq, int inqSeq) {
+		if(inqreplyBiz.delete(repSeq)>0) {
+			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
 		}else {
 			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
 		}
