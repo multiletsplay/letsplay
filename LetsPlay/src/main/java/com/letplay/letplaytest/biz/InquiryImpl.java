@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.letplay.letplaytest.dao.InquiryMapper;
+import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.InquiryDto;
 
 @Service
@@ -15,8 +16,8 @@ public class InquiryImpl implements InquiryBiz{
 	private InquiryMapper inquiryMapper;
 
 	@Override
-	public List<InquiryDto> selectList() {
-		return inquiryMapper.selectList();
+	public List<InquiryDto> selectList(Criteria criteria) {
+		return inquiryMapper.selectList(criteria);
 	}
 
 	@Override
@@ -37,6 +38,11 @@ public class InquiryImpl implements InquiryBiz{
 	@Override
 	public int delete(int inqSeq) {
 		return inquiryMapper.delete(inqSeq);
+	}
+
+	@Override
+	public int getTotal() {
+		return inquiryMapper.getTotal();
 	}
 
 }

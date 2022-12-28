@@ -8,12 +8,20 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.InquiryDto;
 
 @Mapper
 public interface InquiryMapper {
-	@Select(" SELECT *  FROM `ONE-ON-ONE INQUIRY` ORDER BY INQ_SEQ DESC ")
-	List<InquiryDto> selectList();
+	@Select(" SELECT INQ_SEQ, REPLY_CHECK, INQ_TITLE, ID, INQ_DATE\n"
+			+ "FROM (\n"
+			+ "	SELECT @ROWNUM := @ROWNUM + 1 AS rnum, INQ_SEQ, REPLY_CHECK, INQ_TITLE, ID, INQ_DATE\n"
+			+ "	FROM `ONE-ON-ONE INQUIRY` I, (SELECT @ROWNUM := 0 ) A\n"
+			+ "	ORDER BY INQ_SEQ DESC\n"
+			+ ") TMP\n"
+			+ "WHERE rnum > (#{pageNum } - 1) * #{amount} \n"
+			+ "LIMIT #{amount } ")
+	List<InquiryDto> selectList(Criteria criteria);
 
 	@Select(" SELECT * FROM `ONE-ON-ONE INQUIRY` WHERE INQ_SEQ=#{inqSeq} ")
 	InquiryDto selectOne(int inqSeq);
@@ -26,4 +34,7 @@ public interface InquiryMapper {
 	
 	@Delete(" DELETE FROM `ONE-ON-ONE INQUIRY` WHERE INQ_SEQ=#{inqSeq} ")
 	int delete(int inqSeq);
+	
+	@Select(" SELECT count(*) FROM `ONE-ON-ONE INQUIRY` ")
+	int getTotal();
 }

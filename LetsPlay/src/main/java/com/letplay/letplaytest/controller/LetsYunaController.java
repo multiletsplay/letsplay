@@ -1,7 +1,5 @@
 package com.letplay.letplaytest.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.letplay.letplaytest.biz.FacBiz;
 import com.letplay.letplaytest.biz.InquiryBiz;
+import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.InquiryDto;
+import com.letplay.letplaytest.dto.PageDto;
 
 @Controller
 @RequestMapping("/")
@@ -44,14 +44,15 @@ public class LetsYunaController {
 	}
 	
 	//1대1문의
-	@GetMapping("/inquiry/list")				/*page:default 페이지, size:한페이지게시글수, sort:정렬기준컬럼, direction:정렬순서*/
-	public String selectInquirylist(Model model) {
-		model.addAttribute("inquirylist", inquiryBiz.selectList());
-		//Page<InquiryDto> inquirylist = inquiryBiz.selectList(pageable);
-		//int nowPage = inquirylist.getPageable().getPageNumber()+1;			//현재페이지, pageable이 갖고 있는 페이지는 0부터 시작
-		//int startPage = Math.max(nowPage -4, 1);							//블럭에서 보여줄 시작 페이지
-		//int endPage = Math.min(nowPage + 5, inquirylist.getTotalPages());	//블럭에서 보여줄 마지막 페이지
-		
+	@GetMapping("/inquiry/list")
+	public String selectInquirylist(Model model, Criteria criteria) {
+		int inqListCnt = inquiryBiz.getTotal();
+		PageDto paging = new PageDto();
+		paging.setCri(criteria);
+		paging.setTotal(inqListCnt);
+		model.addAttribute("inquirylist", inquiryBiz.selectList(criteria));
+		model.addAttribute("paging", paging);
+//		model.addAttribute("paging", new PageDto(10, inquiryBiz.getTotal(), criteria));
 		return "inquirylist";
 	}
 
