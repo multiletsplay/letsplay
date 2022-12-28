@@ -46,7 +46,10 @@ public interface MatchMapper {
 				+ " match_status as matchStatus, "
 				+ " (select count(reply.rep_seq)"
 				+ " 	from reply"
-				+ " 	where match_seq=matchSeq) cntComment "
+				+ " 	where match_seq=matchSeq) cntComment,"
+				+ " (select count(match_board.match_seq)"
+				+ "		from match_board) "
+				+ "		cntSeq "
 				+ " FROM "
 				+ " 	MATCH_BOARD "
 				+ " ORDER BY "
@@ -71,14 +74,16 @@ public interface MatchMapper {
 				+ " match_status as matchStatus, "
 				+ " (select count(reply.rep_seq)"
 				+ " 	from reply"
-				+ " 	where match_seq=matchSeq) cntComment "
+				+ " 	where match_seq=matchSeq) cntComment, "
+				+ " (select count(match_board.match_seq)"
+				+ "		from match_board) cntSeq "
 				+ " FROM "
 				+ " 	MATCH_BOARD "
 				+ " WHERE "
 				+ " MATCH_SEQ=#{matchSeq} ")
 	MatchDto selectMatchOne(int matchSeq);
 
-	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, #{matchRegdate}, #{matchModidate}, #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchCnt}, #{matchLevel}, #{matchFacility}, #{matchStatus}, #{cntComment}) ")
+	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchCnt}, #{matchLevel}, #{matchFacility}, #{matchStatus}, #{cntComment}, #{cntSeq) ")
 	int insertMatch(MatchDto dto);
 
 	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MTACH_CNT=#{matchCnt}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility} WHERE MATCH_SEQ=#{matchSeq} ")
@@ -112,6 +117,17 @@ public interface MatchMapper {
 
 	@Delete(" DELETE FROM REPLY WHERE REP_SEQ=#{repSeq} ")
 	int delReply(int repSeq);
+
+	@Update(" update match_board "
+				+ " set cnt_seq = "
+					+ " (select count(match_board.match_seq)"
+					+ " from match_board"
+					+ " where match_seq = #{matchSeq})"
+				+ " where match_seq = #{matchSeq} "
+				+ " select cnt_seq as cntSeq"
+				+ " from match_board "
+				+ " where match_seq = #{matchSeq}" )
+	int cntSeq(int matchSeq);
 
 	
 	

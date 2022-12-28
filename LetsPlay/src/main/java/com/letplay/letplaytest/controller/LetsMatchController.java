@@ -76,14 +76,14 @@ public class LetsMatchController {
 			}
 		}
 		
-		@GetMapping("/match/cntReply")
+		@GetMapping("/match/cntreply")
 		public String cntReply(int matchSeq) {
 			matchBiz.cntReply(matchSeq);
 			
 			return "redirect:/match/list";
 		}
 		
-		@PostMapping("/match/insertReply")
+		@PostMapping("/match/insertreply")
 		public String insertReply(String matchContent, String id, int matchSeq) {
 			if(matchBiz.insertReply(matchContent, id, matchSeq)>0) {
 				return "redirect:/match/detail?matchSeq=" + matchSeq;
@@ -92,15 +92,22 @@ public class LetsMatchController {
 			}
 		}
 		
-		@GetMapping("/match/delReply")
+		@GetMapping("/match/delreply")
 		public String delReply(int repSeq, int matchSeq) {
 			matchBiz.delReply(repSeq);
 			return "redirect:/match/detail?matchSeq=" + matchSeq;
 		}
 		
+		@GetMapping("/match/cntSeq")
+		public String cntSeq(int matchSeq) {
+			matchBiz.cntSeq(matchSeq);
+			
+			return "redirect:/match/list";
+		}
+		
 		//공지사항
 		@GetMapping("/notice/list")
-		public String selectNoticelist(Model model, Criteria criteria) {
+		public String selectNoticelist(NoticeDto dto, Model model, Criteria criteria) {
 			int noticeListCnt = noticeBiz.getTotal();
 			PageDto paging = new PageDto();
 			paging.setCri(criteria);
