@@ -43,7 +43,7 @@
 			<c:choose>
 				<c:when test="${empty list }">
 					<tr>
-						<td colspan="11" align="center">작성된 글이 없습니다.</td>
+						<td colspan="11" align="center">등록된 매칭이 없습니다.</td>
 					</tr>
 				</c:when>
 				
