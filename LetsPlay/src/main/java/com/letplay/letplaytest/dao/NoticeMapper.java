@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.NoticeDto;
 /*`NOTICE_SEQ`	int unsigned auto_increment	NOT NULL,
 	`ID`	VARCHAR(300)	NOT NULL,
@@ -17,8 +18,16 @@ import com.letplay.letplaytest.dto.NoticeDto;
 	`NOTICE_MODIDATE`	DATE	NULL*/
 @Mapper
 public interface NoticeMapper {
-	@Select("SELECT *  FROM NOTICE ORDER BY NOTICE_SEQ DESC ")
-	List<NoticeDto> selectNoticeList();
+//	@Select("SELECT *  FROM NOTICE ORDER BY NOTICE_SEQ DESC ")
+	@Select(" SELECT NOTICE_SEQ, ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_MODIDATE\n "
+			+ "FROM (\n"
+			+ "	SELECT @ROWNUM := @ROWNUM + 1 AS rnum, NOTICE_SEQ, ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_MODIDATE\n "
+			+ "	FROM `NOTICE` N, (SELECT @ROWNUM := 0 ) A\n"
+			+ "	ORDER BY NOTICE_SEQ DESC\n"
+			+ ") TMP\n"
+			+ "WHERE rnum > (#{pageNum } - 1) * #{amount} \n"
+			+ "LIMIT #{amount } ")
+	List<NoticeDto> selectNoticeList(Criteria criteria);
 
 	@Select("SELECT * FROM NOTICE WHERE NOTICE_SEQ=#{noticeSeq} ")
 	NoticeDto selectNoticeOne(int inqSeq);
@@ -31,6 +40,10 @@ public interface NoticeMapper {
 	
 	@Delete("DELETE FROM NOTICE WHERE NOTICE_SEQ=#{noticeSeq} ")
 	int deleteNotice(int noticeSeq);
+
+	@Select(" SELECT count(*) FROM `NOTICE` ")
+	int getTotal();
+
 
 }
 
