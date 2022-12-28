@@ -70,13 +70,11 @@ $(function() {
 <div class="paging">
 	<form action="<c:url value='/inquiry/list'/>" name="pageForm">
 		<ul class="pagination" id="pagination">
-			<c:if test="${paging.prev ne true }">
-				<li class="page-item"><a class="page-link" href="<c:url value='/inquiry/list?page=${paging.cri.pageNum-1}'/>" data-pageNum="${paging.cri.pageNum-1}">이전</a></li>
-			</c:if>
+			<li class="page-item"><a class="page-link" href="<c:url value='/inquiry/list?page=${paging.cri.pageNum-1}'/>" data-pageNum="${paging.cri.pageNum-1}">이전</a></li>
 			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
 				<li class="{paging.cri.pageNum == num ? 'page-item active' : ''}"><a class="page-link" href="#" data-pageNum="${num}">${num}</a></li>
 			</c:forEach>
-			<c:if test="${paging.next ne true }">
+			<c:if test="${paging.cri.pageNum < paging.endPage }">
 				<li class="page-item"><a class="page-link" href="<c:url value='/inquiry/list?page=${paging.cri.pageNum+1}'/>" data-pageNum="${paging.cri.pageNum+1}">다음</a></li>
 			</c:if>
 		</ul>
