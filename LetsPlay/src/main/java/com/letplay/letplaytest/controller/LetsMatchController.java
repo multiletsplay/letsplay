@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.letplay.letplaytest.biz.MatchBiz;
 import com.letplay.letplaytest.biz.NoticeBiz;
+import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.MatchDto;
 import com.letplay.letplaytest.dto.NoticeDto;
+import com.letplay.letplaytest.dto.PageDto;
 
 @Controller
 @RequestMapping("/")
@@ -98,8 +100,13 @@ public class LetsMatchController {
 		
 		//공지사항
 		@GetMapping("/notice/list")
-		public String selectNoticelist(Model model) {
-			model.addAttribute("noticelist", noticeBiz.selectNoticeList());
+		public String selectNoticelist(Model model, Criteria criteria) {
+			int noticeListCnt = noticeBiz.getTotal();
+			PageDto paging = new PageDto();
+			paging.setCri(criteria);
+			paging.setTotal(noticeListCnt);
+			model.addAttribute("noticelist", noticeBiz.selectNoticeList(criteria));
+			model.addAttribute("paging", paging);
 			return "noticelist";
 		}
 
@@ -124,14 +131,14 @@ public class LetsMatchController {
 		}
 		
 		@GetMapping("/notice/updateform")
-		public String updateNotice(Model model, int noticeSeq) {
+		public String updateForm(Model model, int noticeSeq) {
 			model.addAttribute("dto", noticeBiz.selectNoticeOne(noticeSeq));
 			return "noticeupdate";
 		}
 		
 		@PostMapping("/notice/update")
 		public String updateNotice(NoticeDto dto) {
-			if(noticeBiz.updateNotice(dto)>0) {
+			if(noticeBiz.updateNotice(dto) > 0) {
 				return "redirect:/notice/detail?noticeSeq="+dto.getNoticeSeq();
 			}else {
 				return "redirect:/notice/updateform?noticeSeq="+dto.getNoticeSeq();
@@ -146,4 +153,7 @@ public class LetsMatchController {
 				return "redirect:/notice/detail?noticeSeq="+noticeSeq;
 			}
 		}
+		
+		
+		
 }

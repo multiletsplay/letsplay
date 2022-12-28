@@ -1,30 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <h1>공지사항</h1>
+<div>
 	<table border="1">
-		<col width="50">
 		<col width="100">
 		<col width="200">
-		<col width="100">
+		<col width="400">
+		<col width="200">
 		<tr>
-			<th>NOTICE_SEQ</th>
-			<th>ID</th>
-			<th>TITLE</th>
-			<th>CONTENT</th>
-			<th>DATE</th>
+			<th>NO</th>
+			<th>작성자</th>
+			<th>제목</th>
+			<th>작성날짜</th>
 		</tr>
 		<c:choose>
 			<c:when test="${empty noticelist }">
 				<tr>
-					<td colspan="5" align="center">---- 공지사항이 없습니다 ----</td>
+					<td colspan="4" align="center">---- 공지사항이 없습니다 ----</td>
 				</tr>
 			</c:when>
 			<c:otherwise>	
@@ -33,8 +35,7 @@
 						<td>${notice.noticeSeq }</td>
 						<td>${notice.id }</td>
 						<td><a href="/notice/detail?noticeSeq=${notice.noticeSeq }">${notice.noticeTitle }</a></td>
-						<td>${notice.noticeContent }</td>
-						<td>${notice.noticeDate }</td>
+						<td><fmt:formatDate value="${notice.noticeDate }" pattern="yyyy-MM-dd(E)" /></td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
@@ -45,5 +46,23 @@
 			</td>
 		</tr>
 	</table>
+	</div>
+<div class="paging">
+	<form action="<c:url value='/notice/list'/>" name="pageForm">
+		<ul class="pagination" id="pagination">
+			<c:if test="${paging.prev }">
+				<li class="page-item"><a class="page-link" href="<c:url value='/notice/list?page=${paging.startPage-1}'/>" data-pageNum="${paging.startPage-1}">이전</a></li>
+			</c:if>
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+				<li class="{paging.pageNum == num ? 'page-item active' : ''}" page-item><a class="page-link" href="#" data-pageNum="${num}">${num}</a></li>
+			</c:forEach>
+			<c:if test="${paging.next }">
+				<li class="page-item"><a class="page-link" href="<c:url value='/notice/list?page=${paging.endPage+1}'/>" data-pageNum="${paging.endPage+1}">다음</a></li>
+			</c:if>
+		</ul>
+		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}">
+        <input type="hidden" name="countPerPage" value="${paging.cri.amount}">
+	</form>
+</div>
 </body>
 </html>
