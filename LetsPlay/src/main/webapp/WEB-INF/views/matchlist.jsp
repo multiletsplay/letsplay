@@ -25,6 +25,7 @@
 			<col width="50">
 			<col width="50">
 			<col width="50">
+			<col width="50">
 			
 			<tr align="center">
 				<th>NO</th>
@@ -38,12 +39,13 @@
 				<th>참여인원</th>
 				<th>레벨</th>
 				<th>댓글 수</th>
+				<th>글 개수</th>
 				<td><input type="hidden" value="${dto.matchSeq } " name="matchSeq" ></td>
 			</tr>
 			<c:choose>
 				<c:when test="${empty list }">
 					<tr>
-						<td colspan="11" align="center">등록된 매칭이 없습니다.</td>
+						<td colspan="12" align="center">등록된 매칭이 없습니다.</td>
 					</tr>
 				</c:when>
 				
@@ -62,14 +64,14 @@
 							<td>${dto.matchCnt }</td>
 							<td>${dto.matchLevel }</td>
 							<td>${dto.cntComment }</td>
+							<td>${dto.cntSeq }</td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 			<tr>
-				<td colspan="11" align="right">
-					<input type="button" value="매칭등록"
-					onclick="location.href='/matchlist/insertform'">
+				<td colspan="12" align="right">
+					<input type="button" value="매칭등록" onclick="location.href='/match/insertform'">
 				</td>
 			</tr>
 		</table>

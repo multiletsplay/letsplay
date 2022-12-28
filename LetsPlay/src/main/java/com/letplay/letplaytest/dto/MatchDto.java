@@ -29,8 +29,8 @@ public class MatchDto {
 	private String matchTitle;
 	private String matchContent;
 	private Date matchRegdate;
-	private Date matchUpdate;
-	private Date endDate;
+	private Date matchModidate;
+	private Date matchEnddate;
 	private String matchLocation;
 	private int matchTotal;
 	private int matchCnt;
@@ -38,13 +38,14 @@ public class MatchDto {
 	private String matchFacility;
 	private char matchStatus;
 	private int cntComment;
+	private int cntSeq;
 	public MatchDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public MatchDto(int matchSeq, String id, int spoId, String matchTitle, String matchContent, Date matchRegdate,
-			Date matchUpdate, Date endDate, String matchLocation, int matchTotal, int matchCnt, int matchLevel,
-			String matchFacility, char matchStatus, int cntComment) {
+			Date matchModidate, Date matchEnddate, String matchLocation, int matchTotal, int matchCnt, int matchLevel,
+			String matchFacility, char matchStatus, int cntComment, int cntSeq) {
 		super();
 		this.matchSeq = matchSeq;
 		this.id = id;
@@ -52,8 +53,8 @@ public class MatchDto {
 		this.matchTitle = matchTitle;
 		this.matchContent = matchContent;
 		this.matchRegdate = matchRegdate;
-		this.matchUpdate = matchUpdate;
-		this.endDate = endDate;
+		this.matchModidate = matchModidate;
+		this.matchEnddate = matchEnddate;
 		this.matchLocation = matchLocation;
 		this.matchTotal = matchTotal;
 		this.matchCnt = matchCnt;
@@ -61,6 +62,7 @@ public class MatchDto {
 		this.matchFacility = matchFacility;
 		this.matchStatus = matchStatus;
 		this.cntComment = cntComment;
+		this.cntSeq = cntSeq;
 	}
 	public int getMatchSeq() {
 		return matchSeq;
@@ -98,17 +100,17 @@ public class MatchDto {
 	public void setMatchRegdate(Date matchRegdate) {
 		this.matchRegdate = matchRegdate;
 	}
-	public Date getMatchUpdate() {
-		return matchUpdate;
+	public Date getMatchModidate() {
+		return matchModidate;
 	}
-	public void setMatchUpdate(Date matchUpdate) {
-		this.matchUpdate = matchUpdate;
+	public void setMatchModidate(Date matchModidate) {
+		this.matchModidate = matchModidate;
 	}
-	public Date getEndDate() {
-		return endDate;
+	public Date getMatchEnddate() {
+		return matchEnddate;
 	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setMatchEnddate(Date matchEnddate) {
+		this.matchEnddate = matchEnddate;
 	}
 	public String getMatchLocation() {
 		return matchLocation;
@@ -151,5 +153,11 @@ public class MatchDto {
 	}
 	public void setCntComment(int cntComment) {
 		this.cntComment = cntComment;
+	}
+	public int getCntSeq() {
+		return cntSeq;
+	}
+	public void setCntSeq(int cntSeq) {
+		this.cntSeq = cntSeq;
 	}
 }
