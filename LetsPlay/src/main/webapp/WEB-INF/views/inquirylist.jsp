@@ -1,11 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	ul{list-style: none; }
+	li{float: left; margin-right: 10px;}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+$(function() {
+		$('#pagination').on('click', 'a', function(e) {
+			e.preventDefault();
+			console.log($(this));
+			const value = $(this).data('pagenum');
+			console.log(value);
+			document.pageForm.pageNum.value = value;
+			document.pageForm.submit();
+		});
+		
+	})
+</script>
 </head>
 <body>
 <h1>1대1문의</h1>
@@ -42,11 +61,28 @@
 						</c:choose>
 						<td><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></td>
 						<td>${dto.id }</td>
-						<td>${dto.inqDate }</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.inqDate }"/></td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>	
 	</table>
+<div class="paging">
+	<form action="<c:url value='/inquiry/list'/>" name="pageForm">
+		<ul class="pagination" id="pagination">
+			<c:if test="${paging.prev }">
+				<li class="page-item"><a class="page-link" href="<c:url value='/inquiry/list?page=${paging.startPage-1}'/>" data-pageNum="${paging.startPage-1}">이전</a></li>
+			</c:if>
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+				<li class="{paging.pageNum == num ? 'page-item active' : ''}" page-item><a class="page-link" href="#" data-pageNum="${num}">${num}</a></li>
+			</c:forEach>
+			<c:if test="${paging.next }">
+				<li class="page-item"><a class="page-link" href="<c:url value='/inquiry/list?page=${paging.endPage+1}'/>" data-pageNum="${paging.endPage+1}">다음</a></li>
+			</c:if>
+		</ul>
+		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}">
+        <input type="hidden" name="countPerPage" value="${paging.cri.amount}">
+	</form>
+</div>
 </body>
 </html>
