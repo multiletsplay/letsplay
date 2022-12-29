@@ -20,5 +20,7 @@
 <br>
 <h2><a href="/faqcontent">faq</a></h2>
 <br>
+<h2><a href="/inquiry/list">1대1문의</a></h2>
+<br>
 </body>
 </html>
