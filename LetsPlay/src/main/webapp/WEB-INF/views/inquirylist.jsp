@@ -14,16 +14,15 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 $(function() {
-		$('#pagination').on('click', 'a', function(e) {
-			e.preventDefault();
-			console.log($(this));
-			const value = $(this).data('pagenum');
-			console.log(value);
-			document.pageForm.pageNum.value = value;
-			document.pageForm.submit();
-		});
-		
-	})
+	$('#pagination').on('click', 'a', function(e) {
+		e.preventDefault();
+		console.log($(this));
+		const value = $(this).data('pagenum');
+		console.log(value);
+		document.pageForm.pageNum.value = value;
+		document.pageForm.submit();
+	});
+})
 </script>
 </head>
 <body>
