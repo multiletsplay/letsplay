@@ -25,7 +25,7 @@ public class LetsYunaController {
 	@Autowired
 	private InqReplyBiz inqreplyBiz;
 	
-	// 시설controller 각 url는 임시
+	// 시설
 	@GetMapping("/facility/list")
 	public String selectFacList(Model model) {
 		model.addAttribute("faclist", facBiz.selectFacList());
