@@ -96,7 +96,7 @@ public class LetsYunaController {
 		if(inquiryBiz.update(dto)>0) {
 			model.addAttribute("msg", "수정 완료");
 			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());
-			return "alert";
+			return "redirect:/inquiry/detail?inqSeq="+dto.getInqSeq();
 		}else {
 			model.addAttribute("msg", "수정 실패");
 			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());

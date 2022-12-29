@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script>
+function fn1(){
+	if (confirm("게시글을 수정하시겠습니까?")) {
+		location.href='/inquiry/detail?inqSeq=${dto.inqSeq}'
+	}
+};
+</script>
 <h1>1대1문의 수정</h1>
 <div id="inquiry-update">
     <form action="/inquiry/update" method="post">
@@ -20,7 +27,7 @@
 		        <th>작성자</th>
 		        <td>${dto.id }</td>
 		    </tr>
-		    <tr>
+		    <tr>	
 		    	<th>날짜</th>
 		        <td>${dto.inqDate }</td>
 		    </tr>
@@ -30,7 +37,7 @@
 		    </tr>
             <tr>
                 <td colspan="2" align="right">
-					<input type="submit" value="등록">
+					<input type="submit" value="수정완료" onclick="javascript:fn1();">
 					<input type="button" value="취소" onclick="location.href='/inquiry/detail?inqSeq=${dto.inqSeq }'">
 				</td>
             </tr>

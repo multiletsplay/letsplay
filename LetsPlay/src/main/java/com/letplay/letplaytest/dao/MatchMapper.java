@@ -47,9 +47,7 @@ public interface MatchMapper {
 				+ " (select count(reply.rep_seq)"
 				+ " 	from reply"
 				+ " 	where match_seq=matchSeq) cntComment,"
-				+ " (select count(match_board.match_seq)"
-				+ "		from match_board) "
-				+ "		cntSeq "
+				+ "	cnt_seq as cntSeq "
 				+ " FROM "
 				+ " 	MATCH_BOARD "
 				+ " ORDER BY "
@@ -75,8 +73,7 @@ public interface MatchMapper {
 				+ " (select count(reply.rep_seq)"
 				+ " 	from reply"
 				+ " 	where match_seq=matchSeq) cntComment, "
-				+ " (select count(match_board.match_seq)"
-				+ "		from match_board) cntSeq "
+				+ "	cnt_seq as cntSeq "
 				+ " FROM "
 				+ " 	MATCH_BOARD "
 				+ " WHERE "
@@ -121,12 +118,7 @@ public interface MatchMapper {
 	@Update(" update match_board "
 				+ " set cnt_seq = "
 					+ " (select count(match_board.match_seq)"
-					+ " from match_board"
-					+ " where match_seq = #{matchSeq})"
-				+ " where match_seq = #{matchSeq} "
-				+ " select cnt_seq as cntSeq"
-				+ " from match_board "
-				+ " where match_seq = #{matchSeq}" )
+					+ " from match_board")
 	int cntSeq(int matchSeq);
 
 	
