@@ -8,8 +8,9 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
-	function replyUpdateForm(){
-		$("#replyupdate");
+	function replyUpdateShow(){
+		$(".reply-table").attr("style", "display:none")
+		$(".reply-update").attr("style", "display:table")
 	}
 </script>
 </head>
@@ -82,11 +83,39 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="right">
-						<input type="button" value="수정" onclick="location.href='/inquiry/reply/updateform?repSeq=${reply.repSeq}'">
+						<input type="button" value="수정" onclick="replyUpdateShow();">
 						<input type="button" value="삭제" onclick="location.href='/inquiry/reply/delete?repSeq=${reply.repSeq}&inqSeq=${reply.inqSeq }'">
 					</td>
 				</tr>
 			</table>
+			
+			
+			<form action="/inquiry/reply/update" method="post">
+			<input type="hidden" name="inqSeq" value="${reply.inqSeq}" >
+			<input type="hidden" name="repSeq" value="${reply.repSeq}" >
+			<table class="reply-update" style="display:none">
+				<tr>
+					<th>답변 수정</th>
+				</tr>
+				<tr>
+					<th>작성자</th>
+					<td>관리자</td>	<!-- 추후 관리자id일경우 '관리자'로 표시로 수정 -->
+				</tr>
+				<tr>
+					<th>날짜</th>
+					<td>${reply.repDate }</td>
+				<tr>
+					<th>내용</th>
+					<td><textarea rows="10" cols="80" name="repContent">${reply.repContent }</textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right">
+						<input type="submit" value="수정">
+						<input type="button" value="취소" onclick="location.href='/inquiry/detail?inqSeq=${dto.inqSeq}'">
+					</td>
+				</tr>
+			</table>
+			</form>
 		</c:otherwise>
 	</c:choose>
 </table>

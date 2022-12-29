@@ -73,10 +73,12 @@ public class LetsYunaController {
 	}
 	
 	@PostMapping("/inquiry/insert")
-	public String insertInq(InquiryDto dto) {
+	public String insertInq(Model model, InquiryDto dto) {
 		if(inquiryBiz.insert(dto)>0) {
+			model.addAttribute("msg", "등록 완료");
 			return "redirect:/inquiry/list";
 		}else {
+			model.addAttribute("msg", "등록 실패");
 			return "redirect:/inquiry/insertform";
 		}
 	}
@@ -115,18 +117,12 @@ public class LetsYunaController {
 		}
 	}
 	
-	@GetMapping("/inquiry/reply/updateform")
-	public String updateFormInqRep(Model model, int repSeq) {
-		model.addAttribute("dto", inqreplyBiz.select(repSeq));
-		return "inquiryupdate";
-	}
-	
 	@PostMapping("/inquiry/reply/update")
-	public String updateInqRep(InqReplyDto dto) {
+	public String updateInqRep(InqReplyDto dto, int inqSeq) {
 		if(inqreplyBiz.update(dto)>0) {
 			return "redirect:/inquiry/detail?inqSeq="+dto.getInqSeq();
 		}else {
-			return "redirect:/inquiry/updateform?inqSeq="+dto.getInqSeq();
+			return "redirect:/inquiry/detail?inqSeq="+dto.getInqSeq();
 		}
 	}
 	
