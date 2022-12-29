@@ -31,7 +31,7 @@
             <tr>
                 <td colspan="2" align="right">
 					<input type="submit" value="등록">
-					<input type="button" value="취소" onclick="location.href='/inquiry/list'">
+					<input type="button" value="취소" onclick="location.href='/inquiry/detail?inqSeq=${dto.inqSeq }'">
 				</td>
             </tr>
         </table>

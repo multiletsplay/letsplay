@@ -14,11 +14,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 $(function() {
-	var msg = "${msg}";
-	if( msg ) {
-		alert(msg);
-	}
-	
 	$('#pagination').on('click', 'a', function(e) {
 		e.preventDefault();
 		console.log($(this));

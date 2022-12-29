@@ -76,10 +76,12 @@ public class LetsYunaController {
 	public String insertInq(Model model, InquiryDto dto) {
 		if(inquiryBiz.insert(dto)>0) {
 			model.addAttribute("msg", "등록 완료");
-			return "redirect:/inquiry/list";
+			model.addAttribute("url", "/inquiry/list");
+			return "alert";
 		}else {
 			model.addAttribute("msg", "등록 실패");
-			return "redirect:/inquiry/insertform";
+			model.addAttribute("url", "/inquiry/insertform");
+			return "alert";
 		}
 	}
 	
@@ -90,48 +92,68 @@ public class LetsYunaController {
 	}
 	
 	@PostMapping("/inquiry/update")
-	public String updateInq(InquiryDto dto) {
+	public String updateInq(Model model, InquiryDto dto) {
 		if(inquiryBiz.update(dto)>0) {
-			return "redirect:/inquiry/detail?inqSeq="+dto.getInqSeq();
+			model.addAttribute("msg", "수정 완료");
+			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());
+			return "alert";
 		}else {
-			return "redirect:/inquiry/updateform?inqSeq="+dto.getInqSeq();
+			model.addAttribute("msg", "수정 실패");
+			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());
+			return "alert";
 		}
 	}
 	
 	@GetMapping("/inquiry/delete")
-	public String deleteInq(int inqSeq) {
+	public String deleteInq(Model model, int inqSeq) {
 		if(inquiryBiz.delete(inqSeq)>0) {
-			return "redirect:/inquiry/list";
+			model.addAttribute("msg", "삭제 성공");
+			model.addAttribute("url", "/inquiry/list");
+			return "alert";
 		}else {
-			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
+			model.addAttribute("msg", "삭제 실패");
+			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
+			return "alert";
 		}
 	}
 	
 	//문의 댓글
 	@PostMapping("/inquiry/reply/insert")
-	public String insertInqRep(InqReplyDto dto, int inqSeq) {
+	public String insertInqRep(InqReplyDto dto, int inqSeq, Model model ) {
 		if(inqreplyBiz.insert(dto)>0) {
-			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
+			model.addAttribute("msg", "등록 완료");
+			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
+			return "alert";
 		}else {
-			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
+			model.addAttribute("msg", "등록 실패");
+			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
+			return "alert";
 		}
 	}
 	
 	@PostMapping("/inquiry/reply/update")
-	public String updateInqRep(InqReplyDto dto, int inqSeq) {
+	public String updateInqRep(InqReplyDto dto, int inqSeq, Model model) {
 		if(inqreplyBiz.update(dto)>0) {
-			return "redirect:/inquiry/detail?inqSeq="+dto.getInqSeq();
+			model.addAttribute("msg", "수정 완료");
+			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());
+			return "alert";
 		}else {
-			return "redirect:/inquiry/detail?inqSeq="+dto.getInqSeq();
+			model.addAttribute("msg", "수정 실패");
+			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());
+			return "alert";
 		}
 	}
 	
 	@GetMapping("/inquiry/reply/delete")
-	public String deleteInqRep(int repSeq, int inqSeq) {
+	public String deleteInqRep(int repSeq, int inqSeq, Model model) {
 		if(inqreplyBiz.delete(repSeq)>0) {
-			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
+			model.addAttribute("msg", "삭제 성공");
+			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
+			return "alert";
 		}else {
-			return "redirect:/inquiry/detail?inqSeq="+inqSeq;
+			model.addAttribute("msg", "삭제 실패");
+			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
+			return "alert";
 		}
 	}
 }
