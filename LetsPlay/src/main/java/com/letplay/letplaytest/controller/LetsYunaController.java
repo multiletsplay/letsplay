@@ -8,12 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.letplay.letplaytest.biz.FacBiz;
 import com.letplay.letplaytest.biz.InqReplyBiz;
 import com.letplay.letplaytest.biz.InquiryBiz;
+import com.letplay.letplaytest.biz.ReviewBiz;
 import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.InqReplyDto;
 import com.letplay.letplaytest.dto.InquiryDto;
@@ -28,6 +28,8 @@ public class LetsYunaController {
 	private InquiryBiz inquiryBiz;
 	@Autowired
 	private InqReplyBiz inqreplyBiz;
+	@Autowired
+	private ReviewBiz reivewBiz;
 	
 	// 시설
 	@GetMapping("/facility/list")
@@ -39,6 +41,7 @@ public class LetsYunaController {
 	@GetMapping("/facility/detail")
 	public String selectFacDetail(Model model, int facSeq) {
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
+		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
 		return "facilitydetail";
 	}
 	
