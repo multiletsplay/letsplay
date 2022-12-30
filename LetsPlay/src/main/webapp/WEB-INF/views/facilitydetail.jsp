@@ -82,7 +82,13 @@
 	            	<tr>
 	            		<td>${review.nickname}</td>
 	            		<td>${review.revContent }</td>
-	            		<td>${review.revRate }</td>
+	            		<c:choose>
+			            	<c:when test="${review.revRate ==1}" ><td>⭐</td></c:when>
+			            	<c:when test="${review.revRate ==2}" ><td>⭐⭐</td></c:when>
+			            	<c:when test="${review.revRate ==3}" ><<td>⭐⭐⭐</td></c:when>
+			            	<c:when test="${review.revRate ==4}" ><td>⭐⭐⭐⭐</td></c:when>
+			            	<c:otherwise ><td>⭐⭐⭐⭐⭐</td></c:otherwise>
+		            	</c:choose>
 	            	</tr>
 	            </c:forEach>
 	        </c:otherwise>
