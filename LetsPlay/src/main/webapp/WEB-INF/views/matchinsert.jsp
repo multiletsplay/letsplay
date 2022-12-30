@@ -12,17 +12,37 @@
 	<form action="/match/insert" method="post">
 		<table border="1">
 			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="id"></td>
+				<th>제  목</th>
+				<td><input type="text" name="matchTitle"></td>
 			</tr>
 			<tr>
-				<th>제  목</th>
-				<td><input type="text" name="title"></td>
+				<th>작성자</th>
+				<td>${dto.id }</td>
+			</tr>
+			<tr>
+				<th>마감일자</th>
+				<td><input type="datetime-local" name="matchEnddate"></td>
+			</tr>
+			<tr>
+				<th>장  소</th>
+				<td><input type="text" name="matchLocation"></td>
 			</tr>
 			<tr>
 				<th>내  용</th>
-				<td><textarea rows="10" cols="100" name="content"></textarea></td>
+				<td><textarea rows="10" cols="100" name="matchContent"></textarea></td>
 			</tr>
+			<tr>
+				<th>총인원</th>
+				<td><input type="text" name="matchTotal"></td>
+			</tr>
+			<tr>
+				<th>레벨</th>
+				<td><input type="range" name="matchLevel" min="0" max="5"></td>
+			</tr>
+			<tr>
+		        <th>시설유무</th>
+		        <td><input type="checkbox" name="시설확정" value="fac">시설확정</td>
+		    </tr>
 			<tr>
 				<td colspan="2" align="right">
 					<input type="submit" value="등록">
