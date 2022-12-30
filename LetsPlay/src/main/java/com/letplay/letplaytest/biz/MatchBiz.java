@@ -11,11 +11,12 @@ public interface MatchBiz {
 	public int insertMatch(MatchDto dto);
 	public int updateMatch(MatchDto dto);
 	public int deleteMatch(int matchSeq);
-	public int cntSeq(int matchSeq);
+	public int cntSeq(int matchSeq);		//글 개수
+	public int cntReply(int matchSeq);		//댓글 수
 	
-	public int insertReply(String matchContent, String id, int matchSeq);
+	//댓글
+	public int insertReply(String repContent, String id, int matchSeq);
 	public List<ReplyDto> selectReplyList(int matchSeq);
-	public int cntReply(int matchSeq);
 	public int delReply(int repSeq);
 	
 }

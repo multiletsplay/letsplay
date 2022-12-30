@@ -31,17 +31,6 @@ $(function() {
 <div class="div2"></div>
 <div class="div2">
 
-<form name="search-form" autocomplete="off">
-	<select name="type">
-		<option selected value="">검색내용선택</option>
-		<option value="noticeTitle">제목</option>
-		<option value="id">글쓴이</option>
-		<option value="noticeContent">내용</option>	
-	</select>
-	<input type="text" name="keyword" value=""></input>
-	<input type="button" onclick="getSearchList()" class="btn btn-outline-primary mr-2" value="검색"></input>
-</form>
-
 </div>
 
 

@@ -19,11 +19,6 @@ function fn1(){
 		location.href='/match/delete?matchSeq=${dto.matchSeq}'
 	}
 };
-function fn2(){
-	if (confirm("게시글을 추천하시겠습니까?")) {
-		location.href='/match/updatelike?matchSeq=${dto.matchSeq}'
-	}
-};
 	</script>
 	<table border="1" class="table">
 		<tr class="table-active">
@@ -35,26 +30,46 @@ function fn2(){
 			<td>${dto.matchTitle }</td>
 		</tr>
 		<tr>
+			<th>종  목</th>
+			<td>${dto.spoId }</td>
+		</tr>
+		<tr>
 			<th>내  용</th>
 			<td width="500px"><textarea rows="10" cols="70" readonly="readonly">${dto.matchContent }</textarea></td>
+		</tr>
+		<tr>
+			<th>마감일자</th>
+			<td><fmt:formatDate value="${dto.matchEnddate}" pattern="yyyy-MM-dd HH:mm:ss" ></fmt:formatDate></td>
+		</tr>
+		<tr>
+			<th>장  소</th>
+			<td>${dto.matchLocation }</td>
+		</tr>
+		<tr>
+			<th>참여인원/총 인원</th>
+			<td>${dto.matchCnt }/${dto.matchTotal }</td>
+		</tr>
+		<tr>
+			<th>레  벨</th>
+			<td>${dto.matchLevel }</td>
+		</tr>
+		<tr>
+			<th>시설유무</th>
+			<td>${dto.matchFacility }</td>
 		</tr>
 		<tr>
 			<td colspan="3" align="right">
 				<input type="button" value="수정" onclick="location.href='/match/updateform?matchSeq=${dto.matchSeq}'">
 				<input type="button" value="삭제"  onclick="javascript:fn1();">
 				<input type="button" value="목록" onclick="location.href='/match/list'">
-				<div style="text-align:center">
-					<input type="image" value="" src="../../img/likebutton.webp" width="35px" onclick="fn2();">
-					<span>${dto.like }</span>
 					
-				</div>
 				<div>
 					<form method="post" action="/match/insertreply?matchSeq=${dto.matchSeq}">
 						<p>
 							<label>댓글 작성자:</label><input type="text" name="id" >
 						</p>
 						<p>
-							<textarea rows="4" cols="100" name="matchContent"></textarea>
+							<textarea rows="4" cols="100" name="repContent"></textarea>
 						</p>
 						<p>
 							<input type="submit" value="댓글 작성">
@@ -71,7 +86,7 @@ function fn2(){
 				<td width="100px">${reply.id }</td>
 				<td width="475px">${reply.repContent }</td>
 				<td width="200px"><fmt:formatDate value="${reply.repRegdate}" pattern="yyyy-MM-dd HH:mm:ss" ></fmt:formatDate>
-				<input type="button" value="삭제" onclick="location.href='/match/delreply?repSeq=${reply.repSeq} + &matchSeq=${dto.matchSeq}'"></td>
+				<input type="button" value="삭제" onclick="location.href='/match/delreply?repSeq=${reply.repSeq} + &matchSeq=${reply.matchSeq}'"></td>
 			</tr>		
 		</c:forEach>		
 	</table>
