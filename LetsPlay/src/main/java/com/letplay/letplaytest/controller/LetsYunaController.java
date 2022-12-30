@@ -1,15 +1,19 @@
 package com.letplay.letplaytest.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.letplay.letplaytest.biz.FacBiz;
 import com.letplay.letplaytest.biz.InqReplyBiz;
 import com.letplay.letplaytest.biz.InquiryBiz;
+import com.letplay.letplaytest.biz.ReviewBiz;
 import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.InqReplyDto;
 import com.letplay.letplaytest.dto.InquiryDto;
@@ -24,6 +28,8 @@ public class LetsYunaController {
 	private InquiryBiz inquiryBiz;
 	@Autowired
 	private InqReplyBiz inqreplyBiz;
+	@Autowired
+	private ReviewBiz reivewBiz;
 	
 	// 시설
 	@GetMapping("/facility/list")
@@ -35,16 +41,15 @@ public class LetsYunaController {
 	@GetMapping("/facility/detail")
 	public String selectFacDetail(Model model, int facSeq) {
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
+		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
 		return "facilitydetail";
 	}
 	
-	@GetMapping("/facility/delete")
-	public String deletFac(int facSeq) {
-		if(facBiz.delete(facSeq)>0) {
-			return "redirect:/facility/list";
-		}else {
-			return "redirect:/facility/detail?facSeq="+facSeq;
-		}
+	//@RequestMapping(value="/facility/delete", method=RequestMethod.POST)
+	@PostMapping("/facility/delete")
+	public String deletFac(@RequestParam("delList") List<Integer> ids) {
+		for(Integer facSeq : ids) facBiz.delete(facSeq);
+		return "redirect:/facility/list";
 	}
 	
 	//1대1문의
