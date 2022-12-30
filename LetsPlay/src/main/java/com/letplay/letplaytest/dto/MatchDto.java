@@ -2,6 +2,8 @@ package com.letplay.letplaytest.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /*CREATE TABLE `MATCH_BOARD` (
 	`MATCH_SEQ`	int unsigned auto_increment	NOT NULL PRIMARY KEY,
 	`ID`	VARCHAR(300)	NOT NULL,
@@ -30,6 +32,7 @@ public class MatchDto {
 	private String matchContent;
 	private Date matchRegdate;
 	private Date matchModidate;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date matchEnddate;
 	private String matchLocation;
 	private int matchTotal;

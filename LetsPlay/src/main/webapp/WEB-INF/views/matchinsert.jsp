@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +18,15 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td>${dto.id }</td>
+				<td><input type="text" name="id"></td>
+			</tr>
+			<tr>
+				<th>스포츠 종류</th>
+				<td><input type="radio" name="spoId" value='1'>풋살</td>
 			</tr>
 			<tr>
 				<th>마감일자</th>
-				<td><input type="datetime-local" name="matchEnddate"></td>
+				<td><input type="date" name="matchEnddate"></td>
 			</tr>
 			<tr>
 				<th>장  소</th>

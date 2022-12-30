@@ -28,59 +28,28 @@ import com.letplay.letplaytest.dto.ReplyDto;
 @Mapper
 public interface MatchMapper {
 
-	@Select(" "
-			+ " SELECT "
-				+ " match_seq as matchSeq, "
-				+ " id, "
-				+ " spo_id as spoId, "
-				+ " match_title as matchTitle, "
-				+ " match_content as matchContent, "
-				+ " match_regdate as matchRegdate, "
-				+ " match_modidate as matchModidate, "
-				+ " match_enddate as matchEnddate, "
-				+ " match_location as matchLocation, "
-				+ " match_total as matchTotal, "
-				+ " match_cnt as matchCnt, "
-				+ " match_level as matchLevel, "
-				+ " match_facility as matchFacility, "
-				+ " match_status as matchStatus, "
-				+ " (select count(reply.rep_seq)"
-				+ " 	from reply"
-				+ " 	where match_seq=matchSeq) cntComment,"
-				+ "	cnt_seq as cntSeq "
-				+ " FROM "
-				+ " 	MATCH_BOARD "
+	@Select(" SELECT *, "
+				+ " (SELECT COUNT(REPLY.REP_SEQ)"
+				+ " 	FROM REPLY"
+				+ " 	WHERE MATCH_SEQ=MATCH_SEQ) CNTCOMMENT,"
+				+ "	CNT_SEQ as CNT_SEQ "
+				+ " FROM MATCH_BOARD "
 				+ " ORDER BY "
-				+ " matchSeq DESC ")
+				+ " MATCH_SEQ DESC ")
 	List<MatchDto> selectMatchList();
 
-	@Select(" "
-			+ " SELECT "
-				+ " match_seq as matchSeq, "
-				+ " id, "
-				+ " spo_id as spoId, "
-				+ " match_title as matchTitle, "
-				+ " match_content as matchContent, "
-				+ " match_regdate as matchRegdate, "
-				+ " match_modidate as matchModidate, "
-				+ " match_enddate as matchEnddate, "
-				+ " match_location as matchLocation, "
-				+ " match_total as matchTotal, "
-				+ " match_cnt as matchCnt, "
-				+ " match_level as matchLevel, "
-				+ " match_facility as matchFacility, "
-				+ " match_status as matchStatus, "
-				+ " (select count(reply.rep_seq)"
-				+ " 	from reply"
-				+ " 	where match_seq=matchSeq) cntComment, "
-				+ "	cnt_seq as cntSeq "
+	@Select(" SELECT *, "
+				+ " (SELECT COUNT(REPLY.REP_SEQ)"
+				+ " 	FROM REPLY"
+				+ " 	WHERE MATCH_SEQ=MATCH_SEQ) CNTCOMMENT, "
+				+ "	CNT_SEQ AS CNTSEQ "
 				+ " FROM "
 				+ " 	MATCH_BOARD "
 				+ " WHERE "
 				+ " MATCH_SEQ=#{matchSeq} ")
 	MatchDto selectMatchOne(int matchSeq);
 
-	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchCnt}, #{matchLevel}, #{matchFacility}, #{matchStatus}, #{cntComment}, #{cntSeq) ")
+	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchCnt}, #{matchLevel}, DEFAULT, DEFAULT, DEFAULT, DEFAULT) ")
 	int insertMatch(MatchDto dto);
 
 	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_ENDDATE=#{matchEnddate}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MTACH_CNT=#{matchCnt}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility} WHERE MATCH_SEQ=#{matchSeq} ")
