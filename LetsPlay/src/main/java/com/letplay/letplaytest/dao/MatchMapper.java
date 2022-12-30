@@ -83,13 +83,13 @@ public interface MatchMapper {
 	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchCnt}, #{matchLevel}, #{matchFacility}, #{matchStatus}, #{cntComment}, #{cntSeq) ")
 	int insertMatch(MatchDto dto);
 
-	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MTACH_CNT=#{matchCnt}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility} WHERE MATCH_SEQ=#{matchSeq} ")
+	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_ENDDATE=#{matchEnddate}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MTACH_CNT=#{matchCnt}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility} WHERE MATCH_SEQ=#{matchSeq} ")
 	int updateMatch(MatchDto dto);
 
 	@Delete(" DELETE FROM MATCH_BOARD WHERE MATCH_SEQ = #{matchSeq} ")
 	int deleteMatch(int matchSeq);
 
-	@Insert(" INSERT INTO BOARD_COMMENT () VALUES( NULL, #{matchSeq}, #{id}, #{repContent}, NOW()) ")
+	@Insert(" INSERT INTO REPLY () VALUES( NULL, #{matchSeq}, #{id}, #{repContent}, NOW()) ")
 	int insertReply(String matchContent, String id, int matchSeq);
 
 	@Select("select "
@@ -115,8 +115,8 @@ public interface MatchMapper {
 	@Delete(" DELETE FROM REPLY WHERE REP_SEQ=#{repSeq} ")
 	int delReply(int repSeq);
 
-	@Update(" update match_board "
-				+ " set cnt_seq = "
+	@Update(" UPDATE MATCH_BOARD "
+				+ " SET CNT_SEQ = "
 					+ " (select count(match_board.match_seq)"
 					+ " from match_board")
 	int cntSeq(int matchSeq);

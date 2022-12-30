@@ -59,7 +59,7 @@ public class LetsMatchController {
 		}
 		
 		@PostMapping("/match/update")
-		public String updateMatch(MatchDto dto) {
+		public String updateMatch(Model model, MatchDto dto) {
 			if(matchBiz.updateMatch(dto)>0) {
 				return "redirect:/match/deatil?matchSeq="+dto.getMatchSeq();
 			}else {
