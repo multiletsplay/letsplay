@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.letplay.letplaytest.dao.FacMapper;
 import com.letplay.letplaytest.dto.FacDto;
+import com.letplay.letplaytest.dto.FacResDto;
 
 @Service
 public class FacImpl implements FacBiz{
@@ -27,6 +28,16 @@ public class FacImpl implements FacBiz{
 	@Override
 	public int delete(int facSeq) {
 		return facMapper.delete(facSeq);
+	}
+
+	@Override
+	public int insertRes(FacResDto dto) {
+		return facMapper.insertRes(dto);
+	}
+
+	@Override
+	public FacResDto selectRes(int resId) {
+		return facMapper.selectRes(resId);
 	}
 
 }
