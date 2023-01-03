@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.letplay.letplaytest.biz.FacBiz;
 import com.letplay.letplaytest.biz.InqReplyBiz;
 import com.letplay.letplaytest.biz.InquiryBiz;
 import com.letplay.letplaytest.biz.ReviewBiz;
 import com.letplay.letplaytest.dto.Criteria;
+import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.InqReplyDto;
 import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.PageDto;
@@ -45,11 +47,38 @@ public class LetsYunaController {
 		return "facilitydetail";
 	}
 	
+//	@RequestMapping(value="/facility/pathfind", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+//	@ResponseBody
+//	public RedirectView findPath(@RequestParam("facName") String facName, @RequestParam("coordsy") String coordsy, @RequestParam("coordsx") String coordsx) {
+//		RedirectView redirectView = new RedirectView();
+//		redirectView.setUrl("https://map.kakao.com/link/to/"+facName+","+coordsy+","+coordsx);
+//		return redirectView;
+//	}
+	
+	
 	//@RequestMapping(value="/facility/delete", method=RequestMethod.POST)
 	@PostMapping("/facility/delete")
 	public String deletFac(@RequestParam("delList") List<Integer> ids) {
 		for(Integer facSeq : ids) facBiz.delete(facSeq);
 		return "redirect:/facility/list";
+	}
+	
+	@PostMapping("/facility/reserveform")
+	public String reserveFac(Model model, FacResDto dto, RedirectAttributes resId) {
+		if(facBiz.insertRes(dto)>0) {
+			resId.addAttribute("resId", dto.getResId());
+			return "redirect:/facility/reserve";
+		}else {
+			model.addAttribute("msg", "예약 실패");
+			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
+			return "alert";
+		}
+	}
+	
+	@GetMapping("/facility/reserve")
+	public String reserveConfirm(Model model, @RequestParam("resId") int resId) {
+		model.addAttribute("dto", facBiz.selectRes(resId));
+		return "resconfirm";
 	}
 	
 	//1대1문의

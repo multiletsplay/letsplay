@@ -9,6 +9,7 @@ public class FacDto {
 	private String spoName;
 	private String facLocation;
 	private String facContact;
+	private int facCost;
 	private String facImg;
 	private Date facDate;
 	private Boolean facParking;
@@ -16,7 +17,7 @@ public class FacDto {
 	private Boolean facShower;
 	private Boolean facLocker;
 	private Boolean facLight;
-	private Boolean facCost;
+	private Boolean facCostcheck;
 	
 	public FacDto() {
 		super();
@@ -24,8 +25,8 @@ public class FacDto {
 	}
 
 	public FacDto(int facSeq, String facName, int spoId, String spoName, String facLocation, String facContact,
-			String facImg, Date facDate, Boolean facParking, Boolean facLent, Boolean facShower, Boolean facLocker,
-			Boolean facLight, Boolean facCost) {
+			int facCost, String facImg, Date facDate, Boolean facParking, Boolean facLent, Boolean facShower,
+			Boolean facLocker, Boolean facLight, Boolean facCostcheck) {
 		super();
 		this.facSeq = facSeq;
 		this.facName = facName;
@@ -33,6 +34,7 @@ public class FacDto {
 		this.spoName = spoName;
 		this.facLocation = facLocation;
 		this.facContact = facContact;
+		this.facCost = facCost;
 		this.facImg = facImg;
 		this.facDate = facDate;
 		this.facParking = facParking;
@@ -40,7 +42,7 @@ public class FacDto {
 		this.facShower = facShower;
 		this.facLocker = facLocker;
 		this.facLight = facLight;
-		this.facCost = facCost;
+		this.facCostcheck = facCostcheck;
 	}
 
 	public int getFacSeq() {
@@ -121,11 +123,17 @@ public class FacDto {
 	public void setFacLight(Boolean facLight) {
 		this.facLight = facLight;
 	}
-	public Boolean getFacCost() {
+	public int getFacCost() {
 		return facCost;
 	}
-	public void setFacCost(Boolean facCost) {
+	public void setFacCost(int facCost) {
 		this.facCost = facCost;
+	}
+	public Boolean getFacCostcheck() {
+		return facCostcheck;
+	}
+	public void setFacCostcheck(Boolean facCostcheck) {
+		this.facCostcheck = facCostcheck;
 	}
 
 }
