@@ -17,7 +17,7 @@ public class LetsLessonController {
 	
 	@GetMapping("/lesson/list")
 	public String lessonList(Model model) {
-		model.addAttribute("leslist", LessonBiz.selectLessonList());
+		model.addAttribute("lessonlist", LessonBiz.selectLessonList());
 		return "lessonlist";
 	}
 	
