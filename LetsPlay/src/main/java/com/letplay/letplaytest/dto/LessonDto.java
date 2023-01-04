@@ -6,6 +6,7 @@ public class LessonDto {
 	private int lesSeq;
 	private String lesName;
 	private int spoId;
+	private String spoName;
 	private String lesTeacher;
 	private String lesLocation;
 	private String lesContact;
@@ -13,17 +14,19 @@ public class LessonDto {
 	private Date lesDate;
 	private String lesType;
 	private String lesWeekend;
+	private String lesCost;
 	
 	public LessonDto() {
 		super();
 	}
 
-	public LessonDto(int lesSeq, String lesName, int spoId, String lesTeacher, String lesLocation, String lesContact,
-			String lesImg, Date lesDate, String lesType, String lesWeekend) {
+	public LessonDto(int lesSeq, String lesName, int spoId, String spoName, String lesTeacher, String lesLocation,
+			String lesContact, String lesImg, Date lesDate, String lesType, String lesWeekend, String lesCost) {
 		super();
 		this.lesSeq = lesSeq;
 		this.lesName = lesName;
 		this.spoId = spoId;
+		this.spoName = spoName;
 		this.lesTeacher = lesTeacher;
 		this.lesLocation = lesLocation;
 		this.lesContact = lesContact;
@@ -31,6 +34,7 @@ public class LessonDto {
 		this.lesDate = lesDate;
 		this.lesType = lesType;
 		this.lesWeekend = lesWeekend;
+		this.lesCost = lesCost;
 	}
 
 	public int getLesSeq() {
@@ -55,6 +59,14 @@ public class LessonDto {
 
 	public void setSpoId(int spoId) {
 		this.spoId = spoId;
+	}
+
+	public String getSpoName() {
+		return spoName;
+	}
+
+	public void setSpoName(String spoName) {
+		this.spoName = spoName;
 	}
 
 	public String getLesTeacher() {
@@ -112,6 +124,17 @@ public class LessonDto {
 	public void setLesWeekend(String lesWeekend) {
 		this.lesWeekend = lesWeekend;
 	}
+
+	public String getLesCost() {
+		return lesCost;
+	}
+
+	public void setLesCost(String lesCost) {
+		this.lesCost = lesCost;
+	}
+	
+	
+	
 	
 	
 }
