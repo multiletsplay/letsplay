@@ -30,8 +30,38 @@ p { width: 230px; font-size: 14px;}
 </head>
 <body>
 <h1>시설리스트</h1>
+<!-- 상세조건검색 -->
+<div id="facility-search">
+	<h3>지역 시설찾기</h3>
+	<!-- 지역	 / 날짜 / 필터 : 유무료, 주차, 장비대여, 샤워시설, 락커, 조명 -->
+	<span><strong>지역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>날짜</strong></span>
+	<form action="/faciility/search" method="get">
+		<span>
+			<select id="region1" name="searchRegion1">
+				<option value="강남구">강남구</option>
+				<option value="강동구">강동구</option>
+				<option value="강북구">강북구</option>
+				<option value="강서구">강서구</option>
+			</select>
+		</span>
+		<span>
+			<select id="region2" name="searchRegion2">
+				<option value="개포동">개포동</option>
+				<option value="논현동">논현동</option>
+				<option value="도곡동">도곡동</option>
+				<option value="대치동">대치동</option>
+			</select>
+		</span>
+		<span>
+			<input type="date" id="date" name="searchDate" >
+		</span>
+		<span><input type="button" value="검색"></span>
+	</form>
+	
+</div>
+
+<!-- 시설리스트 -->
 <div id="facility-list">
-	<div id="facility-search">검색란</div>
 	<form action="/facility/delete" method="post">
 	<div id="multi-delete">
 		<input type="submit" value="선택 삭제">
