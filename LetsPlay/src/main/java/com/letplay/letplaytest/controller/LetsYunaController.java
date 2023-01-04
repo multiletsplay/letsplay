@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.letplay.letplaytest.biz.FacBiz;
 import com.letplay.letplaytest.biz.InqReplyBiz;
@@ -63,11 +62,16 @@ public class LetsYunaController {
 		return "redirect:/facility/list";
 	}
 	
+	//시설예약
 	@PostMapping("/facility/reserveform")
-	public String reserveFac(Model model, FacResDto dto, RedirectAttributes resId) {
+	public String reserveFac(Model model, FacResDto dto) {
 		if(facBiz.insertRes(dto)>0) {
-			resId.addAttribute("resId", dto.getResId());
-			return "redirect:/facility/reserve";
+//			RedirectAttributes re
+//			re.addAttribute("facSeq", dto.getFacSeq());
+//			re.addAttribute("id", dto.getId());
+//			re.addAttribute("resDate", dto.getResDate());
+//			re.addAttribute("resStarttime", dto.getResStarttime());
+			return "forward:/facility/reserve";
 		}else {
 			model.addAttribute("msg", "예약 실패");
 			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
@@ -75,9 +79,9 @@ public class LetsYunaController {
 		}
 	}
 	
-	@GetMapping("/facility/reserve")
-	public String reserveConfirm(Model model, @RequestParam("resId") int resId) {
-		model.addAttribute("dto", facBiz.selectRes(resId));
+	@PostMapping("/facility/reserve")
+	public String reserveConfirm(Model model, FacResDto dto) {
+		model.addAttribute("dto", facBiz.selectRes(dto.getFacSeq(),dto.getId(),dto.getResDate(),dto.getResStarttime()));
 		return "resconfirm";
 	}
 	

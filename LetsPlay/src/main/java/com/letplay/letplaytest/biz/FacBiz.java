@@ -1,5 +1,6 @@
 package com.letplay.letplaytest.biz;
 
+import java.util.Date;
 import java.util.List;
 
 import com.letplay.letplaytest.dto.FacDto;
@@ -11,5 +12,5 @@ public interface FacBiz {
 	public int delete(int facSeq);			//시설 삭제
 	
 	public int insertRes(FacResDto dto);	//예약 등록
-	public FacResDto selectRes(int resId);	//예약 상세확인
+	public FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);	//예약 상세확인
 }

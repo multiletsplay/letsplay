@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,24 +17,29 @@
 		<th>이메일</th>
 	</tr>
 	<tr>
-		<td>${dto.id }</td>
-		<td>${dto.ResDate }</td>
-		<td></td>
-		<td></td>
+		<td>${dto.name }(${dto.nickname })</td>
+		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.resDate }"/></td>
+		<td>${dto.phone }</td>
+		<td>${dto.email }</td>
 	</tr>
 	<tr>
-		<th>시설정보</th>
+		<th colspan="5" align="left">시설정보</th>
 	</tr>
 	<tr>
-		<td>이미지</td>
-		<td>시설명</td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td><img width="300" src="${dto.facImg }"></td>
+		<td>${dto.facName }</td>
+		<td>${dto.facLocation }</td>
+		<td>${dto.facContact }</td>
+		<td>홈페이지주소</td>
 	</tr>
 	<tr>
 		<th>결제 예정 금액</th>
-		<td>${dto.ResPrice }</td>
+		<td>${dto.resPrice }</td>
+	</tr>
+	<tr>
+		<td colspan="5" align="center">
+			<input type="button" value="결제하기" onclick="">
+		</td>
 	</tr>
 </table>
 </body>

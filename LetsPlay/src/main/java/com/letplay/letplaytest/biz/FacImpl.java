@@ -1,5 +1,6 @@
 package com.letplay.letplaytest.biz;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class FacImpl implements FacBiz{
 	}
 
 	@Override
-	public FacResDto selectRes(int resId) {
-		return facMapper.selectRes(resId);
+	public FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime) {
+		return facMapper.selectRes(facSeq, id, resDate, resStarttime);
 	}
 
 }

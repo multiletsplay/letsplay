@@ -61,7 +61,7 @@
 </head>
 <body>
 <form action="/facility/reserveform" method="POST">
-<input type="hidden" name="id" value="test">	<!-- 로그인 구현 후 id값 받아오기 -->
+<input type="hidden" name="id" value="user1">	<!-- 로그인 구현 후 id값 받아오기 -->
 <input type="hidden" name="facSeq" value="${dto.facSeq }" >
 	<table class="facility-detail" >
 		<tr>
