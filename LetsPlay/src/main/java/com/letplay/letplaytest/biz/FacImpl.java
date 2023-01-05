@@ -27,8 +27,18 @@ public class FacImpl implements FacBiz{
 	}
 
 	@Override
-	public int delete(int facSeq) {
-		return facMapper.delete(facSeq);
+	public int deleteFac(int facSeq) {
+		return facMapper.deleteFac(facSeq);
+	}
+	
+	@Override
+	public int insertFac(FacDto dto) {
+		return facMapper.insertFac(dto);
+	}
+	
+	@Override
+	public int updateFac(FacDto dto) {
+		return facMapper.updateFac(dto);
 	}
 
 	@Override
