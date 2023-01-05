@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services"></script>
-<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$("#pathfinding").click(pathFinding);
@@ -60,10 +60,12 @@
 </script>
 </head>
 <body>
+<input type="button" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
+<br><br>
 <form action="/facility/reserveform" method="POST">
 <input type="hidden" name="id" value="user1">	<!-- 로그인 구현 후 id값 받아오기 -->
 <input type="hidden" name="facSeq" value="${dto.facSeq }" >
-	<table class="facility-detail" >
+	<table class="facility-detail" border="1" >
 		<tr>
 			<th>종목</th>
 			<td>${dto.spoName }</td>
@@ -80,6 +82,10 @@
 			<th>주소</th>
 			<td>${dto.facName }</td>
 			<td><input type="button" value="길찾기" id="pathfinding"></td>
+		</tr>
+		<tr>
+			<th>시설전화번호</th>
+			<td>${dto.facContact }</td>
 		</tr>
 		<tr>
 			<th>날짜</th>

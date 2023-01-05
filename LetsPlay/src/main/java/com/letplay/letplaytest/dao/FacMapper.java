@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
@@ -18,14 +19,23 @@ public interface FacMapper {
 			+ " WHERE FACILITY.SPO_ID = SPORTS.SPO_ID ")
 	List<FacDto> selectFacList();
 	
-	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_COST, FAC_DATE, FAC_PARKING, FAC_LENT, FAC_SHOWER, FAC_LOCKER, FAC_LIGHT\n"
+	@Select(" SELECT FAC_SEQ, FAC_NAME, FACILITY.SPO_ID, SPO_NAME, FAC_LOCATION, FAC_CONTACT, FAC_IMG, FAC_COST, FAC_DATE, FAC_PARKING, FAC_LENT, FAC_SHOWER, FAC_LOCKER, FAC_LIGHT, FAC_COSTCHECK "
 			+ " FROM FACILITY, SPORTS\n"
 			+ " WHERE FAC_SEQ = #{facSeq} AND FACILITY.SPO_ID = SPORTS.SPO_ID ")
 	FacDto selectFac(int facSeq);
 	
 	@Delete(" DELETE FROM FACILITY WHERE FAC_SEQ = #{facSeq} ")
-	int delete(int facSeq);
+	int deleteFac(int facSeq);
 	
+	@Insert(" INSERT INTO `FACILITY` VALUES(NULL, #{facName}, #{spoId}, #{facLocation}, #{facContact}, #{facImg}, #{facCost}, NOW(), #{facParking}, #{facLent}, #{facShower}, #{facLocker}, #{facLight}, #{facCostcheck}) ")
+	int insertFac(FacDto dto);
+	
+	@Update(" UPDATE `FACILITY` "
+			+ " SET SPO_ID=#{spoId}, FAC_NAME=#{facName}, FAC_LOCATION=#{facLocation}, FAC_CONTACT=#{facContact}, FAC_IMG=#{facImg}, FAC_COST=#{facCost}, FAC_PARKING=#{facParking}, FAC_LENT=#{facLent}, FAC_SHOWER=#{facShower}, FAC_LOCKER=#{facLocker}, FAC_LIGHT=#{facLight}, FAC_COSTCHECK=#{facCostcheck} "
+			+ " WHERE FAC_SEQ=#{facSeq} ")
+	int updateFac(FacDto dto);
+	
+	//시설예약
 	@Insert(" INSERT INTO `FACILITY_RESERVATION` VALUES(NULL, #{id}, #{facSeq}, #{resDate}, #{resStarttime}, #{resEndtime}, #{resPrice} )")
 	int insertRes(FacResDto dto);
 	

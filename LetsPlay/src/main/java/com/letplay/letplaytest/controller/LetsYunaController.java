@@ -15,6 +15,7 @@ import com.letplay.letplaytest.biz.InqReplyBiz;
 import com.letplay.letplaytest.biz.InquiryBiz;
 import com.letplay.letplaytest.biz.ReviewBiz;
 import com.letplay.letplaytest.dto.Criteria;
+import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.InqReplyDto;
 import com.letplay.letplaytest.dto.InquiryDto;
@@ -54,12 +55,56 @@ public class LetsYunaController {
 //		return redirectView;
 //	}
 	
-	
 	//@RequestMapping(value="/facility/delete", method=RequestMethod.POST)
 	@PostMapping("/facility/delete")
-	public String deletFac(@RequestParam("delList") List<Integer> ids) {
-		for(Integer facSeq : ids) facBiz.delete(facSeq);
-		return "redirect:/facility/list";
+	public String deletFac(Model model, @RequestParam(value="delList", required=false) List<Integer> ids) {
+		if (ids == null) {
+			model.addAttribute("msg", "시설을 선택해주세요.");
+			model.addAttribute("url", "/facility/list");
+			return "alert";
+		}else {
+			for(Integer facSeq : ids) facBiz.deleteFac(facSeq);
+			model.addAttribute("msg", "삭제 성공");
+			model.addAttribute("url", "/facility/list");
+			return "alert";
+		}
+	}
+	
+	@GetMapping("/facility/insertform")
+	public String insertFac() {
+		return "facilityinsert";
+	}
+	
+	@PostMapping("/facility/insert")
+	public String insertFac(Model model, FacDto dto) {
+		if(facBiz.insertFac(dto)>0) {
+			model.addAttribute("msg", "등록 완료");
+			model.addAttribute("url", "/facility/list");
+			return "alert";
+		}else {
+			model.addAttribute("msg", "등록 실패");
+			model.addAttribute("url", "/facility/insertform");
+			return "alert";
+		}
+	}
+	
+	@GetMapping("/facility/updateform")
+	public String updateFac(Model model, int facSeq) {
+		model.addAttribute("dto", facBiz.selectFac(facSeq));
+		return "facilityupdate";
+	}
+	
+	@PostMapping("/facility/update")
+	public String updatefac(Model model, FacDto dto) {
+		if(facBiz.updateFac(dto)>0) {
+			model.addAttribute("msg", "수정 완료");
+			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
+			return "alert";
+		}else {
+			model.addAttribute("msg", "수정 실패");
+			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
+			return "alert";
+		}
 	}
 	
 	//시설예약
