@@ -55,7 +55,7 @@ $(function() {
 					<tr>
 						<td>${dto.inqSeq }</td>
 						<c:choose>
-							<c:when test="${dto.replyCheck == 'N'}"><td>답변대기</td></c:when>
+							<c:when test="${dto.replyCheck == 0 }"><td>답변대기</td></c:when>
 							<c:otherwise><td>답변완료</td></c:otherwise>
 						</c:choose>
 						<td><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></td>
