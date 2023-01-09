@@ -14,5 +14,5 @@ public interface FacBiz {
 	public int updateFac(FacDto dto);		//시설 수정
 	
 	public int insertRes(FacResDto dto);	//예약 등록
-	public FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);	//예약 상세확인
+	//public FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);	//예약 상세확인
 }
