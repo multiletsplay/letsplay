@@ -13,6 +13,7 @@ import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.MatchDto;
 import com.letplay.letplaytest.dto.NoticeDto;
 import com.letplay.letplaytest.dto.PageDto;
+import com.letplay.letplaytest.dto.ReplyDto;
 
 @Controller
 @RequestMapping("/")
@@ -27,9 +28,18 @@ public class LetsMatchController {
 		@GetMapping("/match/list")
 		public String selectMatchList(Model model) {
 			model.addAttribute("list",matchBiz.selectMatchList());
-			
+			model.addAttribute("cnt",matchBiz.matchListCount());
 			return "matchlist";
 		}
+		
+		@GetMapping("/match/search")
+		public String selectSports(Model model, int spoId) {
+			model.addAttribute("list",matchBiz.selectSports(spoId));
+			model.addAttribute("cnt",matchBiz.matchListCount());
+			return "matchlist";
+		}
+		
+		
 		
 		@PostMapping("/match/insert")
 		public String insertMatch(MatchDto dto) {
@@ -48,6 +58,7 @@ public class LetsMatchController {
 		@GetMapping("/match/detail")
 		public String selectOneMatch(Model model, int matchSeq) {
 			model.addAttribute("dto", matchBiz.selectMatchOne(matchSeq));
+			model.addAttribute("reply",matchBiz.selectReplyList(matchSeq));
 			
 			return "matchdetail";
 		}
@@ -61,7 +72,7 @@ public class LetsMatchController {
 		@PostMapping("/match/update")
 		public String updateMatch(Model model, MatchDto dto) {
 			if(matchBiz.updateMatch(dto)>0) {
-				return "redirect:/match/deatil?matchSeq="+dto.getMatchSeq();
+				return "redirect:/match/detail?matchSeq="+dto.getMatchSeq();
 			}else {
 				return "redirect:/match/updateform?matchSeq="+dto.getMatchSeq();
 			}
@@ -84,8 +95,8 @@ public class LetsMatchController {
 		}
 		
 		@PostMapping("/match/insertreply")
-		public String insertReply(String matchContent, String id, int matchSeq) {
-			if(matchBiz.insertReply(matchContent, id, matchSeq)>0) {
+		public String insertReply(String repContent, String id, int matchSeq) {
+			if(matchBiz.insertReply(repContent, id, matchSeq)>0) {
 				return "redirect:/match/detail?matchSeq=" + matchSeq;
 			}else {
 				return "redirect:/match/detail?matchSeq=" + matchSeq;
@@ -98,13 +109,14 @@ public class LetsMatchController {
 			return "redirect:/match/detail?matchSeq=" + matchSeq;
 		}
 		
-		@GetMapping("/match/cntSeq")
-		public String cntSeq(int matchSeq) {
-			matchBiz.cntSeq(matchSeq);
-			
-			return "redirect:/match/list";
-		}
 		
+		@GetMapping("/match/joinMatch")
+		public String joinMatch(int matchSeq) {
+			
+			matchBiz.joinMatch(matchSeq); 
+			
+			return "redirect:/match/detail?matchSeq="+ matchSeq;
+		}
 		//공지사항
 		@GetMapping("/notice/list")
 		public String selectNoticelist(NoticeDto dto, Model model, Criteria criteria) {

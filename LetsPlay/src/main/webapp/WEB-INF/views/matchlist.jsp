@@ -11,36 +11,39 @@
 </head>
 <body>
 <h1>매칭게시판</h1>
-<c:forEach items="${list }" var="dto">
-<div>${dto.cntSeq }명이 현재 매칭 중!!</div>
-</c:forEach>
-<div class="form-group">
-    <label>포지션</label><br>
-    <input class="sports-checkbox" type="checkbox" value="풋살">풋살
-    <input class="sports-checkbox" type="checkbox" value="테니스">테니스
-    <input class="sports-checkbox" type="checkbox" value="골프">피아노2
-    <input class="sports-checkbox" type="checkbox" value="탁구">일렉
+
+<div>
+<form action="/match/search"  method="get">
+  <button type="button" name="spoId" onclick="location.href='/match/list'"><img src="../../img/football.jpg" width="35px">전체</button>
+  <button type="submit" name="spoId" value="1"><img src="../../img/football.jpg" width="35px">풋살</button>
+  <button type="submit" name="spoId" value="2"><img src="../../img/football.jpg" width="35px">테니스</button>
+  <button type="submit" name="spoId" value="3"><img src="../../img/football.jpg" width="35px">배드민턴</button>
+  <button type="submit" name="spoId" value="4"><img src="../../img/football.jpg" width="35px">탁구</button>
+  <button type="submit" name="spoId" value="5"><img src="../../img/football.jpg" width="35px">수영</button>
+  <button type="submit" name="spoId" value="6"><img src="../../img/football.jpg" width="35px">골프</button>
+</form>
 </div>
+
 	<div>
 		<table border="1">
-			<col width="75">
-			<col width="75">
-			<col width="75">
-			<col width="75">
-			<col width="75">
-			<col width="75">
-			<col width="75">
-			<col width="75">
-			<col width="75">
-			<col width="75">
-			<col width="75">
-			
+			<col width="100">
+			<col width="100">
+			<col width="100">
+			<col width="300">
+			<col width="100">
+			<col width="120">
+			<col width="100">
+			<col width="100">
+			<col width="100">
+			<col width="100">
+			<tr>
+				<td><c:out value="${cnt}"/>명이 현재 매칭 중!</td>
+			</tr>
 			<tr align="center">
 				<th>NO</th>
 				<th>작성자</th>
 				<th>종목</th>
 				<th>제목</th>
-				<th>내용</th>
 				<th>작성일자</th>
 				<th>마감일자</th>
 				<th>장소</th>
@@ -52,7 +55,7 @@
 			<c:choose>
 				<c:when test="${empty list }">
 					<tr>
-						<td colspan="11" align="center">등록된 매칭이 없습니다.</td>
+						<td colspan="10" align="center">등록된 매칭이 없습니다.</td>
 					</tr>
 				</c:when>
 				
@@ -64,9 +67,8 @@
 							<td>${dto.id }</td>
 							<td>${dto.spoId}</td>
 							<td><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></td>
-							<td>${dto.matchContent }</td>
 							<td><fmt:formatDate value="${dto.matchRegdate}" pattern="yyyy-MM-dd HH:mm:ss" ></fmt:formatDate></td>
-							<td><fmt:formatDate value="${dto.matchEnddate}" pattern="yyyy-MM-dd HH:mm:ss" ></fmt:formatDate></td>
+							<td><fmt:formatDate value="${dto.matchEnddate}" pattern="yyyy-MM-dd(E) " ></fmt:formatDate></td>
 							<td>${dto.matchLocation }</td>
 							<td>${dto.matchCnt }/${dto.matchTotal }</td>
 							<td>${dto.matchLevel }</td>
@@ -76,7 +78,7 @@
 				</c:otherwise>
 			</c:choose>
 			<tr>
-				<td colspan="11" align="right">
+				<td colspan="10" align="right">
 					<input type="button" value="매칭등록" onclick="location.href='/match/insertform'">
 				</td>
 			</tr>

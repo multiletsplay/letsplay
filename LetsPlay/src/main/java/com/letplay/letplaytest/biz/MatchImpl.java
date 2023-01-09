@@ -21,6 +21,11 @@ public class MatchImpl implements MatchBiz {
 	}
 	
 	@Override
+	public List<MatchDto> selectSports(int spoId) {
+		return matchMapper.selectSports(spoId);
+	}
+	
+	@Override
 	public MatchDto selectMatchOne(int matchSeq) {
 		return matchMapper.selectMatchOne(matchSeq);
 	}
@@ -41,8 +46,8 @@ public class MatchImpl implements MatchBiz {
 	}
 
 	@Override
-	public int insertReply(String matchContent, String id, int matchSeq) {
-		return matchMapper.insertReply(matchContent, id, matchSeq);
+	public int insertReply(String repContent, String id, int matchSeq) {
+		return matchMapper.insertReply(repContent, id, matchSeq);
 	}
 
 	@Override
@@ -60,10 +65,18 @@ public class MatchImpl implements MatchBiz {
 		return matchMapper.delReply(repSeq);
 	}
 
+
 	@Override
-	public int cntSeq(int matchSeq) {
-		return matchMapper.cntSeq(matchSeq);
+	public int joinMatch(int matchSeq) {
+		return matchMapper.joinMatch(matchSeq);
 	}
+
+	@Override
+	public int matchListCount() {
+		return matchMapper.matchListCount();
+	}
+
+
 
 	
 }
