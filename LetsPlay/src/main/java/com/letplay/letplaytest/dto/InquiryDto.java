@@ -8,14 +8,14 @@ public class InquiryDto {
 	private String inqTitle;
 	private String inqContent;
 	private Date inqDate;
-	private String replyCheck;
+	private int replyCheck;
 	
 	public InquiryDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public InquiryDto(int inqSeq, String id, String inqTitle, String inqContent, Date inqDate, String replyCheck) {
+	public InquiryDto(int inqSeq, String id, String inqTitle, String inqContent, Date inqDate, int replyCheck) {
 		super();
 		this.inqSeq = inqSeq;
 		this.id = id;
@@ -55,10 +55,10 @@ public class InquiryDto {
 	public void setInqDate(Date inqDate) {
 		this.inqDate = inqDate;
 	}
-	public String getReplyCheck() {
+	public int getReplyCheck() {
 		return replyCheck;
 	}
-	public void setReplyCheck(String replyCheck) {
+	public void setReplyCheck(int replyCheck) {
 		this.replyCheck = replyCheck;
 	}
 	

@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class FacResDto {
-	int resId;
+	String resId;
 	String id;
 	String name;
 	String nickname;
@@ -27,7 +27,7 @@ public class FacResDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FacResDto(int resId, String id, String name, String nickname, String email, String phone, int facSeq,
+	public FacResDto(String resId, String id, String name, String nickname, String email, String phone, int facSeq,
 			String facName, String facImg, String facLocation, String facContact, Date resDate, String resStarttime,
 			String resEndtime, String resPrice) {
 		super();
@@ -48,10 +48,10 @@ public class FacResDto {
 		this.resPrice = resPrice;
 	}
 
-	public int getResId() {
+	public String getResId() {
 		return resId;
 	}
-	public void setResId(int resId) {
+	public void setResId(String resId) {
 		this.resId = resId;
 	}
 	public String getId() {

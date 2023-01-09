@@ -36,15 +36,15 @@ public interface FacMapper {
 	int updateFac(FacDto dto);
 	
 	//시설예약
-	@Insert(" INSERT INTO `FACILITY_RESERVATION` VALUES(NULL, #{id}, #{facSeq}, #{resDate}, #{resStarttime}, #{resEndtime}, #{resPrice} )")
+	@Insert(" INSERT INTO `FACILITY_RESERVATION` VALUES(#{resId}, #{id}, #{facSeq}, #{resDate}, #{resStarttime}, NULL, #{resPrice} )")
 	int insertRes(FacResDto dto);
 	
-	@Select("SELECT NAME, NICKNAME, PHONE, EMAIL, RES_DATE, RES_PRICE, RES_STARTTIME, RES_ENDTIME, FAC_IMG, FAC_NAME, FAC_LOCATION, FAC_CONTACT "
-			+ " FROM ( "
-			+ "	SELECT r.`ID` AS r_id, m.`ID` AS m_id, r.FAC_SEQ AS r_seq, f.FAC_SEQ AS f_seq, NAME, NICKNAME, PHONE, EMAIL, RES_DATE, RES_STARTTIME, RES_ENDTIME, RES_PRICE, FAC_IMG, FAC_NAME, FAC_LOCATION, FAC_CONTACT "
-			+ "	FROM `FACILITY_RESERVATION` r, `MEMBER` m, `FACILITY` f "
-			+ "	WHERE r.ID=m.ID AND r.FAC_SEQ=f.FAC_SEQ "
-			+ "	) TMP "
-			+ " WHERE r_seq=#{facSeq} AND r_id=#{id} AND RES_DATE=#{resDate} AND RES_STARTTIME=#{resStarttime}; ")
-	FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);
+//	@Select("SELECT NAME, NICKNAME, PHONE, EMAIL, RES_DATE, RES_PRICE, RES_STARTTIME, RES_ENDTIME, FAC_IMG, FAC_NAME, FAC_LOCATION, FAC_CONTACT "
+//			+ " FROM ( "
+//			+ "	SELECT r.`ID` AS r_id, m.`ID` AS m_id, r.FAC_SEQ AS r_seq, f.FAC_SEQ AS f_seq, NAME, NICKNAME, PHONE, EMAIL, RES_DATE, RES_STARTTIME, RES_ENDTIME, RES_PRICE, FAC_IMG, FAC_NAME, FAC_LOCATION, FAC_CONTACT "
+//			+ "	FROM `FACILITY_RESERVATION` r, `MEMBER` m, `FACILITY` f "
+//			+ "	WHERE r.ID=m.ID AND r.FAC_SEQ=f.FAC_SEQ "
+//			+ "	) TMP "
+//			+ " WHERE r_seq=#{facSeq} AND r_id=#{id} AND RES_DATE=#{resDate} AND RES_STARTTIME=#{resStarttime}; ")
+//	FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);
 }

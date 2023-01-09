@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99a2faf19be558d2479cdc1cce8e0ae0&libraries=services"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(document).ready(function(){
@@ -63,29 +63,33 @@
 <input type="button" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
 <br><br>
 <form action="/facility/reserveform" method="POST">
-<input type="hidden" name="id" value="user1">	<!-- 로그인 구현 후 id값 받아오기 -->
+<input type="hidden" name="name" value="유저이름">	<!-- 로그인 구현 후 id값 받아오기 -->
+<input type="hidden" name="id" value="user1">
+<input type="hidden" name="email" value="user1@test.com">
+<input type="hidden" name="phone" value="010-1111-1111">	
 <input type="hidden" name="facSeq" value="${dto.facSeq }" >
-	<table class="facility-detail" border="1" >
+<input type="hidden" name="resId" value="${resId }" >
+	<table class="facility-infrom" border="1" >
 		<tr>
 			<th>종목</th>
 			<td>${dto.spoName }</td>
 		</tr>
 		<tr>
 			<th>시설명</th>
-			<td>${dto.facName }</td>
+			<td><input type="hidden" name="facName" value="${dto.facName }">${dto.facName }</td>
 		</tr>
 		<tr>
 			<th></th>
-			<td><img width="300" src="${dto.facImg }"></td>
+			<td><input type="hidden" name="facImg" value="${dto.facImg }"><img width="300" src="${dto.facImg }"></td>
 		</tr>
 		<tr>
 			<th>주소</th>
-			<td>${dto.facName }</td>
+			<td><input type="hidden" name="facLocation" value="${dto.facLocation }">${dto.facName }</td>
 			<td><input type="button" value="길찾기" id="pathfinding"></td>
 		</tr>
 		<tr>
 			<th>시설전화번호</th>
-			<td>${dto.facContact }</td>
+			<td><input type="hidden" name="facContact" value="${dto.facContact }">${dto.facContact }</td>
 		</tr>
 		<tr>
 			<th>날짜</th>
@@ -102,6 +106,61 @@
 			<td colspan="5" align="right">
 				<input type="submit" value="예약하기">
 			</td>
+		</tr>
+	</table>
+<hr>
+	<!-- 상세정보 -->
+	<h3>상세정보</h3>
+	<table class="facility-detail" border="1">
+		<tr>
+			<c:choose>
+				<c:when test="${dto.facParking eq true }">
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/7212/7212181.png"></td>
+				</c:when>
+				<c:otherwise>
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/7212/7212164.png"></td>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${dto.facLent eq true }">
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/1574/1574169.png"></td>
+				</c:when>
+				<c:otherwise>
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/1574/1574603.png"></td>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${dto.facShower eq true }">
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/2008/2008485.png"></td>
+				</c:when>
+				<c:otherwise>
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/2008/2008489.png"></td>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${dto.facLocker eq true }">
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/1529/1529858.png"></td>
+				</c:when>
+				<c:otherwise>
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/1529/1529756.png"></td>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${dto.facLight eq true }">
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/430/430887.png"></td>
+				</c:when>
+				<c:otherwise>
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/430/430998.png"></td>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${dto.facCostcheck eq true }">
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/2933/2933116.png"></td>
+				</c:when>
+				<c:otherwise>
+					<td><img width="50" src="https://cdn-icons-png.flaticon.com/512/2933/2933038.png"></td>
+				</c:otherwise>
+			</c:choose>
 		</tr>
 	</table>
 </form>

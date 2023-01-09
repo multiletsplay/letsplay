@@ -13,14 +13,16 @@ import com.letplay.letplaytest.dto.InquiryDto;
 
 @Mapper
 public interface InquiryMapper {
-	@Select(" SELECT INQ_SEQ, REPLY_CHECK, INQ_TITLE, ID, INQ_DATE\n"
-			+ "FROM (\n"
-			+ "	SELECT @ROWNUM := @ROWNUM + 1 AS rnum, INQ_SEQ, REPLY_CHECK, INQ_TITLE, ID, INQ_DATE\n"
-			+ "	FROM `ONE-ON-ONE INQUIRY` I, (SELECT @ROWNUM := 0 ) A\n"
+	@Select(" SELECT INQ_SEQ, INQ_TITLE, ID, INQ_DATE, "
+			+ " (SELECT COUNT(*) FROM INQUIRY_REPLY R "
+			+ "   WHERE TMP.INQ_SEQ = R.INQ_SEQ) REPLY_CHECK "
+			+ " FROM ( "
+			+ "	SELECT @ROWNUM := @ROWNUM + 1 AS rnum, INQ_SEQ, INQ_TITLE, ID, INQ_DATE "
+			+ "	FROM `ONE-ON-ONE INQUIRY` I, (SELECT @ROWNUM := 0 ) A "
 			+ "	ORDER BY INQ_SEQ DESC\n"
-			+ ") TMP\n"
-			+ "WHERE rnum > (#{pageNum } - 1) * #{amount} \n"
-			+ "LIMIT #{amount } ")
+			+ ") TMP "
+			+ " WHERE rnum > (#{pageNum } - 1) * #{amount} "
+			+ " LIMIT #{amount } ")
 	List<InquiryDto> selectList(Criteria criteria);
 
 	@Select(" SELECT * FROM `ONE-ON-ONE INQUIRY` WHERE INQ_SEQ=#{inqSeq} ")

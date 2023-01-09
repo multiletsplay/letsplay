@@ -1,5 +1,8 @@
 package com.letplay.letplaytest.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,12 @@ public class LetsYunaController {
 	public String selectFacDetail(Model model, int facSeq) {
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
 		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
+		
+		//예약번호 부여
+		LocalDateTime now = LocalDateTime.now();
+		String localtime = now.format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
+		String resId = "res_"+ localtime;
+		model.addAttribute("resId", resId);
 		return "facilitydetail";
 	}
 	
@@ -111,11 +120,6 @@ public class LetsYunaController {
 	@PostMapping("/facility/reserveform")
 	public String reserveFac(Model model, FacResDto dto) {
 		if(facBiz.insertRes(dto)>0) {
-//			RedirectAttributes re
-//			re.addAttribute("facSeq", dto.getFacSeq());
-//			re.addAttribute("id", dto.getId());
-//			re.addAttribute("resDate", dto.getResDate());
-//			re.addAttribute("resStarttime", dto.getResStarttime());
 			return "forward:/facility/reserve";
 		}else {
 			model.addAttribute("msg", "예약 실패");
@@ -126,8 +130,21 @@ public class LetsYunaController {
 	
 	@PostMapping("/facility/reserve")
 	public String reserveConfirm(Model model, FacResDto dto) {
-		model.addAttribute("dto", facBiz.selectRes(dto.getFacSeq(),dto.getId(),dto.getResDate(),dto.getResStarttime()));
+		model.addAttribute("dto", dto);
 		return "resconfirm";
+	}
+	
+	@PostMapping("/facility/payment")
+	public String reservePayment(Model model, FacResDto dto) {
+		if(facBiz.insertRes(dto)>0) {
+			model.addAttribute("msg", "예약 성공");
+			model.addAttribute("url", "/mypage");
+			return "alert";
+		}else {
+			model.addAttribute("msg", "예약 실패");
+			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
+			return "alert";
+		}
 	}
 	
 	//1대1문의
@@ -238,5 +255,10 @@ public class LetsYunaController {
 			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
 			return "alert";
 		}
+	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "mypage";
 	}
 }
