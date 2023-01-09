@@ -19,6 +19,15 @@ function fn1(){
 		location.href='/match/delete?matchSeq=${dto.matchSeq}'
 	}
 };
+function fn2(a,b){
+	if (confirm("매칭에 참여하시겠습니까?")) {
+		if(a >= b){
+			alert("이미 정원이 가득 찼습니다")
+			return;
+		}
+		location.href='/match/joinMatch?matchSeq=${dto.matchSeq}'
+	}
+};
 	</script>
 	<table border="1" class="table">
 		<tr class="table-active">
@@ -39,7 +48,7 @@ function fn1(){
 		</tr>
 		<tr>
 			<th>마감일자</th>
-			<td><fmt:formatDate value="${dto.matchEnddate}" pattern="yyyy-MM-dd HH:mm:ss" ></fmt:formatDate></td>
+			<td><fmt:formatDate value="${dto.matchEnddate}" pattern="yyyy-MM-dd (a)HH:mm" ></fmt:formatDate></td>
 		</tr>
 		<tr>
 			<th>장  소</th>
@@ -58,11 +67,18 @@ function fn1(){
 			<td>${dto.matchFacility }</td>
 		</tr>
 		<tr>
+			<th>댓글 수</th>
+			<td>${dto.cntComment }</td>
+		</tr>
+		<tr>
 			<td colspan="3" align="right">
 				<input type="button" value="수정" onclick="location.href='/match/updateform?matchSeq=${dto.matchSeq}'">
 				<input type="button" value="삭제"  onclick="javascript:fn1();">
 				<input type="button" value="목록" onclick="location.href='/match/list'">
+				<div style="text-align:center">
+					<input type="button" value="참여하기" onclick="fn2(${dto.matchCnt},${dto.matchTotal });">
 					
+				</div>
 				<div>
 					<form method="post" action="/match/insertreply?matchSeq=${dto.matchSeq}">
 						<p>
