@@ -43,6 +43,12 @@ public class LetsYunaController {
 		return "facilitylist";
 	}
 	
+	@GetMapping("/facility/select")
+	public String selectSports(Model model, int spoId) {
+		model.addAttribute("faclist", facBiz.selectSports(spoId));
+		return "facilitylist";
+	}
+	
 	@GetMapping("/facility/detail")
 	public String selectFacDetail(Model model, int facSeq) {
 		model.addAttribute("dto", facBiz.selectFac(facSeq));

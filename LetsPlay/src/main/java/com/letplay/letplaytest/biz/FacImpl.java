@@ -22,6 +22,11 @@ public class FacImpl implements FacBiz{
 	}
 	
 	@Override
+	public List<FacDto> selectSports(int spoId) {
+		return facMapper.selectSports(spoId);
+	}
+	
+	@Override
 	public FacDto selectFac(int facSeq) {
 		return facMapper.selectFac(facSeq);
 	}

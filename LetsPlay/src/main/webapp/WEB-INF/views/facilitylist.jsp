@@ -22,11 +22,25 @@
 </head>
 <body>
 <h1>시설리스트</h1>
+<!-- 종목 선택 -->
+<h3>종목 선택</h3>
+<div class="select-sports">
+	<form action="/facility/select" method="get">
+		<button type="button" name="spoId" onclick="location.href='/facility/list'"><img src="https://cdn-icons-png.flaticon.com/512/6938/6938829.png" width="30"></button>
+		<button type="submit" name="spoId" value="1"><img src="https://cdn-icons-png.flaticon.com/512/6938/6938829.png" width="30"></button>
+		<button type="submit" name="spoId" value="2"><img src="https://cdn-icons-png.flaticon.com/512/6814/6814699.png" width="30"></button>
+		<button type="submit" name="spoId" value="3"><img src="https://cdn-icons-png.flaticon.com/512/1633/1633893.png" width="30"></button>
+	</form>
+</div>
+<br><br>
 <!-- 상세조건검색 -->
 <div id="facility-search">
 	<h3>지역 시설찾기</h3>
 	<!-- 지역	 / 날짜 / 필터 : 유무료, 주차, 장비대여, 샤워시설, 락커, 조명 -->
-	<span><strong>지역</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>날짜</strong></span>
+	<span><strong>지역</strong>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>날짜</strong></span>
 	<form action="/faciility/search" method="get">
 		<span>
 			<select id="region1" name="searchRegion1">
@@ -52,7 +66,6 @@
 		<span><input type="button" value="검색"></span>
 	</form>
 </div>
-
 <!-- 시설리스트 -->
 <div id="facility-list">
 	<br><br>
