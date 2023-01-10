@@ -11,6 +11,7 @@
 </head>
 <div>
 	<form action="/match/insert" method="post">
+	<input type="hidden" name="matchCnt" value="1">
 		<table border="1">
 			<tr>
 				<th>제  목</th>
@@ -22,7 +23,12 @@
 			</tr>
 			<tr>
 				<th>스포츠 종류</th>
-				<td><input type="radio" name="spoId" value='1'>풋살</td>
+				<td><input type="radio" name="spoId" value='1'>풋살
+					<input type="radio" name="spoId" value='2'>테니스
+					<input type="radio" name="spoId" value='3'>배구
+					<input type="radio" name="spoId" value='4'>탁구
+					<input type="radio" name="spoId" value='5'>수영
+					<input type="radio" name="spoId" value='6'>골프</td>
 			</tr>
 			<tr>
 				<th>마감일자</th>
@@ -46,7 +52,7 @@
 			</tr>
 			<tr>
 		        <th>시설유무</th>
-		        <td><input type="checkbox" name="시설확정" value="fac">시설확정</td>
+		        <td><input type="checkbox" name="matchFacility" value="1">시설확정</td>
 		    </tr>
 			<tr>
 				<td colspan="2" align="right">

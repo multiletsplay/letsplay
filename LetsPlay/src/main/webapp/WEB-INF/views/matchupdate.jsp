@@ -29,7 +29,7 @@ function fn1(){
 		    </tr>
 		    <tr>	
 		    	<th>마감일자</th>
-		        <td><input type="datetime-local" name="matchEnddate" value="${dto.matchRegdate }"></td>
+		        <td><input type="date" name="matchEnddate" value="${dto.matchEnddate }"></td>
 		    </tr>
 		    <tr>
 		        <th>장  소</th>
@@ -49,7 +49,7 @@ function fn1(){
 			</tr>
 			<tr>
 		        <th>시설유무</th>
-		        <td><input type="checkbox" name="시설확정" value="fac">${dto.matchFacility }</td>
+		        <td><input type="checkbox" name="시설확정" value="${dto.matchFacility }">${dto.matchFacility }</td>
 		    </tr>
             <tr>
                 <td colspan="2" align="right">

@@ -41,14 +41,13 @@ public class MatchDto {
 	private String matchFacility;
 	private char matchStatus;
 	private int cntComment;
-	private int cntSeq;
 	public MatchDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public MatchDto(int matchSeq, String id, int spoId, String matchTitle, String matchContent, Date matchRegdate,
 			Date matchModidate, Date matchEnddate, String matchLocation, int matchTotal, int matchCnt, int matchLevel,
-			String matchFacility, char matchStatus, int cntComment, int cntSeq) {
+			String matchFacility, char matchStatus, int cntComment) {
 		super();
 		this.matchSeq = matchSeq;
 		this.id = id;
@@ -65,7 +64,6 @@ public class MatchDto {
 		this.matchFacility = matchFacility;
 		this.matchStatus = matchStatus;
 		this.cntComment = cntComment;
-		this.cntSeq = cntSeq;
 	}
 	public int getMatchSeq() {
 		return matchSeq;
@@ -157,10 +155,5 @@ public class MatchDto {
 	public void setCntComment(int cntComment) {
 		this.cntComment = cntComment;
 	}
-	public int getCntSeq() {
-		return cntSeq;
-	}
-	public void setCntSeq(int cntSeq) {
-		this.cntSeq = cntSeq;
-	}
+
 }
