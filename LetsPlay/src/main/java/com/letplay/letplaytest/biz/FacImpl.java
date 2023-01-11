@@ -1,10 +1,13 @@
 package com.letplay.letplaytest.biz;
 
-import java.util.Date;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.letplay.letplaytest.dao.FacMapper;
 import com.letplay.letplaytest.dto.FacDto;
@@ -37,7 +40,14 @@ public class FacImpl implements FacBiz{
 	}
 	
 	@Override
-	public int insertFac(FacDto dto) {
+	public int insertFac(FacDto dto, MultipartFile file) throws Exception {
+		String projpath = System.getProperty("user.dir")+"/src/main/webapp/image";
+		UUID uuid = UUID.randomUUID();
+		String filename = uuid+"_"+file.getOriginalFilename();
+		File saveFile = new File(projpath,filename);
+		file.transferTo(saveFile);
+		dto.setFacImg(filename);
+		dto.setFacImgpath("/files/"+filename);
 		return facMapper.insertFac(dto);
 	}
 	

@@ -26,10 +26,13 @@
 <h3>종목 선택</h3>
 <div class="select-sports">
 	<form action="/facility/select" method="get">
-		<button type="button" name="spoId" onclick="location.href='/facility/list'"><img src="https://cdn-icons-png.flaticon.com/512/6938/6938829.png" width="30"></button>
+		<button type="button" name="spoId" onclick="location.href='/facility/list'"><img src="https://cdn-icons-png.flaticon.com/512/443/443635.png" width="30"></button>
 		<button type="submit" name="spoId" value="1"><img src="https://cdn-icons-png.flaticon.com/512/6938/6938829.png" width="30"></button>
-		<button type="submit" name="spoId" value="2"><img src="https://cdn-icons-png.flaticon.com/512/6814/6814699.png" width="30"></button>
+		<button type="submit" name="spoId" value="2"><img src="https://cdn-icons-png.flaticon.com/512/3978/3978317.png" width="30"></button>
 		<button type="submit" name="spoId" value="3"><img src="https://cdn-icons-png.flaticon.com/512/1633/1633893.png" width="30"></button>
+		<button type="submit" name="spoId" value="4"><img src="https://cdn-icons-png.flaticon.com/512/2500/2500356.png" width="30"></button>
+		<button type="submit" name="spoId" value="5"><img src="https://cdn-icons-png.flaticon.com/512/50/50004.png" width="30"></button>
+		<button type="submit" name="spoId" value="6"><img src="https://cdn-icons-png.flaticon.com/512/1695/1695095.png" width="30"></button>
 	</form>
 </div>
 <br><br>
@@ -94,7 +97,7 @@
 	            	<tr>
 	            		<td><input type="checkbox" class="delList" name="delList" value="${dto.facSeq }"/></td>
 	            		<td>${dto.spoName}</td>
-	            		<td><img width="210" src="${dto.facImg }"></td>
+	            		<td><img width="210" src="${dto.facImgpath }"></td>
 	            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
 	            		<td>${dto.facLocation }</td>
 	            		<td></td>

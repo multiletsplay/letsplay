@@ -2,7 +2,6 @@ package com.letplay.letplaytest.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.letplay.letplaytest.biz.FacBiz;
 import com.letplay.letplaytest.biz.InqReplyBiz;
@@ -91,8 +91,8 @@ public class LetsYunaController {
 	}
 	
 	@PostMapping("/facility/insert")
-	public String insertFac(Model model, FacDto dto) {
-		if(facBiz.insertFac(dto)>0) {
+	public String insertFac(Model model, FacDto dto, MultipartFile file) throws Exception {
+		if(facBiz.insertFac(dto, file)>0) {
 			model.addAttribute("msg", "등록 완료");
 			model.addAttribute("url", "/facility/list");
 			return "alert";

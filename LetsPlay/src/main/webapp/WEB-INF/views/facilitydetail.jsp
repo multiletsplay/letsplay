@@ -80,7 +80,7 @@
 		</tr>
 		<tr>
 			<th></th>
-			<td><input type="hidden" name="facImg" value="${dto.facImg }"><img width="300" src="${dto.facImg }"></td>
+			<td><input type="hidden" name="facImgpath" value="${dto.facImgpath }"><img width="300" src="${dto.facImgpath }"></td>
 		</tr>
 		<tr>
 			<th>주소</th>

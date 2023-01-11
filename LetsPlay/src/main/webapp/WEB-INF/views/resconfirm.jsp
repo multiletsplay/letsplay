@@ -75,7 +75,7 @@ function requestPay() {
 		<th colspan="5" align="left">시설정보</th>
 	</tr>
 	<tr>
-		<td><img width="300" src="${dto.facImg }"></td>
+		<td><img width="300" src="${dto.facImgpath }"></td>
 		<td>${dto.facName }</td>
 		<td>${dto.facLocation }</td>
 		<td>${dto.facContact }</td>
