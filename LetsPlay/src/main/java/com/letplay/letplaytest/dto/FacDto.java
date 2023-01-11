@@ -1,6 +1,9 @@
 package com.letplay.letplaytest.dto;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class FacDto {
 	private int facSeq;
@@ -10,7 +13,8 @@ public class FacDto {
 	private String facLocation;
 	private String facContact;
 	private int facCost;
-	private String facImg;
+	private String facImg;			//이미지파일명
+	private String facImgpath;		//이미지파일주소
 	private Date facDate;
 	private Boolean facParking;
 	private Boolean facLent;
@@ -25,8 +29,8 @@ public class FacDto {
 	}
 
 	public FacDto(int facSeq, String facName, int spoId, String spoName, String facLocation, String facContact,
-			int facCost, String facImg, Date facDate, Boolean facParking, Boolean facLent, Boolean facShower,
-			Boolean facLocker, Boolean facLight, Boolean facCostcheck) {
+			int facCost, String facImg, String facImgpath, Date facDate, Boolean facParking, Boolean facLent,
+			Boolean facShower, Boolean facLocker, Boolean facLight, Boolean facCostcheck) {
 		super();
 		this.facSeq = facSeq;
 		this.facName = facName;
@@ -36,6 +40,7 @@ public class FacDto {
 		this.facContact = facContact;
 		this.facCost = facCost;
 		this.facImg = facImg;
+		this.facImgpath = facImgpath;
 		this.facDate = facDate;
 		this.facParking = facParking;
 		this.facLent = facLent;
@@ -80,12 +85,6 @@ public class FacDto {
 	}
 	public void setFacContact(String facContact) {
 		this.facContact = facContact;
-	}
-	public String getFacImg() {
-		return facImg;
-	}
-	public void setFacImg(String facImg) {
-		this.facImg = facImg;
 	}
 	public Date getFacDate() {
 		return facDate;
@@ -134,6 +133,20 @@ public class FacDto {
 	}
 	public void setFacCostcheck(Boolean facCostcheck) {
 		this.facCostcheck = facCostcheck;
+	}
+	public String getFacImg() {
+		return facImg;
+	}
+	public void setFacImg(String facImg) {
+		this.facImg = facImg;
+	}
+
+	public String getFacImgpath() {
+		return facImgpath;
+	}
+
+	public void setFacImgpath(String facImgpath) {
+		this.facImgpath = facImgpath;
 	}
 
 }

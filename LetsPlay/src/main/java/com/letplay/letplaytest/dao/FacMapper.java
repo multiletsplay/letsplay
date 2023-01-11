@@ -1,6 +1,5 @@
 package com.letplay.letplaytest.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -14,12 +13,17 @@ import com.letplay.letplaytest.dto.FacResDto;
 
 @Mapper
 public interface FacMapper {
-	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_DATE\n"
-			+ " FROM FACILITY, SPORTS\n"
+	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
+			+ " FROM FACILITY, SPORTS "
 			+ " WHERE FACILITY.SPO_ID = SPORTS.SPO_ID ")
 	List<FacDto> selectFacList();
 	
-	@Select(" SELECT FAC_SEQ, FAC_NAME, FACILITY.SPO_ID, SPO_NAME, FAC_LOCATION, FAC_CONTACT, FAC_IMG, FAC_COST, FAC_DATE, FAC_PARKING, FAC_LENT, FAC_SHOWER, FAC_LOCKER, FAC_LIGHT, FAC_COSTCHECK "
+	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
+			+ " FROM FACILITY f, SPORTS s "
+			+ " WHERE f.SPO_ID = #{spoId} AND f.SPO_ID = s.SPO_ID ")
+	List<FacDto> selectSports(int spoId);
+	
+	@Select(" SELECT FAC_SEQ, FAC_NAME, FACILITY.SPO_ID, SPO_NAME, FAC_LOCATION, FAC_CONTACT, FAC_IMG, FAC_IMGPATH, FAC_COST, FAC_DATE, FAC_PARKING, FAC_LENT, FAC_SHOWER, FAC_LOCKER, FAC_LIGHT, FAC_COSTCHECK "
 			+ " FROM FACILITY, SPORTS\n"
 			+ " WHERE FAC_SEQ = #{facSeq} AND FACILITY.SPO_ID = SPORTS.SPO_ID ")
 	FacDto selectFac(int facSeq);
@@ -27,7 +31,7 @@ public interface FacMapper {
 	@Delete(" DELETE FROM FACILITY WHERE FAC_SEQ = #{facSeq} ")
 	int deleteFac(int facSeq);
 	
-	@Insert(" INSERT INTO `FACILITY` VALUES(NULL, #{facName}, #{spoId}, #{facLocation}, #{facContact}, #{facImg}, #{facCost}, NOW(), #{facParking}, #{facLent}, #{facShower}, #{facLocker}, #{facLight}, #{facCostcheck}) ")
+	@Insert(" INSERT INTO `FACILITY` VALUES(NULL, #{facName}, #{spoId}, #{facLocation}, #{facContact}, #{facImg}, #{facImgpath}, #{facCost}, NOW(), #{facParking}, #{facLent}, #{facShower}, #{facLocker}, #{facLight}, #{facCostcheck}) ")
 	int insertFac(FacDto dto);
 	
 	@Update(" UPDATE `FACILITY` "

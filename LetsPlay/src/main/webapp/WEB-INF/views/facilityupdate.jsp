@@ -56,8 +56,8 @@ $(document).ready(function(){
 				<td><input type="text" style="width:500px;" name="facName" value="${dto.facName }"></td>
 			</tr>
 			<tr>
-				<th>이미지주소</th>
-				<td><input type="text" style="width:500px;" name="facImg" value="${dto.facImg }"></td>
+				<th>이미지</th>
+				<td><input type="file" style="width:500px;" name="file" multiple="multiple"></td>
 			</tr>
 			<tr>
 				<th>주소</th>

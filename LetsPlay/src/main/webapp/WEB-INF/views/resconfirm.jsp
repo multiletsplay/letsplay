@@ -28,7 +28,8 @@ function requestPay() {
     }, function (rsp) { // callback
     	console.log(rsp.success)
         if (rsp.success) { // 결제 성공 시
-	        /* $.ajax({
+ 			console.log("결제 성공")
+	        $.ajax({
 	        	type: "POST",
 	            url: "/facility/payment",
 	            data: {
@@ -41,12 +42,8 @@ function requestPay() {
 	            }
 	        }).done(function(data){
 	        	var msg = "결제가 완료되었습니다.";
-	        }) */
-	        data.impUid = rsp.imp_uid;
-		    data.merchant_uid = rsp.merchant_uid;
-		    paymentComplete(data);
-		    var msg = "결제에 완료되었습니다."
-		    location.href="/mypage";
+	        	location.href="/mypage";
+	        })
         } else {
         	var msg = "결제에 실패하였습니다. 에러 내용: " ;
         	msg += rsp.error_msg;
@@ -78,7 +75,7 @@ function requestPay() {
 		<th colspan="5" align="left">시설정보</th>
 	</tr>
 	<tr>
-		<td><img width="300" src="${dto.facImg }"></td>
+		<td><img width="300" src="${dto.facImgpath }"></td>
 		<td>${dto.facName }</td>
 		<td>${dto.facLocation }</td>
 		<td>${dto.facContact }</td>

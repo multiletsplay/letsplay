@@ -9,7 +9,7 @@
 <body>
 <h1>시설 추가</h1>
 <div>
-	<form action="/facility/insert" method="post">
+	<form action="/facility/insert" method="post" enctype="multipart/form-data">
 		<table class="facility-insert" border="1">
 			<tr>
 				<th>종목</th>
@@ -32,8 +32,8 @@
 				<td><input type="text" style="width:500px;" name="facName"></td>
 			</tr>
 			<tr>
-				<th>이미지주소</th>
-				<td><input type="text" style="width:500px;" name="facImg"></td>
+				<th>이미지</th>
+				<td><input type="file" style="width:500px;" name="file" multiple="multiple"></td>
 			</tr>
 			<tr>
 				<th>주소</th>
