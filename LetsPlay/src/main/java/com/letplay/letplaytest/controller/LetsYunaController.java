@@ -1,13 +1,20 @@
 package com.letplay.letplaytest.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,12 +60,6 @@ public class LetsYunaController {
 	public String selectFacDetail(Model model, int facSeq) {
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
 		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
-		
-		//예약번호 부여
-		LocalDateTime now = LocalDateTime.now();
-		String localtime = now.format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
-		String resId = "res_"+ localtime;
-		model.addAttribute("resId", resId);
 		return "facilitydetail";
 	}
 	
@@ -123,19 +124,13 @@ public class LetsYunaController {
 	}
 	
 	//시설예약
-	@PostMapping("/facility/reserveform")
-	public String reserveFac(Model model, FacResDto dto) {
-		if(facBiz.insertRes(dto)>0) {
-			return "forward:/facility/reserve";
-		}else {
-			model.addAttribute("msg", "예약 실패");
-			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
-			return "alert";
-		}
-	}
-	
 	@PostMapping("/facility/reserve")
 	public String reserveConfirm(Model model, FacResDto dto) {
+		//예약번호 부여
+		LocalDateTime now = LocalDateTime.now();
+		String localtime = now.format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
+		String resId = "res_"+ localtime;
+		dto.setResId(resId);
 		model.addAttribute("dto", dto);
 		return "resconfirm";
 	}

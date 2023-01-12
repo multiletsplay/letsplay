@@ -4,23 +4,25 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class FacResDto {
-	String resId;
-	String id;
-	String name;
-	String nickname;
-	String email;
-	String phone;
-	int facSeq;
-	String facName;
-	String facImg;
-	String facLocation;
-	String facContact;
+	private String resId;
+	private String id;
+	private String name;
+	private String nickname;
+	private String email;
+	private String phone;
+	private int facSeq;
+	private String facName;
+	private String facImgpath;
+	private String facLocation;
+	private String facContact;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	Date resDate;
-	String resStarttime;
-	String resEndtime;
-	String resPrice;
+	private Date resDate;
+	private String resStarttime;
+	private String resEndtime;
+	private String resPrice;
 	
 	public FacResDto() {
 		super();
@@ -28,7 +30,7 @@ public class FacResDto {
 	}
 
 	public FacResDto(String resId, String id, String name, String nickname, String email, String phone, int facSeq,
-			String facName, String facImg, String facLocation, String facContact, Date resDate, String resStarttime,
+			String facName, String facImgpath, String facLocation, String facContact, Date resDate, String resStarttime,
 			String resEndtime, String resPrice) {
 		super();
 		this.resId = resId;
@@ -39,7 +41,7 @@ public class FacResDto {
 		this.phone = phone;
 		this.facSeq = facSeq;
 		this.facName = facName;
-		this.facImg = facImg;
+		this.facImgpath = facImgpath;
 		this.facLocation = facLocation;
 		this.facContact = facContact;
 		this.resDate = resDate;
@@ -120,11 +122,11 @@ public class FacResDto {
 	public void setFacName(String facName) {
 		this.facName = facName;
 	}
-	public String getFacImg() {
-		return facImg;
+	public String getFacImgpath() {
+		return facImgpath;
 	}
-	public void setFacImg(String facImg) {
-		this.facImg = facImg;
+	public void setFacImgpath(String facImgpath) {
+		this.facImgpath = facImgpath;
 	}
 	public String getFacLocation() {
 		return facLocation;
