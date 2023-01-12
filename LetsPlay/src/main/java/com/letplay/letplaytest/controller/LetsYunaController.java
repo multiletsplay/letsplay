@@ -1,20 +1,14 @@
 package com.letplay.letplaytest.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +24,7 @@ import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.InqReplyDto;
 import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.PageDto;
+import com.letplay.letplaytest.dto.SearchDto;
 
 @Controller
 @RequestMapping("/")
@@ -121,6 +116,20 @@ public class LetsYunaController {
 			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
 			return "alert";
 		}
+	}
+	
+	//시설 검색
+//	@GetMapping("/facility/search")
+//	public String searchfac(Model model, @RequestParam("searchRegion1") String region1, @RequestParam("searchRegion2") String region2,
+//			@RequestParam("optParking") boolean parking ) {
+//		model.addAttribute("faclist", facBiz.searchFac(region1, region2, parking));
+//		return "facilitylist";
+//	}
+	
+	@GetMapping("/facility/search")
+	public String searchfac(Model model, SearchDto dto) {
+		model.addAttribute("faclist", facBiz.searchFac(dto));
+		return "facilitylist";
 	}
 	
 	//시설예약

@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	ul{ list-style:none; }
+	#optionBtn { display: none; }
+	.searchOption { display:none; }
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -15,6 +20,11 @@
 			var checked = $(this).is(':checked');
 			
 			$('.delList').prop("checked", checked);
+		});
+		
+		//상세조건 펼침버튼
+		$('#optionBtn').click(function(){
+			$('.searchOption').toggle('active');
 		});
 		
 	});
@@ -41,32 +51,45 @@
 	<h3>지역 시설찾기</h3>
 	<!-- 지역	 / 날짜 / 필터 : 유무료, 주차, 장비대여, 샤워시설, 락커, 조명 -->
 	<span><strong>지역</strong>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>날짜</strong></span>
-	<form action="/faciility/search" method="get">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>날짜</strong></span>
+	<form action="/facility/search" method="get">
 		<span>
 			<select id="region1" name="searchRegion1">
 				<option value="">시/도</option>
-				<option value="강남구">강남구</option>
-				<option value="강동구">강동구</option>
-				<option value="강북구">강북구</option>
-				<option value="강서구">강서구</option>
+				<option value="1">서울</option>
 			</select>
 		</span>
 		<span>
 			<select id="region2" name="searchRegion2">
 				<option value="">군/구</option>
-				<option value="개포동">개포동</option>
-				<option value="논현동">논현동</option>
-				<option value="도곡동">도곡동</option>
-				<option value="대치동">대치동</option>
+				<option value="강서구">강서구</option>
+				<option value="구로구">구로구</option>
+				<option value="동작구">동작구</option>
+				<option value="서초구">서초구</option>
+				<option value="송파구">송파구</option>
+				<option value="종로구">종로구</option>
+				<option value="중구">중구</option>
 			</select>
 		</span>
 		<span>
 			<input type="date" id="date" name="searchDate" >
 		</span>
-		<span><input type="button" value="검색"></span>
+		<div>
+			<strong>상세조건</strong>
+			<input type="checkbox" id="optionBtn">
+			<label for="optionBtn">▼ 열기</label>
+			<ul class="searchOption">
+				<li><input type="checkbox" name="optParking" value="true"><label>주차</label>
+				<li><input type="checkbox" name="optLent" value="true"><label>장비대여</label>
+				<li><input type="checkbox" name="optShower" value="true"><label>샤워시설</label>
+				<li><input type="checkbox" name="optLocker" value="true"><label>락커</label>
+				<li><input type="checkbox" name="optLight" value="true"><label>조명</label>
+				<li><input type="checkbox" name="optCost" value="true"><label>가격무료</label>
+			</ul>
+		</div>
+		<span><input type="submit" value="검색"></span>
 	</form>
 </div>
 <!-- 시설리스트 -->
