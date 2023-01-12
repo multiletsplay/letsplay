@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
+import com.letplay.letplaytest.dto.SearchDto;
 
 @Mapper
 public interface FacMapper {
@@ -17,6 +18,26 @@ public interface FacMapper {
 			+ " FROM FACILITY, SPORTS "
 			+ " WHERE FACILITY.SPO_ID = SPORTS.SPO_ID ")
 	List<FacDto> selectFacList();
+	
+//	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
+//			+ " FROM ( "
+//			+ " SELECT FAC_SEQ, f.SPO_ID, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE, FAC_PARKING, FAC_LENT, FAC_SHOWER, FAC_LOCKER, FAC_LIGHT, FAC_COSTCHECK "
+//			+ " FROM FACILITY f, SPORTS s "
+//			+ " WHERE f.SPO_ID = s.SPO_ID ) TMP "
+//			+ " WHERE FAC_LOCATION LIKE CONCAT(#{region1},'%') AND FAC_LOCATION LIKE CONCAT('%',#{region2},'%') AND FAC_PARKING=#{parking} ")
+//	List<FacDto> searchFac(String region1, String region2, boolean parking);
+	
+	@Select( {"<script>",
+		" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
+		+ " FROM ( "
+		+ " SELECT FAC_SEQ, f.SPO_ID, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE, FAC_PARKING, FAC_LENT, FAC_SHOWER, FAC_LOCKER, FAC_LIGHT, FAC_COSTCHECK "
+		+ " FROM FACILITY f, SPORTS s "
+		+ "	WHERE f.SPO_ID = s.SPO_ID ) TMP "
+		+ " <where>"
+		+ " 	<if test='region1 != null '>FAC_LOCATION=#{region1} AND FAC_LOCATION=#{region2} </if> "
+		+ " </where>"
+		+ "</script>" })
+	List<FacDto> searchFac(SearchDto dto);
 	
 	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
 			+ " FROM FACILITY f, SPORTS s "

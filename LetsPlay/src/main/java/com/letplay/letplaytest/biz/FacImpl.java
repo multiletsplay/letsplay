@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.letplay.letplaytest.dao.FacMapper;
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
+import com.letplay.letplaytest.dto.SearchDto;
 
 @Service
 public class FacImpl implements FacBiz{
@@ -23,6 +24,16 @@ public class FacImpl implements FacBiz{
 	public List<FacDto> selectFacList() {
 		return facMapper.selectFacList();
 	}
+	
+	@Override
+	public List<FacDto> searchFac(SearchDto dto) {
+		return facMapper.searchFac(dto);
+	}
+	
+//	@Override
+//	public List<FacDto> searchFac(String region1, String region2, boolean parking) {
+//		return facMapper.searchFac(region1, region2, parking);
+//	}
 	
 	@Override
 	public List<FacDto> selectSports(int spoId) {
@@ -47,7 +58,7 @@ public class FacImpl implements FacBiz{
 		File saveFile = new File(projpath,filename);
 		file.transferTo(saveFile);
 		dto.setFacImg(filename);
-		dto.setFacImgpath("/files/"+filename);
+		dto.setFacImgpath("/image/"+filename);
 		return facMapper.insertFac(dto);
 	}
 	

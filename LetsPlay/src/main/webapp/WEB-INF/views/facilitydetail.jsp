@@ -62,13 +62,13 @@
 <body>
 <input type="button" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
 <br><br>
-<form action="/facility/reserveform" method="POST">
+<form action="/facility/reserve" method="POST">
 <input type="hidden" name="name" value="유저이름">	<!-- 로그인 구현 후 id값 받아오기 -->
 <input type="hidden" name="id" value="user1">
 <input type="hidden" name="email" value="user1@test.com">
 <input type="hidden" name="phone" value="010-1111-1111">	
 <input type="hidden" name="facSeq" value="${dto.facSeq }" >
-<input type="hidden" name="resId" value="${resId }" >
+<!-- <input type="hidden" name="resId" value="${resId }" >  -->
 	<table class="facility-infrom" border="1" >
 		<tr>
 			<th>종목</th>

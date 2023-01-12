@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.InqReplyDto;
 import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.PageDto;
+import com.letplay.letplaytest.dto.SearchDto;
 
 @Controller
 @RequestMapping("/")
@@ -53,12 +55,6 @@ public class LetsYunaController {
 	public String selectFacDetail(Model model, int facSeq) {
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
 		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
-		
-		//예약번호 부여
-		LocalDateTime now = LocalDateTime.now();
-		String localtime = now.format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
-		String resId = "res_"+ localtime;
-		model.addAttribute("resId", resId);
 		return "facilitydetail";
 	}
 	
@@ -122,20 +118,28 @@ public class LetsYunaController {
 		}
 	}
 	
-	//시설예약
-	@PostMapping("/facility/reserveform")
-	public String reserveFac(Model model, FacResDto dto) {
-		if(facBiz.insertRes(dto)>0) {
-			return "forward:/facility/reserve";
-		}else {
-			model.addAttribute("msg", "예약 실패");
-			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
-			return "alert";
-		}
+	//시설 검색
+//	@GetMapping("/facility/search")
+//	public String searchfac(Model model, @RequestParam("searchRegion1") String region1, @RequestParam("searchRegion2") String region2,
+//			@RequestParam("optParking") boolean parking ) {
+//		model.addAttribute("faclist", facBiz.searchFac(region1, region2, parking));
+//		return "facilitylist";
+//	}
+	
+	@GetMapping("/facility/search")
+	public String searchfac(Model model, SearchDto dto) {
+		model.addAttribute("faclist", facBiz.searchFac(dto));
+		return "facilitylist";
 	}
 	
+	//시설예약
 	@PostMapping("/facility/reserve")
 	public String reserveConfirm(Model model, FacResDto dto) {
+		//예약번호 부여
+		LocalDateTime now = LocalDateTime.now();
+		String localtime = now.format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
+		String resId = "res_"+ localtime;
+		dto.setResId(resId);
 		model.addAttribute("dto", dto);
 		return "resconfirm";
 	}
