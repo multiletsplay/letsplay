@@ -66,7 +66,6 @@ public class LetsYunaController {
 //		return redirectView;
 //	}
 	
-	//@RequestMapping(value="/facility/delete", method=RequestMethod.POST)
 	@PostMapping("/facility/delete")
 	public String deletFac(Model model, @RequestParam(value="delList", required=false) List<Integer> ids) {
 		if (ids == null) {
@@ -118,14 +117,7 @@ public class LetsYunaController {
 		}
 	}
 	
-	//시설 검색
-//	@GetMapping("/facility/search")
-//	public String searchfac(Model model, @RequestParam("searchRegion1") String region1, @RequestParam("searchRegion2") String region2,
-//			@RequestParam("optParking") boolean parking ) {
-//		model.addAttribute("faclist", facBiz.searchFac(region1, region2, parking));
-//		return "facilitylist";
-//	}
-	
+	//시설 검색	
 	@GetMapping("/facility/search")
 	public String searchfac(Model model, SearchDto dto) {
 		model.addAttribute("faclist", facBiz.searchFac(dto));
@@ -144,6 +136,7 @@ public class LetsYunaController {
 		return "resconfirm";
 	}
 	
+	//시설 결제후 예약내역 db저장
 	@PostMapping("/facility/payment")
 	public String reservePayment(Model model, FacResDto dto) {
 		if(facBiz.insertRes(dto)>0) {

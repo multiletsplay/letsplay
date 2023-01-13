@@ -19,26 +19,6 @@ public interface FacMapper {
 			+ " WHERE FACILITY.SPO_ID = SPORTS.SPO_ID ")
 	List<FacDto> selectFacList();
 	
-//	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
-//			+ " FROM ( "
-//			+ " SELECT FAC_SEQ, f.SPO_ID, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE, FAC_PARKING, FAC_LENT, FAC_SHOWER, FAC_LOCKER, FAC_LIGHT, FAC_COSTCHECK "
-//			+ " FROM FACILITY f, SPORTS s "
-//			+ " WHERE f.SPO_ID = s.SPO_ID ) TMP "
-//			+ " WHERE FAC_LOCATION LIKE CONCAT(#{region1},'%') AND FAC_LOCATION LIKE CONCAT('%',#{region2},'%') AND FAC_PARKING=#{parking} ")
-//	List<FacDto> searchFac(String region1, String region2, boolean parking);
-	
-	@Select( {"<script>",
-		" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
-		+ " FROM ( "
-		+ " SELECT FAC_SEQ, f.SPO_ID, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE, FAC_PARKING, FAC_LENT, FAC_SHOWER, FAC_LOCKER, FAC_LIGHT, FAC_COSTCHECK "
-		+ " FROM FACILITY f, SPORTS s "
-		+ "	WHERE f.SPO_ID = s.SPO_ID ) TMP "
-		+ " <where>"
-		+ " 	<if test='region1 != null '>FAC_LOCATION=#{region1} AND FAC_LOCATION=#{region2} </if> "
-		+ " </where>"
-		+ "</script>" })
-	List<FacDto> searchFac(SearchDto dto);
-	
 	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
 			+ " FROM FACILITY f, SPORTS s "
 			+ " WHERE f.SPO_ID = #{spoId} AND f.SPO_ID = s.SPO_ID ")
@@ -72,4 +52,22 @@ public interface FacMapper {
 //			+ "	) TMP "
 //			+ " WHERE r_seq=#{facSeq} AND r_id=#{id} AND RES_DATE=#{resDate} AND RES_STARTTIME=#{resStarttime}; ")
 //	FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);
+	
+	@Select( {"<script>",
+		" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE ",
+		" FROM FACILITY f INNER JOIN SPORTS s ON f.SPO_ID = s.SPO_ID ",
+		" <where>",
+		" 	<if test='searchRegion1 != null'>FAC_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
+		"	<if test='searchRegion2 != null'>AND FAC_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
+//		" 	<if test='searchDate != null or !searchDate.equals(\"\") '>AND FAC_DATE=#{searchDate} </if> ",
+		" 	<if test='optParking == true '>AND FAC_PARKING=#{optParking} </if> ",
+		" 	<if test='optLent == true'>AND FAC_LENT=#{optLent} </if> ",
+		" 	<if test='optShower == true'>AND FAC_SHOWER=#{optShower} </if> ",
+		" 	<if test='optLocker == true'>AND FAC_LOCKER=#{optLocker} </if> ",
+		" 	<if test='optLight == true'>AND FAC_LIGHT=#{optLight} </if> ",
+		" 	<if test='optCost == true'>AND FAC_COSTCHECK=#{optCost} </if> ",
+		" 	<if test='optCost == false'>AND FAC_COSTCHECK=false </if> ",
+		" </where> ",
+		" </script>" })
+	List<FacDto> searchFac(SearchDto dto);
 }
