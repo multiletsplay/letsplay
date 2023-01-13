@@ -10,6 +10,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(document).ready(function(){
+		var id = ${member.id}
+		console.log(id);
 		$("#pathfinding").click(pathFinding);
 	});
 	
@@ -63,12 +65,11 @@
 <input type="button" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
 <br><br>
 <form action="/facility/reserve" method="POST">
-<input type="hidden" name="name" value="유저이름">	<!-- 로그인 구현 후 id값 받아오기 -->
-<input type="hidden" name="id" value="user1">
-<input type="hidden" name="email" value="user1@test.com">
-<input type="hidden" name="phone" value="010-1111-1111">	
+<input type="hidden" name="name" value="${member.name }">
+<input type="hidden" name="id" value="${member.id }">
+<input type="hidden" name="email" value="${member.email }">
+<input type="hidden" name="phone" value="${member.phone }">	
 <input type="hidden" name="facSeq" value="${dto.facSeq }" >
-<!-- <input type="hidden" name="resId" value="${resId }" >  -->
 	<table class="facility-infrom" border="1" >
 		<tr>
 			<th>종목</th>

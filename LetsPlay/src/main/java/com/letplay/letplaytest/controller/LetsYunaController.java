@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,12 +19,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.letplay.letplaytest.biz.FacBiz;
 import com.letplay.letplaytest.biz.InqReplyBiz;
 import com.letplay.letplaytest.biz.InquiryBiz;
+import com.letplay.letplaytest.biz.MemberBiz;
 import com.letplay.letplaytest.biz.ReviewBiz;
 import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.InqReplyDto;
 import com.letplay.letplaytest.dto.InquiryDto;
+import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.PageDto;
 import com.letplay.letplaytest.dto.SearchDto;
 
@@ -37,6 +41,8 @@ public class LetsYunaController {
 	private InqReplyBiz inqreplyBiz;
 	@Autowired
 	private ReviewBiz reivewBiz;
+	@Autowired
+	private MemberBiz memBiz;
 	
 	// 시설
 	@GetMapping("/facility/list")
@@ -52,7 +58,10 @@ public class LetsYunaController {
 	}
 	
 	@GetMapping("/facility/detail")
-	public String selectFacDetail(Model model, int facSeq) {
+	public String selectFacDetail(HttpServletRequest request, Model model, int facSeq) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
 		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
 		return "facilitydetail";

@@ -22,6 +22,10 @@
 			$('.delList').prop("checked", checked);
 		});
 		
+		//날짜 default값. 안정해두면 검색할때 null값이 넘어가 오류 발생
+		//document.getElementById("date").defaultValue = "2000-01-01";
+		
+		
 		//상세조건 펼침버튼
 		$('#optionBtn').click(function(){
 			$('.searchOption').toggle('active');
@@ -74,7 +78,7 @@
 			</select>
 		</span>
 		<!-- <span>
-			<input type="date" id="date" name="searchDate" >
+			<input type="date" id="date" name="searchDate">
 		</span> -->
 		<div>
 			<strong>상세조건</strong>

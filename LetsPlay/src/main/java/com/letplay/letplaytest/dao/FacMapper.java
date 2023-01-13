@@ -14,19 +14,19 @@ import com.letplay.letplaytest.dto.SearchDto;
 
 @Mapper
 public interface FacMapper {
-	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
-			+ " FROM FACILITY, SPORTS "
-			+ " WHERE FACILITY.SPO_ID = SPORTS.SPO_ID ")
+	@Select(" SELECT f.*, s.SPO_NAME "
+			+ " FROM FACILITY f, SPORTS s "
+			+ " WHERE f.SPO_ID = s.SPO_ID ")
 	List<FacDto> selectFacList();
 	
-	@Select(" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE "
+	@Select(" SELECT f.*, s.SPO_NAME "
 			+ " FROM FACILITY f, SPORTS s "
 			+ " WHERE f.SPO_ID = #{spoId} AND f.SPO_ID = s.SPO_ID ")
 	List<FacDto> selectSports(int spoId);
 	
-	@Select(" SELECT FAC_SEQ, FAC_NAME, FACILITY.SPO_ID, SPO_NAME, FAC_LOCATION, FAC_CONTACT, FAC_IMG, FAC_IMGPATH, FAC_COST, FAC_DATE, FAC_PARKING, FAC_LENT, FAC_SHOWER, FAC_LOCKER, FAC_LIGHT, FAC_COSTCHECK "
-			+ " FROM FACILITY, SPORTS\n"
-			+ " WHERE FAC_SEQ = #{facSeq} AND FACILITY.SPO_ID = SPORTS.SPO_ID ")
+	@Select(" SELECT f.*, s.SPO_NAME "
+			+ " FROM FACILITY f, SPORTS s "
+			+ " WHERE FAC_SEQ = #{facSeq} AND f.SPO_ID = s.SPO_ID ")
 	FacDto selectFac(int facSeq);
 	
 	@Delete(" DELETE FROM FACILITY WHERE FAC_SEQ = #{facSeq} ")
@@ -54,12 +54,12 @@ public interface FacMapper {
 //	FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);
 	
 	@Select( {"<script>",
-		" SELECT FAC_SEQ, FAC_NAME, SPO_NAME, FAC_LOCATION, FAC_IMG, FAC_IMGPATH, FAC_DATE ",
+		" SELECT f.*, s.SPO_NAME ",
 		" FROM FACILITY f INNER JOIN SPORTS s ON f.SPO_ID = s.SPO_ID ",
 		" <where>",
 		" 	<if test='searchRegion1 != null'>FAC_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
 		"	<if test='searchRegion2 != null'>AND FAC_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
-//		" 	<if test='searchDate != null or !searchDate.equals(\"\") '>AND FAC_DATE=#{searchDate} </if> ",
+//		"	<if test='searchDate != null'>AND FAC_DATE=#{searchDate} </if>",
 		" 	<if test='optParking == true '>AND FAC_PARKING=#{optParking} </if> ",
 		" 	<if test='optLent == true'>AND FAC_LENT=#{optLent} </if> ",
 		" 	<if test='optShower == true'>AND FAC_SHOWER=#{optShower} </if> ",
