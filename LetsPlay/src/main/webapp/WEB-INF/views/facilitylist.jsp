@@ -58,7 +58,7 @@
 		<span>
 			<select id="region1" name="searchRegion1">
 				<option value="">시/도</option>
-				<option value="1">서울</option>
+				<option value="서울">서울</option>
 			</select>
 		</span>
 		<span>
@@ -73,9 +73,9 @@
 				<option value="중구">중구</option>
 			</select>
 		</span>
-		<span>
+		<!-- <span>
 			<input type="date" id="date" name="searchDate" >
-		</span>
+		</span> -->
 		<div>
 			<strong>상세조건</strong>
 			<input type="checkbox" id="optionBtn">
@@ -86,7 +86,9 @@
 				<li><input type="checkbox" name="optShower" value="true"><label>샤워시설</label>
 				<li><input type="checkbox" name="optLocker" value="true"><label>락커</label>
 				<li><input type="checkbox" name="optLight" value="true"><label>조명</label>
-				<li><input type="checkbox" name="optCost" value="true"><label>가격무료</label>
+				<li><label>가격</label>
+				<li><input type="checkbox" name="optCost" value="true"><label>유료</label>
+				<li><input type="checkbox" name="optCost" value="false"><label>무료</label>
 			</ul>
 		</div>
 		<span><input type="submit" value="검색"></span>
