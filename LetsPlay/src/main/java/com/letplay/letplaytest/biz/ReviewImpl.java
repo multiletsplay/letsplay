@@ -11,11 +11,16 @@ import com.letplay.letplaytest.dto.ReviewDto;
 @Service
 public class ReviewImpl implements ReviewBiz{
 	@Autowired
-	private ReviewMapper reviewmapper;
+	private ReviewMapper reviewMapper;
 
 	@Override
 	public List<ReviewDto> selectReviewList(int facSeq) {
-		return reviewmapper.selectList(facSeq);
+		return reviewMapper.selectList(facSeq);
+	}
+
+	@Override
+	public List<ReviewDto> selectLesRevlist(int lesSeq) {
+		return reviewMapper.selectLessonList(lesSeq);
 	}
 
 }

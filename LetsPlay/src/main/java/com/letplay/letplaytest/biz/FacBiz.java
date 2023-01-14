@@ -11,7 +11,6 @@ import com.letplay.letplaytest.dto.SearchDto;
 public interface FacBiz {
 	public List<FacDto> selectFacList();				//전체 시설 불러오기
 	public List<FacDto> searchFac(SearchDto dto);
-	//public List<FacDto> searchFac(String region1, String region2, boolean parking);	//시설 검색
 	public List<FacDto> selectSports(int spoId);		//선택 스포츠시설 불러오기
 	public FacDto selectFac(int facSeq); 				//시설 디테일
 	public int deleteFac(int facSeq);					//시설 삭제

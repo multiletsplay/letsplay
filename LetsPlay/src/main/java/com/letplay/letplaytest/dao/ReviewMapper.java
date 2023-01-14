@@ -14,5 +14,11 @@ public interface ReviewMapper {
 			+ "WHERE FAC_SEQ=#{facSeq} AND REVIEW.ID = MEMBER.ID "
 			+ "ORDER BY REV_ID DESC ")
 	List<ReviewDto> selectList(int facSeq);
+	
+	@Select(" SELECT REV_ID, NICKNAME, FAC_SEQ, REV_RATE, REV_CONTENT "
+			+ "FROM REVIEW, MEMBER "
+			+ "WHERE LES_SEQ=#{lesSeq} AND REVIEW.ID = MEMBER.ID "
+			+ "ORDER BY REV_ID DESC ")
+	List<ReviewDto> selectLessonList(int lesSeq);
 
 }

@@ -9,7 +9,7 @@
 <body>
 <h1>레슨 추가</h1>
 <div>
-	<form action="/lesson/insert" method="post">
+	<form action="/lesson/insert" method="post" enctype="multipart/form-data">
 		<table class="lesson-insert" border="1">
 			<tr>
 				<th>종목</th>
@@ -36,6 +36,14 @@
 				<td><input type="text" style="width:500px;" name="lesTeacher"></td>
 			</tr>
 			<tr>
+				<th>이미지</th>
+				<td><input type="file" style="width:500px;" name="file" multiple="multiple"></td>
+			</tr>
+			<tr>
+				<th>레슨 장소</th>
+				<td><input type="text" style="width:500px;" name="lesLocation"></td>
+			</tr>
+			<tr>
 				<th>레슨 전화번호</th>
 				<td><input type="text" style="width:500px;" name="lesContact"></td>
 			</tr>
@@ -44,25 +52,28 @@
 				<td><input type="text" style="width:500px;" name="lesCost"></td>
 			</tr>
 			<tr>
-				<th>레슨 장소</th>
-				<td><input type="text" style="width:500px;" name="lesLocation"></td>
+				<th>개인/단체</th>
+				<td>
+					<input type="radio" name="lesType" value='personal'>개인
+					&nbsp;
+					<input type="radio" name="lesType" value='group'>단체
+				</td>
 			</tr>
 			<tr>
-				<th>레슨 종류</th>
-				<td><input type="text" style="width:500px;" name="lesType"></td>
+				<th>주중/주말</th>
+				<td>
+					<input type="radio" name="lesWeekend" value='weekday'>주중
+					&nbsp;
+					<input type="radio" name="lesWeekend" value='weekend'>주말
+				</td>
 			</tr>
 			<tr>
-				<th>레슨 주중,주말</th>
-				<td><input type="text" style="width:500px;" name="lesWeekend"></td>
-			</tr>
-			<tr>
-				<th>레슨 이미지</th>
-				<td><input type="text" style="width:500px;" name="lesImg"></td>
+				<th>레슨 스케줄</th>
+				<td></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="시설 추가">
-					
+					<input type="submit" value="레슨 추가">
 				</td>
 			</tr>
 		</table>

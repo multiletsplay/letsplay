@@ -9,10 +9,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class FacResDto {
 	private String resId;
 	private String id;
-	private String name;
-	private String nickname;
-	private String email;
-	private String phone;
 	private int facSeq;
 	private String facName;
 	private String facImgpath;
@@ -29,16 +25,11 @@ public class FacResDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FacResDto(String resId, String id, String name, String nickname, String email, String phone, int facSeq,
-			String facName, String facImgpath, String facLocation, String facContact, Date resDate, String resStarttime,
-			String resEndtime, String resPrice) {
+	public FacResDto(String resId, String id, int facSeq, String facName, String facImgpath, String facLocation,
+			String facContact, Date resDate, String resStarttime, String resEndtime, String resPrice) {
 		super();
 		this.resId = resId;
 		this.id = id;
-		this.name = name;
-		this.nickname = nickname;
-		this.email = email;
-		this.phone = phone;
 		this.facSeq = facSeq;
 		this.facName = facName;
 		this.facImgpath = facImgpath;
@@ -91,30 +82,6 @@ public class FacResDto {
 	}
 	public void setResPrice(String resPrice) {
 		this.resPrice = resPrice;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 	public String getFacName() {
 		return facName;

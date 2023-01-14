@@ -58,10 +58,7 @@ public class LetsYunaController {
 	}
 	
 	@GetMapping("/facility/detail")
-	public String selectFacDetail(HttpServletRequest request, Model model, int facSeq) {
-		HttpSession session = request.getSession();
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		model.addAttribute("member", memBiz.selectmember(member.getId()));
+	public String selectFacDetail(Model model, int facSeq) {
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
 		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
 		return "facilitydetail";
@@ -135,7 +132,11 @@ public class LetsYunaController {
 	
 	//시설예약
 	@PostMapping("/facility/reserve")
-	public String reserveConfirm(Model model, FacResDto dto) {
+	public String reserveConfirm(HttpServletRequest request, Model model, FacResDto dto) {
+		//로그인정보 가져오기
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		//예약번호 부여
 		LocalDateTime now = LocalDateTime.now();
 		String localtime = now.format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));

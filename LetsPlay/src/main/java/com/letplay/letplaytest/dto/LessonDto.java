@@ -11,17 +11,19 @@ public class LessonDto {
 	private String lesLocation;
 	private String lesContact;
 	private String lesImg;
+	private String lesImgpath;
 	private Date lesDate;
 	private String lesType;
 	private String lesWeekend;
-	private String lesCost;
+	private int lesCost;
 	
 	public LessonDto() {
 		super();
 	}
-
+	
 	public LessonDto(int lesSeq, String lesName, int spoId, String spoName, String lesTeacher, String lesLocation,
-			String lesContact, String lesImg, Date lesDate, String lesType, String lesWeekend, String lesCost) {
+			String lesContact, String lesImg, String lesImgpath, Date lesDate, String lesType, String lesWeekend,
+			int lesCost) {
 		super();
 		this.lesSeq = lesSeq;
 		this.lesName = lesName;
@@ -31,6 +33,7 @@ public class LessonDto {
 		this.lesLocation = lesLocation;
 		this.lesContact = lesContact;
 		this.lesImg = lesImg;
+		this.lesImgpath = lesImgpath;
 		this.lesDate = lesDate;
 		this.lesType = lesType;
 		this.lesWeekend = lesWeekend;
@@ -125,14 +128,22 @@ public class LessonDto {
 		this.lesWeekend = lesWeekend;
 	}
 
-	public String getLesCost() {
+	public int getLesCost() {
 		return lesCost;
 	}
 
-	public void setLesCost(String lesCost) {
+	public void setLesCost(int lesCost) {
 		this.lesCost = lesCost;
 	}
-	
+
+	public String getLesImgpath() {
+		return lesImgpath;
+	}
+
+	public void setLesImgpath(String lesImgpath) {
+		this.lesImgpath = lesImgpath;
+	}
+
 	
 	
 	
