@@ -10,8 +10,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(document).ready(function(){
-		var id = ${member.id}
-		console.log(id);
 		$("#pathfinding").click(pathFinding);
 	});
 	
@@ -65,10 +63,6 @@
 <input type="button" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
 <br><br>
 <form action="/facility/reserve" method="POST">
-<input type="hidden" name="name" value="${member.name }">
-<input type="hidden" name="id" value="${member.id }">
-<input type="hidden" name="email" value="${member.email }">
-<input type="hidden" name="phone" value="${member.phone }">	
 <input type="hidden" name="facSeq" value="${dto.facSeq }" >
 	<table class="facility-infrom" border="1" >
 		<tr>

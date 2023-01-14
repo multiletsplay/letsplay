@@ -14,7 +14,6 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script>
-console.log("${dto.resDate}");
 var IMP = window.IMP;
 IMP.init("imp31758044"); //가맹점식별코드
 
@@ -26,9 +25,9 @@ function requestPay() {
         merchant_uid: "${dto.resId }",	//고유 주문번호
         name: "${dto.facName}",			//주문명
         amount: ${dto.resPrice},					//결제금액
-        buyer_email: "${dto.email}",	//주문자 이메일
-        buyer_name: "${dto.name}",		//주문자명
-        buyer_tel: "${dto.phone}"		//주문자 연락처
+        buyer_email: "${member.email}",	//주문자 이메일
+        buyer_name: "${member.name}",		//주문자명
+        buyer_tel: "${member.phone}"		//주문자 연락처
     }, function (rsp) { // callback
         if (rsp.success) { // 결제 성공 시
 	        /* $.ajax({
@@ -56,7 +55,7 @@ function requestPay() {
 <h1>예약 상세정보</h1>
 <form action="/facility/payment" method="post" id="payment-form">
 <input type="hidden" name="resId" value="${dto.resId }">
-<input type="hidden" name="id" value="${dto.id }">
+<input type="hidden" name="id" value="${member.id }">
 <input type="hidden" name="facSeq" value="${dto.facSeq }">
 	<table class="reservation-table" border="1">
 		<tr>
@@ -67,11 +66,11 @@ function requestPay() {
 			<th>이메일</th>
 		</tr>
 		<tr>
-			<td>${dto.name }(${dto.nickname })</td>
+			<td>${member.name }(${member.nickname })</td>
 			<td><input type="date" name="resDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.resDate }"/>"></td>
 			<td><input type="hidden" name="resStarttime" value="${dto.resStarttime }">${dto.resStarttime }</td>
-			<td>${dto.phone }</td>
-			<td>${dto.email }</td>
+			<td>${member.phone }</td>
+			<td>${member.email }</td>
 		</tr>
 		<tr>
 			<th colspan="5" align="left">시설정보</th>
