@@ -66,7 +66,7 @@
 							<c:otherwise><td>답변완료</td></c:otherwise>
 						</c:choose>
 						<c:choose>
-							<c:when test="${member.id == dto.id }"><td><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></td></c:when>
+							<c:when test="${member.id == dto.id or member.id == 'admin' }"><td><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></td></c:when>
 							<c:otherwise><td>${dto.inqTitle } 🔒 </td></c:otherwise>
 						</c:choose>
 						<td>${dto.id }</td>

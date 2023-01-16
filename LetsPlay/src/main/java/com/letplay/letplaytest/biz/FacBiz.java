@@ -9,9 +9,9 @@ import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.SearchDto;
 
 public interface FacBiz {
-	public List<FacDto> selectFacList();				//전체 시설 불러오기
+	public List<FacDto> selectFacList(String id);				//전체 시설 불러오기
 	public List<FacDto> searchFac(SearchDto dto);
-	public List<FacDto> selectSports(int spoId);		//선택 스포츠시설 불러오기
+	public List<FacDto> selectSports(int spoId, String id);		//선택 스포츠시설 불러오기
 	public FacDto selectFac(int facSeq); 				//시설 디테일
 	public int deleteFac(int facSeq);					//시설 삭제
 	public int insertFac(FacDto dto, MultipartFile file) throws Exception ;		//시설 등록

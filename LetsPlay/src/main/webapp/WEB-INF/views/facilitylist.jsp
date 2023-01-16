@@ -34,16 +34,44 @@
 			$('.delList').prop("checked", checked);
 		});
 		
-		//날짜 default값. 안정해두면 검색할때 null값이 넘어가 오류 발생
-		//document.getElementById("date").defaultValue = "2000-01-01";
-		
-		
 		//상세조건 펼침버튼
 		$('#optionBtn').click(function(){
 			$('.searchOption').toggle('active');
 		});
 		
+		//찜
+		$("#likeBtn").click(like);
+		$("#dellikeBtn").click(dellike);
+		
 	});
+	
+	function like(){
+		let facSeq = $(this).attr('idx');
+		
+		$.ajax({
+			url : "/facility/likes",
+			type : "POST",
+			data : { 'facSeq' : facSeq },
+			success : function(){
+				alert("찜 성공");
+				window.location.reload();
+			}
+		});
+	}
+	
+	function dellike(){
+		let facSeq = $(this).attr('idx');
+		$.ajax({
+			url : "/facility/dellikes",
+			type : "GET",
+			data : { 'facSeq' : facSeq },
+			success : function(){
+				alert("취소 성공");
+				window.location.reload();
+			}
+		});
+	}
+	
 </script>
 </head>
 <body>
@@ -88,9 +116,6 @@
 				<option value="중구">중구</option>
 			</select>
 		</span>
-		<!-- <span>
-			<input type="date" id="date" name="searchDate">
-		</span> -->
 		<div>
 			<strong>상세조건</strong>
 			<input type="checkbox" id="optionBtn">
@@ -101,7 +126,7 @@
 				<li><input type="checkbox" name="optShower" value="true"><label>샤워시설</label>
 				<li><input type="checkbox" name="optLocker" value="true"><label>락커</label>
 				<li><input type="checkbox" name="optLight" value="true"><label>조명</label>
-				<li><label>가격</label>
+				<li>가격
 				<li><input type="checkbox" name="optCost" value="true"><label>유료</label>
 				<li><input type="checkbox" name="optCost" value="false"><label>무료</label>
 			</ul>
@@ -126,7 +151,7 @@
 			<th>사진</th>
 			<th>시설이름</th>
 			<th>주소</th>
-			<th>찜?</th>
+			<th>찜</th>
 		</tr>
 	    <c:choose>
 	        <c:when test="${empty faclist }">
@@ -140,7 +165,16 @@
 	            		<td><img width="210" src="${dto.facImgpath }"></td>
 	            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
 	            		<td>${dto.facLocation }</td>
-	            		<td></td>
+	            		<td>
+	            		<c:choose>
+			   				<c:when test="${dto.likesStatus eq 1 }">
+			   					<img id="dellikeBtn" idx="${dto.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+			   				</c:when>
+			   				<c:otherwise>
+			   					<img id="likeBtn" idx="${dto.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+			   				</c:otherwise>
+			   			</c:choose>
+	            		</td>
 	            	</tr>
 	            </c:forEach>
 	        </c:otherwise>

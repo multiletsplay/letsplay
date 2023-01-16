@@ -5,6 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("input [id=file]").change(function(){
+			if($(this).val() !== ""){
+				for(var i=0; i<this.files.length; i++){
+					var fileSize = this.files[i].size;
+					var maxSize = 1024*1024*10;
+					if(fileSize>maxSize){
+						alert(this.files[i].name+"(이)가 10MB를 초과했습니다.");
+						$(this).val("");
+					}
+				}
+			}
+		})
+	});
+</script>
 </head>
 <body>
 <h1>시설 추가</h1>

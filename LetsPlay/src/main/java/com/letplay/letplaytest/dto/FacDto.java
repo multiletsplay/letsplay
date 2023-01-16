@@ -22,6 +22,7 @@ public class FacDto {
 	private Boolean facLocker;
 	private Boolean facLight;
 	private Boolean facCostcheck;
+	private int likesStatus;
 	
 	public FacDto() {
 		super();
@@ -30,7 +31,7 @@ public class FacDto {
 
 	public FacDto(int facSeq, String facName, int spoId, String spoName, String facLocation, String facContact,
 			int facCost, String facImg, String facImgpath, Date facDate, Boolean facParking, Boolean facLent,
-			Boolean facShower, Boolean facLocker, Boolean facLight, Boolean facCostcheck) {
+			Boolean facShower, Boolean facLocker, Boolean facLight, Boolean facCostcheck, int likesStatus) {
 		super();
 		this.facSeq = facSeq;
 		this.facName = facName;
@@ -48,6 +49,7 @@ public class FacDto {
 		this.facLocker = facLocker;
 		this.facLight = facLight;
 		this.facCostcheck = facCostcheck;
+		this.likesStatus = likesStatus;
 	}
 
 	public int getFacSeq() {
@@ -147,6 +149,14 @@ public class FacDto {
 
 	public void setFacImgpath(String facImgpath) {
 		this.facImgpath = facImgpath;
+	}
+
+	public int getLikesStatus() {
+		return likesStatus;
+	}
+
+	public void setLikesStatus(int likesStatus) {
+		this.likesStatus = likesStatus;
 	}
 
 }

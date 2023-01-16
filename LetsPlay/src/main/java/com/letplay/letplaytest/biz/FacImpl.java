@@ -21,8 +21,8 @@ public class FacImpl implements FacBiz{
 	private FacMapper facMapper;
 
 	@Override
-	public List<FacDto> selectFacList() {
-		return facMapper.selectFacList();
+	public List<FacDto> selectFacList(String id) {
+		return facMapper.selectFacList(id);
 	}
 	
 	@Override
@@ -36,8 +36,8 @@ public class FacImpl implements FacBiz{
 //	}
 	
 	@Override
-	public List<FacDto> selectSports(int spoId) {
-		return facMapper.selectSports(spoId);
+	public List<FacDto> selectSports(int spoId, String id) {
+		return facMapper.selectSports(spoId, id);
 	}
 	
 	@Override

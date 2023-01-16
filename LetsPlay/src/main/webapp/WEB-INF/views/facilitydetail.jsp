@@ -19,7 +19,36 @@
 		}
 		
 		$("#pathfinding").click(pathFinding);
+		$("#likeBtn").click(like);
+		$("#dellikeBtn").click(dellike);
 	});
+	
+	function like(){
+		let facSeq = ${dto.facSeq};
+		
+		$.ajax({
+			url : "/facility/likes",
+			type : "POST",
+			data : { 'facSeq' : facSeq },
+			success : function(){
+				alert("찜 성공");
+				window.location.reload();
+			}
+		});
+	}
+	
+	function dellike(){
+		let facSeq = ${dto.facSeq};
+		$.ajax({
+			url : "/facility/dellikes",
+			type : "GET",
+			data : { 'facSeq' : facSeq },
+			success : function(){
+				alert("취소 성공");
+				window.location.reload();
+			}
+		});
+	}
 	
 	function pathFinding(){
 		var geocoder = new kakao.maps.services.Geocoder();
@@ -73,6 +102,18 @@
 <form action="/facility/reserve" method="POST">
 <input type="hidden" name="facSeq" value="${dto.facSeq }" >
 	<table class="facility-infrom" border="1" >
+		<tr>
+			<td>
+				<c:choose>
+	   				<c:when test="${like == 0}">
+	   					<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+	   				</c:when>
+	   				<c:otherwise>
+	   					<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+	   				</c:otherwise>
+	   			</c:choose>
+			</td>
+		</tr>
 		<tr>
 			<th>종목</th>
 			<td>${dto.spoName }</td>
