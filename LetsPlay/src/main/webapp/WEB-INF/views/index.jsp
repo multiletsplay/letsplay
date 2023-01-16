@@ -22,5 +22,9 @@
 <br>
 <h2><a href="/inquiry/list">1대1문의</a></h2>
 <br>
+<h2><a href="/member/loginform">로그인</a></h2>
+<br>
+<h2><a href="/member/mypage">마이페이지</a></h2>
+<br>
 </body>
 </html>

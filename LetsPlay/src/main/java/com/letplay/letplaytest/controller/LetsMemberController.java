@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.letplay.letplaytest.biz.MemberBiz;
 import com.letplay.letplaytest.dto.MemberDto;
 
+
 @Controller
 @RequestMapping("/member")
 public class LetsMemberController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(LetsMemberController.class);
+	
 	@Autowired
 	private MemberBiz membiz;
 	
@@ -52,30 +58,34 @@ public class LetsMemberController {
 	}
 	
 	//회원가입
-//	@RequestMapping("/signupform")
-//	public String signup() {
-//		return "signup";
-//	}
-//	
-//	@RequestMapping("/signup")
-//	public String insertRes(MemberDto dto) {
-//		int res = membiz.insert(dto);
-//		
-//		if(res>0) {
-//			return "redirect:/member/loginform";
-//		}else {
-//			return "redirect:/member/signupform";
-//		}
-//	}
+	@RequestMapping("/signupform")
+	public String signup() {
+		return "signup";
+	}
+	
+	@RequestMapping("/signup")
+	public String insertRes(MemberDto dto) {
+		int res = membiz.insert(dto);
+		
+		if(res>0) {
+			return "redirect:/member/loginform"
+					+ "";
+		}else {
+			return "redirect:/member/signupform";
+		}
+	}
 	
 	// 마이페이지 수정해야함
-	@GetMapping("/mypage")
-	public String selectmember(HttpSession session,Model model) {
+	@RequestMapping(value="/mypage", method=RequestMethod.GET)
+	public String selectmember(HttpSession session,Model model, String id) {
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		
 		model.addAttribute("list", member.getId());
+		logger.info(id);
 		model.addAttribute("listdto", membiz.selectmyreview(member.getId()) );
 		
 		return "mypage";
 	}
+	
+	
 }
