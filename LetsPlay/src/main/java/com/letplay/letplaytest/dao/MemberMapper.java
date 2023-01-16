@@ -1,5 +1,6 @@
 package com.letplay.letplaytest.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -13,4 +14,9 @@ public interface MemberMapper {
 	
 	@Select(" SELECT * FROM `MEMBER` WHERE ID=#{id}")
 	MemberDto selectmember(String id);
+	
+	@Insert(" INSERT INTO `MEMBER` VALUES( #{id}, #{birth}, #{password}, #{name}, #{gender}, #{nickname}, #{email}, #{phone}, DEFAULT) ")
+	int insert(MemberDto dto);
+	
+	
 }

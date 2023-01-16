@@ -27,8 +27,7 @@ public class Memberlmpl implements MemberBiz{
 	
 	@Override
 	public int insert(MemberDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return memberMapper.insert(dto);
 	}
 
 	@Override
