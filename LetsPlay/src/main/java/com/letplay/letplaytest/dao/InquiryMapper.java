@@ -28,7 +28,7 @@ public interface InquiryMapper {
 	@Select(" SELECT * FROM `ONE-ON-ONE INQUIRY` WHERE INQ_SEQ=#{inqSeq} ")
 	InquiryDto selectOne(int inqSeq);
 	
-	@Insert(" INSERT INTO `ONE-ON-ONE INQUIRY` VALUES(NULL, #{id}, #{inqTitle}, #{inqContent}, now(), DEFAULT ) ")
+	@Insert(" INSERT INTO `ONE-ON-ONE INQUIRY` VALUES(NULL, #{id}, #{inqTitle}, #{inqContent}, now() ) ")
 	int insert(InquiryDto dto);
 	
 	@Update(" UPDATE `ONE-ON-ONE INQUIRY` SET INQ_TITLE=#{inqTitle}, INQ_CONTENT=#{inqContent} WHERE INQ_SEQ=#{inqSeq} ")

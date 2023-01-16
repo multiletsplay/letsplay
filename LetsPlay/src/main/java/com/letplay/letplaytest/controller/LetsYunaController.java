@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.letplay.letplaytest.biz.FacBiz;
@@ -31,6 +32,7 @@ import com.letplay.letplaytest.dto.PageDto;
 import com.letplay.letplaytest.dto.SearchDto;
 
 @Controller
+@SessionAttributes("member")
 @RequestMapping("/")
 public class LetsYunaController {
 	@Autowired
@@ -46,19 +48,28 @@ public class LetsYunaController {
 	
 	// 시설
 	@GetMapping("/facility/list")
-	public String selectFacList(Model model) {
+	public String selectFacList(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("faclist", facBiz.selectFacList());
 		return "facilitylist";
 	}
 	
 	@GetMapping("/facility/select")
-	public String selectSports(Model model, int spoId) {
+	public String selectSports(HttpServletRequest request, Model model, int spoId) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("faclist", facBiz.selectSports(spoId));
 		return "facilitylist";
 	}
 	
 	@GetMapping("/facility/detail")
-	public String selectFacDetail(Model model, int facSeq) {
+	public String selectFacDetail(HttpServletRequest request, Model model, int facSeq) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
 		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
 		return "facilitydetail";
@@ -125,7 +136,10 @@ public class LetsYunaController {
 	
 	//시설 검색	
 	@GetMapping("/facility/search")
-	public String searchfac(Model model, SearchDto dto) {
+	public String searchfac(HttpServletRequest request, Model model, SearchDto dto) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("faclist", facBiz.searchFac(dto));
 		return "facilitylist";
 	}
@@ -162,7 +176,13 @@ public class LetsYunaController {
 	
 	//1대1문의
 	@GetMapping("/inquiry/list")
-	public String selectInquirylist(Model model, Criteria criteria) {
+	public String selectInquirylist(HttpServletRequest request, Model model, Criteria criteria) {
+		//로그인정보
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
+		
+		//페이징
 		int inqListCnt = inquiryBiz.getTotal();
 		PageDto paging = new PageDto();
 		paging.setCri(criteria);
@@ -174,14 +194,20 @@ public class LetsYunaController {
 	}
 
 	@GetMapping("/inquiry/detail")
-	public String selectInquiryOne(Model model, int inqSeq) {
+	public String selectInquiryOne(HttpServletRequest request, Model model, int inqSeq) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", inquiryBiz.selectOne(inqSeq));
 		model.addAttribute("reply", inqreplyBiz.select(inqSeq));
 		return "inquirydetail";
 	}
 	
 	@GetMapping("/inquiry/insertform")
-	public String insertFormInq() {
+	public String insertFormInq(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		return "inquiryinsert";
 	}
 	

@@ -13,16 +13,23 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
-$(function() {
-	$('#pagination').on('click', 'a', function(e) {
-		e.preventDefault();
-		console.log($(this));
-		const value = $(this).data('pagenum');
-		console.log(value);
-		document.pageForm.pageNum.value = value;
-		document.pageForm.submit();
-	});
-})
+	$(document).ready(function(){
+		var mem = '${member.type }';
+		
+		if (mem=='admin'){
+			
+	}
+	
+	$(function() {
+		$('#pagination').on('click', 'a', function(e) {
+			e.preventDefault();
+			console.log($(this));
+			const value = $(this).data('pagenum');
+			console.log(value);
+			document.pageForm.pageNum.value = value;
+			document.pageForm.submit();
+		});
+	})
 </script>
 </head>
 <body>
@@ -58,7 +65,10 @@ $(function() {
 							<c:when test="${dto.replyCheck == 0 }"><td>답변대기</td></c:when>
 							<c:otherwise><td>답변완료</td></c:otherwise>
 						</c:choose>
-						<td><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></td>
+						<c:choose>
+							<c:when test="${member.id == dto.id }"><td><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></td></c:when>
+							<c:otherwise><td>${dto.inqTitle } 🔒 </td></c:otherwise>
+						</c:choose>
 						<td>${dto.id }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.inqDate }"/></td>
 					</tr>

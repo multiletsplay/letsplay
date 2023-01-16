@@ -6,10 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#updateBtn { visibility: hidden; }
+</style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(document).ready(function(){
+		var mem = '${member.type }';
+		if (mem=='admin'){
+			$("#updateBtn").css("visibility","visible");
+		}
+		
 		$("#pathfinding").click(pathFinding);
 	});
 	
@@ -60,7 +68,7 @@
 </script>
 </head>
 <body>
-<input type="button" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
+<input type="button" id="updateBtn" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
 <br><br>
 <form action="/facility/reserve" method="POST">
 <input type="hidden" name="facSeq" value="${dto.facSeq }" >

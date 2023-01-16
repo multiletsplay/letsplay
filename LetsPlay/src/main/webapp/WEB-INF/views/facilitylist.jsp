@@ -10,10 +10,22 @@
 	ul{ list-style:none; }
 	#optionBtn { display: none; }
 	.searchOption { display:none; }
+	#insertBtn { visibility: hidden; }
+	#deleteBtn { visibility: hidden; }
+	#selectAll { display: none; }
+	.delList { display: none; }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var mem = '${member.type }';
+		
+		if (mem=='admin'){
+			$("#insertBtn").css("visibility","visible");
+			$("#deleteBtn").css("visibility","visible");
+			$("#selectAll").show();
+			$(".delList").show();
+		}
 		
 		//전체체크 선택
 		$('#selectAll').click(function(){
@@ -53,7 +65,6 @@
 <!-- 상세조건검색 -->
 <div id="facility-search">
 	<h3>지역 시설찾기</h3>
-	<!-- 지역	 / 날짜 / 필터 : 유무료, 주차, 장비대여, 샤워시설, 락커, 조명 -->
 	<span><strong>지역</strong>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
