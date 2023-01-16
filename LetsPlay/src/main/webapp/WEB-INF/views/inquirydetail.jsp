@@ -6,8 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#commentBtn { visibility: hidden; }
+	#comUpdateBtn { visibility: hidden; }
+	#comDelBtn { visibility: hidden; }
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
+	$(document).ready(function(){
+		var mem = '${member.type }';
+		if (mem=='admin'){
+			$("#commentBtn").css("visibility","visible");
+			$("#comUpdateBtn").css("visibility","visible");
+			$("#comDelBtn").css("visibility","visible");
+		}
+	});
+	
 	function replyUpdateShow(){
 		$(".reply-table").attr("style", "display:none")
 		$(".reply-update").attr("style", "display:table")
@@ -62,7 +76,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="right">
-							<input type="submit" value="댓글 등록">
+							<input type="submit" id="commentBtn" value="댓글 등록">
 						</td>
 					</tr>
 				</table>
@@ -72,7 +86,7 @@
 			<table class="reply-table">
 				<tr>
 					<th>작성자</th>
-					<td>관리자</td>	<!-- 추후 관리자id일경우 '관리자'로 표시로 수정 -->
+					<td>관리자</td>
 				</tr>
 				<tr>
 					<th>날짜</th>
@@ -83,8 +97,8 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="right">
-						<input type="button" value="수정" onclick="replyUpdateShow();">
-						<input type="button" value="삭제" onclick="location.href='/inquiry/reply/delete?repSeq=${reply.repSeq}&inqSeq=${reply.inqSeq }'">
+						<input type="button" value="수정" id="comUpdateBtn" onclick="replyUpdateShow();">
+						<input type="button" value="삭제" id="comDelBtn" onclick="location.href='/inquiry/reply/delete?repSeq=${reply.repSeq}&inqSeq=${reply.inqSeq }'">
 					</td>
 				</tr>
 			</table>

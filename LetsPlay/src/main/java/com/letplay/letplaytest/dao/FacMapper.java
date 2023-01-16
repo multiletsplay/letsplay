@@ -14,15 +14,23 @@ import com.letplay.letplaytest.dto.SearchDto;
 
 @Mapper
 public interface FacMapper {
-	@Select(" SELECT f.*, s.SPO_NAME "
-			+ " FROM FACILITY f, SPORTS s "
-			+ " WHERE f.SPO_ID = s.SPO_ID ")
-	List<FacDto> selectFacList();
+	@Select(" SELECT TMP.*, s.SPO_NAME "
+			+ " FROM ( "
+			+ "		SELECT f.*, l.LIKES_STATUS "
+			+ " 	FROM FACILITY f "
+			+ "		LEFT OUTER JOIN LIKES l "
+			+ " 	ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} )TMP, SPORTS s "
+			+ " WHERE TMP.SPO_ID = s.SPO_ID ")
+	List<FacDto> selectFacList(String id);
 	
-	@Select(" SELECT f.*, s.SPO_NAME "
-			+ " FROM FACILITY f, SPORTS s "
-			+ " WHERE f.SPO_ID = #{spoId} AND f.SPO_ID = s.SPO_ID ")
-	List<FacDto> selectSports(int spoId);
+	@Select(" SELECT TMP.*, s.SPO_NAME "
+			+ " FROM ( "
+			+ "		SELECT f.*, l.LIKES_STATUS "
+			+ " 	FROM FACILITY f "
+			+ "		LEFT OUTER JOIN LIKES l "
+			+ " 	ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} )TMP, SPORTS s "
+			+ " WHERE TMP.SPO_ID=#{spoId} AND TMP.SPO_ID = s.SPO_ID ")
+	List<FacDto> selectSports(int spoId, String id);
 	
 	@Select(" SELECT f.*, s.SPO_NAME "
 			+ " FROM FACILITY f, SPORTS s "
@@ -56,7 +64,7 @@ public interface FacMapper {
 	@Select( {"<script>",
 		" SELECT f.*, s.SPO_NAME ",
 		" FROM FACILITY f INNER JOIN SPORTS s ON f.SPO_ID = s.SPO_ID ",
-		" <where>",
+		" WHERE ",
 		" 	<if test='searchRegion1 != null'>FAC_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
 		"	<if test='searchRegion2 != null'>AND FAC_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
 //		"	<if test='searchDate != null'>AND FAC_DATE=#{searchDate} </if>",
@@ -66,8 +74,7 @@ public interface FacMapper {
 		" 	<if test='optLocker == true'>AND FAC_LOCKER=#{optLocker} </if> ",
 		" 	<if test='optLight == true'>AND FAC_LIGHT=#{optLight} </if> ",
 		" 	<if test='optCost == true'>AND FAC_COSTCHECK=#{optCost} </if> ",
-		" 	<if test='optCost == false'>AND FAC_COSTCHECK=false </if> ",
-		" </where> ",
+		" 	<if test='optCost == false'>AND FAC_COSTCHECK=FALSE </if> ",
 		" </script>" })
 	List<FacDto> searchFac(SearchDto dto);
 }

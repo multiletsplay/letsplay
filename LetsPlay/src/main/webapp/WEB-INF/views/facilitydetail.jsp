@@ -6,12 +6,49 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#updateBtn { visibility: hidden; }
+</style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(document).ready(function(){
+		var mem = '${member.type }';
+		if (mem=='admin'){
+			$("#updateBtn").css("visibility","visible");
+		}
+		
 		$("#pathfinding").click(pathFinding);
+		$("#likeBtn").click(like);
+		$("#dellikeBtn").click(dellike);
 	});
+	
+	function like(){
+		let facSeq = ${dto.facSeq};
+		
+		$.ajax({
+			url : "/facility/likes",
+			type : "POST",
+			data : { 'facSeq' : facSeq },
+			success : function(){
+				alert("찜 성공");
+				window.location.reload();
+			}
+		});
+	}
+	
+	function dellike(){
+		let facSeq = ${dto.facSeq};
+		$.ajax({
+			url : "/facility/dellikes",
+			type : "GET",
+			data : { 'facSeq' : facSeq },
+			success : function(){
+				alert("취소 성공");
+				window.location.reload();
+			}
+		});
+	}
 	
 	function pathFinding(){
 		var geocoder = new kakao.maps.services.Geocoder();
@@ -60,11 +97,23 @@
 </script>
 </head>
 <body>
-<input type="button" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
+<input type="button" id="updateBtn" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
 <br><br>
 <form action="/facility/reserve" method="POST">
 <input type="hidden" name="facSeq" value="${dto.facSeq }" >
 	<table class="facility-infrom" border="1" >
+		<tr>
+			<td>
+				<c:choose>
+	   				<c:when test="${like == 0}">
+	   					<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+	   				</c:when>
+	   				<c:otherwise>
+	   					<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+	   				</c:otherwise>
+	   			</c:choose>
+			</td>
+		</tr>
 		<tr>
 			<th>종목</th>
 			<td>${dto.spoName }</td>

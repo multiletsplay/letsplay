@@ -13,7 +13,7 @@
         <table class="inquiry-table">
         	<tr>
                 <th>ID</th>
-                <td><input type="text" name="id"></td>
+                <td><input type="hidden" name="id" value="${member.id }">${member.id }</td>
             </tr>
             <tr>
                 <th>제목</th>
