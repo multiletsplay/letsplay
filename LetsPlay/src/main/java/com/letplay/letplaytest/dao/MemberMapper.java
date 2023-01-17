@@ -24,4 +24,7 @@ public interface MemberMapper {
 	@Select(" SELECT COUNT(ID) FROM `MEMBER` WHERE ID=#{id} ")
 	int idcheck(String id);
 	
+	@Select(" SELECT COUNT(PHONE) FROM `MEMBER` WHERE PHONE=#{tel} ")
+	int CountTel(String tel);
+	
 }

@@ -3,6 +3,7 @@ package com.letplay.letplaytest.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +27,6 @@ import com.letplay.letplaytest.dto.MemberDto;
 @RequestMapping("/member")
 public class LetsMemberController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(LetsMemberController.class);
 	
 	@Autowired
 	private MemberBiz membiz;
@@ -109,15 +110,46 @@ public class LetsMemberController {
 	
 	// 마이페이지 수정해야함
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
-	public String selectmember(HttpSession session,Model model, String id) {
+	public String selectmember(HttpSession session,Model model ) {
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		
-		model.addAttribute("list", member.getId());
-		logger.info(id);
-		model.addAttribute("listdto", membiz.selectmyreview(member.getId()) );
+		model.addAttribute("member", membiz.selectmember(member.getId()));
+		
+		//model.addAttribute("listdto", membiz.selectmyreview(member.getId()) );
 		
 		return "mypage";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/phoneAuth", method=RequestMethod.POST)
+	public Boolean phoneAuth(String tel, HttpSession session) {
+
+	    try { // 이미 가입된 전화번호가 있으면
+	        if(membiz.memberTelCount(tel) > 0) 
+	            return true; 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    String code = membiz.sendRandomMessage(tel);
+	    session.setAttribute("rand", code);
+	    
+	    return false;
+	}
 	
+	@ResponseBody
+	@RequestMapping(value="/phoneAuthOk", method=RequestMethod.POST)
+	public Boolean phoneAuthOk(HttpSession session, HttpServletRequest request) {
+	    String rand = (String) session.getAttribute("rand");
+	    String code = (String) request.getParameter("code");
+
+	    System.out.println(rand + " : " + code);
+
+	    if (rand.equals(code)) {
+	        session.removeAttribute("rand");
+	        return false;
+	    } 
+
+	    return true;
+	}
 }
