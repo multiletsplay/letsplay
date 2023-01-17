@@ -1,8 +1,10 @@
 package com.letplay.letplaytest.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.letplay.letplaytest.dto.MemberDto;
 
@@ -17,6 +19,12 @@ public interface MemberMapper {
 	
 	@Insert(" INSERT INTO `MEMBER` VALUES( #{id}, #{birth}, #{password}, #{name}, #{gender}, #{nickname}, #{email}, #{phone}, DEFAULT) ")
 	int insert(MemberDto dto);
+	
+	@Update(" UPDATE `MEMBER` SET NAME=#{name}, NICKNAME=#{nickname}, EMAIL=#{email}, PHONE=#{phone} WHERE ID=#{id} ")
+	int update(MemberDto dto);
+	
+	@Delete(" DELETE FROM `MEMBER` WHERE ID=#{id} ")
+	int delete(String id);
 	
 	@Select(" SELECT ID FROM `MEMBER` WHERE NAME=#{name} AND PHONE=#{phone} ")
 	String findid(String name, String phone);
