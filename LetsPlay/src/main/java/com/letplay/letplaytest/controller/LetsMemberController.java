@@ -152,4 +152,35 @@ public class LetsMemberController {
 
 	    return true;
 	}
+	
+	@RequestMapping(value="/updateform", method=RequestMethod.GET)
+	public String updateForm(HttpSession session, Model model, MemberDto dto) {
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		
+		model.addAttribute("member", membiz.selectmember(member.getId()));
+		return "memberupdate";
+		
+	}
+	
+	@PostMapping("/update")
+	public String update(HttpSession session, MemberDto dto) {
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		dto.setId(member.getId());
+		if(membiz.update(dto) > 0) {
+			return "redirect:/member/mypage";
+		} else {
+			return "redirect:/member/updateform";
+		}
+	}
+	
+	@GetMapping("/delete")
+	public String delete(HttpSession session) {
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		String id = member.getId();
+		if(membiz.delete(id)>0) {
+			return "redirect:/member/loginform";
+		} else {			
+			return "redirect:/member/mypage";
+		}
+	}
 }

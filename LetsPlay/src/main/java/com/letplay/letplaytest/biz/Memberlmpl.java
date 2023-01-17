@@ -68,4 +68,14 @@ public class Memberlmpl implements MemberBiz{
 	public int memberTelCount(String tel) {
 		return memberMapper.CountTel(tel);
 	}
+
+	@Override
+	public int update(MemberDto dto) {
+		return memberMapper.update(dto);
+	}
+
+	@Override
+	public int delete(String id) {
+		return memberMapper.delete(id);
+	}
 }
