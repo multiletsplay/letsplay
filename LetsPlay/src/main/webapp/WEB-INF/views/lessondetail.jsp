@@ -72,8 +72,14 @@
 			<th>날짜</th>
 			<td><input type="date" name="resDate"></td>
 			<th>시간</th>
-			<td><input type="time" name="resStarttime"></td>
-			<td><input type="time" name="resEndtime"></td>
+			<td>
+				<select name="resStarttime">
+					<option value="">시간을 선택해주세요</option>
+					<c:forEach items="${schlist }" var="sch">
+						<option value="${sch.schStarttime }">${sch.schStarttime } ~ ${sch.schEndtime }</option>
+					</c:forEach>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<th>레슨 비용</th>

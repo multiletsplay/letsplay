@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.letplay.letplaytest.biz.MemberBiz;
@@ -64,15 +65,46 @@ public class LetsMemberController {
 	}
 	
 	@RequestMapping("/signup")
-	public String insertRes(MemberDto dto) {
+	public String insertRes(MemberDto dto, Model model) {
 		int res = membiz.insert(dto);
 		
 		if(res>0) {
-			return "redirect:/member/loginform"
-					+ "";
+			model.addAttribute("msg", "회원가입 성공");
+			model.addAttribute("url", "/member/loginform");
+			return "alert";
 		}else {
-			return "redirect:/member/signupform";
+			model.addAttribute("msg", "회원가입 실패");
+			model.addAttribute("url", "/member/signupform");
+			return "alert";
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/idcheck", method=RequestMethod.GET)
+	public int idcheck(@RequestParam String id ) {
+		int result = membiz.idcheck(id);
+		return result;
+	}
+	
+	@RequestMapping("/findidform")
+	public String findIdform() {
+		return "findid";
+	}
+	
+	@GetMapping("/findid")
+	public String findId(@RequestParam("name") String name, @RequestParam("phone") String phone, Model model ) {
+		model.addAttribute("id", membiz.findid(name, phone));
+		if( membiz.findid(name, phone) == null ) {
+			model.addAttribute("msg", "아이디가 존재하지 않습니다.");
+			model.addAttribute("url", "/member/findidform");
+			return "alert";
+		}
+		return "forward:/member/findidform";
+	}
+	
+	@RequestMapping("/findpwform")
+	public String findPwform() {
+		return "findpw";
 	}
 	
 	// 마이페이지 수정해야함

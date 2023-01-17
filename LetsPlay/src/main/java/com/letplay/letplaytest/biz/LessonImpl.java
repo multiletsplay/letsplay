@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.letplay.letplaytest.dao.LessonMapper;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
+import com.letplay.letplaytest.dto.LessonSchDto;
 
 @Service
 public class LessonImpl implements LessonBiz{
@@ -61,6 +62,11 @@ public class LessonImpl implements LessonBiz{
 	@Override
 	public List<LessonDto> selectSports(int spoId) {
 		return lessonMapper.selectSports(spoId);
+	}
+
+	@Override
+	public List<LessonSchDto> selectSchedule(int lesSeq) {
+		return lessonMapper.selectSchedule(lesSeq);
 	}
 
 	//@Override

@@ -18,5 +18,10 @@ public interface MemberMapper {
 	@Insert(" INSERT INTO `MEMBER` VALUES( #{id}, #{birth}, #{password}, #{name}, #{gender}, #{nickname}, #{email}, #{phone}, DEFAULT) ")
 	int insert(MemberDto dto);
 	
+	@Select(" SELECT ID FROM `MEMBER` WHERE NAME=#{name} AND PHONE=#{phone} ")
+	String findid(String name, String phone);
+	
+	@Select(" SELECT COUNT(ID) FROM `MEMBER` WHERE ID=#{id} ")
+	int idcheck(String id);
 	
 }
