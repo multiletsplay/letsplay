@@ -13,4 +13,6 @@ public interface MemberBiz {
 	public int idcheck(String id);
 	public String findid(String name, String phone);		//아이디찾기
 	public List<ReviewDto> selectmyreview(String id);		//후기불러오기
+	public String sendRandomMessage(String tel);
+	public int memberTelCount(String tel);
 }

@@ -9,6 +9,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#idChk").click(idChk);
+		$("#phoneBtn").click(auth);
+		$("#phoneChkBtn").click(authChk);
 	});
 	
 	function idChk(){
@@ -28,6 +30,45 @@
 			},
 			error:function(){
 				alert("통신 실패");
+			}
+		});
+		
+	}
+	
+	function auth(){
+		const phoneNum = $("#phone").val();
+		$.ajax({
+			type: 'POST',
+			url: '/member/phoneAuth',
+			header: {"Content-Type":"application/json"},
+			dataType:'json',
+			data : {tel : phoneNum},
+			success: function(result){
+				if(result == true){
+					alert("이미 가입된 전화번호입니다.");
+					$("#signup").attr("type", "button");
+				} else{
+					alert("인증 번호를 전송했습니다.");
+				}
+			}
+		});
+	}
+	
+	function authChk(){
+		const code = $("#phoneChk").val();
+		$.ajax({
+			type: 'POST',
+			url: '/member/phoneAuthOk',
+			header: {"Content-Type":"application/json"},
+			dataType:'json',
+			data : {code : code},
+			success: function(result){
+				if(result == true){
+					alert("인증 번호가 다릅니다.");
+					$("#signup").attr("type", "button");
+				} else{
+					alert("인증되었습니다.");
+				}
 			}
 		});
 	}
@@ -64,13 +105,13 @@
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><input type="text" name="phone" placeholder="숫자만 입력해주세요"></td>
-			<td><button type="button">인증번호 받기</button>
+			<td><input type="text" name="phone" id="phone" placeholder="숫자만 입력해주세요"></td>
+			<td><button type="button" id="phoneBtn">인증번호 받기</button>
 		</tr>
 		<tr>
 			<th></th>
 			<td><input type="text" id="phoneChk" placeholder="아이디를 입력해주세요"></td>
-			<td><button type="button">인증번호 확인</button>
+			<td><button type="button" id="phoneChkBtn">인증번호 확인</button>
 		</tr>
 		<tr>
 			<th></th>

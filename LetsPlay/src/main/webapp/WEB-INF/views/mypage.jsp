@@ -17,31 +17,31 @@
 	</tr>
 	<tr>
 		<th>생년월일</th>
-		<td>${dto.birth}</td>
+		<td>${member.birth}</td>
 	</tr>
 	<tr>
 		<th>비밀번호</th>
-		<td>${dto.password}</td>
+		<td>${member.password}</td>
 	</tr>
 	<tr>
 		<th>이름</th>
-		<td>${dto.name}</td>
+		<td>${member.name}</td>
 	</tr>
 	<tr>
 		<th>성별</th>
-		<td>${dto.gender}</td>
+		<td>${member.gender}</td>
 	</tr>
 	<tr>
 		<th>닉네임</th>
-		<td>${dto.nickname}</td>
+		<td>${member.nickname}</td>
 	</tr>
 	<tr>
 		<th>이메일</th>
-		<td>${dto.email}</td>
+		<td>${member.email}</td>
 	</tr>
 	<tr>
 		<th>전화번호</th>
-		<td>${dto.phone}</td>
+		<td>${member.phone}</td>
 	</tr>
 	
 </table>

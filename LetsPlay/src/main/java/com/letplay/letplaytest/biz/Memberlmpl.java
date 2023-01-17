@@ -1,6 +1,7 @@
 package com.letplay.letplaytest.biz;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.letplay.letplaytest.dao.MemberMapper;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
+import com.letplay.letplaytest.util.Naver_Sens_V2;
 
 @Service
 public class Memberlmpl implements MemberBiz{
@@ -45,5 +47,25 @@ public class Memberlmpl implements MemberBiz{
 	public String findid(String name, String phone) {
 		return memberMapper.findid(name, phone);
 	}
+	
+	@Override
+	public String sendRandomMessage(String tel) {
+	    Naver_Sens_V2 message = new Naver_Sens_V2();
+	    Random rand = new Random();
+	    String numStr = "";
+	    for (int i = 0; i < 6; i++) {
+	        String ran = Integer.toString(rand.nextInt(10));
+	        numStr += ran;
+	    }
+	    System.out.println("회원가입 문자 인증 => " + numStr);
 
+	    message.send_msg(tel, numStr);
+
+	    return numStr;
+	}
+
+	@Override
+	public int memberTelCount(String tel) {
+		return memberMapper.CountTel(tel);
+	}
 }
