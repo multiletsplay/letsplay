@@ -1,6 +1,7 @@
 package com.letplay.letplaytest.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
+import com.letplay.letplaytest.dto.LessonSchDto;
 
 @Mapper
 public interface LessonMapper {
@@ -47,4 +49,8 @@ public interface LessonMapper {
 	//		+ " WHERE LES_SEQ = #{lesSeq} AND MEMBER = #{ID} AND RES_DATE=#{resDate} AND RES_STARTTIME=#{resStarttime}; ")
 	//LessonResDto selectLesRes(int lesSeq, String id, Date resDate, String resStarttime);
 	
+	@Select(" SELECT s.* "
+			+" FROM LESSON l, LESSON_SCHEDULE s "
+			+" WHERE l.LES_SEQ=#{lesSeq} AND l.LES_SEQ = s.LES_SEQ ")
+	List<LessonSchDto> selectSchedule(int lesSeq);
 }

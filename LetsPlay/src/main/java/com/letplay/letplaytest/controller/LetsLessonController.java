@@ -49,6 +49,7 @@ public class LetsLessonController {
 	@GetMapping("/lesson/detail")
 	public String lessonDetail(Model model, int lesSeq) {
 		model.addAttribute("dto", LessonBiz.selectLesson(lesSeq));
+		model.addAttribute("schlist", LessonBiz.selectSchedule(lesSeq));
 		model.addAttribute("reviewlist", reviewBiz.selectLesRevlist(lesSeq));
 		return "lessondetail";
 	}

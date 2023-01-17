@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
+import com.letplay.letplaytest.dto.LessonSchDto;
 
 public interface LessonBiz {
 	public List<LessonDto> selectLessonList();
@@ -14,6 +15,7 @@ public interface LessonBiz {
 	public int deleteLesson(int lesSeq);
 	public int insertLesson(LessonDto dto, MultipartFile file) throws Exception ;	
 	public int updatelesson(LessonDto dto);
+	public List<LessonSchDto> selectSchedule(int lesSeq);	//레슨 스케줄 불러오기
 	
 	public int insertRes(LessonResDto dto);
 	

@@ -33,7 +33,7 @@
 					console.log(msg);
 					if(msg.check==true){
 						alert("성공적으로 로그인되었습니다.");
-						location.href="/member/mypage";
+						location.href="/";
 					}else{
 						$("#loginChk").show();
 						$("#loginChk").html("ID 혹은 PW가 잘못 되었습니다.")
@@ -51,9 +51,12 @@
 <body>
 <h1>로그인</h1>
 <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요">
-<input type="text" id="password" name="password" placeholder="비밀번호를 입력해주세요">
+<input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요">
 <button type="button" id="login" onclick="login();">로그인</button>
 <button type="button" onclick="location.href='/member/signupform'">회원가입</button>
+<div>
+	<a href="/member/findidform">아이디 찾기</a> &nbsp;&nbsp; <a href="/member/findpwform">비밀번호 찾기</a>
+</div>
 <div id="loginChk"></div>
 </body>
 </html>
