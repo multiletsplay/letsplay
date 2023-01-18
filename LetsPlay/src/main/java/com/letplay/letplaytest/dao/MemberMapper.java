@@ -34,5 +34,8 @@ public interface MemberMapper {
 	
 	@Select(" SELECT COUNT(PHONE) FROM `MEMBER` WHERE PHONE=#{tel} ")
 	int CountTel(String tel);
+
+	@Select(" SELECT COUNT(NICKNAME) FROM `MEMBER` WHERE NICKNAME=#{nickname} ")
+	int nicknamecheck(String nickname);
 	
 }

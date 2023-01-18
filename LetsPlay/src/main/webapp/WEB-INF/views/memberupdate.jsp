@@ -5,6 +5,35 @@
 <head>
 <meta charset="UTF-8">
 <title>MemberUpdate</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#nicknameChk").click(nicknameChk);
+	});
+	
+	function nicknameChk(){
+		let nickname = $("#nickname").val().trim();
+		
+		$.ajax({
+			url:"/member/nicknamecheck",
+			type:"get",
+			data:{ "nickname" : nickname },	
+			success:function(data){
+				if(data == 1){
+					alert("이미 사용중인 닉네임입니다.");
+					$("#signup").attr("type", "button");
+				}else{
+					alert("사용 가능한 닉네임입니다.");
+				}
+			},
+			error:function(){
+				alert("통신 실패");
+			}
+		});
+		
+	}
+	
+</script>
 </head>
 <body>
 <h1>마이페이지</h1>
@@ -33,7 +62,8 @@
 	</tr>
 	<tr>
 		<th>닉네임</th>
-		<td><input type="text" name="nickname" value="${member.nickname}"></td>
+		<td><input type="text" id="nickname" name="nickname" value="${member.nickname}"></td>
+		<td><button type="button" id="nicknameChk">닉네임 중복확인</button>
 	</tr>
 	<tr>
 		<th>이메일</th>
