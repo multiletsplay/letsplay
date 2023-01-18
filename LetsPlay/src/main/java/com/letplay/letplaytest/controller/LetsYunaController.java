@@ -77,7 +77,7 @@ public class LetsYunaController {
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
-		model.addAttribute("like", likesBiz.select(facSeq, member.getId()));
+		model.addAttribute("like", likesBiz.selectfac(facSeq, member.getId()));
 		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
 		return "facilitydetail";
 	}
@@ -160,7 +160,7 @@ public class LetsYunaController {
 		HttpSession session = request.getSession();
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		dto.setId(member.getId());
-		if(likesBiz.insert(dto)>0) {
+		if(likesBiz.insertfac(dto)>0) {
 			System.out.println("찜 성공");		
 		}else {
 			System.out.println("찜 실패");
@@ -172,7 +172,7 @@ public class LetsYunaController {
 	public void deleteLike(@RequestParam int facSeq, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		MemberDto member = (MemberDto) session.getAttribute("login");
-		if(likesBiz.delete(facSeq, member.getId())>0) {
+		if(likesBiz.deletefac(facSeq, member.getId())>0) {
 			System.out.println("취소 성공");	
 		}else {
 			System.out.println("취소 실패");	

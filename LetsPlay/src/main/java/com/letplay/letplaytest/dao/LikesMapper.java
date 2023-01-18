@@ -10,17 +10,34 @@ import com.letplay.letplaytest.dto.LikesDto;
 
 @Mapper
 public interface LikesMapper {
+	
 	@Select(" SELECT COUNT(LIKES_ID) FROM LIKES WHERE FAC_SEQ=#{facSeq} AND ID=#{id} ")
-	int select(int facSeq, String id);
+	int selectfac(int facSeq, String id);
 	
 	@Insert(" INSERT INTO LIKES VALUES(NULL, #{id}, NULL, NULL, #{facSeq}, 1 ) ")
-	int insert(LikesDto dto);
+	int insertfac(LikesDto dto);
 	
 	@Delete(" DELETE FROM LIKES WHERE FAC_SEQ=#{facSeq} AND ID=#{id} ")
-	int delete(int facSeq, String id);
+	int deletefac(int facSeq, String id);
 	
-	@Update(" UPDATE FACILITY SET LIKECOUNT = "
-			+ " (SELECT COUNT(*) FROM LIKES WHERE FAC_SEQ=#{facSeq}) "
-			+ " WHERE FAC_SEQ=#{facSeq} ")
-	int update(int facSeq);
+	
+	@Select(" SELECT COUNT(LIKES_ID) FROM LIKES WHERE LES_SEQ=#{lesSeq} AND ID=#{id} ")
+	int selectles(int lesSeq, String id);
+	
+	@Insert(" INSERT INTO LIKES VALUES(NULL, #{id}, NULL, #{lesSeq}, NULL, 1 ) ")
+	int insertles(LikesDto dto);
+	
+	@Delete(" DELETE FROM LIKES WHERE LES_SEQ=#{lesSeq} AND ID=#{id} ")
+	int deleteles(int lesSeq, String id);
+	
+	
+	@Select(" SELECT COUNT(LIKES_ID) FROM LIKES WHERE MATCH_SEQ=#{matchSeq} AND ID=#{id} ")
+	int selectmat(int matchSeq, String id);
+	
+	@Insert(" INSERT INTO LIKES VALUES(NULL, #{id}, #{matchSeq}, NULL, NULL, 1 ) ")
+	int insertmat(LikesDto dto);
+	
+	@Delete(" DELETE FROM LIKES WHERE MATCH_SEQ=#{matchSeq} AND ID=#{id} ")
+	int deletemat(int matchSeq, String id);
+	
 }

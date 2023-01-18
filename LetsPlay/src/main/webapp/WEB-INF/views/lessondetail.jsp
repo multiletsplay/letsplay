@@ -6,11 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>LessonDetail</title>
+<style type="text/css">
+	#updateBtn { visibility: hidden; }
+</style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(document).ready(function(){
+		var mem = '${member.type }';
+		if (mem=='admin'){
+			$("#updateBtn").css("visibility","visible");
+		}
+		
 		$("#pathfinding").click(pathFinding);
+		$("#likeBtn").click(like);
+		$("#dellikeBtn").click(dellike);
 	});
 	
 	function pathFinding(){
@@ -37,12 +47,51 @@
 	     }
 		});
 	}
+	
+	function like(){
+		let lesSeq = ${dto.lesSeq};
+		
+		$.ajax({
+			url : "/lesson/likes",
+			type : "POST",
+			data : { 'lesSeq' : lesSeq },
+			success : function(){
+				alert("찜 성공");
+				window.location.reload();
+			}
+		});
+	}
+	
+	function dellike(){
+		let lesSeq = ${dto.lesSeq};
+		$.ajax({
+			url : "/lesson/dellikes",
+			type : "GET",
+			data : { 'lesSeq' : lesSeq },
+			success : function(){
+				alert("취소 성공");
+				window.location.reload();
+			}
+		});
+	}
 </script>
 </head>
 <body>
 <form action="/lesson/reserve" method="POST">
 <input type="hidden" name="lesSeq" value="${dto.lesSeq }">
 	<table border="1">
+		<tr>
+			<td>
+				<c:choose>
+	   				<c:when test="${like == 0}">
+	   					<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+	   				</c:when>
+	   				<c:otherwise>
+	   					<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+	   				</c:otherwise>
+	   			</c:choose>
+			</td>
+		</tr>
 		<tr>
 			<th>종목</th>
 			<td>${dto.spoName}</td>
@@ -57,7 +106,7 @@
 		</tr>
 		<tr>
 			<th></th>
-			<td><input type="hidden" name="lesImgpath" value="${dto.lesImgpath }"><img width="3000" src="${dto.lesImgpath }"></td>
+			<td><input type="hidden" name="lesImgpath" value="${dto.lesImgpath }"><img width="300" src="${dto.lesImgpath }"></td>
 		</tr>
 		<tr>
 			<th>주소</th>
@@ -110,7 +159,7 @@
 		<tr>
 			<td colspan="2">
 				<input type="button" value="목록" onclick="location.href='/lesson/list'">
-				<input type="button" value="레슨 수정" onclick="location.href='/lesson/updateform?lesSeq=${dto.lesSeq}'">
+				<input type="button" id="updateBtn" value="레슨 수정" onclick="location.href='/lesson/updateform?lesSeq=${dto.lesSeq}'">
 				<input type="submit" value="예약하기">
 			</td>
 		</tr>

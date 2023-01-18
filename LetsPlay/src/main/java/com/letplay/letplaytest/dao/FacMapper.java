@@ -14,22 +14,24 @@ import com.letplay.letplaytest.dto.SearchDto;
 
 @Mapper
 public interface FacMapper {
-	@Select(" SELECT TMP.*, s.SPO_NAME "
-			+ " FROM ( "
-			+ "		SELECT f.*, l.LIKES_STATUS "
-			+ " 	FROM FACILITY f "
-			+ "		LEFT OUTER JOIN LIKES l "
-			+ " 	ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} )TMP, SPORTS s "
-			+ " WHERE TMP.SPO_ID = s.SPO_ID ")
+	
+	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+			+ " FROM FACILITY f "
+			+ "		LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID "
+			+ " 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} "
+			+ "		LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ "
+			+ " GROUP BY f.FAC_SEQ "
+			+ " ORDER BY f.FAC_DATE DESC ")
 	List<FacDto> selectFacList(String id);
 	
-	@Select(" SELECT TMP.*, s.SPO_NAME "
-			+ " FROM ( "
-			+ "		SELECT f.*, l.LIKES_STATUS "
-			+ " 	FROM FACILITY f "
-			+ "		LEFT OUTER JOIN LIKES l "
-			+ " 	ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} )TMP, SPORTS s "
-			+ " WHERE TMP.SPO_ID=#{spoId} AND TMP.SPO_ID = s.SPO_ID ")
+	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+			+ " FROM FACILITY f "
+			+ "		LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID "
+			+ " 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} "
+			+ "		LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ "
+			+ " WHERE f.SPO_ID=#{spoId} "
+			+ " GROUP BY f.FAC_SEQ "
+			+ " ORDER BY f.FAC_DATE DESC ")
 	List<FacDto> selectSports(int spoId, String id);
 	
 	@Select(" SELECT f.*, s.SPO_NAME "
@@ -77,4 +79,13 @@ public interface FacMapper {
 		" 	<if test='optCost == false'>AND FAC_COSTCHECK=FALSE </if> ",
 		" </script>" })
 	List<FacDto> searchFac(SearchDto dto);
+	
+	//평점 좋은 순으로 4개까지 불러오기
+	@Select(" SELECT f.*, AVG(REV_RATE) AS AVG_RATE "
+			+ " FROM FACILITY f "
+			+ " LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ "
+			+ " GROUP BY FAC_SEQ "
+			+ " ORDER BY AVGF DESC "
+			+ " LIMIT 4 ")
+	List<FacDto> selectRateavg();
 }
