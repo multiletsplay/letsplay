@@ -83,12 +83,12 @@
 			<th>시설유무</th>
 			<td>${dto.matchFacility }</td>
 		</tr>
-		<tr>
-			<th>참여한 사람</th>
-			<td><form action="/match/joinmatchlist"  method="get"></form>
+<!-- 		<tr> -->
+<!-- 			<th>참여한 사람</th> -->
+<!-- 			<td><form action="/match/joinmatchlist"  method="get"></form> -->
 				
-			</td>
-		</tr>
+<!-- 			</td> -->
+<!-- 		</tr> -->
 		<tr>
 			<td colspan="3" align="right">
 				<input type="button" value="수정" onclick="location.href='/match/updateform?matchSeq=${dto.matchSeq}'">
