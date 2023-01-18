@@ -6,18 +6,61 @@
 <head>
 <meta charset="UTF-8">
 <title>LessonList</title>
+<style type="text/css">
+	#insertBtn { visibility: hidden; }
+	#deleteBtn { visibility: hidden; }
+	#selectAll { display: none; }
+	.delList { display: none; }
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var mem = '${member.type }';
 		
-		//전체체크 선택
+		if (mem=='admin'){
+			$("#insertBtn").css("visibility","visible");
+			$("#deleteBtn").css("visibility","visible");
+			$("#selectAll").show();
+			$(".delList").show();
+		}
+		
 		$('#selectAll').click(function(){
 			var checked = $(this).is(':checked');
 			
 			$('.delList').prop("checked", checked);
 		});
 		
+		$("#likeBtn").click(like);
+		$("#dellikeBtn").click(dellike);
+		
 	});
+	
+	function like(){
+		let lesSeq = $(this).attr('idx');
+		
+		$.ajax({
+			url : "/lesson/likes",
+			type : "POST",
+			data : { 'lesSeq' : lesSeq },
+			success : function(){
+				alert("찜 성공");
+				window.location.reload();
+			}
+		});
+	}
+	
+	function dellike(){
+		let lesSeq = $(this).attr('idx');
+		$.ajax({
+			url : "/lesson/dellikes",
+			type : "GET",
+			data : { 'lesSeq' : lesSeq },
+			success : function(){
+				alert("취소 성공");
+				window.location.reload();
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -48,6 +91,7 @@
 			<th>사진</th>
 			<th>레슨 이름</th>
 			<th>주소</th>
+			<th>리뷰 수</th>
 			<th>찜</th>
 		</tr>
 		
@@ -65,14 +109,24 @@
 						<td><img width="210" src="${dto.lesImgpath }"></td>
 						<td><a href="/lesson/detail?lesSeq=${dto.lesSeq}">${dto.lesName }</a></td>
 						<td>${dto.lesLocation }</td>
-						<td></td>
+						<td>이용자 리뷰 ${dto.cntReview }개</td>
+	            		<td>
+	            		<c:choose>
+			   				<c:when test="${dto.likesStatus eq 1 }">
+			   					<img id="dellikeBtn" idx="${dto.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+			   				</c:when>
+			   				<c:otherwise>
+			   					<img id="likeBtn" idx="${dto.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+			   				</c:otherwise>
+			   			</c:choose>
+	            		</td>
 					</tr>
 				</c:forEach> 
 			</c:otherwise>
 		</c:choose>
 	</table>
 	</form>
-	<input type="button" id="insertButton" value="레슨 추가" onclick="location.href='/lesson/insertform'">
+	<input type="button" id="insertBtn" value="레슨 추가" onclick="location.href='/lesson/insertform'">
 </div>
 </body>
 </html>

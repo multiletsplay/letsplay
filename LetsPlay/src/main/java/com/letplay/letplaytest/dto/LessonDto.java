@@ -16,14 +16,16 @@ public class LessonDto {
 	private String lesType;
 	private String lesWeekend;
 	private int lesCost;
+	private int likesStatus;
+	private int cntReview;
 	
 	public LessonDto() {
 		super();
 	}
-	
+
 	public LessonDto(int lesSeq, String lesName, int spoId, String spoName, String lesTeacher, String lesLocation,
 			String lesContact, String lesImg, String lesImgpath, Date lesDate, String lesType, String lesWeekend,
-			int lesCost) {
+			int lesCost, int likesStatus, int cntReview) {
 		super();
 		this.lesSeq = lesSeq;
 		this.lesName = lesName;
@@ -38,6 +40,8 @@ public class LessonDto {
 		this.lesType = lesType;
 		this.lesWeekend = lesWeekend;
 		this.lesCost = lesCost;
+		this.likesStatus = likesStatus;
+		this.cntReview = cntReview;
 	}
 
 	public int getLesSeq() {
@@ -144,8 +148,20 @@ public class LessonDto {
 		this.lesImgpath = lesImgpath;
 	}
 
-	
-	
-	
+	public int getLikesStatus() {
+		return likesStatus;
+	}
+
+	public void setLikesStatus(int likesStatus) {
+		this.likesStatus = likesStatus;
+	}
+
+	public int getCntReview() {
+		return cntReview;
+	}
+
+	public void setCntReview(int cntReview) {
+		this.cntReview = cntReview;
+	}
 	
 }

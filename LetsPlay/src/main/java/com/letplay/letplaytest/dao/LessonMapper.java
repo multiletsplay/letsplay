@@ -15,19 +15,28 @@ import com.letplay.letplaytest.dto.LessonSchDto;
 @Mapper
 public interface LessonMapper {
 	
-	@Select(" SELECT l.*, s.SPO_NAME "
-			+ " FROM LESSON l, SPORTS s "
-			+ " WHERE l.SPO_ID = s.SPO_ID ")
-	List<LessonDto> selectLessonList();
+	@Select(" SELECT l.*, s.SPO_NAME, ANY_VALUE(ls.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+			+ " FROM LESSON l "
+			+ "		LEFT OUTER JOIN SPORTS s ON l.SPO_ID=s.SPO_ID "
+			+ " 	LEFT OUTER JOIN LIKES ls ON l.LES_SEQ=ls.LES_SEQ AND ls.ID=#{id} "
+			+ "		LEFT OUTER JOIN REVIEW r ON l.LES_SEQ=r.LES_SEQ "
+			+ " GROUP BY l.LES_SEQ "
+			+ " ORDER BY l.LES_DATE DESC ")
+	List<LessonDto> selectLessonList(String id);
+	
+	@Select(" SELECT l.*, s.SPO_NAME, ANY_VALUE(ls.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+			+ " FROM LESSON l "
+			+ "		LEFT OUTER JOIN SPORTS s ON l.SPO_ID=s.SPO_ID "
+			+ " 	LEFT OUTER JOIN LIKES ls ON l.LES_SEQ=ls.LES_SEQ AND ls.ID=#{id} "
+			+ "		LEFT OUTER JOIN REVIEW r ON l.LES_SEQ=r.LES_SEQ "
+			+ " WHERE l.SPO_ID=#{spoId} "
+			+ " GROUP BY l.LES_SEQ "
+			+ " ORDER BY l.LES_DATE DESC ")
+	List<LessonDto> selectSports(String id, int spoId);
 	
 	@Select(" SELECT l.*, s.SPO_NAME "
 			+ " FROM LESSON l, SPORTS s "
-			+ " WHERE l.SPO_ID=#{spoId} AND l.SPO_ID = s.SPO_ID ")
-	List<LessonDto> selectSports(int spoId);
-	
-	@Select(" SELECT LES_SEQ, LES_NAME, SPO_NAME, LES_TEACHER, LES_LOCATION, LES_CONTACT, LES_IMG, LES_DATE, LES_TYPE, LES_WEEKEND, LES_COST \n"
-			+ " FROM LESSON, SPORTS\n"
-			+ " WHERE LES_SEQ = #{lesSeq} AND LESSON.SPO_ID = SPORTS.SPO_ID ")
+			+ " WHERE LES_SEQ = #{lesSeq} AND l.SPO_ID = s.SPO_ID ")
 	LessonDto selectLesson(int lesSeq);
 	
 	@Delete(" DELETE FROM LESSON WHERE LES_SEQ = #{lesSeq} ")

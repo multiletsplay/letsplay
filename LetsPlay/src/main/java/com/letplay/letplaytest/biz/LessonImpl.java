@@ -21,8 +21,8 @@ public class LessonImpl implements LessonBiz{
 	private LessonMapper lessonMapper;
 	
 	@Override
-	public List<LessonDto> selectLessonList() {
-		return lessonMapper.selectLessonList();
+	public List<LessonDto> selectLessonList(String id) {
+		return lessonMapper.selectLessonList(id);
 	}
 
 	@Override
@@ -60,8 +60,8 @@ public class LessonImpl implements LessonBiz{
 	}
 
 	@Override
-	public List<LessonDto> selectSports(int spoId) {
-		return lessonMapper.selectSports(spoId);
+	public List<LessonDto> selectSports(String id, int spoId) {
+		return lessonMapper.selectSports(id, spoId);
 	}
 
 	@Override

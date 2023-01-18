@@ -151,6 +151,7 @@
 			<th>사진</th>
 			<th>시설이름</th>
 			<th>주소</th>
+			<th>리뷰 수</th>
 			<th>찜</th>
 		</tr>
 	    <c:choose>
@@ -165,6 +166,7 @@
 	            		<td><img width="210" src="${dto.facImgpath }"></td>
 	            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
 	            		<td>${dto.facLocation }</td>
+	            		<td>이용자 리뷰 ${dto.cntReview }개</td>
 	            		<td>
 	            		<c:choose>
 			   				<c:when test="${dto.likesStatus eq 1 }">

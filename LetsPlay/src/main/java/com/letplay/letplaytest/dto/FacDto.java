@@ -23,6 +23,8 @@ public class FacDto {
 	private Boolean facLight;
 	private Boolean facCostcheck;
 	private int likesStatus;
+	private int cntReview;
+	private double avgRate;
 	
 	public FacDto() {
 		super();
@@ -31,7 +33,8 @@ public class FacDto {
 
 	public FacDto(int facSeq, String facName, int spoId, String spoName, String facLocation, String facContact,
 			int facCost, String facImg, String facImgpath, Date facDate, Boolean facParking, Boolean facLent,
-			Boolean facShower, Boolean facLocker, Boolean facLight, Boolean facCostcheck, int likesStatus) {
+			Boolean facShower, Boolean facLocker, Boolean facLight, Boolean facCostcheck, int likesStatus,
+			int cntReview, double avgRate) {
 		super();
 		this.facSeq = facSeq;
 		this.facName = facName;
@@ -50,6 +53,8 @@ public class FacDto {
 		this.facLight = facLight;
 		this.facCostcheck = facCostcheck;
 		this.likesStatus = likesStatus;
+		this.cntReview = cntReview;
+		this.avgRate = avgRate;
 	}
 
 	public int getFacSeq() {
@@ -157,6 +162,22 @@ public class FacDto {
 
 	public void setLikesStatus(int likesStatus) {
 		this.likesStatus = likesStatus;
+	}
+
+	public int getCntReview() {
+		return cntReview;
+	}
+
+	public void setCntReview(int cntReview) {
+		this.cntReview = cntReview;
+	}
+
+	public double getAvgRate() {
+		return avgRate;
+	}
+
+	public void setAvgRate(double avgRate) {
+		this.avgRate = avgRate;
 	}
 
 }

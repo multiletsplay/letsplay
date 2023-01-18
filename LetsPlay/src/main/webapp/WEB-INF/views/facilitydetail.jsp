@@ -218,7 +218,7 @@
 	</tr>
     <c:choose>
         <c:when test="${empty reviewlist }">
-            <div>------ 후기가 없습니다. ------</div>
+            <td colspan="3">------ 후기가 없습니다. ------</td>
         </c:when>
         <c:otherwise>
             <c:forEach items="${reviewlist }" var="review">
