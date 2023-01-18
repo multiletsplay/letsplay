@@ -5,10 +5,13 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class SearchDto {
+	//공통
 	private String searchRegion1;		// 시/도
 	private String searchRegion2;		// 군/구
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date searchDate;			
+	private Date searchDate;
+	
+	//시설
 	private String searchTime1;
 	private String searchTime2;
 	private boolean optParking;
@@ -18,14 +21,17 @@ public class SearchDto {
 	private boolean optLight;
 	private boolean optCost;
 	
+	//match
+		
+	private int searchLevel;
+	private String searchFacStatus;
 	public SearchDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 	public SearchDto(String searchRegion1, String searchRegion2, Date searchDate, String searchTime1,
 			String searchTime2, boolean optParking, boolean optLent, boolean optShower, boolean optLocker,
-			boolean optLight, boolean optCost) {
+			boolean optLight, boolean optCost, int searchLevel, String searchFacStatus) {
 		super();
 		this.searchRegion1 = searchRegion1;
 		this.searchRegion2 = searchRegion2;
@@ -38,8 +44,9 @@ public class SearchDto {
 		this.optLocker = optLocker;
 		this.optLight = optLight;
 		this.optCost = optCost;
+		this.searchLevel = searchLevel;
+		this.searchFacStatus = searchFacStatus;
 	}
-	
 	public String getSearchRegion1() {
 		return searchRegion1;
 	}
@@ -106,5 +113,16 @@ public class SearchDto {
 	public void setOptCost(boolean optCost) {
 		this.optCost = optCost;
 	}
-	
+	public int getSearchLevel() {
+		return searchLevel;
+	}
+	public void setSearchLevel(int searchLevel) {
+		this.searchLevel = searchLevel;
+	}
+	public String isSearchFacStatus() {
+		return searchFacStatus;
+	}
+	public void setSearchFacStatus(String searchFacStatus) {
+		this.searchFacStatus = searchFacStatus;
+	}
 }

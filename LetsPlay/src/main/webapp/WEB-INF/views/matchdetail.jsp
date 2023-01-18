@@ -14,21 +14,30 @@
 <body style="background-color: gray">
         <div class="container col-8 mt-2" style="background-color:white">
 <script>
-function fn1(){
-	if (confirm("게시글을 삭제하시겠습니까?")) {
-		location.href='/match/delete?matchSeq=${dto.matchSeq}'
-	}
-};
-function fn2(a,b){
-	if (confirm("매칭에 참여하시겠습니까?")) {
-		if(a >= b){
-			alert("이미 정원이 가득 찼습니다")
-			return;
-		}
-		location.href='/match/joinMatch?matchSeq=${dto.matchSeq}'
-	}
-};
-	</script>
+	$(document).ready(function(){
+		var id = ${member.id}
+		console.log(id);
+		$("#fn2").click(fn2);
+	});
+		function fn1(){
+			if (confirm("게시글을 삭제하시겠습니까?")) {
+				location.href='/match/delete?matchSeq=${dto.matchSeq}'
+			}
+		};
+		function fn2(a,b){
+			if (confirm("매칭에 참여하시겠습니까?")) {
+				if(a >= b){
+					alert("이미 정원이 가득 찼습니다")
+					return;
+				}
+// 				const btnElement = document.getElementById('btn');
+// 				btnElement.innerText = '매칭취소';
+				location.href='/match/joinMatch?matchSeq=${dto.matchSeq}'
+			}
+		};
+	
+	
+	</script>	
 	<table border="1" class="table">
 		<tr class="table-active">
 			<th>작성자</th>
@@ -40,7 +49,7 @@ function fn2(a,b){
 		</tr>
 		<tr>
 			<th>종  목</th>
-			<td>${dto.spoId }</td>
+			<td>${dto.spoName}</td>
 		</tr>
 		<tr>
 			<th>내  용</th>
@@ -48,15 +57,23 @@ function fn2(a,b){
 		</tr>
 		<tr>
 			<th>마감일자</th>
-			<td><fmt:formatDate value="${dto.matchEnddate}" pattern="yyyy-MM-dd (a)HH:mm" ></fmt:formatDate></td>
+			<td>
+							<fmt:parseDate value="${dto.matchEnddate}" 
+								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /></td>
+							<td>
 		</tr>
 		<tr>
 			<th>장  소</th>
 			<td>${dto.matchLocation }</td>
 		</tr>
 		<tr>
+			<th>시작시간 ~ 종료시간</th>
+			<td>${dto.startTime } ~ ${dto.endTime }</td>
+		</tr>
+		<tr>
 			<th>참여인원/총 인원</th>
-			<td>${dto.matchCnt }/${dto.matchTotal }</td>
+			<td>${dto.matchCnt }/${dto.matchTotal } [${dto.id }, ]</td>
 		</tr>
 		<tr>
 			<th>레  벨</th>
@@ -67,8 +84,10 @@ function fn2(a,b){
 			<td>${dto.matchFacility }</td>
 		</tr>
 		<tr>
-			<th>댓글 수</th>
-			<td>${dto.cntComment }</td>
+			<th>참여한 사람</th>
+			<td><form action="/match/joinmatchlist"  method="get"></form>
+				
+			</td>
 		</tr>
 		<tr>
 			<td colspan="3" align="right">
@@ -76,13 +95,14 @@ function fn2(a,b){
 				<input type="button" value="삭제"  onclick="javascript:fn1();">
 				<input type="button" value="목록" onclick="location.href='/match/list'">
 				<div style="text-align:center">
-					<input type="button" value="참여하기" onclick="fn2(${dto.matchCnt},${dto.matchTotal });">
-					
+					<c:if test="${ dto.id != null }">
+					<button type="submit" id="btn" name="joinMatchList" value="${member.id }" onclick="fn2(${dto.matchCnt},${dto.matchTotal });">참여하기</button>
+					</c:if>
 				</div>
 				<div>
 					<form method="post" action="/match/insertreply?matchSeq=${dto.matchSeq}">
 						<p>
-							<label>댓글 작성자:</label><input type="text" name="id" >
+							<label>댓글 작성자:</label><input type="text" name="id" value="${member.id }" readonly>
 						</p>
 						<p>
 							<textarea rows="4" cols="100" name="repContent"></textarea>
@@ -102,7 +122,7 @@ function fn2(a,b){
 				<td width="100px">${reply.id }</td>
 				<td width="475px">${reply.repContent }</td>
 				<td width="200px"><fmt:formatDate value="${reply.repRegdate}" pattern="yyyy-MM-dd HH:mm:ss" ></fmt:formatDate>
-				<input type="button" value="삭제" onclick="location.href='/match/delreply?repSeq=${reply.repSeq} + &matchSeq=${reply.matchSeq}'"></td>
+				<input type="button" value="삭제" onclick="location.href='/match/delreply?repSeq=${reply.repSeq} + &matchSeq=${dto.matchSeq}'"></td>
 			</tr>		
 		</c:forEach>		
 	</table>
