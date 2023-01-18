@@ -30,7 +30,7 @@ import com.letplay.letplaytest.dto.SearchDto;
 @Mapper
 public interface MatchMapper {
 
-	@Select(" SELECT m.*, s.SPO_NAME, "
+	@Select(" SELECT m.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
 			+ "(select count(r.REP_SEQ)"
 			+ "		FROM REPLY r"
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT "
@@ -40,7 +40,7 @@ public interface MatchMapper {
 			+ " m.MATCH_SEQ DESC ")
 	List<MatchDto> selectMatchList();
 	
-	@Select("SELECT MATCH_SEQ, ID, SPO_NAME, MATCH_TITLE, MATCH_REGDATE, MATCH_ENDDATE, MATCH_LOCATION, START_TIME, END_TIME, MATCH_CNT, MATCH_TOTAL, MATCH_LEVEL, "
+	@Select("SELECT MATCH_SEQ, ID, SPO_NAME, MATCH_TITLE, MATCH_REGDATE, MATCH_ENDDATE, MATCH_LOCATION, START_TIME, END_TIME, MATCH_CNT, MATCH_TOTAL, MATCH_LEVEL, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
 			+ "	(SELECT COUNT(REPLY.REP_SEQ) "
 			+ "		FROM REPLY"
 			+ "		WHERE MATCH_BOARD.MATCH_SEQ=REPLY.MATCH_SEQ) CNT_COMMENT "
@@ -50,7 +50,7 @@ public interface MatchMapper {
 			+ " MATCH_SEQ DESC ")
 	List<MatchDto> selectSports(int spoId);
 
-	@Select(" SELECT m.*, s.SPO_NAME, "
+	@Select(" SELECT m.*, s.SPO_NAME,  "
 			+ "	(SELECT COUNT(r.REP_SEQ)"
 			+ "		FROM REPLY r "
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT "

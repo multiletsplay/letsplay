@@ -7,11 +7,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.letplay.letplaytest.biz.LikesBiz;
 import com.letplay.letplaytest.biz.MatchBiz;
 import com.letplay.letplaytest.biz.MemberBiz;
 import com.letplay.letplaytest.biz.NoticeBiz;
 import com.letplay.letplaytest.dto.Criteria;
+import com.letplay.letplaytest.dto.LikesDto;
 import com.letplay.letplaytest.dto.MatchDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.NoticeDto;
@@ -39,6 +44,8 @@ public class LetsMatchController {
 	private NoticeBiz noticeBiz;
 	@Autowired
 	private MemberBiz memBiz;
+	@Autowired
+	private LikesBiz likesBiz;
 	
 	// 매치controller
 	
@@ -248,6 +255,33 @@ public class LetsMatchController {
 //		    session.invalidate();
 //		    return null;
 //		}
+		//매치 찜하기
+		@ResponseBody
+		@RequestMapping(value="/match/likes", method=RequestMethod.POST)
+		public void insertLike(@RequestParam int matchSeq, HttpServletRequest request, Model model) {
+			LikesDto dto = new LikesDto();
+			dto.setMatchSeq(matchSeq);
+			HttpSession session = request.getSession();
+			MemberDto member = (MemberDto) session.getAttribute("login");
+			dto.setId(member.getId());
+			if(likesBiz.insertMatch(dto)>0) {
+				System.out.println("찜 성공");		
+			}else {
+				System.out.println("찜 실패");
+			}
+		}
+		
+		@ResponseBody
+		@RequestMapping(value="/match/dellikes", method=RequestMethod.GET)
+		public void deleteLike(@RequestParam int matchSeq, HttpServletRequest request, Model model) {
+			HttpSession session = request.getSession();
+			MemberDto member = (MemberDto) session.getAttribute("login");
+			if(likesBiz.deleteMatch(matchSeq, member.getId())>0) {
+				System.out.println("취소 성공");	
+			}else {
+				System.out.println("취소 실패");	
+			}
+		}
 		
 		//공지사항
 		@GetMapping("/notice/list")
