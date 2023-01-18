@@ -64,9 +64,9 @@ public interface MatchMapper {
 	@Insert(" INSERT INTO REPLY () VALUES( NULL, #{matchSeq}, #{id}, #{repContent}, NOW()) ")
 	int insertReply(String repContent, String id, int matchSeq);
 
-	@Select("select * "
-				+ " from reply "
-				+ " where match_seq=#{matchSeq} order by rep_regdate asc")
+	@Select("SELECT * "
+				+ " FROM REPLY "
+				+ " WHERE MATCH_SEQ=#{matchSeq} ORDER BY REP_REGDATE ASC")
 	List<ReplyDto> selectReplyList(int matchSeq);
 
 	@Update(" UPDATE MATCH_BOARD"
@@ -74,20 +74,20 @@ public interface MatchMapper {
 					+ " (SELECT COUNT(REPLY.REP_SEQ)"
 					+ " FROM REPLY"
 					+ " WHERE MATCH_SEQ = #{matchSeq}) "
-				+ " where match_seq = #{matchSeq} "
-				+ " select cnt_comment as cntComment "
-				+ " from match_board "
-				+ " where match_seq = #{matchSeq} ")
+				+ " WHERE MATCH_SEQ = #{matchSeq} "
+				+ " SELECT CNT_COMMENT AS CNTCOMMENT "
+				+ " FROM MATCH_BOARD "
+				+ " WHERE MATCH_SEQ = #{matchSeq} ")
 	int cntReply(int matchSeq);
 
 	@Delete(" DELETE FROM REPLY WHERE REP_SEQ=#{repSeq} ")
 	int delReply(int repSeq);
 
 
-	@Update("update match_board set match_board.match_cnt=match_board.match_cnt + 1 where match_board.match_seq=#{matchSeq}")
+	@Update("UPDATE MATCH_BOARD SET MATCH_BOARD.MATCH_CNT=MATCH_BOARD.MATCH_CNT + 1 WHERE MATCH_BOARD.MATCH_SEQ=#{matchSeq}")
 	int joinMatch(int matchSeq);
 
-	@Select(" select count(*) from match_board ")
+	@Select(" SELECT COUNT(*) FROM MATCH_BOARD ")
 	int matchListCount();
 
 

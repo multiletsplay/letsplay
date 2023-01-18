@@ -1,11 +1,15 @@
 package com.letplay.letplaytest.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.letplay.letplaytest.dto.FacResDto;
+import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.MemberDto;
 
 @Mapper
@@ -35,4 +39,18 @@ public interface MemberMapper {
 	@Select(" SELECT COUNT(PHONE) FROM `MEMBER` WHERE PHONE=#{tel} ")
 	int CountTel(String tel);
 	
+	
+	@Select(" SELECT fr.*, f.FAC_NAME , f.FAC_LOCATION "
+			+ " FROM FACILITY_RESERVATION fr "
+			+ " LEFT OUTER JOIN FACILITY f ON fr.FAC_SEQ = f.FAC_SEQ "
+			+ " WHERE ID=#{id} "
+			+ " ORDER BY RES_DATE DESC ")
+	List<FacResDto> selectResfac(String id);
+	
+	@Select(" SELECT lr.*, l.LES_NAME , l.LES_LOCATION "
+			+ " FROM LESSON_RESERVATION lr "
+			+ " LEFT OUTER JOIN LESSON l ON lr.LES_SEQ = l.LES_SEQ "
+			+ " WHERE ID=#{id} "
+			+ " ORDER BY RES_DATE DESC ")
+	List<LessonResDto> selectResles(String id);
 }

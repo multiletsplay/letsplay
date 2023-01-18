@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.letplay.letplaytest.dao.MemberMapper;
+import com.letplay.letplaytest.dto.FacResDto;
+import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
 import com.letplay.letplaytest.util.Naver_Sens_V2;
@@ -35,12 +37,6 @@ public class Memberlmpl implements MemberBiz{
 	@Override
 	public int idcheck(String id) {
 		return memberMapper.idcheck(id);
-	}
-
-	@Override
-	public List<ReviewDto> selectmyreview(String id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -78,4 +74,21 @@ public class Memberlmpl implements MemberBiz{
 	public int delete(String id) {
 		return memberMapper.delete(id);
 	}
+
+	@Override
+	public List<FacResDto> selectResfac(String id) {
+		return memberMapper.selectResfac(id);
+	}
+	
+	@Override
+	public List<LessonResDto> selectResles(String id) {
+		return memberMapper.selectResles(id);
+	}
+	
+	@Override
+	public List<ReviewDto> selectmyreview(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
