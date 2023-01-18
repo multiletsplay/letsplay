@@ -17,4 +17,5 @@ public interface MemberBiz {
 	public int memberTelCount(String tel);
 	public int update(MemberDto dto);
 	public int delete(String id);
+	public int nicknamecheck(String nickname);
 }

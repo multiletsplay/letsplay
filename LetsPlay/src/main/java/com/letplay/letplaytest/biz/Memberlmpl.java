@@ -78,4 +78,9 @@ public class Memberlmpl implements MemberBiz{
 	public int delete(String id) {
 		return memberMapper.delete(id);
 	}
+
+	@Override
+	public int nicknamecheck(String nickname) {
+		return memberMapper.nicknamecheck(nickname);
+	}
 }

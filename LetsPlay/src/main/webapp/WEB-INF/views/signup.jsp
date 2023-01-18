@@ -9,6 +9,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#idChk").click(idChk);
+		$("#nicknameChk").click(nicknameChk);
 		$("#phoneBtn").click(auth);
 		$("#phoneChkBtn").click(authChk);
 	});
@@ -26,6 +27,28 @@
 					$("#signup").attr("type", "button");
 				}else{
 					alert("사용 가능한 ID입니다.");
+				}
+			},
+			error:function(){
+				alert("통신 실패");
+			}
+		});
+		
+	}
+	
+	function nicknameChk(){
+		let nickname = $("#nickname").val().trim();
+		
+		$.ajax({
+			url:"/member/nicknamecheck",
+			type:"get",
+			data:{ "nickname" : nickname },	
+			success:function(data){
+				if(data == 1){
+					alert("이미 사용중인 닉네임입니다.");
+					$("#signup").attr("type", "button");
+				}else{
+					alert("사용 가능한 닉네임입니다.");
 				}
 			},
 			error:function(){
@@ -97,7 +120,8 @@
 		</tr>
 		<tr>
 			<th>닉네임</th>
-			<td><input type="text" name="nickname" placeholder="닉네임을 입력해주세요"></td>
+			<td><input type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요"></td>
+			<td><button type="button" id="nicknameChk">닉네임 중복확인</button>
 		</tr>
 		<tr>
 			<th>이메일</th>
