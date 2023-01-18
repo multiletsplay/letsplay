@@ -25,7 +25,7 @@ function fn1(){
 		    </tr>
 		    <tr>
 		        <th>작성자</th>
-		        <td>${dto.id }</td>
+		        <td><input type="text" name="id" value="${dto.id }" readonly></td>
 		    </tr>
 		    <tr>	
 		    	<th>마감일자</th>
@@ -35,6 +35,14 @@ function fn1(){
 		        <th>장  소</th>
 		        <td><input type="text" name="matchLocation" value="${dto.matchLocation }"></td>
 		    </tr>
+		    <tr>
+				<th>시작시간</th>
+				<td><input type="time" name="startTime" value="${dto.startTime }" ></td>
+			</tr>
+			<tr>
+				<th>종료시간</th>
+				<td><input type="time" name="endTime" value="${dto.endTime }" ></td>
+			</tr>
 		    <tr>
 		        <th>내  용</th>
 		        <td><textarea rows="10" cols="80" name="matchContent">${dto.matchContent }</textarea></td>
@@ -49,7 +57,7 @@ function fn1(){
 			</tr>
 			<tr>
 		        <th>시설유무</th>
-		        <td><input type="checkbox" name="시설확정" value="${dto.matchFacility }">${dto.matchFacility }</td>
+		        <td><input type="checkbox" name="matchFacility" value="${dto.matchFacility }"></td>
 		    </tr>
             <tr>
                 <td colspan="2" align="right">

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.letplay.letplaytest.dao.MatchMapper;
 import com.letplay.letplaytest.dto.MatchDto;
 import com.letplay.letplaytest.dto.ReplyDto;
+import com.letplay.letplaytest.dto.SearchDto;
 
 @Service
 public class MatchImpl implements MatchBiz {
@@ -28,6 +29,11 @@ public class MatchImpl implements MatchBiz {
 	@Override
 	public MatchDto selectMatchOne(int matchSeq) {
 		return matchMapper.selectMatchOne(matchSeq);
+	}
+	
+	@Override
+	public List<MatchDto> searchMatch(SearchDto dto) {
+		return matchMapper.searchMatch(dto);
 	}
 
 	@Override
@@ -75,6 +81,24 @@ public class MatchImpl implements MatchBiz {
 	public int matchListCount() {
 		return matchMapper.matchListCount();
 	}
+
+	@Override
+	public List<MatchDto> selectEndList(int spoId) {
+		return matchMapper.selectEndList(spoId);
+	}
+
+	@Override
+	public int matchEndCount() {
+		return matchMapper.matchEndCount();
+	}
+
+//	@Override
+//	public List<MatchDto> joinMatchList(String id) {
+//		return matchMapper.joinMatchList(id);
+//	}
+
+	
+
 
 
 
