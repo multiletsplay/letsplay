@@ -15,4 +15,6 @@ public interface MemberBiz {
 	public List<ReviewDto> selectmyreview(String id);		//후기불러오기
 	public String sendRandomMessage(String tel);
 	public int memberTelCount(String tel);
+	public int update(MemberDto dto);
+	public int delete(String id);
 }
