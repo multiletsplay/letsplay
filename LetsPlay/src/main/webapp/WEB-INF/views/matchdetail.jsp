@@ -14,11 +14,41 @@
 <body style="background-color: gray">
         <div class="container col-8 mt-2" style="background-color:white">
 <script>
-	$(document).ready(function(){
-		var id = ${member.id}
-		console.log(id);
-		$("#fn2").click(fn2);
-	});
+		$(document).ready(function(){
+			var id = ${member.id}
+			console.log(id);
+			$("#fn2").click(fn2);
+			
+			$("#likeBtn").click(like);
+			$("#dellikeBtn").click(dellike);
+		});
+		
+		function like(){
+			let facSeq = ${dto.facSeq};
+			
+			$.ajax({
+				url : "/facility/likes",
+				type : "POST",
+				data : { 'facSeq' : facSeq },
+				success : function(){
+					alert("찜 성공");
+					window.location.reload();
+				}
+			});
+		}
+		
+		function dellike(){
+			let facSeq = ${dto.facSeq};
+			$.ajax({
+				url : "/facility/dellikes",
+				type : "GET",
+				data : { 'facSeq' : facSeq },
+				success : function(){
+					alert("취소 성공");
+					window.location.reload();
+				}
+			});
+		}
 		function fn1(){
 			if (confirm("게시글을 삭제하시겠습니까?")) {
 				location.href='/match/delete?matchSeq=${dto.matchSeq}'
@@ -39,6 +69,18 @@
 	
 	</script>	
 	<table border="1" class="table">
+		<tr>
+			<td>
+				<c:choose>
+	   				<c:when test="${like == 0}">
+	   					<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+	   				</c:when>
+	   				<c:otherwise>
+	   					<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+	   				</c:otherwise>
+	   			</c:choose>
+			</td>
+		</tr>
 		<tr class="table-active">
 			<th>작성자</th>
 			<td width="500px">${dto.id }</td>
@@ -83,12 +125,12 @@
 			<th>시설유무</th>
 			<td>${dto.matchFacility }</td>
 		</tr>
-		<tr>
-			<th>참여한 사람</th>
-			<td><form action="/match/joinmatchlist"  method="get"></form>
+<!-- 		<tr> -->
+<!-- 			<th>참여한 사람</th> -->
+<!-- 			<td><form action="/match/joinmatchlist"  method="get"></form> -->
 				
-			</td>
-		</tr>
+<!-- 			</td> -->
+<!-- 		</tr> -->
 		<tr>
 			<td colspan="3" align="right">
 				<input type="button" value="수정" onclick="location.href='/match/updateform?matchSeq=${dto.matchSeq}'">

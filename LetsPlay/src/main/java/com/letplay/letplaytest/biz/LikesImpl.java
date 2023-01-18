@@ -42,18 +42,18 @@ public class LikesImpl implements LikesBiz {
 	}
 
 	@Override
-	public int insertmat(LikesDto dto) {
-		return likesMapper.insertmat(dto);
+	public int insertMatch(LikesDto dto) {
+		return likesMapper.insertMatch(dto);
 	}
 
 	@Override
-	public int deletemat(int matchSeq, String id) {
-		return likesMapper.deletemat(matchSeq, id);
+	public int deleteMatch(int matchSeq, String id) {
+		return likesMapper.deleteMatch(matchSeq, id);
 	}
 
 	@Override
-	public int selectmat(int matchSeq, String id) {
-		return likesMapper.selectmat(matchSeq, id);
+	public int selectMatch(int matchSeq, String id) {
+		return likesMapper.selectMatch(matchSeq, id);
 	}
 
 }

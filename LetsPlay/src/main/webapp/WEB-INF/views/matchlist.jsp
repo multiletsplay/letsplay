@@ -14,14 +14,45 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+		
+		
+		//상세조건 펼침버튼
+		$('#optionBtn').click(function(){
+			$('.searchOption').toggle('active');
+		});
+		
+		});
+		
+		//찜
+		$("#likeBtn").click(like);
+		$("#dellikeBtn").click(dellike);
 	
+	function like(){
+		let matchSeq = $(this).attr('idx');
+		
+		$.ajax({
+			url : "/match/likes",
+			type : "POST",
+			data : { 'matchSeq' : matchSeq },
+			success : function(){
+				alert("찜 성공");
+				window.location.reload();
+			}
+		});
+	}
 	
-	//상세조건 펼침버튼
-	$('#optionBtn').click(function(){
-		$('.searchOption').toggle('active');
-	});
-	
-});
+	function dellike(){
+		let matchSeq = $(this).attr('idx');
+		$.ajax({
+			url : "/match/dellikes",
+			type : "GET",
+			data : { 'match' : matchSeq },
+			success : function(){
+				alert("취소 성공");
+				window.location.reload();
+			}
+		});
+}
 	</script>
 <div>
 <form action="/match/category"  method="get">
@@ -95,7 +126,7 @@ $(document).ready(function(){
 				<td><c:out value="${endcnt}"/>건이 마감되었습니다.</td>
 			</tr>
 			<tr align="center">
-				<th>찜?</th>
+				<th>찜</th>
 				<th>작성자</th>
 				<th>종목</th>
 				<th>제목</th>
@@ -119,7 +150,16 @@ $(document).ready(function(){
 				<c:otherwise>
 					<c:forEach items="${list }" var="dto">
 						<tr align="center">
-							<td></td>
+							<td>
+							<c:choose>
+			   				<c:when test="${dto.likesStatus eq 1 }">
+			   					<img id="dellikeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+			   				</c:when>
+			   				<c:otherwise>
+			   					<img id="likeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+			   				</c:otherwise>
+			   			</c:choose>
+							</td>
 							<td>${dto.id }</td>
 							<td>${dto.spoName}</td>
 							<td><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></td>
@@ -149,7 +189,16 @@ $(document).ready(function(){
 					</c:forEach>
 					<c:forEach items="${end }" var="end">
 						<tr align="center" bgcolor="gray">
-							<td></td>
+							<td>
+							<c:choose>
+			   				<c:when test="${dto.likesStatus eq 1 }">
+			   					<img id="dellikeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+			   				</c:when>
+			   				<c:otherwise>
+			   					<img id="likeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+			   				</c:otherwise>
+			   			</c:choose>
+			   			</td>
 							<td>${end.id }</td>
 							<td>${end.spoName}</td>
 							<td>${end.matchTitle }</td>

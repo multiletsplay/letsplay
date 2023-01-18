@@ -30,34 +30,34 @@ import com.letplay.letplaytest.dto.SearchDto;
 @Mapper
 public interface MatchMapper {
 
-	@Select(" SELECT m.*, s.SPO_NAME, "
+	@Select(" SELECT m.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
 			+ "(select count(r.REP_SEQ)"
 			+ "		FROM REPLY r"
-			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) cntComment "
+			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT "
 			+ " FROM MATCH_BOARD m, SPORTS s "
 			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE "
 			+ " ORDER BY "
 			+ " m.MATCH_SEQ DESC ")
 	List<MatchDto> selectMatchList();
 	
-	@Select("SELECT MATCH_SEQ, ID, SPO_NAME, MATCH_TITLE, MATCH_REGDATE, MATCH_ENDDATE, MATCH_LOCATION, START_TIME, END_TIME, MATCH_CNT, MATCH_TOTAL, MATCH_LEVEL, "
+	@Select("SELECT MATCH_SEQ, ID, SPO_NAME, MATCH_TITLE, MATCH_REGDATE, MATCH_ENDDATE, MATCH_LOCATION, START_TIME, END_TIME, MATCH_CNT, MATCH_TOTAL, MATCH_LEVEL, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
 			+ "	(SELECT COUNT(REPLY.REP_SEQ) "
 			+ "		FROM REPLY"
-			+ "		WHERE MATCH_BOARD.MATCH_SEQ=REPLY.MATCH_SEQ) cntComment "
+			+ "		WHERE MATCH_BOARD.MATCH_SEQ=REPLY.MATCH_SEQ) CNT_COMMENT "
 			+ " FROM MATCH_BOARD, SPORTS "
 			+ " WHERE MATCH_BOARD.SPO_ID = SPORTS.SPO_ID AND MATCH_BOARD.SPO_ID = #{spoId} AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE "
 			+ " ORDER BY "
 			+ " MATCH_SEQ DESC ")
 	List<MatchDto> selectSports(int spoId);
 
-	@Select(" SELECT m.*, s.SPO_NAME, MEMBER.ID "
+	@Select(" SELECT m.*, s.SPO_NAME,  "
 			+ "	(SELECT COUNT(r.REP_SEQ)"
 			+ "		FROM REPLY r "
-			+ "		where m.match_seq=r.match_seq) cntComment"
+			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT "
 				+ " FROM "
-				+ " MATCH_BOARD m, SPORTS s, MEMBER"
+				+ " MATCH_BOARD m, SPORTS s "
 				+ " WHERE "
-				+ " M.SPO_ID = S.SPO_ID AND MATCH_SEQ=#{matchSeq} ")
+				+ " m.SPO_ID = s.SPO_ID AND MATCH_SEQ=#{matchSeq} ")
 	MatchDto selectMatchOne(int matchSeq);
 
 	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchCnt}, #{matchLevel}, #{matchFacility}, DEFAULT, #{cntComment}, #{startTime}, #{endTime}) ")
