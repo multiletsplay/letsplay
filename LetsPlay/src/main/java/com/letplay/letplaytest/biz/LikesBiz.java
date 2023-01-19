@@ -11,7 +11,9 @@ public interface LikesBiz {
 	public int deleteles(int lesSeq, String id);
 	public int selectles(int lesSeq, String id);
 	
+
 	public int insertMatch(LikesDto dto);
 	public int deleteMatch(int matchSeq, String id);
 	public int selectMatch(int matchSeq, String id);
+
 }

@@ -108,15 +108,28 @@ public class LetsMemberController {
 		return "findpw";
 	}
 	
-	// 마이페이지 수정해야함
+	// 마이페이지
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
 	public String selectmember(HttpSession session,Model model ) {
 		MemberDto member = (MemberDto) session.getAttribute("login");
-		
 		model.addAttribute("member", membiz.selectmember(member.getId()));
-		
+		model.addAttribute("faclist", membiz.selectResfac(member.getId()));
+		model.addAttribute("leslist", membiz.selectResles(member.getId()));
 		//model.addAttribute("listdto", membiz.selectmyreview(member.getId()) );
 		
+		return "mypage";
+	}
+	
+	@GetMapping("/mypage/resselect")
+	public String selectSports(HttpServletRequest request, Model model, char type) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", membiz.selectmember(member.getId()));
+		if(type == 'F') {
+			model.addAttribute("faclist", membiz.selectResfac(member.getId()));
+		}else {
+			model.addAttribute("leslist", membiz.selectResles(member.getId()));
+		}
 		return "mypage";
 	}
 	

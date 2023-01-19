@@ -39,5 +39,6 @@ public interface LikesMapper {
 	
 	@Delete(" DELETE FROM LIKES WHERE MATCH_SEQ=#{matchSeq} AND ID=#{id} ")
 	int deleteMatch(int matchSeq, String id);
+
 	
 }
