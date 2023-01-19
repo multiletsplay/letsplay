@@ -106,6 +106,11 @@
 
 <hr>
 <h2>찜한 목록</h2>
+<form action="/member/mypage/likeselect" method="get">
+		<button type="submit" name="type" value="M">매치</button>
+		<button type="submit" name="type" value="F">시설</button>
+		<button type="submit" name="type" value="L">레슨</button>
+</form>
 <div class="likes-list">
 	<table border="1">
 		<tr>
@@ -121,7 +126,70 @@
 				<td colspan="6">------ 찜 목록이 없습니다. ------</td>
 			</c:when>
 			<c:otherwise>
-	        	
+	        	<c:if test="${not empty likesfaclist }">
+		            <c:forEach items="${likesfaclist }" var="fac">
+	           			<tr>
+		            		<td>${fac.spoName}</td>
+		            		<td><img width="100" src="${fac.facImgpath }"></td>
+		            		<td><a href="/facility/detail?facSeq=${fac.facSeq }">${fac.facName }</a></td>
+		            		<td>${fac.facLocation }</td>
+		            		<td>이용자 리뷰 ${fac.cntReview }개</td>
+		            		<td>
+		            		<c:choose>
+				   				<c:when test="${fac.likesStatus eq 1 }">
+				   					<img id="dellikeBtn" idx="${fac.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+				   				</c:when>
+				   				<c:otherwise>
+				   					<img id="likeBtn" idx="${fac.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+				   				</c:otherwise>
+				   			</c:choose>
+		            		</td>
+	            		</tr>
+		            </c:forEach>
+	            </c:if>
+	            <c:if test="${not empty likesmatlist }">
+		            <c:forEach items="${likesmatlist }" var="mat">
+	           			<tr>
+	           				<td><fmt:formatDate pattern="MM.dd" value="${mat.matchDate}"/></td>
+	           				<td>${mat.startTime } ~ ${mat.endTime }</td>
+		            		<td>${mat.spoName}</td>
+		            		<td>${mat.matchTotal }
+		            		<td><a href="/match/detail?matchSeq=${mat.matchSeq }">${mat.matchName }</a></td>
+		            		<td>${mat.matchLocation }</td>
+		            		<td>
+		            		<c:choose>
+				   				<c:when test="${mat.likesStatus eq 1 }">
+				   					<img id="dellikeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+				   				</c:when>
+				   				<c:otherwise>
+				   					<img id="likeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+				   				</c:otherwise>
+				   			</c:choose>
+		            		</td>
+	            		</tr>
+		            </c:forEach>
+	            </c:if>
+	            <c:if test="${not empty likesleslist }">
+		            <c:forEach items="${likesleslist }" var="les">
+	           			<tr>
+		            		<td>${les.spoName}</td>
+		            		<td><img width="100" src="${les.lesImgpath }"></td>
+		            		<td><a href="/lesson/detail?lesSeq=${les.lesSeq }">${les.lesName }</a></td>
+		            		<td>${les.lesLocation }</td>
+		            		<td>이용자 리뷰 ${les.cntReview }개</td>
+		            		<td>
+		            		<c:choose>
+				   				<c:when test="${les.likesStatus eq 1 }">
+				   					<img id="dellikeBtn" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+				   				</c:when>
+				   				<c:otherwise>
+				   					<img id="likeBtn" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+				   				</c:otherwise>
+				   			</c:choose>
+		            		</td>
+	            		</tr>
+		            </c:forEach>
+	            </c:if>
 			</c:otherwise>
 		</c:choose>
 	</table>

@@ -154,7 +154,7 @@ public class LetsYunaController {
 	//시설 찜하기
 	@ResponseBody
 	@RequestMapping(value="/facility/likes", method=RequestMethod.POST)
-	public void insertLike(@RequestParam int facSeq, HttpServletRequest request, Model model) {
+	public void insertLike(@RequestParam int facSeq, HttpServletRequest request) {
 		LikesDto dto = new LikesDto();
 		dto.setFacSeq(facSeq);
 		HttpSession session = request.getSession();
@@ -169,7 +169,7 @@ public class LetsYunaController {
 	
 	@ResponseBody
 	@RequestMapping(value="/facility/dellikes", method=RequestMethod.GET)
-	public void deleteLike(@RequestParam int facSeq, HttpServletRequest request, Model model) {
+	public void deleteLike(@RequestParam int facSeq, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		if(likesBiz.deletefac(facSeq, member.getId())>0) {

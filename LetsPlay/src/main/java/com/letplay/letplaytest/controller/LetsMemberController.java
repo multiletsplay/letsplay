@@ -115,6 +115,9 @@ public class LetsMemberController {
 		model.addAttribute("member", membiz.selectmember(member.getId()));
 		model.addAttribute("faclist", membiz.selectResfac(member.getId()));
 		model.addAttribute("leslist", membiz.selectResles(member.getId()));
+		model.addAttribute("likesfaclist", membiz.selectLikesfac(member.getId()));
+		//model.addAttribute("likesmatlist", membiz.selectLikesmat(member.getId()));
+		model.addAttribute("likesleslist", membiz.selectLikesles(member.getId()));
 		//model.addAttribute("listdto", membiz.selectmyreview(member.getId()) );
 		
 		return "mypage";

@@ -2,7 +2,9 @@ package com.letplay.letplaytest.biz;
 
 import java.util.List;
 
+import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
+import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
@@ -21,8 +23,12 @@ public interface MemberBiz {
 	public int delete(String id);
 	
 	public List<FacResDto> selectResfac(String id);			//시설예약내역불러오기
-	public List<LessonResDto> selectResles(String id);			//레슨예약내역불러오기
+	public List<LessonResDto> selectResles(String id);		//레슨예약내역불러오기
 	public List<ReviewDto> selectmyreview(String id);		//후기불러오기
 	public int nicknamecheck(String nickname);
 
+	
+	public List<FacDto> selectLikesfac(String id);			//시설찜내역 불러오기
+	public List<LessonDto> selectLikesles(String id);		//레슨찜내역 불러오기
+	//public List<MatchDto> selectLikesmath(String id);		//매치찜내역 불러오기
 }

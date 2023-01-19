@@ -61,6 +61,7 @@
 	
 	function dellike(){
 		let facSeq = $(this).attr('idx');
+		
 		$.ajax({
 			url : "/facility/dellikes",
 			type : "GET",
