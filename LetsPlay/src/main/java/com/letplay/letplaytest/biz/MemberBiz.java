@@ -23,4 +23,6 @@ public interface MemberBiz {
 	public List<FacResDto> selectResfac(String id);			//시설예약내역불러오기
 	public List<LessonResDto> selectResles(String id);			//레슨예약내역불러오기
 	public List<ReviewDto> selectmyreview(String id);		//후기불러오기
+	public int nicknamecheck(String nickname);
+
 }

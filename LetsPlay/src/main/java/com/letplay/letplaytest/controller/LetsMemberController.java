@@ -196,4 +196,11 @@ public class LetsMemberController {
 			return "redirect:/member/mypage";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/nicknamecheck", method=RequestMethod.GET)
+	public int nicknamecheck(@RequestParam String nickname ) {
+		int result = membiz.nicknamecheck(nickname);
+		return result;
+	}
 }

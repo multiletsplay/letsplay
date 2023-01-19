@@ -32,12 +32,13 @@ public interface LikesMapper {
 	
 	
 	@Select(" SELECT COUNT(LIKES_ID) FROM LIKES WHERE MATCH_SEQ=#{matchSeq} AND ID=#{id} ")
-	int selectmat(int matchSeq, String id);
+	int selectMatch(int matchSeq, String id);
 	
 	@Insert(" INSERT INTO LIKES VALUES(NULL, #{id}, #{matchSeq}, NULL, NULL, 1 ) ")
-	int insertmat(LikesDto dto);
+	int insertMatch(LikesDto dto);
 	
 	@Delete(" DELETE FROM LIKES WHERE MATCH_SEQ=#{matchSeq} AND ID=#{id} ")
-	int deletemat(int matchSeq, String id);
+	int deleteMatch(int matchSeq, String id);
+
 	
 }

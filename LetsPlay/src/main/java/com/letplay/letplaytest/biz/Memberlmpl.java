@@ -91,4 +91,9 @@ public class Memberlmpl implements MemberBiz{
 		return null;
 	}
 
+  @Override
+	public int nicknamecheck(String nickname) {
+		return memberMapper.nicknamecheck(nickname);
+	}
+
 }
