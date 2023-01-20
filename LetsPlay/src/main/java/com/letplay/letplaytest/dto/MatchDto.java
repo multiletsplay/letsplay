@@ -48,6 +48,9 @@ public class MatchDto {
 	private int cntComment;
 	private String startTime;
 	private String endTime;
+	private int cntJoin;
+	private int joinStatus;
+	private int likesStatus;
 	public MatchDto() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -55,7 +58,7 @@ public class MatchDto {
 	public MatchDto(int matchSeq, String id, int spoId, String spoName, String matchTitle, String matchContent,
 			LocalDateTime matchRegdate, Date matchModidate, LocalDateTime matchEnddate, int dDay, String matchLocation,
 			int matchTotal, int matchCnt, int matchLevel, String matchFacility, char matchStatus, int cntComment,
-			String startTime, String endTime) {
+			String startTime, String endTime, int cntJoin, int joinStatus, int likesStatus) {
 		super();
 		this.matchSeq = matchSeq;
 		this.id = id;
@@ -76,6 +79,9 @@ public class MatchDto {
 		this.cntComment = cntComment;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.cntJoin = cntJoin;
+		this.joinStatus = joinStatus;
+		this.likesStatus = likesStatus;
 	}
 	public int getMatchSeq() {
 		return matchSeq;
@@ -94,6 +100,12 @@ public class MatchDto {
 	}
 	public void setSpoId(int spoId) {
 		this.spoId = spoId;
+	}
+	public String getSpoName() {
+		return spoName;
+	}
+	public void setSpoName(String spoName) {
+		this.spoName = spoName;
 	}
 	public String getMatchTitle() {
 		return matchTitle;
@@ -185,11 +197,23 @@ public class MatchDto {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	public String getSpoName() {
-		return spoName;
+	public int getCntJoin() {
+		return cntJoin;
 	}
-	public void setSpoName(String spoName) {
-		this.spoName = spoName;
+	public void setCntJoin(int cntJoin) {
+		this.cntJoin = cntJoin;
 	}
-
+	public int getJoinStatus() {
+		return joinStatus;
+	}
+	public void setJoinStatus(int joinStatus) {
+		this.joinStatus = joinStatus;
+	}
+	public int getLikesStatus() {
+		return likesStatus;
+	}
+	public void setLikesStatus(int likesStatus) {
+		this.likesStatus = likesStatus;
+	}
+	
 }

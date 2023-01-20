@@ -13,23 +13,57 @@
 </head>
 <body style="background-color: gray">
         <div class="container col-8 mt-2" style="background-color:white">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 		$(document).ready(function(){
-			var id = ${member.id}
-			console.log(id);
-			$("#fn2").click(fn2);
+			var mem = '${member.id }';
+			if (mem=='${dto.id}'){
+				$("#joinbtn").attr("disabled", true);
+			}
 			
+			$("#joinbtn").click(join);
+			$("#unjoinbtn").click(unjoin)
 			$("#likeBtn").click(like);
 			$("#dellikeBtn").click(dellike);
 		});
+		function join(){
+			var matchSeq = ${dto.matchSeq}
+			var id = '${member.id}';
+			$.ajax({
+				url : "/match/matchJoin",
+				type : "POST",
+				data : { 'matchSeq' : matchSeq, 'id' : id},
+				success : function(){
+					alert("매칭 참여");
+					window.location.reload();
+				}
+				
+			});
+		}
+		
+		function unjoin(){
+			var matchSeq = ${dto.matchSeq}
+			var id = '${member.id}';
+			$.ajax({
+				url : "/match/matchUnjoin",
+				type : "GET",
+				data : { 'matchSeq' : matchSeq, 'id' : id},
+				success : function(){
+					alert("매칭 취소");
+					window.location.reload();
+				}
+						
+				
+			});
+		}
+		
 		
 		function like(){
-			let facSeq = ${dto.facSeq};
-			
+			let matchSeq = ${dto.matchSeq};
 			$.ajax({
-				url : "/facility/likes",
+				url : "/match/likes",
 				type : "POST",
-				data : { 'facSeq' : facSeq },
+				data : { 'matchSeq' : matchSeq },
 				success : function(){
 					alert("찜 성공");
 					window.location.reload();
@@ -38,11 +72,11 @@
 		}
 		
 		function dellike(){
-			let facSeq = ${dto.facSeq};
+			let matchSeq = ${dto.matchSeq};
 			$.ajax({
-				url : "/facility/dellikes",
+				url : "/match/dellikes",
 				type : "GET",
-				data : { 'facSeq' : facSeq },
+				data : { 'matchSeq' : matchSeq },
 				success : function(){
 					alert("취소 성공");
 					window.location.reload();
@@ -54,17 +88,17 @@
 				location.href='/match/delete?matchSeq=${dto.matchSeq}'
 			}
 		};
-		function fn2(a,b){
-			if (confirm("매칭에 참여하시겠습니까?")) {
-				if(a >= b){
-					alert("이미 정원이 가득 찼습니다")
-					return;
-				}
+// 		function fn2(a,b){
+// 			if (confirm("매칭에 참여하시겠습니까?")) {
+// 				if(a >= b){
+// 					alert("이미 정원이 가득 찼습니다")
+// 					return;
+// 				}
 // 				const btnElement = document.getElementById('btn');
 // 				btnElement.innerText = '매칭취소';
-				location.href='/match/joinMatch?matchSeq=${dto.matchSeq}'
-			}
-		};
+// 				location.href='/match/joinMatch?matchSeq=${dto.matchSeq}'
+// 			}
+// 		};
 	
 	
 	</script>	
@@ -115,7 +149,7 @@
 		</tr>
 		<tr>
 			<th>참여인원/총 인원</th>
-			<td>${dto.matchCnt }/${dto.matchTotal } [${dto.id }, ]</td>
+			<td>${dto.cntJoin }/${dto.matchTotal }</td>
 		</tr>
 		<tr>
 			<th>레  벨</th>
@@ -125,21 +159,27 @@
 			<th>시설유무</th>
 			<td>${dto.matchFacility }</td>
 		</tr>
-<!-- 		<tr> -->
-<!-- 			<th>참여한 사람</th> -->
-<!-- 			<td><form action="/match/joinmatchlist"  method="get"></form> -->
-				
-<!-- 			</td> -->
-<!-- 		</tr> -->
+		<tr>
+			<th>참여한 사람</th>
+			<td>${dto.id }
+				<c:forEach items="${joinlist}" var="join">
+					${join.id }
+				</c:forEach>
+			</td>
+		</tr>
 		<tr>
 			<td colspan="3" align="right">
 				<input type="button" value="수정" onclick="location.href='/match/updateform?matchSeq=${dto.matchSeq}'">
 				<input type="button" value="삭제"  onclick="javascript:fn1();">
 				<input type="button" value="목록" onclick="location.href='/match/list'">
 				<div style="text-align:center">
-					<c:if test="${ dto.id != null }">
-					<button type="submit" id="btn" name="joinMatchList" value="${member.id }" onclick="fn2(${dto.matchCnt},${dto.matchTotal });">참여하기</button>
+					<c:if test="${ dto.joinStatus ge 1 }">
+					<button type="button" id="unjoinbtn">참여취소</button>
 					</c:if>
+					<c:if test="${ dto.joinStatus eq 0 }">
+					<button type="button" id="joinbtn">참여하기</button>
+					</c:if>
+				
 				</div>
 				<div>
 					<form method="post" action="/match/insertreply?matchSeq=${dto.matchSeq}">
