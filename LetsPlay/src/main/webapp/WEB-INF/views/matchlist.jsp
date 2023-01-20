@@ -176,7 +176,7 @@ $(document).ready(function(){
 							</td>
 							<td>${dto.matchLocation }</td>
 							<td>${dto.startTime } ~ ${dto.endTime }</td>
-							<td>${dto.matchCnt }/${dto.matchTotal }</td>
+							<td>${dto.cntJoin }/${dto.matchTotal }</td>
 							<td>${dto.matchLevel }</td>
 							<td>${dto.cntComment }</td>
 <%-- 							<td><input type="hidden" value="${dto.matchRegdate }" name="matchRegdate"></td> --%>
@@ -215,7 +215,7 @@ $(document).ready(function(){
 							</td>
 							<td>${end.matchLocation }</td>
 							<td>${end.startTime } ~ ${end.endTime }</td>
-							<td>${end.matchCnt }/${end.matchTotal }</td>
+							<td>${end.cntJoin }/${end.matchTotal }</td>
 							<td>${end.matchLevel }</td>
 							<td>${end.cntComment }</td>
 							
