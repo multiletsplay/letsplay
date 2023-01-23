@@ -168,15 +168,7 @@ public class LetsMemberController {
 
 	    return true;
 	}
-	
-	@RequestMapping(value="/updateform", method=RequestMethod.GET)
-	public String updateForm(HttpSession session, Model model, MemberDto dto) {
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		
-		model.addAttribute("member", membiz.selectmember(member.getId()));
-		return "memberupdate";
-		
-	}
+			
 	
 	@PostMapping("/update")
 	public String update(HttpSession session, MemberDto dto) {
@@ -185,7 +177,7 @@ public class LetsMemberController {
 		if(membiz.update(dto) > 0) {
 			return "redirect:/member/mypage";
 		} else {
-			return "redirect:/member/updateform";
+			return "redirect:/member/mypage";
 		}
 	}
 	
