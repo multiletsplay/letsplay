@@ -51,7 +51,9 @@ public class LetsMatchController {
 	
 		@GetMapping("/match/list")
 		public String selectMatchList(Model model, HttpServletRequest request) {
-			List<MatchDto> matchlist = matchBiz.selectMatchList();
+			HttpSession session = request.getSession();
+			MemberDto member = (MemberDto) session.getAttribute("login");
+			List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
 			Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 			for(MatchDto dto : matchlist) {
 				LocalDateTime matchEnddate = dto.getMatchEnddate();
@@ -63,7 +65,7 @@ public class LetsMatchController {
 				dDayMap.put(dto, days);
 			}
 			model.addAttribute("ddays", dDayMap);
-			model.addAttribute("list",matchBiz.selectMatchList());
+			model.addAttribute("list",matchBiz.selectMatchList(member.getId()));
 			model.addAttribute("cnt",matchBiz.matchListCount());
 			model.addAttribute("endcnt",matchBiz.matchEndCount());
 			return "matchlist";
@@ -71,6 +73,8 @@ public class LetsMatchController {
 		
 		@GetMapping("/match/category")
 		public String selectSports(Model model, int spoId, HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			MemberDto member = (MemberDto) session.getAttribute("login");
 			List<MatchDto> matchEndlist = matchBiz.selectEndList(spoId);
 			Map<MatchDto, Integer> dEndDayMap = new HashMap<MatchDto, Integer>();
 			for(MatchDto dto : matchEndlist) {
@@ -81,7 +85,7 @@ public class LetsMatchController {
 				dto.setdDay(days);
 				dEndDayMap.put(dto, days);
 			}
-			List<MatchDto> matchlist = matchBiz.selectMatchList();
+			List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
 			Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 			for(MatchDto dto : matchlist) {
 				LocalDateTime matchEnddate = dto.getMatchEnddate();
@@ -103,7 +107,10 @@ public class LetsMatchController {
 		//매칭 검색	
 			@GetMapping("/match/search")
 			public String searchmatch(Model model, SearchDto dto, HttpServletRequest request) {
-				List<MatchDto> matchlist = matchBiz.selectMatchList();
+				HttpSession session = request.getSession();
+				MemberDto member = (MemberDto) session.getAttribute("login");
+				List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
+				
 				Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 				for(MatchDto vo : matchlist) {
 					LocalDateTime matchEnddate = vo.getMatchEnddate();
@@ -119,7 +126,7 @@ public class LetsMatchController {
 				model.addAttribute("cnt",matchBiz.matchListCount());
 				model.addAttribute("list",matchBiz.searchMatch(dto));
 				model.addAttribute("endcnt",matchBiz.matchEndCount());
-				
+
 				
 				return "matchlist";
 			}
@@ -129,8 +136,10 @@ public class LetsMatchController {
 			HttpSession session = request.getSession();
 			MemberDto member = (MemberDto) session.getAttribute("login");
 			model.addAttribute("member", memBiz.selectmember(member.getId()));
-			model.addAttribute("dto", matchBiz.selectMatchOne(matchSeq));
+			model.addAttribute("dto", matchBiz.selectMatchOne(matchSeq, member.getId()));
 			model.addAttribute("reply",matchBiz.selectReplyList(matchSeq));
+			model.addAttribute("joinlist", matchBiz.selectJoinList(matchSeq));
+			model.addAttribute("like",likesBiz.selectMatch(matchSeq, member.getId()));
 			return "matchdetail";
 		}
 				
@@ -155,8 +164,10 @@ public class LetsMatchController {
 		
 		
 		@GetMapping("/match/updateform")
-		public String updateFormMatch(Model model, int matchSeq) {
-			model.addAttribute("dto", matchBiz.selectMatchOne(matchSeq));
+		public String updateFormMatch(HttpServletRequest request, Model model, int matchSeq) {
+			HttpSession session = request.getSession();
+			MemberDto member = (MemberDto) session.getAttribute("login");
+			model.addAttribute("dto", matchBiz.selectMatchOne(matchSeq, member.getId()));
 			return "matchupdate";
 		}
 		
@@ -176,13 +187,6 @@ public class LetsMatchController {
 			}else {
 				return "redirect:/match/list";
 			}
-		}
-		
-		@GetMapping("/match/cntreply")
-		public String cntReply(int matchSeq) {
-			matchBiz.cntReply(matchSeq);
-			
-			return "redirect:/match/list";
 		}
 		
 		@PostMapping("/match/insertreply")
@@ -211,12 +215,24 @@ public class LetsMatchController {
 //			return "matchdetail";
 //		}
 			
+		@ResponseBody
+		@PostMapping("/match/matchJoin")
+		public void MatchJoin(@RequestParam int matchSeq, @RequestParam String id) {
+			if(matchBiz.MatchJoin(matchSeq, id)>0) {
+				System.out.println("참여 성공");
+			}else {
+				System.out.println("참여 실패");
+			}
+		}
 		
-		@GetMapping("/match/joinMatch")
-		public String joinMatch(int matchSeq) {
-			if(matchBiz.joinMatch(matchSeq)>0) {
-			}; 
-			return "redirect:/match/detail?matchSeq="+ matchSeq;
+		@ResponseBody
+		@GetMapping("/match/matchUnjoin")
+		public void MatchUnjoin(@RequestParam int matchSeq, @RequestParam String id) {
+			if(matchBiz.MatchUnjoin(matchSeq, id)>0) {
+				System.out.println("취소 성공");
+			}else {
+				System.out.println("취소 실패");
+			}
 		}
 //		@GetMapping("/match/session")
 //		public String JavaSession(Model model, HttpServletRequest request) {
@@ -258,7 +274,7 @@ public class LetsMatchController {
 		//매치 찜하기
 		@ResponseBody
 		@RequestMapping(value="/match/likes", method=RequestMethod.POST)
-		public void insertLike(@RequestParam int matchSeq, HttpServletRequest request, Model model) {
+		public void insertLike(@RequestParam int matchSeq, HttpServletRequest request) {
 			LikesDto dto = new LikesDto();
 			dto.setMatchSeq(matchSeq);
 			HttpSession session = request.getSession();
@@ -273,7 +289,7 @@ public class LetsMatchController {
 		
 		@ResponseBody
 		@RequestMapping(value="/match/dellikes", method=RequestMethod.GET)
-		public void deleteLike(@RequestParam int matchSeq, HttpServletRequest request, Model model) {
+		public void deleteLike(@RequestParam int matchSeq, HttpServletRequest request) {
 			HttpSession session = request.getSession();
 			MemberDto member = (MemberDto) session.getAttribute("login");
 			if(likesBiz.deleteMatch(matchSeq, member.getId())>0) {

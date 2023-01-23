@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.letplay.letplaytest.dao.MatchMapper;
 import com.letplay.letplaytest.dto.MatchDto;
+import com.letplay.letplaytest.dto.MatchJoin;
 import com.letplay.letplaytest.dto.ReplyDto;
 import com.letplay.letplaytest.dto.SearchDto;
 
@@ -17,8 +18,8 @@ public class MatchImpl implements MatchBiz {
 	private MatchMapper matchMapper;
 
 	@Override
-	public List<MatchDto> selectMatchList() {
-		return matchMapper.selectMatchList();
+	public List<MatchDto> selectMatchList(String id) {
+		return matchMapper.selectMatchList(id);
 	}
 	
 	@Override
@@ -27,8 +28,8 @@ public class MatchImpl implements MatchBiz {
 	}
 	
 	@Override
-	public MatchDto selectMatchOne(int matchSeq) {
-		return matchMapper.selectMatchOne(matchSeq);
+	public MatchDto selectMatchOne(int matchSeq, String id) {
+		return matchMapper.selectMatchOne(matchSeq, id);
 	}
 	
 	@Override
@@ -61,10 +62,6 @@ public class MatchImpl implements MatchBiz {
 		return matchMapper.selectReplyList(matchSeq);
 	}
 
-	@Override
-	public int cntReply(int matchSeq) {
-		return matchMapper.cntReply(matchSeq);
-	}
 
 	@Override
 	public int delReply(int repSeq) {
@@ -73,8 +70,13 @@ public class MatchImpl implements MatchBiz {
 
 
 	@Override
-	public int joinMatch(int matchSeq) {
-		return matchMapper.joinMatch(matchSeq);
+	public int MatchJoin(int matchSeq, String id) {
+		return matchMapper.MatchJoin(matchSeq, id);
+	}
+	
+	@Override
+	public int MatchUnjoin(int matchSeq, String id) {
+		return matchMapper.MatchUnjoin(matchSeq, id);
 	}
 
 	@Override
@@ -90,6 +92,11 @@ public class MatchImpl implements MatchBiz {
 	@Override
 	public int matchEndCount() {
 		return matchMapper.matchEndCount();
+	}
+
+	@Override
+	public List<MatchJoin> selectJoinList(int matchSeq) {
+		return matchMapper.selectJoinList(matchSeq);
 	}
 
 //	@Override

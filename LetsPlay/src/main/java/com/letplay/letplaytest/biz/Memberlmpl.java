@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.letplay.letplaytest.dao.MemberMapper;
+import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
+import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
@@ -94,6 +96,16 @@ public class Memberlmpl implements MemberBiz{
   @Override
 	public int nicknamecheck(String nickname) {
 		return memberMapper.nicknamecheck(nickname);
+	}
+
+	@Override
+	public List<FacDto> selectLikesfac(String id) {
+		return memberMapper.selectLikesfac(id);
+	}
+	
+	@Override
+	public List<LessonDto> selectLikesles(String id) {
+		return memberMapper.selectLikesles(id);
 	}
 
 }

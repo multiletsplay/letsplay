@@ -8,7 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
+import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.MemberDto;
 
@@ -56,4 +58,22 @@ public interface MemberMapper {
 			+ " WHERE ID=#{id} "
 			+ " ORDER BY RES_DATE DESC ")
 	List<LessonResDto> selectResles(String id);
+	
+	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+			+ " FROM FACILITY f "
+			+ " 	INNER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} "
+			+ "		LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID "
+			+ "		LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ "
+			+ " GROUP BY f.FAC_SEQ "
+			+ " ORDER BY f.FAC_DATE DESC ")
+	List<FacDto> selectLikesfac(String id);
+	
+	@Select(" SELECT l.*, s.SPO_NAME, ANY_VALUE(ls.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+			+ " FROM LESSON l "
+			+ " 	INNER JOIN LIKES ls ON l.LES_SEQ=ls.LES_SEQ AND ls.ID=#{id} "
+			+ "		LEFT OUTER JOIN SPORTS s ON l.SPO_ID=s.SPO_ID "
+			+ "		LEFT OUTER JOIN REVIEW r ON l.LES_SEQ=r.LES_SEQ "
+			+ " GROUP BY l.LES_SEQ "
+			+ " ORDER BY l.LES_DATE DESC ")
+	List<LessonDto> selectLikesles(String id);
 }
