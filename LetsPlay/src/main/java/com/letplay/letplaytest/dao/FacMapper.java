@@ -64,9 +64,12 @@ public interface FacMapper {
 //	FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);
 	
 	@Select( {"<script>",
-		" SELECT f.*, s.SPO_NAME ",
-		" FROM FACILITY f INNER JOIN SPORTS s ON f.SPO_ID = s.SPO_ID ",
-		" WHERE ",
+		" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW ",
+		" FROM FACILITY f ",
+		"	LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID ",
+		" 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} ",
+		"	LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ ",
+		" <where>",
 		" 	<if test='searchRegion1 != null'>FAC_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
 		"	<if test='searchRegion2 != null'>AND FAC_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
 //		"	<if test='searchDate != null'>AND FAC_DATE=#{searchDate} </if>",
@@ -75,8 +78,10 @@ public interface FacMapper {
 		" 	<if test='optShower == true'>AND FAC_SHOWER=#{optShower} </if> ",
 		" 	<if test='optLocker == true'>AND FAC_LOCKER=#{optLocker} </if> ",
 		" 	<if test='optLight == true'>AND FAC_LIGHT=#{optLight} </if> ",
-		" 	<if test='optCost == true'>AND FAC_COSTCHECK=#{optCost} </if> ",
-		" 	<if test='optCost == false'>AND FAC_COSTCHECK=FALSE </if> ",
+		" 	<if test='optCost.equals(\"T\")'>AND FAC_COSTCHECK=#{optCost} </if> ",
+		" 	<if test='optCost.equals(\"F\")'>AND FAC_COSTCHECK=FALSE </if> ",
+		" </where> ",
+		" GROUP BY f.FAC_SEQ ",
 		" </script>" })
 	List<FacDto> searchFac(SearchDto dto);
 	
