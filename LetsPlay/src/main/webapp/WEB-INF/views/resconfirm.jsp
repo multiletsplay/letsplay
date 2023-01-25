@@ -57,6 +57,7 @@ function requestPay() {
 <input type="hidden" name="resId" value="${dto.resId }">
 <input type="hidden" name="id" value="${member.id }">
 <input type="hidden" name="facSeq" value="${dto.facSeq }">
+<input type="hidden" name="resEndtime" value="${dto.resEndtime }">
 	<table class="reservation-table" border="1">
 		<tr>
 			<th>이름(닉네임)</th>

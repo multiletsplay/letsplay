@@ -71,6 +71,17 @@ public class LetsYunaController {
 		return "facilitylist";
 	}
 	
+	//시설 검색	
+	@GetMapping("/facility/search")
+	public String searchfac(HttpServletRequest request, Model model, SearchDto dto) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
+		dto.setId(member.getId());
+		model.addAttribute("faclist", facBiz.searchFac(dto));
+		return "facilitylist";
+	}
+	
 	@GetMapping("/facility/detail")
 	public String selectFacDetail(HttpServletRequest request, Model model, int facSeq) {
 		HttpSession session = request.getSession();
@@ -139,16 +150,6 @@ public class LetsYunaController {
 			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
 			return "alert";
 		}
-	}
-	
-	//시설 검색	
-	@GetMapping("/facility/search")
-	public String searchfac(HttpServletRequest request, Model model, SearchDto dto) {
-		HttpSession session = request.getSession();
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		model.addAttribute("member", memBiz.selectmember(member.getId()));
-		model.addAttribute("faclist", facBiz.searchFac(dto));
-		return "facilitylist";
 	}
 	
 	//시설 찜하기
