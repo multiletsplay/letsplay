@@ -20,14 +20,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.letplay.letplaytest.biz.MemberBiz;
+import com.letplay.letplaytest.biz.ReviewBiz;
 import com.letplay.letplaytest.dto.MemberDto;
+import com.letplay.letplaytest.dto.ReviewDto;
 
 
 @Controller
 @RequestMapping("/member")
 public class LetsMemberController {
 	
-	
+	@Autowired
+	private ReviewBiz reviewBiz;
 	@Autowired
 	private MemberBiz membiz;
 	
@@ -198,4 +201,6 @@ public class LetsMemberController {
 		int result = membiz.nicknamecheck(nickname);
 		return result;
 	}
+	
+	
 }
