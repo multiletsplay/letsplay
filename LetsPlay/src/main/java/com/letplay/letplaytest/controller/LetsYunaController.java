@@ -1,8 +1,15 @@
 package com.letplay.letplaytest.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,6 +41,7 @@ import com.letplay.letplaytest.dto.LikesDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.PageDto;
 import com.letplay.letplaytest.dto.SearchDto;
+import com.letplay.letplaytest.dto.TimeDto;
 
 @Controller
 @SessionAttributes("member")
@@ -83,9 +91,30 @@ public class LetsYunaController {
 	}
 	
 	@GetMapping("/facility/detail")
-	public String selectFacDetail(HttpServletRequest request, Model model, int facSeq) {
+	public String selectFacDetail(HttpServletRequest request, Model model, int facSeq ) {
 		HttpSession session = request.getSession();
 		MemberDto member = (MemberDto) session.getAttribute("login");
+		
+		//datetime -> 날짜와 시간으로 각각 나눠서 view에 전달
+		List<TimeDto> datelist = facBiz.selectTime(facSeq);
+//		Map<String, ArrayList<String>> datetimeMap = new HashMap<String, ArrayList<String>>();
+//		List<String> timelist = new ArrayList<String>();
+		for(TimeDto dto : datelist) {
+			Date dt = dto.getDt();
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String ds = fm.format(dt);
+			String date = ds.substring(0, 10);
+			String time = ds.substring(11);
+			dto.setDate(date);
+			dto.setTime(time);
+		}
+//		for(Entry<String, String> entrySet : datetimeMap.entrySet()) {
+//			System.out.println(entrySet.getKey()+" : "+entrySet.getValue());
+//		}
+		//model.addAttribute("timeMap", datetimeMap);
+
+		model.addAttribute("time", datelist);
+		
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
 		model.addAttribute("like", likesBiz.selectfac(facSeq, member.getId()));
@@ -198,7 +227,14 @@ public class LetsYunaController {
 	
 	//시설 결제후 예약내역 db저장
 	@PostMapping("/facility/payment")
-	public String reservePayment(Model model, FacResDto dto) {
+	public String reservePayment(Model model, FacResDto dto) throws ParseException {
+		//예약날짜,시간 데이터변환
+		String ds = dto.getResDate() + " " + dto.getResStarttime();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date dt = fm.parse(ds);
+		dto.setResDatetime(dt);
+		System.out.println(dto.getResDatetime());
+		
 		if(facBiz.insertRes(dto)>0) {
 			model.addAttribute("msg", "예약 성공");
 			model.addAttribute("url", "/mypage");
@@ -332,8 +368,4 @@ public class LetsYunaController {
 		}
 	}
 	
-	@GetMapping("/mypage")
-	public String mypage() {
-		return "mypage";
-	}
 }

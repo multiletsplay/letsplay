@@ -1,5 +1,6 @@
 package com.letplay.letplaytest.dto;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,19 +14,20 @@ public class LessonResDto {
 	private String lesLocation;
 	private String lesTeacher;
 	private String lesContact;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date resDate;
+	private String resDate;
 	private String resStarttime;
 	private String resEndtime;
 	private String resPrice;
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
+	private Date resDatetime;
 	
 	public LessonResDto() {
 		super();
 	}
 
 	public LessonResDto(String resId, String id, int lesSeq, String lesName, String lesImgpath, String lesLocation,
-			String lesTeacher, String lesContact, Date resDate, String resStarttime, String resEndtime,
-			String resPrice) {
+			String lesTeacher, String lesContact, String resDate, String resStarttime, String resEndtime,
+			String resPrice, Date resDatetime) {
 		super();
 		this.resId = resId;
 		this.id = id;
@@ -39,6 +41,7 @@ public class LessonResDto {
 		this.resStarttime = resStarttime;
 		this.resEndtime = resEndtime;
 		this.resPrice = resPrice;
+		this.resDatetime = resDatetime;
 	}
 
 	public String getResId() {
@@ -95,10 +98,10 @@ public class LessonResDto {
 	public void setResPrice(String resPrice) {
 		this.resPrice = resPrice;
 	}
-	public Date getResDate() {
+	public String getResDate() {
 		return resDate;
 	}
-	public void setResDate(Date resDate) {
+	public void setResDate(String resDate) {
 		this.resDate = resDate;
 	}
 	public String getResStarttime() {
@@ -112,6 +115,12 @@ public class LessonResDto {
 	}
 	public void setResEndtime(String resEndtime) {
 		this.resEndtime = resEndtime;
+	}
+	public Date getResDatetime() {
+		return resDatetime;
+	}
+	public void setResDatetime(Date resDatetime) {
+		this.resDatetime = resDatetime;
 	}
 	
 }

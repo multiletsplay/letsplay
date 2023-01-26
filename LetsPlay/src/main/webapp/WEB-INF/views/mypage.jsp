@@ -78,24 +78,22 @@
 	        	<c:if test="${not empty faclist }">
 		            <c:forEach items="${faclist }" var="dto">
 	           			<tr>
-		            		<td><fmt:formatDate pattern="MM.dd" value="${dto.resDate}"/></td>
-		            		<td>${dto.resStarttime } ~ ${dto.resEndtime }</td>
+		            		<td>${dto.resDate }</td>
 		            		<td>시설</td>
 		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
 		            		<td>${dto.facLocation }</td>
-		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform'"></td>
+		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?facSeq=${dto.facSeq }'"></td>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>
 	            <c:if test="${not empty leslist }">
 		            <c:forEach items="${leslist }" var="dto">
 	           			<tr>
-		            		<td><fmt:formatDate pattern="MM.dd" value="${dto.resDate}"/></td>
-		            		<td>${dto.resStarttime } ~ ${dto.resEndtime }</td>
+		            		<td>${dto.resDate }</td>
 		            		<td>레슨</td>
-		            		<td><a href="/lesson/detail?facSeq=${dto.lesSeq }">${dto.lesName }</a></td>
+		            		<td><a href="/lesson/detail?lesSeq=${dto.lesSeq }">${dto.lesName }</a></td>
 		            		<td>${dto.lesLocation }</td>
-		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform'"></td>
+		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?facSeq=${dto.facSeq }'"></td>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>
@@ -194,5 +192,37 @@
 		</c:choose>
 	</table>
 </div>
+
+<h2>1대1문의</h2>
+	<table border="1">
+		<tr>
+			<th>INQ_SEQ</th>
+			<th>REPLY_CHECK</th>
+			<th>TITLE</th>
+			<th>ID</th>
+			<th>DATE</th>
+		</tr>
+		<c:choose>
+			<c:when test="${empty inqlist }">
+				<tr>
+					<td colspan="5">---- 작성된 글이 없습니다 ----</td>
+				</tr>
+			</c:when>
+			<c:otherwise>	
+				<c:forEach items="${inqlist}" var="dto">
+					<tr>
+						<td>${dto.inqSeq }</td>
+						<c:choose>
+							<c:when test="${dto.replyCheck == 0 }"><td>답변대기</td></c:when>
+							<c:otherwise><td>답변완료</td></c:otherwise>
+						</c:choose>
+						<td><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></td>
+						<td>${dto.id }</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.inqDate }"/></td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>	
+	</table>
 </body>
 </html>

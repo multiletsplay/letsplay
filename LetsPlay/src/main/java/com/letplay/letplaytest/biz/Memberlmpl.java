@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.letplay.letplaytest.dao.MemberMapper;
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
+import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.MemberDto;
@@ -106,6 +107,11 @@ public class Memberlmpl implements MemberBiz{
 	@Override
 	public List<LessonDto> selectLikesles(String id) {
 		return memberMapper.selectLikesles(id);
+	}
+
+	@Override
+	public List<InquiryDto> selectInq(String id) {
+		return memberMapper.selectInq(id);
 	}
 
 }
