@@ -47,6 +47,7 @@ public class Naver_Sens_V2 {
 	    bodyJson.put("from","01099398869");	// 발신번호 * 사전에 인증/등록된 번호만 사용할 수 있습니다.		
 	    bodyJson.put("messages", toArr);		
 	    
+	    
 
 	    String body = bodyJson.toJSONString();
 	    
