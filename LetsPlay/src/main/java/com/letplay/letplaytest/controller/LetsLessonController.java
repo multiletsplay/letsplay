@@ -29,6 +29,7 @@ import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.LikesDto;
 import com.letplay.letplaytest.dto.MemberDto;
+import com.letplay.letplaytest.dto.ReviewDto;
 
 @Controller
 @RequestMapping("/")
