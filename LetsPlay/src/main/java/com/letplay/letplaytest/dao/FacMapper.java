@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.SearchDto;
+import com.letplay.letplaytest.dto.TimeDto;
 
 @Mapper
 public interface FacMapper {
@@ -34,10 +35,15 @@ public interface FacMapper {
 			+ " ORDER BY f.FAC_DATE DESC ")
 	List<FacDto> selectSports(int spoId, String id);
 	
-	@Select(" SELECT f.*, s.SPO_NAME "
+	@Select(" SELECT f.*, s.SPO_NAME  "
 			+ " FROM FACILITY f, SPORTS s "
 			+ " WHERE FAC_SEQ = #{facSeq} AND f.SPO_ID = s.SPO_ID ")
 	FacDto selectFac(int facSeq);
+	
+	@Select(" SELECT d.DT, IF(d.DT = fr.RES_DATE, 1, 0) AS RES_STATUS "
+			+ " FROM DETM d, FACILITY_RESERVATION fr"
+			+ " WHERE fr.FAC_SEQ = #{facSeq} ")
+	List<TimeDto> selectTime(int facSeq);
 	
 	@Delete(" DELETE FROM FACILITY WHERE FAC_SEQ = #{facSeq} ")
 	int deleteFac(int facSeq);
@@ -51,7 +57,7 @@ public interface FacMapper {
 	int updateFac(FacDto dto);
 	
 	//시설예약
-	@Insert(" INSERT INTO `FACILITY_RESERVATION` VALUES(#{resId}, #{id}, #{facSeq}, #{resDate}, #{resStarttime}, NULL, #{resPrice} )")
+	@Insert(" INSERT INTO `FACILITY_RESERVATION` VALUES(#{resId}, #{id}, #{facSeq}, #{resDatetime}, #{resPrice} )")
 	int insertRes(FacResDto dto);
 	
 //	@Select("SELECT NAME, NICKNAME, PHONE, EMAIL, RES_DATE, RES_PRICE, RES_STARTTIME, RES_ENDTIME, FAC_IMG, FAC_NAME, FAC_LOCATION, FAC_CONTACT "
@@ -64,9 +70,12 @@ public interface FacMapper {
 //	FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);
 	
 	@Select( {"<script>",
-		" SELECT f.*, s.SPO_NAME ",
-		" FROM FACILITY f INNER JOIN SPORTS s ON f.SPO_ID = s.SPO_ID ",
-		" WHERE ",
+		" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW ",
+		" FROM FACILITY f ",
+		"	LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID ",
+		" 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} ",
+		"	LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ ",
+		" <where>",
 		" 	<if test='searchRegion1 != null'>FAC_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
 		"	<if test='searchRegion2 != null'>AND FAC_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
 //		"	<if test='searchDate != null'>AND FAC_DATE=#{searchDate} </if>",
@@ -75,8 +84,10 @@ public interface FacMapper {
 		" 	<if test='optShower == true'>AND FAC_SHOWER=#{optShower} </if> ",
 		" 	<if test='optLocker == true'>AND FAC_LOCKER=#{optLocker} </if> ",
 		" 	<if test='optLight == true'>AND FAC_LIGHT=#{optLight} </if> ",
-		" 	<if test='optCost == true'>AND FAC_COSTCHECK=#{optCost} </if> ",
-		" 	<if test='optCost == false'>AND FAC_COSTCHECK=FALSE </if> ",
+		" 	<if test='optCost.equals(\"T\")'>AND FAC_COSTCHECK=#{optCost} </if> ",
+		" 	<if test='optCost.equals(\"F\")'>AND FAC_COSTCHECK=FALSE </if> ",
+		" </where> ",
+		" GROUP BY f.FAC_SEQ ",
 		" </script>" })
 	List<FacDto> searchFac(SearchDto dto);
 	

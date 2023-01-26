@@ -55,7 +55,7 @@ function requestPay() {
 		</tr>
 		<tr>
 			<td>${member.name }(${member.nickname })</td>
-			<td><input type="date" name="resDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.resDate }"/>"></td>
+			<td><input type="text" name="resDate" value="${dto.resDate }">${dto.resDate }</td>
 			<td><input type="hidden" name="resStarttime" value="${dto.resStarttime }">${dto.resStarttime }</td>
 			<td>${member.phone }</td>
 			<td>${member.email }</td>

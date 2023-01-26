@@ -10,6 +10,7 @@ public class SearchDto {
 	private String searchRegion2;		// 군/구
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date searchDate;
+	private String id;
 	
 	//시설
 	private String searchTime1;
@@ -19,7 +20,7 @@ public class SearchDto {
 	private boolean optShower;
 	private boolean optLocker;
 	private boolean optLight;
-	private boolean optCost;
+	private char optCost;
 	
 	//match
 		
@@ -29,13 +30,15 @@ public class SearchDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SearchDto(String searchRegion1, String searchRegion2, Date searchDate, String searchTime1,
+	
+	public SearchDto(String searchRegion1, String searchRegion2, Date searchDate, String id, String searchTime1,
 			String searchTime2, boolean optParking, boolean optLent, boolean optShower, boolean optLocker,
-			boolean optLight, boolean optCost, int searchLevel, String searchFacStatus) {
+			boolean optLight, char optCost, int searchLevel, String searchFacStatus) {
 		super();
 		this.searchRegion1 = searchRegion1;
 		this.searchRegion2 = searchRegion2;
 		this.searchDate = searchDate;
+		this.id = id;
 		this.searchTime1 = searchTime1;
 		this.searchTime2 = searchTime2;
 		this.optParking = optParking;
@@ -47,6 +50,7 @@ public class SearchDto {
 		this.searchLevel = searchLevel;
 		this.searchFacStatus = searchFacStatus;
 	}
+
 	public String getSearchRegion1() {
 		return searchRegion1;
 	}
@@ -64,6 +68,12 @@ public class SearchDto {
 	}
 	public void setSearchDate(Date searchDate) {
 		this.searchDate = searchDate;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getSearchTime1() {
 		return searchTime1;
@@ -107,10 +117,10 @@ public class SearchDto {
 	public void setOptLight(boolean optLight) {
 		this.optLight = optLight;
 	}
-	public boolean isOptCost() {
+	public char isOptCost() {
 		return optCost;
 	}
-	public void setOptCost(boolean optCost) {
+	public void setOptCost(char optCost) {
 		this.optCost = optCost;
 	}
 	public int getSearchLevel() {
