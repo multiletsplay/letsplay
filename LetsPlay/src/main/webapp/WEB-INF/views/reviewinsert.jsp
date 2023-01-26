@@ -20,12 +20,30 @@
 			
 			
 			<tr>
-				<th>레슨번호</th>
-				<td>${dto.lesSeq }</td>
+				<th>시설/레슨명</th>
+				<td>
+					<c:choose>
+                       <c:when test="${dto.facName eq null}">
+                           ${dto.lesName}
+                       </c:when>
+                       <c:otherwise>
+                           ${dto.facName}
+                       </c:otherwise>
+                   </c:choose>
+				</td>
 			</tr>
 			<tr>
-				<th>시설번호</th>
-				<td>${dto.facSeq }</td>
+				<th>주소</th>
+				<td>
+					<c:choose>
+                       <c:when test="${dto.facLocation eq null}">
+                           ${dto.lesLocation}
+                       </c:when>
+                       <c:otherwise>
+                           ${dto.facLocation}
+                       </c:otherwise>
+                   </c:choose>
+				</td>
 			</tr>
 			<tr>
 				<th>별점</th>
@@ -34,14 +52,6 @@
 			<tr>
 				<th>본문</th>
 				<td><input type="text" style="width:300px; height:200px;" name="revContent"></td>
-			</tr>
-			<tr>
-				<th>작성일자</th>
-				<td>${dto.revWritedate }</td>
-			</tr>
-			<tr>
-				<th>수정일자</th>
-				<td>${dto.revModidate }</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

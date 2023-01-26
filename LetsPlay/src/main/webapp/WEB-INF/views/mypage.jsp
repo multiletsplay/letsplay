@@ -99,7 +99,6 @@
 	<table border="1">
 		<tr>
 			<th>예약날짜</th>
-			<th>예약시간</th>
 			<th>시설/레슨</th>
 			<th>이름</th>
 			<th>주소</th>
@@ -112,7 +111,7 @@
 	        	<c:if test="${not empty faclist }">
 		            <c:forEach items="${faclist }" var="dto">
 	           			<tr>
-		            		<td>${dto.resDate }</td>
+		            		<td>${dto.resDatetime }</td>
 		            		<td>시설</td>
 		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
 		            		<td>${dto.facLocation }</td>
@@ -123,11 +122,11 @@
 	            <c:if test="${not empty leslist }">
 		            <c:forEach items="${leslist }" var="dto">
 	           			<tr>
-		            		<td>${dto.resDate }</td>
+		            		<td>${dto.resDatetime }</td>
 		            		<td>레슨</td>
 		            		<td><a href="/lesson/detail?lesSeq=${dto.lesSeq }">${dto.lesName }</a></td>
 		            		<td>${dto.lesLocation }</td>
-		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?facSeq=${dto.facSeq }'"></td>
+		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?lesSeq=${dto.lesSeq }'"></td>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>

@@ -6,8 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.letplay.letplaytest.biz.FacBiz;
+import com.letplay.letplaytest.biz.LessonBiz;
 import com.letplay.letplaytest.biz.MemberBiz;
 import com.letplay.letplaytest.biz.ReviewBiz;
 import com.letplay.letplaytest.dto.MemberDto;
@@ -33,6 +33,10 @@ public class LetsMemberController {
 	private ReviewBiz reviewBiz;
 	@Autowired
 	private MemberBiz membiz;
+	@Autowired
+	private FacBiz facbiz;
+	@Autowired
+	private LessonBiz lessonbiz;
 	
 	//로그인
 	@RequestMapping("/loginform")
@@ -201,6 +205,28 @@ public class LetsMemberController {
 		int result = membiz.nicknamecheck(nickname);
 		return result;
 	}
+	@GetMapping("/reviewinsertform")
+	public String reviewinsert(HttpSession session, Model model, @RequestParam(value="facSeq", required = false)int facSeq, @RequestParam(required = false)int lesSeq) {
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", membiz.selectmember(member.getId()));
+		model.addAttribute("dto", facbiz.selectFac(facSeq));
+		model.addAttribute("dto", lessonbiz.selectLesson(lesSeq));
+		return "reviewinsert";
+	}
 	
+	@RequestMapping(value="/mypage/reviewinsert", method=RequestMethod.POST)
+	public String reviewInsert(Model model, ReviewDto dto) {
+		
+		if(reviewBiz.reviewInsert(dto)>0) {
+			model.addAttribute("msg", "후기 작성 완료");
+			model.addAttribute("url", "/mypage");
+			return "alert";
+		}else {
+			model.addAttribute("msg", "후기 작성 실패");
+			model.addAttribute("url", "/mypage/insert");
+			return "alert";
+		}
+		
+	}
 	
 }
