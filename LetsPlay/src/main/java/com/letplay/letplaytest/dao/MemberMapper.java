@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
+import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.MemberDto;
@@ -76,4 +77,9 @@ public interface MemberMapper {
 			+ " GROUP BY l.LES_SEQ "
 			+ " ORDER BY l.LES_DATE DESC ")
 	List<LessonDto> selectLikesles(String id);
+	
+	@Select(" SELECT i.*, (SELECT COUNT(*) FROM INQUIRY_REPLY r WHERE i.INQ_SEQ = r.INQ_SEQ) REPLY_CHECK "
+			+ " FROM `ONE-ON-ONE INQUIRY` i"
+			+ " WHERE i.ID = 'user1' ")
+	List<InquiryDto> selectInq(String id);
 }

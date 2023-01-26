@@ -57,7 +57,6 @@ function requestPay() {
 <input type="hidden" name="resId" value="${dto.resId }">
 <input type="hidden" name="id" value="${member.id }">
 <input type="hidden" name="facSeq" value="${dto.facSeq }">
-<input type="hidden" name="resEndtime" value="${dto.resEndtime }">
 	<table class="reservation-table" border="1">
 		<tr>
 			<th>이름(닉네임)</th>
@@ -68,7 +67,7 @@ function requestPay() {
 		</tr>
 		<tr>
 			<td>${member.name }(${member.nickname })</td>
-			<td><input type="date" name="resDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${dto.resDate }"/>"></td>
+			<td><input type="text" name="resDate" value="${dto.resDate }">${dto.resDate }</td>
 			<td><input type="hidden" name="resStarttime" value="${dto.resStarttime }">${dto.resStarttime }</td>
 			<td>${member.phone }</td>
 			<td>${member.email }</td>

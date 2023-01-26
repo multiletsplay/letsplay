@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.SearchDto;
+import com.letplay.letplaytest.dto.TimeDto;
 
 @Mapper
 public interface FacMapper {
@@ -34,10 +35,15 @@ public interface FacMapper {
 			+ " ORDER BY f.FAC_DATE DESC ")
 	List<FacDto> selectSports(int spoId, String id);
 	
-	@Select(" SELECT f.*, s.SPO_NAME "
+	@Select(" SELECT f.*, s.SPO_NAME  "
 			+ " FROM FACILITY f, SPORTS s "
 			+ " WHERE FAC_SEQ = #{facSeq} AND f.SPO_ID = s.SPO_ID ")
 	FacDto selectFac(int facSeq);
+	
+	@Select(" SELECT d.DT, IF(d.DT = fr.RES_DATE, 1, 0) AS RES_STATUS "
+			+ " FROM DETM d, FACILITY_RESERVATION fr"
+			+ " WHERE fr.FAC_SEQ = #{facSeq} ")
+	List<TimeDto> selectTime(int facSeq);
 	
 	@Delete(" DELETE FROM FACILITY WHERE FAC_SEQ = #{facSeq} ")
 	int deleteFac(int facSeq);
@@ -51,7 +57,7 @@ public interface FacMapper {
 	int updateFac(FacDto dto);
 	
 	//시설예약
-	@Insert(" INSERT INTO `FACILITY_RESERVATION` VALUES(#{resId}, #{id}, #{facSeq}, #{resDate}, #{resStarttime}, NULL, #{resPrice} )")
+	@Insert(" INSERT INTO `FACILITY_RESERVATION` VALUES(#{resId}, #{id}, #{facSeq}, #{resDatetime}, #{resPrice} )")
 	int insertRes(FacResDto dto);
 	
 //	@Select("SELECT NAME, NICKNAME, PHONE, EMAIL, RES_DATE, RES_PRICE, RES_STARTTIME, RES_ENDTIME, FAC_IMG, FAC_NAME, FAC_LOCATION, FAC_CONTACT "

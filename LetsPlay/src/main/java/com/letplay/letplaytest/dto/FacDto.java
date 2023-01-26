@@ -3,6 +3,7 @@ package com.letplay.letplaytest.dto;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FacDto {
@@ -25,6 +26,11 @@ public class FacDto {
 	private int likesStatus;
 	private int cntReview;
 	private double avgRate;
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
+	private Date dt;
+	private int resStatus;
+	private String date;
+	private String time;
 	
 	public FacDto() {
 		super();
@@ -34,7 +40,7 @@ public class FacDto {
 	public FacDto(int facSeq, String facName, int spoId, String spoName, String facLocation, String facContact,
 			int facCost, String facImg, String facImgpath, Date facDate, Boolean facParking, Boolean facLent,
 			Boolean facShower, Boolean facLocker, Boolean facLight, Boolean facCostcheck, int likesStatus,
-			int cntReview, double avgRate) {
+			int cntReview, double avgRate, Date dt, int resStatus, String date, String time) {
 		super();
 		this.facSeq = facSeq;
 		this.facName = facName;
@@ -55,6 +61,10 @@ public class FacDto {
 		this.likesStatus = likesStatus;
 		this.cntReview = cntReview;
 		this.avgRate = avgRate;
+		this.dt = dt;
+		this.resStatus = resStatus;
+		this.date = date;
+		this.time = time;
 	}
 
 	public int getFacSeq() {
@@ -147,37 +157,61 @@ public class FacDto {
 	public void setFacImg(String facImg) {
 		this.facImg = facImg;
 	}
-
 	public String getFacImgpath() {
 		return facImgpath;
 	}
-
 	public void setFacImgpath(String facImgpath) {
 		this.facImgpath = facImgpath;
 	}
-
 	public int getLikesStatus() {
 		return likesStatus;
 	}
-
 	public void setLikesStatus(int likesStatus) {
 		this.likesStatus = likesStatus;
 	}
-
 	public int getCntReview() {
 		return cntReview;
 	}
-
 	public void setCntReview(int cntReview) {
 		this.cntReview = cntReview;
 	}
-
 	public double getAvgRate() {
 		return avgRate;
 	}
-
 	public void setAvgRate(double avgRate) {
 		this.avgRate = avgRate;
+	}
+
+	public Date getDt() {
+		return dt;
+	}
+
+	public void setDt(Date dt) {
+		this.dt = dt;
+	}
+
+	public int getResStatus() {
+		return resStatus;
+	}
+
+	public void setResStatus(int resStatus) {
+		this.resStatus = resStatus;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 }

@@ -1,7 +1,10 @@
 package com.letplay.letplaytest.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -161,12 +164,20 @@ public class LetsLessonController {
 		String localtime = now.format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
 		String resId = "res_"+ localtime;
 		dto.setResId(resId);
+		
 		model.addAttribute("dto", dto);
+		LessonBiz.insertRes(dto);
 		return "reslesconfirm";
 	}
 	
 	@PostMapping("/lesson/payment")
-	public String reservePayment(Model model, LessonResDto dto) {
+	public String reservePayment(Model model, LessonResDto dto) throws ParseException {
+		//예약날짜,시간 데이터변환
+		String ds = dto.getResDate() + " " + dto.getResStarttime();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date dt = fm.parse(ds);
+		dto.setResDatetime(dt);
+		System.out.println(dto.getResDatetime());
 		if(LessonBiz.insertRes(dto)>0) {
 			model.addAttribute("msg", "예약 성공");
 			model.addAttribute("url", "/mypage");
