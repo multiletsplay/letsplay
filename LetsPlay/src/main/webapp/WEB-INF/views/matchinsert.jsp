@@ -64,12 +64,16 @@
 				</td>
 			</tr>
 			<tr>
+				<th>매칭날짜</th>
+				<td><input type="date" name="matchDay"></td>
+			</tr>
+			<tr>
 				<th>시작시간</th>
 				<td><input type="time" name="startTime"step="30:00" value="11:00"></td>
 			</tr>
 			<tr>
 				<th>종료시간</th>
-				<td><input type="time" name="endTime" min="06:00" max="23:59" step="30:00" value="14:00"></td>
+				<td><input type="time" name="endTime" min="06:00" max="23:59" value="14:00"></td>
 			</tr>
 			<tr>
 				<th>내  용</th>

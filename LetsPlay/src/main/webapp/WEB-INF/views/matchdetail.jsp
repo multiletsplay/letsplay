@@ -144,6 +144,10 @@
 			<td>${dto.matchLocation }</td>
 		</tr>
 		<tr>
+			<th>매칭날짜</th>
+			<td>${dto.matchDay }</td>
+		</tr>
+		<tr>
 			<th>시작시간 ~ 종료시간</th>
 			<td>${dto.startTime } ~ ${dto.endTime }</td>
 		</tr>

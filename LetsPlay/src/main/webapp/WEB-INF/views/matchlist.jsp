@@ -8,12 +8,16 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-</head>
+<style type="text/css">
+	#optionBtn { display: none; }
+	.searchOption { display:none; }
+</style>
+
 <body>
 <a href="/match/list" style="text-decoration:none"><font size="20">매칭게시판</font></a>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
+	$(document).ready(function(){
 		
 		
 		//상세조건 펼침버튼
@@ -21,11 +25,11 @@ $(document).ready(function(){
 			$('.searchOption').toggle('active');
 		});
 		
-		});
 		
 		//찜
 		$("#likeBtn").click(like);
 		$("#dellikeBtn").click(dellike);
+	});
 	
 	function like(){
 		let matchSeq = $(this).attr('idx');
@@ -46,7 +50,7 @@ $(document).ready(function(){
 		$.ajax({
 			url : "/match/dellikes",
 			type : "GET",
-			data : { 'match' : matchSeq },
+			data : { 'matchSeq' : matchSeq },
 			success : function(){
 				alert("취소 성공");
 				window.location.reload();
@@ -54,6 +58,7 @@ $(document).ready(function(){
 		});
 }
 	</script>
+</head>
 <div>
 <form action="/match/category"  method="get">
   <button type="button" name="spoId" onclick="location.href='/match/list'"><img src="../../img/football.jpg" width="35px">전체</button>
@@ -101,8 +106,10 @@ $(document).ready(function(){
 			<input type="checkbox" id="optionBtn">
 			<label for="optionBtn">▼ 열기</label>
 			<ul class="searchOption">
+				<li><input type="time" name="searchStartTime" min="05:00" value="" step="900"><label>시작시간</label>
 				<li><input type="checkbox" name="searchFacStatus" value="Y" checked><label>시설확정여부</label>
 				<li><input type="range" name="searchLevel" value="3" min="1" max="5"><label>레벨</label>
+				<li><input type="number" name="searchTotal" value="2" min="2" max="22"><label>참가인원</label>
 			</ul>
 		</div>
 		<span><input type="submit" value="검색"></span>
@@ -130,14 +137,14 @@ $(document).ready(function(){
 				<th>작성자</th>
 				<th>종목</th>
 				<th>제목</th>
-				<th>마감일자</th>
+				<th>매칭날짜</th>
 				<th>남은날짜</th>
 				<th>장소</th>
 				<th>시작시간 ~ 종료시간</th>
 				<th>참여인원/총인원</th>
 				<th>레벨</th>
 				<th>댓글 수</th>
-				<td><input type="hidden" value="${dto.matchSeq } " name="matchSeq" ></td>
+				<td></td>
 			</tr>
 			<c:choose>
 				<c:when test="${empty list }">
@@ -151,22 +158,22 @@ $(document).ready(function(){
 					<c:forEach items="${list }" var="dto">
 						<tr align="center">
 							<td>
-							<c:choose>
-			   				<c:when test="${dto.likesStatus eq 1 }">
-			   					<img id="dellikeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-			   				</c:when>
-			   				<c:otherwise>
-			   					<img id="likeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
-			   				</c:otherwise>
-			   			</c:choose>
+								<c:choose>
+					   				<c:when test="${dto.likesStatus eq 1 }">
+					   					<img id="dellikeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+					   				</c:when>
+					   				<c:otherwise>
+					   					<img id="likeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+					   				</c:otherwise>
+					   			</c:choose>
 							</td>
 							<td>${dto.id }</td>
 							<td>${dto.spoName}</td>
 							<td><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></td>
-							<td>
-							<fmt:parseDate  value="${dto.matchEnddate}" 
-								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
-							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /></td>
+							<td><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
+<%-- 							<fmt:parseDate  value="${dto.matchEnddate}"  --%>
+<%-- 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/> --%>
+<%-- 							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /></td> --%>
 							<td>
 								<c:forEach var="i" items="${ddays }">
 									<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
@@ -179,11 +186,12 @@ $(document).ready(function(){
 							<td>${dto.cntJoin }/${dto.matchTotal }</td>
 							<td>${dto.matchLevel }</td>
 							<td>${dto.cntComment }</td>
+							<td><input type="hidden" value="${dto.matchSeq } " name="matchSeq" ></td>
 <%-- 							<td><input type="hidden" value="${dto.matchRegdate }" name="matchRegdate"></td> --%>
 <%-- 							<td><fmt:formatDate type="hidden" value="${dto.matchRegdate}" pattern="yyyy-MM-dd" /></td> --%>
-							<td>
+<!-- 							<td> -->
 <%-- 							<fmt:formatDate type="hidden" value="${dto.matchRegdate}" pattern="yyyy-MM-dd" /></td> --%>
-							<td>
+<!-- 							<td> -->
 						</tr>
 						
 					</c:forEach>
@@ -191,22 +199,23 @@ $(document).ready(function(){
 						<tr align="center" bgcolor="gray">
 							<td>
 							<c:choose>
-			   				<c:when test="${dto.likesStatus eq 1 }">
-			   					<img id="dellikeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+			   				<c:when test="${end.likesStatus eq 1 }">
+			   					<img id="dellikeBtn" idx="${end.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 			   				</c:when>
 			   				<c:otherwise>
-			   					<img id="likeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+			   					<img id="likeBtn" idx="${end.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
 			   				</c:otherwise>
 			   			</c:choose>
 			   			</td>
 							<td>${end.id }</td>
 							<td>${end.spoName}</td>
 							<td>${end.matchTitle }</td>
-							<td>
-							<fmt:parseDate value="${end.matchEnddate}" 
-								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
-							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /></td>
-							<td>
+							<td><fmt:formatDate value="${end.matchDay }" pattern="yyyy-MM-dd(E)" />j22
+<!-- 							<td> -->
+<%-- 							<fmt:parseDate value="${end.matchEnddate}"  --%>
+<%-- 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/> --%>
+<%-- 							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /></td> --%>
+<!-- 							<td> -->
 								<c:forEach var="i" items="${dEnddays }">
 									<c:if test="${end.matchSeq eq i.key.matchSeq }" >
 										마감
@@ -218,6 +227,7 @@ $(document).ready(function(){
 							<td>${end.cntJoin }/${end.matchTotal }</td>
 							<td>${end.matchLevel }</td>
 							<td>${end.cntComment }</td>
+							<td><input type="hidden" value="${end.matchSeq } " name="matchSeq" ></td>
 							
 						</tr>
 					</c:forEach>
