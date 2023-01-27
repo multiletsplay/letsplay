@@ -33,12 +33,11 @@ public class SearchDto {
 		// TODO Auto-generated constructor stub
 	}
 	
+
 	public SearchDto(String searchRegion1, String searchRegion2, Date searchDate, String id, String searchTime1,
 			String searchTime2, boolean optParking, boolean optLent, boolean optShower, boolean optLocker,
-
-			boolean optLight, boolean optCost, int searchLevel, String searchFacStatus, int searchTotal,
+			boolean optLight, char optCost, int searchLevel, String searchFacStatus, int searchTotal,
 			String searchStartTime) {
-
 		super();
 		this.searchRegion1 = searchRegion1;
 		this.searchRegion2 = searchRegion2;
@@ -57,6 +56,7 @@ public class SearchDto {
 		this.searchTotal = searchTotal;
 		this.searchStartTime = searchStartTime;
 	}
+
 
 	public String getSearchRegion1() {
 		return searchRegion1;
