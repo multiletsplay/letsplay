@@ -1,7 +1,9 @@
 package com.letplay.letplaytest.dao;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -20,5 +22,8 @@ public interface ReviewMapper {
 			+ "WHERE LES_SEQ=#{lesSeq} AND REVIEW.ID = MEMBER.ID "
 			+ "ORDER BY REV_ID DESC ")
 	List<ReviewDto> selectLessonList(int lesSeq);
+
+	@Insert(" INSERT INTO REVIEW VALUES(NULL, #{nickname}, #{lesSeq}, #{facSeq}, #{revRate}, #{revContent}, #{revWritedate}, #{revModidate} ) ")
+	int reviewInsert(ReviewDto dto);
 
 }

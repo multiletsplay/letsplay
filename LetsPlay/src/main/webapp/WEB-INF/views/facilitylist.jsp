@@ -61,6 +61,7 @@
 	
 	function dellike(){
 		let facSeq = $(this).attr('idx');
+		console.log(facSeq);
 		$.ajax({
 			url : "/facility/dellikes",
 			type : "GET",
@@ -127,8 +128,8 @@
 				<li><input type="checkbox" name="optLocker" value="true"><label>락커</label>
 				<li><input type="checkbox" name="optLight" value="true"><label>조명</label>
 				<li>가격
-				<li><input type="checkbox" name="optCost" value="true"><label>유료</label>
-				<li><input type="checkbox" name="optCost" value="false"><label>무료</label>
+				<li><input type="checkbox" name="optCost" value="T"><label>유료</label>
+				<li><input type="checkbox" name="optCost" value="F"><label>무료</label>
 			</ul>
 		</div>
 		<span><input type="submit" value="검색"></span>
@@ -156,7 +157,7 @@
 		</tr>
 	    <c:choose>
 	        <c:when test="${empty faclist }">
-	            <div>------ 시설이 없습니다. ------</div>
+	            <td colspan="7">------ 시설이 없습니다. ------</td>
 	        </c:when>
 	        <c:otherwise>
 	            <c:forEach items="${faclist }" var="dto">

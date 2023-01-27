@@ -21,6 +21,24 @@
 		$("#pathfinding").click(pathFinding);
 		$("#likeBtn").click(like);
 		$("#dellikeBtn").click(dellike);
+		
+		$("#resDate").change(function(){
+			var timeSelectBox = $("#resTime");
+	        timeSelectBox.children().remove();
+	        
+	        $("option:selected", this).each(function(){
+	        	const rdate = $("#resDate").val();
+	        	var date = rdate.toString();
+	        	console.log(date);
+	            timeSelectBox.append("<option value=''>=== 선택 ===</option>");
+	            for(var i=0;i<23;i++){
+	                if(date == '${time.date }'){
+	                    timeSelectBox.append("<option value='"+ '${time.time }' +"'>"+${time.time }+"</option>");
+	                    
+	                }
+	            }
+	        });
+		});
 	});
 	
 	function like(){
@@ -137,10 +155,20 @@
 		</tr>
 		<tr>
 			<th>날짜</th>
-			<td><input type="date" name="resDate"></td>
+			<td><input type="date" id="resDate" name="resDate"></td>
 			<th>시간</th>
-			<td><input type="time" name="resStarttime"></td>
-			<td><input type="time" name="resEndtime"></td>
+			<td>
+				<select id="resTime" name="resStarttime">
+					<option value="">=== 선택 ===</option>
+					<c:forEach var="time" items="${time }">
+						<c:if test="${time.dt eq time.dt }">
+						<option value="${time.time }" 
+							<c:if test="${time.resStatus eq 1}">disabled="disabled"</c:if>>
+							${time.time }</option>
+						</c:if>
+					</c:forEach> 
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<th>가격</th>

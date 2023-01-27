@@ -138,8 +138,6 @@ public interface MatchMapper {
 	@Delete(" DELETE FROM REPLY WHERE REP_SEQ=#{repSeq} ")
 	int delReply(int repSeq);
 
-
-
 	@Select(" SELECT COUNT(*) FROM MATCH_BOARD"
 			+ " WHERE MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE ")
 	int matchListCount();

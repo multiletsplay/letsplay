@@ -42,9 +42,11 @@ public class Naver_Sens_V2 {
 	    
 	    bodyJson.put("type","sms");	// 메시지 Type (sms | lms)
 	    bodyJson.put("contentType","COMM");
+	    bodyJson.put("content","Letsplay 본인인증 ["+rand+"]");
 	    bodyJson.put("countryCode","82");
-	    bodyJson.put("from","");	// 발신번호 * 사전에 인증/등록된 번호만 사용할 수 있습니다.		
+	    bodyJson.put("from","01099398869");	// 발신번호 * 사전에 인증/등록된 번호만 사용할 수 있습니다.		
 	    bodyJson.put("messages", toArr);		
+	    
 	    
 
 	    String body = bodyJson.toJSONString();

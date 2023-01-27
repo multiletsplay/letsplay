@@ -23,4 +23,9 @@ public class ReviewImpl implements ReviewBiz{
 		return reviewMapper.selectLessonList(lesSeq);
 	}
 
+	@Override
+	public int reviewInsert(ReviewDto dto) {
+		return reviewMapper.reviewInsert(dto);
+	}
+
 }

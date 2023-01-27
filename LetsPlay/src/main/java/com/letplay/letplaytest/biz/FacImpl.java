@@ -1,7 +1,6 @@
 package com.letplay.letplaytest.biz;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +12,7 @@ import com.letplay.letplaytest.dao.FacMapper;
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.SearchDto;
+import com.letplay.letplaytest.dto.TimeDto;
 
 @Service
 public class FacImpl implements FacBiz{
@@ -70,6 +70,11 @@ public class FacImpl implements FacBiz{
 	@Override
 	public int insertRes(FacResDto dto) {
 		return facMapper.insertRes(dto);
+	}
+
+	@Override
+	public List<TimeDto> selectTime(int facSeq) {
+		return facMapper.selectTime(facSeq);
 	}
 
 //	@Override

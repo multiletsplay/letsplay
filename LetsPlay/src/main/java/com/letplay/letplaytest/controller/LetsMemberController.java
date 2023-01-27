@@ -6,8 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,17 +17,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.letplay.letplaytest.biz.FacBiz;
+import com.letplay.letplaytest.biz.LessonBiz;
 import com.letplay.letplaytest.biz.MemberBiz;
+import com.letplay.letplaytest.biz.ReviewBiz;
 import com.letplay.letplaytest.dto.MemberDto;
+import com.letplay.letplaytest.dto.ReviewDto;
 
 
 @Controller
 @RequestMapping("/member")
 public class LetsMemberController {
 	
-	
+	@Autowired
+	private ReviewBiz reviewBiz;
 	@Autowired
 	private MemberBiz membiz;
+	@Autowired
+	private FacBiz facbiz;
+	@Autowired
+	private LessonBiz lessonbiz;
 	
 	//로그인
 	@RequestMapping("/loginform")
@@ -108,15 +115,31 @@ public class LetsMemberController {
 		return "findpw";
 	}
 	
-	// 마이페이지 수정해야함
+	// 마이페이지
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
 	public String selectmember(HttpSession session,Model model ) {
 		MemberDto member = (MemberDto) session.getAttribute("login");
-		
 		model.addAttribute("member", membiz.selectmember(member.getId()));
-		
+		model.addAttribute("faclist", membiz.selectResfac(member.getId()));
+		model.addAttribute("leslist", membiz.selectResles(member.getId()));
+		model.addAttribute("likesfaclist", membiz.selectLikesfac(member.getId()));
+		//model.addAttribute("likesmatlist", membiz.selectLikesmat(member.getId()));
+		model.addAttribute("likesleslist", membiz.selectLikesles(member.getId()));
 		//model.addAttribute("listdto", membiz.selectmyreview(member.getId()) );
-		
+		model.addAttribute("inqlist", membiz.selectInq(member.getId()));
+		return "mypage";
+	}
+	
+	@GetMapping("/mypage/resselect")
+	public String selectSports(HttpServletRequest request, Model model, char type) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", membiz.selectmember(member.getId()));
+		if(type == 'F') {
+			model.addAttribute("faclist", membiz.selectResfac(member.getId()));
+		}else {
+			model.addAttribute("leslist", membiz.selectResles(member.getId()));
+		}
 		return "mypage";
 	}
 	
@@ -152,15 +175,7 @@ public class LetsMemberController {
 
 	    return true;
 	}
-	
-	@RequestMapping(value="/updateform", method=RequestMethod.GET)
-	public String updateForm(HttpSession session, Model model, MemberDto dto) {
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		
-		model.addAttribute("member", membiz.selectmember(member.getId()));
-		return "memberupdate";
-		
-	}
+			
 	
 	@PostMapping("/update")
 	public String update(HttpSession session, MemberDto dto) {
@@ -169,7 +184,7 @@ public class LetsMemberController {
 		if(membiz.update(dto) > 0) {
 			return "redirect:/member/mypage";
 		} else {
-			return "redirect:/member/updateform";
+			return "redirect:/member/mypage";
 		}
 	}
 	
@@ -183,4 +198,35 @@ public class LetsMemberController {
 			return "redirect:/member/mypage";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/nicknamecheck", method=RequestMethod.GET)
+	public int nicknamecheck(@RequestParam String nickname ) {
+		int result = membiz.nicknamecheck(nickname);
+		return result;
+	}
+	@GetMapping("/reviewinsertform")
+	public String reviewinsert(HttpSession session, Model model, @RequestParam(value="facSeq", required = false)int facSeq, @RequestParam(required = false)int lesSeq) {
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", membiz.selectmember(member.getId()));
+		model.addAttribute("dto", facbiz.selectFac(facSeq));
+		model.addAttribute("dto", lessonbiz.selectLesson(lesSeq));
+		return "reviewinsert";
+	}
+	
+	@RequestMapping(value="/mypage/reviewinsert", method=RequestMethod.POST)
+	public String reviewInsert(Model model, ReviewDto dto) {
+		
+		if(reviewBiz.reviewInsert(dto)>0) {
+			model.addAttribute("msg", "후기 작성 완료");
+			model.addAttribute("url", "/mypage");
+			return "alert";
+		}else {
+			model.addAttribute("msg", "후기 작성 실패");
+			model.addAttribute("url", "/mypage/insert");
+			return "alert";
+		}
+		
+	}
+	
 }
