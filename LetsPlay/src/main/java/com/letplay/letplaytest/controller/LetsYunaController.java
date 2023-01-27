@@ -97,8 +97,8 @@ public class LetsYunaController {
 		
 		//datetime -> 날짜와 시간으로 각각 나눠서 view에 전달
 		List<TimeDto> datelist = facBiz.selectTime(facSeq);
-//		Map<String, ArrayList<String>> datetimeMap = new HashMap<String, ArrayList<String>>();
-//		List<String> timelist = new ArrayList<String>();
+		Map<TimeDto, List<String>> datetimeMap = new HashMap<TimeDto, List<String>>();
+		List<String> timelist = new ArrayList<String>();
 		for(TimeDto dto : datelist) {
 			Date dt = dto.getDt();
 			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -107,13 +107,21 @@ public class LetsYunaController {
 			String time = ds.substring(11);
 			dto.setDate(date);
 			dto.setTime(time);
+			timelist.add(time);
+			datetimeMap.put(dto, null);
 		}
-//		for(Entry<String, String> entrySet : datetimeMap.entrySet()) {
-//			System.out.println(entrySet.getKey()+" : "+entrySet.getValue());
-//		}
-		//model.addAttribute("timeMap", datetimeMap);
+//		List<List<String>> times = new ArrayList<>();
+//		int partitionSize = 24;
+//		times.add(timelist.subList(0,18));
+//// 		for(int i=18; i<timelist.size(); i+=partitionSize) {
+////			times.add(timelist.subList(i, Math.min(i + partitionSize, timelist.size())));
+////		}
+// 		for(TimeDto dto : datelist) {
+// 			datetimeMap.put(dto, times.get(0));
+// 		}
+		model.addAttribute("timeMap", datetimeMap);
 
-		model.addAttribute("time", datelist);
+		//model.addAttribute("time", datelist);
 		
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
