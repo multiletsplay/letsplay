@@ -73,11 +73,14 @@ public interface MatchMapper {
 		" 		LEFT OUTER JOIN SPORTS s ON m.SPO_ID = s.SPO_ID ",
 		" 		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ  ",
 		" <where>",
-		" 	<if test='searchRegion1 != null'>MATCH_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
-		"	<if test='searchRegion2 != null'>AND MATCH_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
-		"   <if test='searchDate != null'>AND MATCH_REGDATE LIKE CONCAT('%',#{searchDate},'%') </if>",
-		"	<if test='searchFacStatus != null'>AND MATCH_FACILITY=#{searchFacStatus} </if>",
-		"	<if test='searchLevel != null'>AND MATCH_LEVEL=#{searchLevel} </if>",
+		" 	<if test='searchRegion1 != null'>m.MATCH_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
+		"	<if test='searchRegion2 != null'>AND m.MATCH_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
+//		"   <if test='searchDate != null'>AND m.MATCH_DAY LIKE CONCAT('%',#{searchDate},'%') </if>",
+		"   <if test='searchDate != null'>AND m.MATCH_DAY=#{searchDate} </if>",
+		"   <if test='searchStartTime != null'>AND m.START_TIME=#{searchStartTime} </if>",
+		"	<if test='searchFacStatus != null'>AND m.MATCH_FACILITY=#{searchFacStatus} </if>",
+		"	<if test='searchLevel != null'>AND m.MATCH_LEVEL=#{searchLevel} </if>",
+		"	<if test='searchTotal != null'>AND m.MATCH_TOTAL=#{searchTotal} </if>",
 		" </where> ",
 		" GROUP BY m.MATCH_SEQ ",
 		" ORDER BY MATCH_SEQ DESC",
@@ -102,10 +105,10 @@ public interface MatchMapper {
 	
 
 
-	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchCnt}, #{matchLevel}, #{matchFacility}, DEFAULT, #{cntComment}, #{startTime}, #{endTime}) ")
+	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchLevel}, #{matchFacility}, DEFAULT, #{startTime}, #{endTime}, #{matchDay}) ")
 	int insertMatch(MatchDto dto);
 
-	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_ENDDATE=#{matchEnddate}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility}, START_TIME=#{startTime}, ENDTIME=#{endTime} WHERE MATCH_SEQ=#{matchSeq} ")
+	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_ENDDATE=#{matchEnddate}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility},MATCH_DAY=#{matchDay}, START_TIME=#{startTime}, ENDTIME=#{endTime} WHERE MATCH_SEQ=#{matchSeq} ")
 	int updateMatch(MatchDto dto);
 
 	@Delete(" DELETE FROM MATCH_BOARD WHERE MATCH_SEQ = #{matchSeq} ")

@@ -36,6 +36,10 @@ function fn1(){
 		        <td><input type="text" name="matchLocation" value="${dto.matchLocation }"></td>
 		    </tr>
 		    <tr>
+		        <th>매칭날짜</th>
+		        <td><input type="date" name="matchDay" value="${dto.matchDay }"></td>
+		    </tr>
+		    <tr>
 				<th>시작시간</th>
 				<td><input type="time" name="startTime" value="${dto.startTime }" ></td>
 			</tr>

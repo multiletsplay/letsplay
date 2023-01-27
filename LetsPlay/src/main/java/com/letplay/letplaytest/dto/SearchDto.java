@@ -25,13 +25,15 @@ public class SearchDto {
 		
 	private int searchLevel;
 	private String searchFacStatus;
+	private int searchTotal;
+	private String searchStartTime;
 	public SearchDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public SearchDto(String searchRegion1, String searchRegion2, Date searchDate, String searchTime1,
 			String searchTime2, boolean optParking, boolean optLent, boolean optShower, boolean optLocker,
-			boolean optLight, boolean optCost, int searchLevel, String searchFacStatus) {
+			boolean optLight, boolean optCost, int searchLevel, String searchFacStatus, int searchTotal, String searchStartTime) {
 		super();
 		this.searchRegion1 = searchRegion1;
 		this.searchRegion2 = searchRegion2;
@@ -46,6 +48,8 @@ public class SearchDto {
 		this.optCost = optCost;
 		this.searchLevel = searchLevel;
 		this.searchFacStatus = searchFacStatus;
+		this.searchTotal = searchTotal;
+		this.searchStartTime = searchStartTime;
 	}
 	public String getSearchRegion1() {
 		return searchRegion1;
@@ -119,10 +123,22 @@ public class SearchDto {
 	public void setSearchLevel(int searchLevel) {
 		this.searchLevel = searchLevel;
 	}
-	public String isSearchFacStatus() {
+	public String getSearchFacStatus() {
 		return searchFacStatus;
 	}
 	public void setSearchFacStatus(String searchFacStatus) {
 		this.searchFacStatus = searchFacStatus;
+	}
+	public int getSearchTotal() {
+		return searchTotal;
+	}
+	public void setSearchTotal(int searchTotal) {
+		this.searchTotal = searchTotal;
+	}
+	public String getSearchStartTime() {
+		return searchStartTime;
+	}
+	public void setSearchStartTime(String searchStartTime) {
+		this.searchStartTime = searchStartTime;
 	}
 }
