@@ -428,7 +428,7 @@ ul{ list-style:none; }
   width: 24.5%;
 }
 
-.facility-list-fl:nth-child(4n){
+.facility-list-fl:nth-child(4n+1){
   margin-right: 0px;
 
 }

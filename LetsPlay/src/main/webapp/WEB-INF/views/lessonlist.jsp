@@ -1,17 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>LessonList</title>
-<style type="text/css">
-	#insertBtn { visibility: hidden; }
-	#deleteBtn { visibility: hidden; }
-	#selectAll { display: none; }
-	.delList { display: none; }
-</style>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="header.jsp" %>    
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -62,29 +53,31 @@
 		});
 	}
 </script>
-</head>
-<body>
-<h1>레슨 리스트</h1>
+<div class="container inner">
+	<div class="row">
+
+
 <!-- 종목 선택 -->
-<h3>종목 선택</h3>
-<div class="select-sports">
+<div class="sport-div">
 	<form action="/lesson/select" method="get">
-		<button type="button" name="spoId" onclick="location.href='/lesson/list'"><img src="https://cdn-icons-png.flaticon.com/512/443/443635.png" width="30"></button>
-		<button type="submit" name="spoId" value="1"><img src="https://cdn-icons-png.flaticon.com/512/6938/6938829.png" width="30"></button>
-		<button type="submit" name="spoId" value="2"><img src="https://cdn-icons-png.flaticon.com/512/3978/3978317.png" width="30"></button>
-		<button type="submit" name="spoId" value="3"><img src="https://cdn-icons-png.flaticon.com/512/1633/1633893.png" width="30"></button>
-		<button type="submit" name="spoId" value="4"><img src="https://cdn-icons-png.flaticon.com/512/2500/2500356.png" width="30"></button>
-		<button type="submit" name="spoId" value="5"><img src="https://cdn-icons-png.flaticon.com/512/50/50004.png" width="30"></button>
-		<button type="submit" name="spoId" value="6"><img src="https://cdn-icons-png.flaticon.com/512/1695/1695095.png" width="30"></button>
+	<button type="button"  class="sport" name="spoId" onclick="location.href='/facility/list'">전체</button>
+	<button type="submit"  class="sport" name="spoId" value="1">풋살</button>
+	<button type="submit"  class="sport" name="spoId" value="2">테니스</button>
+	<button type="submit"  class="sport" name="spoId" value="3">배드민턴</button>
+	<button type="submit"  class="sport" name="spoId" value="4">탁구</button>
+	<button type="submit"  class="sport" name="spoId" value="5">수영</button>
+	<button type="submit"  class="sport" name="spoId" value="6">골프</button>
 	</form>
 </div>
-<br><br>
+
+
 <div id="lessonlist">
+	<p><input style="clear: both;" type="button" id="insertBtn" value="레슨 추가" onclick="location.href='/lesson/insertform'"></p>
 	<form action="/lesson/delete" method="post">
 	<div>
 		<input type="submit" id="deleteBtn" value="선택 삭제">
 	</div>
-	<table border="1">
+	<!-- <table border="1">
 		<tr>
 			<th><input id="selectAll" type="checkbox"></th>
 			<th>스포츠 종류</th>
@@ -93,18 +86,48 @@
 			<th>주소</th>
 			<th>리뷰 수</th>
 			<th>찜</th>
-		</tr>
-		
+		</tr> -->
+		<p>전체 선택 <input id="selectAll" type="checkbox"></p>
 		<c:choose>
 			<c:when test="${empty lessonlist }">
-				<tr>
-					<td colspan="4">---- 등록된 레슨이 없습니다 ----</td>
-				</tr>
+				<div>---- 등록된 레슨이 없습니다 ----</div>
 			</c:when>
+
 			<c:otherwise>
 				<c:forEach items="${lessonlist }" var="dto">
-					<tr>
-						<td><input type="checkbox" class="delList" name="delList" value="${dto.lesSeq }"/></td>
+
+				<div class="facility-list-fl">
+					<span><input type="checkbox" class="delList" name="delList" value="${dto.lesSeq }"/></span>
+          <div class="lesson">
+            <a href="/lesson/detail?lesSeq=${dto.lesSeq}">
+              <p class="img">
+								<span class="sports-category">${dto.spoName }</span>
+								<img src="${dto.lesImgpath }">
+							</p>
+            </a>
+            
+            <div>
+              <a href="/lesson/detail?lesSeq=${dto.lesSeq}">
+                <p class="fac-title">${dto.lesName }</p>
+              </a>
+              <p class="review-count">이용자 리뷰 ${dto.cntReview }개</p>
+              <p><span class="match-location">${dto.lesLocation }</span></p>
+              
+              <div class="favorite">
+								<c:choose>
+			   				<c:when test="${dto.likesStatus eq 1 }">
+			   					<img id="dellikeBtn" idx="${dto.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+			   				</c:when>
+			   				<c:otherwise>
+			   					<img id="likeBtn" idx="${dto.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+			   				</c:otherwise>
+			   			</c:choose>
+							</div>
+            </div>
+          </div>
+        </div>
+					<!-- <tr>
+						<td></td>
 						<td>${dto.spoName }</td>
 						<td><img width="210" src="${dto.lesImgpath }"></td>
 						<td><a href="/lesson/detail?lesSeq=${dto.lesSeq}">${dto.lesName }</a></td>
@@ -120,13 +143,13 @@
 			   				</c:otherwise>
 			   			</c:choose>
 	            		</td>
-					</tr>
+					</tr> -->
 				</c:forEach> 
 			</c:otherwise>
 		</c:choose>
-	</table>
 	</form>
-	<input type="button" id="insertBtn" value="레슨 추가" onclick="location.href='/lesson/insertform'">
 </div>
-</body>
-</html>
+
+</div>
+</div>
+<%@ include file="footer.jsp" %>
