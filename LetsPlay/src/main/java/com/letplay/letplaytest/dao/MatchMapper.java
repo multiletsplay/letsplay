@@ -29,7 +29,7 @@ import com.letplay.letplaytest.dto.SearchDto;
 @Mapper
 public interface MatchMapper {
 
-	@Select(" SELECT m.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
+	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
 			+ "(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r"
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
@@ -39,13 +39,14 @@ public interface MatchMapper {
 			+ " FROM MATCH_BOARD m "
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
 			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
-			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE "
+			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
+			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
 			+ " m.MATCH_SEQ DESC ")
 	List<MatchDto> selectMatchList(String id);
 	
-	@Select("SELECT m.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
+	@Select("SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
 			+ "	(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r "
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
@@ -55,6 +56,7 @@ public interface MatchMapper {
 			+ " FROM MATCH_BOARD m "
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
 			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
+			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
 			+ " WHERE m.SPO_ID = s.SPO_ID AND m.SPO_ID = #{spoId} AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE "
 			+ " GROUP BY m.MATCH_SEQ"
 			+ " ORDER BY "
@@ -62,7 +64,7 @@ public interface MatchMapper {
 	List<MatchDto> selectSports(int spoId);
 
 	@Select( {"<script>",
-		" SELECT m.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, ",
+		" SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, ",
 		" (SELECT COUNT(r.REP_SEQ) ",
 		" 		FROM REPLY r ",
 		"		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, ",
@@ -72,6 +74,7 @@ public interface MatchMapper {
 		" FROM MATCH_BOARD m ",
 		" 		LEFT OUTER JOIN SPORTS s ON m.SPO_ID = s.SPO_ID ",
 		" 		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ  ",
+		"		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID ",
 		" <where>",
 		" 	<if test='searchRegion1 != null'>m.MATCH_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
 		"	<if test='searchRegion2 != null'>AND m.MATCH_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
@@ -87,7 +90,7 @@ public interface MatchMapper {
 		" </script>"})
 	List<MatchDto> searchMatch(SearchDto dto);
 	
-	@Select(" SELECT m.*, s.SPO_NAME,  "
+	@Select(" SELECT m.*, s.SPO_NAME, NICKNAME, "
 			+ "	(SELECT COUNT(r.REP_SEQ)"
 			+ "		FROM REPLY r "
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
@@ -98,11 +101,30 @@ public interface MatchMapper {
 			+ "		FROM MATCH_JOIN j "
 			+ " WHERE j.MATCH_SEQ=#{matchSeq} AND j.id=#{id}) JOIN_STATUS "
 				+ " FROM "
-				+ " MATCH_BOARD m, SPORTS s "
-				+ " WHERE "
-				+ " m.SPO_ID = s.SPO_ID AND MATCH_SEQ=#{matchSeq} ")
+				+ "	MATCH_BOARD m, MEMBER mb, SPORTS s "
+				+ " WHERE m.ID=mb.ID AND m.SPO_ID=s.SPO_ID AND m.MATCH_SEQ=#{matchSeq} "
+		
+				)
+
 	MatchDto selectMatchOne(int matchSeq, String id);
 	
+
+	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
+			+ "(SELECT COUNT(r.REP_SEQ) "
+			+ "		FROM REPLY r"
+			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
+			+ "(SELECT COUNT(j.JOIN_SEQ) + 1 "
+			+ "		FROM MATCH_JOIN j "
+			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
+			+ " FROM MATCH_BOARD m "
+			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
+			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
+			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
+			+ " WHERE m.SPO_ID = #{spoId} AND MATCH_ENDDATE < MATCH_REGDATE "
+			+ " GROUP BY m.MATCH_SEQ "
+			+ " ORDER BY "
+			+ " m.MATCH_SEQ DESC ")
+	List<MatchDto> selectEndList(int spoId);
 
 
 	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchLevel}, #{matchFacility}, DEFAULT, #{startTime}, #{endTime}, #{matchDay}) ")
@@ -117,9 +139,9 @@ public interface MatchMapper {
 	@Insert(" INSERT INTO REPLY () VALUES( NULL, #{matchSeq}, #{id}, #{repContent}, NOW()) ")
 	int insertReply(String repContent, String id, int matchSeq);
 
-	@Select("SELECT * "
-				+ " FROM REPLY "
-				+ " WHERE MATCH_SEQ=#{matchSeq} ")
+	@Select("SELECT r.*, NICKNAME "
+				+ " FROM REPLY r , MEMBER m "
+				+ " WHERE MATCH_SEQ=#{matchSeq} AND r.ID=m.ID ")
 	List<ReplyDto> selectReplyList(int matchSeq);
 
 	
@@ -139,25 +161,22 @@ public interface MatchMapper {
 	int delReply(int repSeq);
 
 	@Select(" SELECT COUNT(*) FROM MATCH_BOARD"
-			+ " WHERE MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE ")
+			+ " WHERE MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' ")
 	int matchListCount();
 	
 	@Select(" SELECT COUNT(*) FROM MATCH_BOARD"
-			+ " WHERE MATCH_ENDDATE < MATCH_REGDATE ")
+			+ " WHERE MATCH_STATUS='Y' ")
 	int matchEndCount();
 
-	@Select(" SELECT MATCH_SEQ, ID, SPO_NAME, MATCH_TITLE, MATCH_REGDATE, MATCH_ENDDATE, MATCH_LOCATION, START_TIME, END_TIME, MATCH_TOTAL, MATCH_LEVEL,"
-			+ "(SELECT COUNT(REPLY.REP_SEQ)"
-			+ "		FROM REPLY"
-			+ "		WHERE MATCH_BOARD.MATCH_SEQ=REPLY.MATCH_SEq) cntComment "
-			+ " FROM MATCH_BOARD, SPORTS "
-			+ " WHERE MATCH_BOARD.SPO_ID = SPORTS.SPO_ID AND MATCH_BOARD.SPO_ID = #{spoId} AND MATCH_ENDDATE < MATCH_REGDATE "
-			+ " ORDER BY "
-			+ " MATCH_SEQ DESC ")
-	List<MatchDto> selectEndList(int spoId);
 
-	@Select(" SELECT ID FROM MATCH_JOIN WHERE MATCH_SEQ=#{matchSeq} ")
+	@Select(" SELECT NICKNAME FROM MATCH_JOIN, MEMBER WHERE MATCH_SEQ=#{matchSeq} AND MATCH_JOIN.ID=MEMBER.ID ")
 	List<MatchJoin> selectJoinList(int matchSeq);
+
+	@Update(" UPDATE MATCH_BOARD SET MATCH_STATUS='Y' WHERE MATCH_SEQ=#{matchSeq} ")
+	int fixMatch(int matchSeq);
+
+	@Update(" UPDATE MATCH_BOARD SET MATCH_STATUS='N' WHERE MATCH_SEQ=#{matchSeq} ")
+	int unfixMatch(int matchSeq);
 
 
 

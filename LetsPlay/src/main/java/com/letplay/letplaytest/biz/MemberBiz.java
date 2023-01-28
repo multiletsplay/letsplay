@@ -7,6 +7,7 @@ import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
+import com.letplay.letplaytest.dto.MatchDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
 
@@ -31,7 +32,9 @@ public interface MemberBiz {
 	
 	public List<FacDto> selectLikesfac(String id);			//시설찜내역 불러오기
 	public List<LessonDto> selectLikesles(String id);		//레슨찜내역 불러오기
-	//public List<MatchDto> selectLikesmath(String id);		//매치찜내역 불러오기
+	public List<MatchDto> selectLikesmat(String id);		//매치찜내역 불러오기
 	
 	public List<InquiryDto> selectInq(String id);			//1대1내역 불러오기
+	public List<MatchDto> selectMatchList(String id);		//내가 쓴 매칭글 보기
+	public List<MatchDto> selectMatchjoinList(String id);	//내가 참여한 매칭글 보기
 }

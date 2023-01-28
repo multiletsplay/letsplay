@@ -12,6 +12,7 @@ import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
+import com.letplay.letplaytest.dto.MatchDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
 import com.letplay.letplaytest.util.Naver_Sens_V2;
@@ -112,6 +113,21 @@ public class Memberlmpl implements MemberBiz{
 	@Override
 	public List<InquiryDto> selectInq(String id) {
 		return memberMapper.selectInq(id);
+	}
+
+	@Override
+	public List<MatchDto> selectLikesmat(String id) {
+		return memberMapper.selectLikesmat(id);
+	}
+
+	@Override
+	public List<MatchDto> selectMatchList(String id) {
+		return memberMapper.selectMatchList(id);
+	}
+
+	@Override
+	public List<MatchDto> selectMatchjoinList(String id) {
+		return memberMapper.selectMatchJoinList(id);
 	}
 
 }
