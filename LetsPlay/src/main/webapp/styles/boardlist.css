@@ -15,8 +15,9 @@ input:focus {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-
+  padding-top:4px;
 }
+
 .wrapper-search_type{position:relative}
 .wrapper-search_type .btn-search_type.select{
   border-radius:6px;
@@ -403,3 +404,31 @@ background-color: var(--font-50);
   font-size: .9rem;
 }
 
+/* #optionBtn { display: none; } */
+.searchOption { display:none; }
+
+ul{ list-style:none; }
+#optionBtn { display: none; }
+.searchOption { display:none; }
+#insertBtn { visibility: hidden; }
+#deleteBtn { visibility: hidden; }
+#selectAll { display: none; }
+.delList { display: none; }
+
+
+.facility .sports-category{
+  position: absolute;
+  top:10px;
+  left: 10px;
+}
+
+.facility-list-fl{
+  float: left;
+  margin-right: 5px;
+  width: 24.5%;
+}
+
+.facility-list-fl:nth-child(4n){
+  margin-right: 0px;
+
+}
