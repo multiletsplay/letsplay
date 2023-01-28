@@ -121,7 +121,7 @@ public class LetsYunaController {
 // 		}
 		model.addAttribute("timeMap", datetimeMap);
 
-		//model.addAttribute("time", datelist);
+		model.addAttribute("time", datelist);
 		
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
