@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SignUp</title>
+<link href="${pageContext.request.contextPath}/resources/css/signup.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -96,67 +97,155 @@
 		});
 	}
 </script>
+
 </head>
 <body>
-<h1>회원가입</h1>
 <form action="/member/signup" method="post">
-	<table border="1">
-		<tr>
-			<th>아이디</th>
-			<td><input type="text" id="id" name="id" placeholder="아이디를 입력해주세요"></td>
-			<td><button type="button" id="idChk">중복확인</button>
-		</tr>
-		<tr>
-			<th>비밀번호</th>
-			<td><input type="text" name="password" placeholder="영문,숫자,특수문자 포함 8자 이상 15자 이하"></td>
-		</tr>
-		<tr>
-			<th>비밀번호확인</th>
-			<td><input type="text" id="pwChk" placeholder="비밀번호를 한번 더 입력해주세요"></td>
-		</tr>
-		<tr>
-			<th>이름</th>
-			<td><input type="text" name="name" placeholder="이름을 입력해주세요"></td>
-		</tr>
-		<tr>
-			<th>닉네임</th>
-			<td><input type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요"></td>
-			<td><button type="button" id="nicknameChk">닉네임 중복확인</button>
-		</tr>
-		<tr>
-			<th>이메일</th>
-			<td><input type="text" name="email" placeholder="ex) multi_7@campus.com"></td>
-		</tr>
-		<tr>
-			<th>전화번호</th>
-			<td><input type="text" name="phone" id="phone" placeholder="숫자만 입력해주세요"></td>
-			<td><button type="button" id="phoneBtn">인증번호 받기</button>
-		</tr>
-		<tr>
-			<th></th>
-			<td><input type="text" id="phoneChk" placeholder="아이디를 입력해주세요"></td>
-			<td><button type="button" id="phoneChkBtn">인증번호 확인</button>
-		</tr>
-		<tr>
-			<th></th>
-			<td>
-				<input type="radio" name="gender" value='M'>남자
-				&nbsp;
-				<input type="radio" name="gender" value='F'>여자
-			</td>
-		</tr>
-		<tr>
-			<th>생년월일</th>
-			<td><input type="text" name="birth" placeholder="YYYY/MM/DD"></td>
-		</tr>
-		<tr>
-			<td>
-				<input type="submit" id="signup" value="회원가입">
-				<input type="button" value="로그인" onclick="location.href='/member/loginform'">
-			</td>
-		</tr>
-		
-	</table>
+	<div class='SigningMain inner'>
+    <div class='Signing'>
+        <div><h1>회원가입</h1></div>
+        <span style={{color:"red"}}>*필수입력사항</span>
+        <hr/>
+        <div class='formBoxTop'>
+        <div class='formBox'>
+        <div class='ValTarget idCheck'>
+          <div>
+          <span>아이디</span>
+          <span class='redColour'>*</span>
+          </div>
+          <input
+          type="text"
+          placeholder='아이디를 입력해주세요'
+          id="id"
+          name="id"/>
+          <button type='button' id="idChk">중복확인</button>
+        </div>
+        
+        <div class='ValTarget pwCheck'>
+          <div>
+          <span>비밀번호</span>
+          <span class='redColour'>*</span>
+          </div>
+          <input
+          type="text"
+          placeholder="영문,숫자,특수문자 포함 8자 이상 15자 이하"
+          name="password"
+          />
+        </div>
+       
+        <div class='ValTarget pwDCheck'>
+        <div>
+          <span>비밀번호확인</span>
+          <span class='redColour'>*</span>
+          </div>
+          <input
+          type="text"
+          placeholder='비밀번호를 한번 더 입력해주세요'
+          id="pwChk"/>
+        </div>
+        
+        <div class='ValTarget nameCheck'>
+        <div>
+          <span>이름</span>
+          <span class='redColour'>*</span>
+          </div>
+          <input
+          type="text"
+          placeholder='이름을 입력해주세요'
+          name="name"/>
+        </div>
+        
+        <div class='ValTarget nicCheck'>
+          <div>
+          <span>닉네임</span>
+          <span class='redColour'>*</span>
+          </div>
+          <input
+          type="text"
+          placeholder='닉네임을 입력해주세요'
+          id="nickname"
+	      name="nickname"/>
+		 <button type='button' id="nicknameChk">중복확인</button>
+        </div>
+        <div class='ValTarget emailCheck'>
+          <div>
+          <span>이메일</span>
+          <span class='redColour'>*</span>
+          </div>
+          <input
+          type="text"
+          placeholder='ex) multi_7@campus.com'
+          name="email"/>
+        </div>
+        
+        <div class='ValTarget numCheck'>
+          <div>
+          <span>휴대폰</span>
+          <span class='redColour'>*</span>
+          </div>
+          <input
+          type="text"
+          placeholder='숫자만 입력해주세요'
+          name="phone"
+          id="phone"/>
+          <button type='button' id="phoneBtn">인증받기</button>
+        </div>
+       
+        <div class='ValTarget numDCheck'>
+          <input
+          type="text"
+		 id="phoneChk"
+          value='인증번호를 입력해주세요'/>
+          <button type="button" id="phoneChkBtn">인증확인</button>
+        </div>
+        <div class='formBtn'>
+          <button name="gender" value="M">남자</button>
+          <button name="gender" value="F">여자</button>
+        </div>
+        <div class='formDate'>
+          <div>생년월일</div>
+        <div class='formDate'>
+          <input type="date" name="birth" style={{paddingLeft:'80px'}}/>
+        </div>
+        </div>
+        </div>
+        </div>
+        <hr style={{marginTop:'25px', marginBottom:'10px'}}/>
+          <div class='agreementTitle'>
+            <span class='agreementAsk'>이용약관동의</span>
+            <span class='redColour'>*</span>
+            <label><span><input id='chkAll' type={'checkbox'} onClick={checkAll}></input></span>
+            <span style={{fontSize:'larger', fontWeight:'bold'}}>전체 동의합니다.</span></label>
+          </div>
+        <div class='agreement'>
+          <div>
+            <label><span><input class='chk' type={'checkbox'}></input></span>
+            <span>이용약관 동의(필수)</span></label>
+          </div>
+          <div>
+          <label><span><input class='chk' type={'checkbox'}></input></span>
+            <span>개인정보 수집•이용 동의(필수)</span></label>
+          </div>
+          <div>
+          <label><span><input class='chk' type={'checkbox'}></input></span>
+            <span>할인 쿠폰 등 혜택/정보 수신 동의(선택)</span></label>
+          </div>
+          <div>
+          <label><span><input class='chk' type={'checkbox'}></input></span>
+            <span>만 14세 이상입니다.(필수)</span></label>
+          </div>
+          <div class='signUpBtn'>
+            <button id="signup" disabled={NotAllow} style={{width:'350px'}}>가입하기</button>
+          <div class='signUpLink'>
+            <span>
+             이미 가입하셨나요? &nbsp;
+            </span>
+            <a>로그인하기</a>
+          </div>
+          </div>
+        </div>
+    </div>
+    </div>
 
 
 </form>
