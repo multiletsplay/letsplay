@@ -5,6 +5,7 @@ import java.util.Date;
 public class ReviewDto {
 	private int revId;
 	private String id;
+	private String nickname;
 	private int lesSeq;
 	private int facSeq;
 	private int revRate;
@@ -17,11 +18,12 @@ public class ReviewDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReviewDto(int revId, String id, int lesSeq, int facSeq, int revRate, String revContent, Date revWritedate,
-			Date revModidate) {
+	public ReviewDto(int revId, String id, String nickname, int lesSeq, int facSeq, int revRate, String revContent,
+			Date revWritedate, Date revModidate) {
 		super();
 		this.revId = revId;
 		this.id = id;
+		this.nickname = nickname;
 		this.lesSeq = lesSeq;
 		this.facSeq = facSeq;
 		this.revRate = revRate;
@@ -92,6 +94,14 @@ public class ReviewDto {
 
 	public void setRevModidate(Date revModidate) {
 		this.revModidate = revModidate;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	
