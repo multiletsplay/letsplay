@@ -220,3 +220,7 @@ section{
   flex: 0 0 auto;
   width: 16.66666667%;
 }
+
+.col {
+  flex: 1 0;
+}

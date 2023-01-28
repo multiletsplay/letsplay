@@ -43,7 +43,7 @@
         <div class="nav__icons">
                   
           <span>
-            <Link to='registration'><span class='btn01'>매칭만들기</span></Link>
+           <a href="/match/insertform"><span class='btn01'>매칭만들기</span></a> 
           </span>
           <span>
             <a href="/member/loginform"><span class='btn01'>로그인</span></a>
