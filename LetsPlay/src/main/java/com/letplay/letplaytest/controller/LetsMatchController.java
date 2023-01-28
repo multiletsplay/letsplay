@@ -299,6 +299,36 @@ public class LetsMatchController {
 			}
 		}
 		
+		// 매칭확정/취소
+		@ResponseBody
+		@RequestMapping(value="/match/fixmatch", method=RequestMethod.POST)
+		public void fixMatch(@RequestParam int matchSeq) {
+			if(matchBiz.fixMatch(matchSeq)>0) {
+				System.out.println("찜 성공");		
+			}else {
+				System.out.println("찜 실패");
+			}
+		}
+		
+		@ResponseBody
+		@RequestMapping(value="/match/unfixmatch", method=RequestMethod.GET)
+		public void unfixMatch(@RequestParam int matchSeq) {
+			if(matchBiz.unfixMatch(matchSeq)>0) {
+				System.out.println("취소 성공");	
+			}else {
+				System.out.println("취소 실패");	
+			}
+		}
+		
+		@RequestMapping(value="/match/facimport")
+		public String facImport(Model model, HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			MemberDto member = (MemberDto) session.getAttribute("login");
+			
+			model.addAttribute("faclist",memBiz.selectResfac(member.getId()));
+			return "facimport-pop";
+		}
+		
 		//공지사항
 		@GetMapping("/notice/list")
 		public String selectNoticelist(NoticeDto dto, Model model, Criteria criteria) {

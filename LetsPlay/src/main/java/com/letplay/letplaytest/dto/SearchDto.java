@@ -36,6 +36,7 @@ public class SearchDto {
 
 	public SearchDto(String searchRegion1, String searchRegion2, Date searchDate, String id, String searchTime1,
 			String searchTime2, boolean optParking, boolean optLent, boolean optShower, boolean optLocker,
+
 			boolean optLight, char optCost, int searchLevel, String searchFacStatus, int searchTotal,
 			String searchStartTime) {
 		super();

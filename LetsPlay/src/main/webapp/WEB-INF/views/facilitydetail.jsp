@@ -22,22 +22,7 @@
 		$("#likeBtn").click(like);
 		$("#dellikeBtn").click(dellike);
 		
-		/* var timeMap = '<c:out value="${timeMap}"/>';
-		timeMap = JSON.parse(timeMap);
-		$("#resDate").change(function(){
-			var selectBox = $("#resTime");
-	       	selectBox.children().remove();
-	        
-	       	const rdate = $("#resDate").val();
-	       	var date = rdate.toString();
-           	selectBox.append("<option value=''>=== 선택 ===</option>");
-           	if(timeMap.hasOwnProperty(date)){
-           	     var val = timeMap[date];
-           	     for(var i=0; i<val.length; i++){
-           	        selectBox.append("<option value='"+ val[i] +"'>"+ val[i] +"</option>");
-           	     }
-           	}
-	    }); */
+		
 	});
 	
 	function like(){
@@ -156,10 +141,8 @@
 			<th>날짜</th>
 			<td><input type="date" id="resDate" name="resDate"></td>
 			<th>시간</th>
-			<td><input type="time" id="resStarttime" name="resStarttime"></td>
-				<!-- <select id="resTime" name="resStarttime">
-					<option value="">=== 시간 ===</option>
-				</select> -->
+			<td><input type="time" id="resStarttime" name="resStarttime">
+				
 			</td>
 		</tr>
 		<tr>

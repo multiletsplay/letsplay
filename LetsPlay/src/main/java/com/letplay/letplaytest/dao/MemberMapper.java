@@ -13,11 +13,14 @@ import com.letplay.letplaytest.dto.FacResDto;
 import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
+import com.letplay.letplaytest.dto.MatchDto;
 import com.letplay.letplaytest.dto.MemberDto;
 
 @Mapper
 public interface MemberMapper {
 	
+	
+
 	@Select(" SELECT * FROM `MEMBER` WHERE ID=#{id} AND PASSWORD=#{password} ")
 	MemberDto login(MemberDto dto);
 	
@@ -78,8 +81,50 @@ public interface MemberMapper {
 			+ " ORDER BY l.LES_DATE DESC ")
 	List<LessonDto> selectLikesles(String id);
 	
+	@Select(" SELECT m.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS "
+			+ " FROM MATCH_BOARD m "
+			+ " 	INNER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
+			+ "		LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
+			+ " GROUP BY m.MATCH_SEQ "
+			+ " ORDER BY m.MATCH_REGDATE DESC ")
+	List<MatchDto> selectLikesmat(String id);
+	
 	@Select(" SELECT i.*, (SELECT COUNT(*) FROM INQUIRY_REPLY r WHERE i.INQ_SEQ = r.INQ_SEQ) REPLY_CHECK "
 			+ " FROM `ONE-ON-ONE INQUIRY` i"
 			+ " WHERE i.ID = 'user1' ")
 	List<InquiryDto> selectInq(String id);
+
+	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME,"
+			+ "(SELECT COUNT(r.REP_SEQ) "
+			+ "		FROM REPLY r"
+			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
+			+ "(SELECT COUNT(j.JOIN_SEQ) + 1 "
+			+ "		FROM MATCH_JOIN j "
+			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
+			+ " FROM MATCH_BOARD m "
+			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
+			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
+			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND m.ID=#{id} "
+			+ " GROUP BY m.MATCH_SEQ "
+			+ " ORDER BY "
+			+ " m.MATCH_SEQ DESC ")
+	List<MatchDto> selectMatchList(String id);
+
+	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME,"
+			+ "(SELECT COUNT(r.REP_SEQ) "
+			+ "		FROM REPLY r"
+			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
+			+ "(SELECT COUNT(j.JOIN_SEQ) + 1 "
+			+ "		FROM MATCH_JOIN j "
+			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
+			+ " FROM MATCH_BOARD m "
+			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
+			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
+			+ "		WHERE MATCH_SEQ IN( "
+			+ "		SELECT MATCH_SEQ FROM MATCH_JOIN mj "
+			+ "		WHERE mj.ID=#{id} "
+			+ "			)"
+			+ " ORDER BY "
+			+ " m.MATCH_SEQ DESC ")
+	List<MatchDto> selectMatchJoinList(String id);
 }

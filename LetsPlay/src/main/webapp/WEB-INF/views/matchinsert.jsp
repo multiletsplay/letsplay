@@ -11,7 +11,9 @@
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
-
+function openPopUp() {
+    window.open("/match/facimport", "시설 선택", "width=450, height=400, top=150, left=200");
+}
 </script>
 
 <div>
@@ -62,6 +64,7 @@
 					<option value="중구">중구</option>
 				</select>
 				</td>
+				<td><input type="button" value="시설 등록" onclick="openPopUp()"></td>
 			</tr>
 			<tr>
 				<th>매칭날짜</th>
