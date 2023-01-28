@@ -7,6 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+function selectfac() {
+	  var facSeq = $("#facSeq").val();
+	  var facName = $("#facname").val();
+
+	  var parent = window.opener;
+	  window.opener.document.getElementById("facSeq").value = facSeq;
+	  window.opener.document.getElementById("facname").value = facName;
+
+	self.close();
+	}
+</script>
 </head>
 <body>
 <h2>예약 내역</h2>
@@ -27,9 +40,10 @@
 		            <c:forEach items="${faclist }" var="dto">
 	           			<tr>
 		            		<td>${dto.resDatetime }</td>
-		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
+		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }"><input type="text" value="${dto.facName }" id="facname"></a></td>
 		            		<td>${dto.facLocation }</td>
-		            		<td><input type="button" value="시설 선택" onclick=""></td>
+		            		<td><input type="button" value="시설 선택" onclick="selectfac()"></td>
+		            		<td><input type="hidden" value="${dto.facSeq }" id="facSeq" ></td>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>

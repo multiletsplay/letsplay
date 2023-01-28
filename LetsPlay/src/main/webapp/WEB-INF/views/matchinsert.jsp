@@ -65,6 +65,8 @@ function openPopUp() {
 				</select>
 				</td>
 				<td><input type="button" value="시설 등록" onclick="openPopUp()"></td>
+				<td><input type="text" id="facname"></td>
+				<td><input type="hidden" id="facSeq" name="facSeq"></td>
 			</tr>
 			<tr>
 				<th>매칭날짜</th>

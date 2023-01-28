@@ -245,7 +245,7 @@ public class LetsYunaController {
 		
 		if(facBiz.insertRes(dto)>0) {
 			model.addAttribute("msg", "예약 성공");
-			model.addAttribute("url", "/mypage");
+			model.addAttribute("url", "/member/mypage");
 			return "alert";
 		}else {
 			model.addAttribute("msg", "예약 실패");
