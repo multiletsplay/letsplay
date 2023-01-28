@@ -2,14 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <!-- 검색기능(지역,인원,날짜)필터,검색,레벨 마감날짜 종목 참여인원/총인원 제목 장소 작성날짜 참여시간 찜하기 -->
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<style type="text/css">
+    #fixmatch { display: none; }
+    #unfixmatch { display: none; }
+</style>
 </head>
 <body style="background-color: gray">
         <div class="container col-8 mt-2" style="background-color:white">
@@ -18,13 +21,18 @@
 		$(document).ready(function(){
 			var mem = '${member.id }';
 			if (mem=='${dto.id}'){
-				$("#joinbtn").attr("disabled", true);
+				$("#joinbtn").attr('style', "display:none;");
+				$("#fixmatch").show();
+				$("#unfixmatch").show();
+			
 			}
 			
 			$("#joinbtn").click(join);
 			$("#unjoinbtn").click(unjoin)
 			$("#likeBtn").click(like);
 			$("#dellikeBtn").click(dellike);
+			$("#fixmatch").click(fixmatch);
+			$("#unfixmatch").click(unfixmatch);
 		});
 		function join(){
 			var matchSeq = ${dto.matchSeq}
@@ -37,7 +45,6 @@
 					alert("매칭 참여");
 					window.location.reload();
 				}
-				
 			});
 		}
 		
@@ -52,12 +59,8 @@
 					alert("매칭 취소");
 					window.location.reload();
 				}
-						
-				
 			});
 		}
-		
-		
 		function like(){
 			let matchSeq = ${dto.matchSeq};
 			$.ajax({
@@ -70,11 +73,35 @@
 				}
 			});
 		}
-		
 		function dellike(){
 			let matchSeq = ${dto.matchSeq};
 			$.ajax({
 				url : "/match/dellikes",
+				type : "GET",
+				data : { 'matchSeq' : matchSeq },
+				success : function(){
+					alert("취소 성공");
+					window.location.reload();
+				}
+			});
+		}
+		function fixmatch(){
+			let matchSeq = ${dto.matchSeq};
+			$.ajax({
+				url : "/match/fixmatch",
+				type : "POST",
+				data : { 'matchSeq' : matchSeq },
+				success : function(){
+					alert("매칭 확정");
+					window.location.reload();
+				}
+			});
+		}
+		
+		function unfixmatch(){
+			let matchSeq = ${dto.matchSeq};
+			$.ajax({
+				url : "/match/unfixmatch",
 				type : "GET",
 				data : { 'matchSeq' : matchSeq },
 				success : function(){
@@ -117,7 +144,7 @@
 		</tr>
 		<tr class="table-active">
 			<th>작성자</th>
-			<td width="500px">${dto.id }</td>
+			<td width="500px">${dto.nickName }</td>
 		</tr>
 		<tr>
 			<th>제  목</th>
@@ -145,7 +172,7 @@
 		</tr>
 		<tr>
 			<th>매칭날짜</th>
-			<td>${dto.matchDay }</td>
+			<td><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" /></td>
 		</tr>
 		<tr>
 			<th>시작시간 ~ 종료시간</th>
@@ -165,9 +192,9 @@
 		</tr>
 		<tr>
 			<th>참여한 사람</th>
-			<td>${dto.id }
+			<td>${dto.nickName }
 				<c:forEach items="${joinlist}" var="join">
-					${join.id }
+					${join.nickName }
 				</c:forEach>
 			</td>
 		</tr>
@@ -183,12 +210,19 @@
 					<c:if test="${ dto.joinStatus eq 0 }">
 					<button type="button" id="joinbtn">참여하기</button>
 					</c:if>
-				
+				</div>
+					<div style="text-align:center">
+					<c:if test="${fn:contains(dto.matchStatus, 'Y')}">
+					<button type="button" id="unfixmatch">확정취소</button>
+					</c:if>
+					<c:if test="${fn:contains(dto.matchStatus, 'N')}">
+					<button type="button" id="fixmatch">매칭확정</button>
+					</c:if>
 				</div>
 				<div>
 					<form method="post" action="/match/insertreply?matchSeq=${dto.matchSeq}">
 						<p>
-							<label>댓글 작성자:</label><input type="text" name="id" value="${member.id }" readonly>
+							<label>댓글 작성자:</label><input type="text" name="id" value="${member.nickname }" readonly>
 						</p>
 						<p>
 							<textarea rows="4" cols="100" name="repContent"></textarea>
@@ -205,7 +239,7 @@
 		<table border="1">
 		<c:forEach items="${reply }" var="reply">
 			<tr>
-				<td width="100px">${reply.id }</td>
+				<td width="100px">${reply.nickName }</td>
 				<td width="475px">${reply.repContent }</td>
 				<td width="200px"><fmt:formatDate value="${reply.repRegdate}" pattern="yyyy-MM-dd HH:mm:ss" ></fmt:formatDate>
 				<input type="button" value="삭제" onclick="location.href='/match/delreply?repSeq=${reply.repSeq} + &matchSeq=${dto.matchSeq}'"></td>

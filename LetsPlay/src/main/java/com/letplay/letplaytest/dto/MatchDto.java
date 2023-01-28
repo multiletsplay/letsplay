@@ -52,6 +52,7 @@ public class MatchDto {
 	private int likesStatus;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date matchDay;
+	private String nickName;
 	public MatchDto() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -59,7 +60,8 @@ public class MatchDto {
 	public MatchDto(int matchSeq, String id, int spoId, String spoName, String matchTitle, String matchContent,
 			LocalDateTime matchRegdate, Date matchModidate, LocalDateTime matchEnddate, int dDay, String matchLocation,
 			int matchTotal, int matchCnt, int matchLevel, String matchFacility, char matchStatus, int cntComment,
-			String startTime, String endTime, int cntJoin, int joinStatus, int likesStatus, Date matchDay) {
+			String startTime, String endTime, int cntJoin, int joinStatus, int likesStatus, Date matchDay,
+			String nickName) {
 		super();
 		this.matchSeq = matchSeq;
 		this.id = id;
@@ -84,6 +86,7 @@ public class MatchDto {
 		this.joinStatus = joinStatus;
 		this.likesStatus = likesStatus;
 		this.matchDay = matchDay;
+		this.nickName = nickName;
 	}
 	public int getMatchSeq() {
 		return matchSeq;
@@ -223,5 +226,10 @@ public class MatchDto {
 	public void setMatchDay(Date matchDay) {
 		this.matchDay = matchDay;
 	}
-
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 }

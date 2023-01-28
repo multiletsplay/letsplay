@@ -26,5 +26,7 @@ public interface MatchBiz {
 	public int insertReply(String repContent, String id, int matchSeq);
 	public List<ReplyDto> selectReplyList(int matchSeq);
 	public int delReply(int repSeq);
+	public int fixMatch(int matchSeq);			//매칭확정
+	public int unfixMatch(int matchSeq);		//확정취소
 	
 }

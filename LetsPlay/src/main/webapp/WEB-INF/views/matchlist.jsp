@@ -29,7 +29,7 @@
 		//찜
 		$("#likeBtn").click(like);
 		$("#dellikeBtn").click(dellike);
-	});
+		});
 	
 	function like(){
 		let matchSeq = $(this).attr('idx');
@@ -167,7 +167,7 @@
 					   				</c:otherwise>
 					   			</c:choose>
 							</td>
-							<td>${dto.id }</td>
+							<td>${dto.nickName }</td>
 							<td>${dto.spoName}</td>
 							<td><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></td>
 							<td><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
@@ -207,16 +207,16 @@
 			   				</c:otherwise>
 			   			</c:choose>
 			   			</td>
-							<td>${end.id }</td>
+							<td>${end.nickName }</td>
 							<td>${end.spoName}</td>
 							<td>${end.matchTitle }</td>
-							<td><fmt:formatDate value="${end.matchDay }" pattern="yyyy-MM-dd(E)" />j22
+							<td><fmt:formatDate value="${end.matchDay }" pattern="yyyy-MM-dd(E)" /></td>
 <!-- 							<td> -->
 <%-- 							<fmt:parseDate value="${end.matchEnddate}"  --%>
 <%-- 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/> --%>
 <%-- 							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /></td> --%>
 <!-- 							<td> -->
-								<c:forEach var="i" items="${dEnddays }">
+							<td><c:forEach var="i" items="${dEnddays }">
 									<c:if test="${end.matchSeq eq i.key.matchSeq }" >
 										마감
          							 </c:if>

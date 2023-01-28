@@ -11,8 +11,10 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#nicknameChk").click(nicknameChk);
-	});
 	
+		//찜
+		$("#dellikeBtn").click(dellike);
+	});
 	function nicknameChk(){
 		let nickname = $("#nickname").val().trim();
 		
@@ -34,6 +36,19 @@
 		});
 		
 	}
+
+	function dellike(){
+		let matchSeq = $(this).attr('idx');
+		$.ajax({
+			url : "/match/dellikes",
+			type : "GET",
+			data : { 'matchSeq' : matchSeq },
+			success : function(){
+				alert("취소 성공");
+				window.location.reload();
+			}
+		});
+}
 	
 </script>
 </head>
@@ -86,7 +101,73 @@
 
 <hr>
 <h2>매치 내역</h2>
-
+<table border="1">
+			<tr align="center">
+				<th>작성자</th>
+				<th>종목</th>
+				<th>제목</th>
+				<th>매칭날짜</th>
+				<th>남은날짜</th>
+				<th>장소</th>
+				<th>시작시간 ~ 종료시간</th>
+				<th>참여인원/총인원</th>
+				<th>레벨</th>
+				<th>댓글 수</th>
+			</tr>
+			<c:choose>
+				<c:when test="${empty list and empty joinlist }">
+					<tr>
+						<td colspan="10" align="center">등록된 매칭이 없습니다.</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+				<c:if test="${not empty list }">
+					<c:forEach items="${list }" var="dto">
+						<tr align="center">
+							<td>${dto.nickName }</td>
+							<td>${dto.spoName}</td>
+							<td><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></td>
+							<td><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
+							<td>
+								<c:forEach var="i" items="${ddays }">
+									<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+										마감 ${i.value }일 전
+									</c:if>
+								</c:forEach>
+							</td>
+							<td>${dto.matchLocation }</td>
+							<td>${dto.startTime } ~ ${dto.endTime }</td>
+							<td>${dto.cntJoin }/${dto.matchTotal }</td>
+							<td>${dto.matchLevel }</td>
+							<td>${dto.cntComment }</td>
+						</tr>
+					</c:forEach>
+					</c:if>
+					<c:if test ="${not empty joinlist }">
+						<c:forEach items="${joinlist }" var="dto">
+						<tr align="center">
+							<td>${dto.nickName }</td>
+							<td>${dto.spoName}</td>
+							<td><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></td>
+							<td><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
+							<td>
+								<c:forEach var="i" items="${ddays2 }">
+									<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+										마감 ${i.value }일 전
+									</c:if>
+								</c:forEach>
+							</td>
+							<td>${dto.matchLocation }</td>
+							<td>${dto.startTime } ~ ${dto.endTime }</td>
+							<td>${dto.cntJoin }/${dto.matchTotal }</td>
+							<td>${dto.matchLevel }</td>
+							<td>${dto.cntComment }</td>
+						</tr>
+					</c:forEach>
+					</c:if>
+				</c:otherwise>
+			</c:choose>
+</table>
 
 <hr>
 <h2>예약 내역</h2>
@@ -143,21 +224,22 @@
 		<button type="submit" name="type" value="L">레슨</button>
 </form>
 <div class="likes-list">
-	<table border="1">
-		<tr>
-			<th>종목</th>
-			<th>이미지</th>
-			<th>시설/레슨명</th>
-			<th>리뷰개수</th>
-			<th>주소</th>
-			<th>찜여부</th>
-		</tr>
+
 		<c:choose>
 			<c:when test="${empty likesfaclist and empty likesmatlist and empty likesleslist }">
 				<td colspan="6">------ 찜 목록이 없습니다. ------</td>
 			</c:when>
 			<c:otherwise>
 	        	<c:if test="${not empty likesfaclist }">
+	        	<table border="1">
+						<tr>
+							<th>종목</th>
+							<th>이미지</th>
+							<th>시설/레슨명</th>
+							<th>리뷰개수</th>
+							<th>주소</th>
+							<th>찜여부</th>
+						</tr>
 		            <c:forEach items="${likesfaclist }" var="fac">
 	           			<tr>
 		            		<td>${fac.spoName}</td>
@@ -166,42 +248,56 @@
 		            		<td>${fac.facLocation }</td>
 		            		<td>이용자 리뷰 ${fac.cntReview }개</td>
 		            		<td>
-		            		<c:choose>
-				   				<c:when test="${fac.likesStatus eq 1 }">
 				   					<img id="dellikeBtn" idx="${fac.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-				   				</c:when>
-				   				<c:otherwise>
-				   					<img id="likeBtn" idx="${fac.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
-				   				</c:otherwise>
-				   			</c:choose>
 		            		</td>
 	            		</tr>
 		            </c:forEach>
+		            </table>
 	            </c:if>
 	            <c:if test="${not empty likesmatlist }">
+	            <table border="1">
+						<tr>
+							<th>날짜</th>
+							<th>시간</th>
+							<th>종목</th>
+							<th>총인원</th>
+							<th>제목</th>
+							<th>시설명</th>
+							<th>찜여부</th>
+						</tr>
 		            <c:forEach items="${likesmatlist }" var="mat">
+	           		
 	           			<tr>
-	           				<td><fmt:formatDate pattern="MM.dd" value="${mat.matchDate}"/></td>
+<%-- 	           				<td><fmt:formatDate pattern="MM.dd" value="${mat.matchRegdate}"/></td> --%>
+							<td>
+							<fmt:parseDate  value="${mat.matchRegdate}"
+								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+							<fmt:formatDate value="${parsedDateTime}" pattern="MM.dd" /></td>
+
 	           				<td>${mat.startTime } ~ ${mat.endTime }</td>
 		            		<td>${mat.spoName}</td>
 		            		<td>${mat.matchTotal }
-		            		<td><a href="/match/detail?matchSeq=${mat.matchSeq }">${mat.matchName }</a></td>
-		            		<td>${mat.matchLocation }</td>
+		            		<td><a href="/match/detail?matchSeq=${mat.matchSeq }">${mat.matchTitle }</a></td>
+		            		<td></td>
 		            		<td>
-		            		<c:choose>
-				   				<c:when test="${mat.likesStatus eq 1 }">
 				   					<img id="dellikeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-				   				</c:when>
-				   				<c:otherwise>
-				   					<img id="likeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
-				   				</c:otherwise>
-				   			</c:choose>
 		            		</td>
 	            		</tr>
 		            </c:forEach>
+		            </table>
 	            </c:if>
 	            <c:if test="${not empty likesleslist }">
+	            <table border="1">
+						<tr>
+							<th>종목</th>
+							<th>이미지</th>
+							<th>시설/레슨명</th>
+							<th>리뷰개수</th>
+							<th>주소</th>
+							<th>찜여부</th>
+						</tr>
 		            <c:forEach items="${likesleslist }" var="les">
+	           			
 	           			<tr>
 		            		<td>${les.spoName}</td>
 		            		<td><img width="100" src="${les.lesImgpath }"></td>
@@ -209,21 +305,14 @@
 		            		<td>${les.lesLocation }</td>
 		            		<td>이용자 리뷰 ${les.cntReview }개</td>
 		            		<td>
-		            		<c:choose>
-				   				<c:when test="${les.likesStatus eq 1 }">
 				   					<img id="dellikeBtn" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-				   				</c:when>
-				   				<c:otherwise>
-				   					<img id="likeBtn" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
-				   				</c:otherwise>
-				   			</c:choose>
 		            		</td>
 	            		</tr>
 		            </c:forEach>
+		            </table>
 	            </c:if>
 			</c:otherwise>
 		</c:choose>
-	</table>
 </div>
 
 <h2>1대1문의</h2>
