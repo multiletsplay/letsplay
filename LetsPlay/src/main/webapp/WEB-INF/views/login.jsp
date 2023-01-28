@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="header.jsp" %>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src = "https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -50,9 +45,9 @@
 		
 	}
 </script>
-</head>
-<body>
-	<div class="mainContent inner">
+<div class="container">
+	<div class="row">
+		<div class="mainContent">
   		<h2 class="section__title mb-40">Login</h2>
 		 <form>
    			<div class="inputBox">
@@ -62,7 +57,7 @@
       			  <input type="password" placeholder="비밀번호를 입력해주세요" id="password" name="password" label="Password">
      	     </div>
         	  <div class="mainBtn">
-         		   <button type="button id="login" onclick="login(); class="loginBtn">로그인</button>
+         		   <button class="loginBtn" type="button id="login" onclick="login()" >로그인</button>
            	  </div>
           </form>
           <div class="findAccount">
@@ -132,7 +127,9 @@ function kakaoLogin() {
            </div>
    	 </div>
 <div id="loginChk"></div>
-</body>
+				</div>
+			</div>
+
  <script type="text/javascript">
   	var naver_id_login = new naver_id_login("nlgdIwCIkJWqjjJYv6n7", "http://localhost:8787/");
       var state = naver_id_login.getUniqState();
@@ -141,4 +138,4 @@ function kakaoLogin() {
       naver_id_login.setState(state);
       naver_id_login.init_naver_id_login();
   </script>
-</html>
+<%@ include file="footer.jsp" %>
