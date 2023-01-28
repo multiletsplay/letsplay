@@ -164,11 +164,12 @@
 							<fmt:parseDate value="${dto.matchEnddate}" 
 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
 							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /></td>
-							<td>
 		</tr>
 		<tr>
 			<th>장  소</th>
 			<td>${dto.matchLocation }</td>
+			<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
+			
 		</tr>
 		<tr>
 			<th>매칭날짜</th>
