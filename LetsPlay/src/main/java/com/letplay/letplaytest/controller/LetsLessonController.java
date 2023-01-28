@@ -4,8 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +33,7 @@ import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.LikesDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
+import com.letplay.letplaytest.dto.TimeDto;
 
 @Controller
 @RequestMapping("/")
@@ -66,6 +70,8 @@ public class LetsLessonController {
 	public String lessonDetail(HttpServletRequest request, Model model, int lesSeq) {
 		HttpSession session = request.getSession();
 		MemberDto member = (MemberDto) session.getAttribute("login");
+
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", LessonBiz.selectLesson(lesSeq));
 		model.addAttribute("schlist", LessonBiz.selectSchedule(lesSeq));
 		model.addAttribute("like", likesBiz.selectles(lesSeq, member.getId()));
