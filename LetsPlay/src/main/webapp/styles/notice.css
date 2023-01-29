@@ -131,3 +131,12 @@
 	margin-top: 100px;
 	
 }
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination > li {
+	margin: auto 10px;
+}
