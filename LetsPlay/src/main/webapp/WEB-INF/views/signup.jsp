@@ -93,6 +93,15 @@
 			}
 		});
 	}
+	
+	function checkAll(){
+	    var isChecked = document.getElementById('chkAll').checked;
+	    var chks = document.getElementsByClassName('chk');
+	    for(let i=0; i<chks.length; i++){
+	     chks[i].checked = isChecked;
+	    }
+	  }
+	
 </script>
 
 <form action="/member/signup" method="post">
@@ -209,7 +218,7 @@
           <div class='agreementTitle'>
             <span class='agreementAsk'>이용약관동의</span>
             <span class='redColour'>*</span>
-            <label><span><input id='chkAll' type='checkbox' onClick={checkAll}></input></span>
+            <label><span><input id='chkAll' type='checkbox' onclick="checkAll();"></input></span>
             <span style="font-size:larger; font-weight:bold">전체 동의합니다.</span></label>
           </div>
         <div class='agreement'>
