@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="header.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
+<!-- <style type="text/css">
 	ul{list-style: none; }
 	li{float: left; margin-right: 10px;}
-</style>
+</style> -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 $(function() {
@@ -25,51 +21,39 @@ $(function() {
 		
 	})
 </script>
-</head>
-<body>
 <h2>공지사항</h2>
-<div class="div2"></div>
-<div class="div2">
 
+
+<div class='NoticeTop'>
+<div class='LetplNoticeMain'>
+<div class='LetplCompose'>
+	<input type="button" value="글쓰기" onclick="location.href='/notice/insertform'"/>
 </div>
+<div class='LetplNotice'>
+	<div class='LetplNum'>번호</div>
+	<div class='LetplWriter'>작성자</div>
+	<div class='LetplTitle'>제목</div>
+	<div class='LetplDate'>작성일</div>
+</div>
+<ul class='LetplList'>
+<c:choose>
+<c:when test="${empty noticelist }">
+<div>---- 공지사항이 없습니다 ----</div>
+</c:when>
+<c:otherwise>
+<c:forEach items="${noticelist}" var="notice">
+	<li>
+		<div class='listNum'>${notice.noticeSeq }</div>
+		<div class='listWriter'>${notice.id }</div>
+ 		<div class='listTitle'>${notice.noticeTitle }<a href="/notice/detail?noticeSeq=${notice.noticeSeq }"></a></div>
+ 		<div class='listDate'><fmt:formatDate value="${notice.noticeDate }" pattern="yyyy-MM-dd(E)" /></div>
+	</li>
+</c:forEach>
+</c:otherwise>
+</c:choose>	
+</ul>
 
 
-<div>
-	<table border="1">
-		<col width="100">
-		<col width="200">
-		<col width="400">
-		<col width="200">
-		<tr>
-			<th>NO</th>
-			<th>작성자</th>
-			<th>제목</th>
-			<th>작성날짜</th>
-		</tr>
-		<c:choose>
-			<c:when test="${empty noticelist }">
-				<tr>
-					<td colspan="4" align="center">---- 공지사항이 없습니다 ----</td>
-				</tr>
-			</c:when>
-			<c:otherwise>	
-				<c:forEach items="${noticelist}" var="notice">
-					<tr>
-						<td>${notice.noticeSeq }</td>
-						<td>${notice.id }</td>
-						<td><a href="/notice/detail?noticeSeq=${notice.noticeSeq }">${notice.noticeTitle }</a></td>
-						<td><fmt:formatDate value="${notice.noticeDate }" pattern="yyyy-MM-dd(E)" /></td>
-					</tr>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>	
-		<tr>
-			<td colspan="5" align="right">
-				<input type="button" value="글 작성" onclick="location.href='/notice/insertform'">
-			</td>
-		</tr>
-	</table>
-	</div>
 <div class="paging">
 	<form action="<c:url value='/notice/list'/>" name="pageForm">
 		<ul class="pagination" id="pagination">
@@ -87,5 +71,6 @@ $(function() {
         <input type="hidden" name="countPerPage" value="${paging.cri.amount}">
 	</form>
 </div>
-</body>
-</html>
+</div>
+</div>
+<%@ include file="footer.jsp" %>

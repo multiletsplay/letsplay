@@ -1,0 +1,133 @@
+.noticeMain {
+    display: flex;
+    justify-content: center;
+    height: 1500px;
+}
+
+.NoticeContainer {
+    margin-top: 100px;
+    position: relative;
+    width: 1100px;
+}
+
+.NoticeContainer > h5 {
+    font-weight: bolder;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.notice {
+    background-color: beige;
+    border-radius: 4px;
+    position: relative;
+    top: 90px;
+    height: 60px;
+    width: 100%;
+    margin-bottom: 50px;
+    box-shadow: 2px 2px 10px 0.1px grey;
+    cursor: pointer;
+    transition: all 300ms linear;
+}
+
+.notice:hover {
+    transform: scale(1.009);
+    transition: all 300ms linear;
+}
+
+.notice > h5 {
+    font-weight: 700;
+}
+
+.NoticeContainer p {
+    font-size: smaller;
+}
+
+.notice > div {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto 60px;
+}
+
+.LetplCompose {
+    float: right;
+    margin-top: 65px;
+}
+
+.LetplNotice {
+    margin-top: 100px;
+    padding: 20px 0px;
+    border-bottom: 1px solid rgb(51, 51, 51);
+    border-top: 2px solid rgb(51, 51, 51);
+    display: flex;
+}
+
+.LetplNum {
+	color: red;
+    flex-basis: 100px;
+    text-align: center;
+}
+
+.LetplWriter {
+    flex-basis: 100px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+}
+
+.LetplTitle {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.LetplDate {
+    flex-basis: 100px;
+    text-align: center;
+}
+
+.LetplList > li {
+    display: flex;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.listNum {
+    text-align: center;
+    padding: 20px 0px;
+    color: rgb(76, 76, 76);
+    flex-basis: 100px;
+}
+
+.listWriter {
+    text-align: center;
+    padding: 20px 0px;
+    color: rgb(76, 76, 76);
+    flex-basis: 100px;
+}
+
+.listTitle {
+    padding: 20px 0px 20px 50px;
+    color: rgb(76, 76, 76);
+    flex: 1 1 0%;
+    text-align: left;
+}
+
+.listDate {
+    text-align: center;
+    padding: 20px 0px;
+    flex-basis: 120px;
+    color: rgb(153, 153, 153);
+}
+
+.NoticeTop {
+	display: flex;
+	justify-content: center;
+}
+
+.LetplNoticeMain {
+	width: 1100px;
+	margin-top: 100px;
+	
+}

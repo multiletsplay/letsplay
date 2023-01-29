@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>SignUp</title>
-<link href="${pageContext.request.contextPath}/resources/css/signup.css" rel="stylesheet" type="text/css">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="header.jsp" %>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -98,13 +95,11 @@
 	}
 </script>
 
-</head>
-<body>
 <form action="/member/signup" method="post">
 	<div class='SigningMain inner'>
     <div class='Signing'>
         <div><h1>회원가입</h1></div>
-        <span style={{color:"red"}}>*필수입력사항</span>
+        <span style="color:red">*필수입력사항</span>
         <hr/>
         <div class='formBoxTop'>
         <div class='formBox'>
@@ -199,48 +194,48 @@
           <button type="button" id="phoneChkBtn">인증확인</button>
         </div>
         <div class='formBtn'>
-          <button name="gender" value="M">남자</button>
+          <button type="radio" name="gender" value="M">남자</button>
           <button name="gender" value="F">여자</button>
         </div>
         <div class='formDate'>
           <div>생년월일</div>
         <div class='formDate'>
-          <input type="date" name="birth" style={{paddingLeft:'80px'}}/>
+          <input type="date" name="birth" style="padding-left:80px"/>
         </div>
         </div>
         </div>
         </div>
-        <hr style={{marginTop:'25px', marginBottom:'10px'}}/>
+        <hr style="margin-top:25px; margin-bottom:10px"/>
           <div class='agreementTitle'>
             <span class='agreementAsk'>이용약관동의</span>
             <span class='redColour'>*</span>
-            <label><span><input id='chkAll' type={'checkbox'} onClick={checkAll}></input></span>
-            <span style={{fontSize:'larger', fontWeight:'bold'}}>전체 동의합니다.</span></label>
+            <label><span><input id='chkAll' type='checkbox' onClick={checkAll}></input></span>
+            <span style="font-size:larger; font-weight:bold">전체 동의합니다.</span></label>
           </div>
         <div class='agreement'>
           <div>
-            <label><span><input class='chk' type={'checkbox'}></input></span>
+            <label><span><input class='chk' type='checkbox'></input></span>
             <span>이용약관 동의(필수)</span></label>
           </div>
           <div>
-          <label><span><input class='chk' type={'checkbox'}></input></span>
+          <label><span><input class='chk' type='checkbox'></input></span>
             <span>개인정보 수집•이용 동의(필수)</span></label>
           </div>
           <div>
-          <label><span><input class='chk' type={'checkbox'}></input></span>
+          <label><span><input class='chk' type='checkbox'></input></span>
             <span>할인 쿠폰 등 혜택/정보 수신 동의(선택)</span></label>
           </div>
           <div>
-          <label><span><input class='chk' type={'checkbox'}></input></span>
+          <label><span><input class='chk' type='checkbox'></input></span>
             <span>만 14세 이상입니다.(필수)</span></label>
           </div>
           <div class='signUpBtn'>
-            <button id="signup" disabled={NotAllow} style={{width:'350px'}}>가입하기</button>
+            <button type="submit" id="signup" style="width:350px; cursor: pointer">가입하기</button>
           <div class='signUpLink'>
             <span>
              이미 가입하셨나요? &nbsp;
             </span>
-            <a>로그인하기</a>
+            <a href="/member/loginform">로그인하기</a>
           </div>
           </div>
         </div>
@@ -249,5 +244,4 @@
 
 
 </form>
-</body>
-</html>
+<%@ include file="footer.jsp" %>
