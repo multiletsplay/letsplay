@@ -21,11 +21,14 @@ $(function() {
 		
 	})
 </script>
-<h2>공지사항</h2>
-
 
 <div class='NoticeTop'>
 <div class='LetplNoticeMain'>
+
+<div class='noticeBanner'>
+<h2>공지사항</h2>
+</div>
+
 <div class='LetplCompose'>
 	<input type="button" value="글쓰기" onclick="location.href='/notice/insertform'"/>
 </div>
