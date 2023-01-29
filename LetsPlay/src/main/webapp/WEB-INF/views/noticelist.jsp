@@ -45,7 +45,7 @@ $(function() {
 	<li>
 		<div class='listNum'>${notice.noticeSeq }</div>
 		<div class='listWriter'>${notice.id }</div>
- 		<div class='listTitle'>${notice.noticeTitle }<a href="/notice/detail?noticeSeq=${notice.noticeSeq }"></a></div>
+ 		<a  class='listTitle' href="/notice/detail?noticeSeq=${notice.noticeSeq }">${notice.noticeTitle }</a>
  		<div class='listDate'><fmt:formatDate value="${notice.noticeDate }" pattern="yyyy-MM-dd(E)" /></div>
 	</li>
 </c:forEach>
