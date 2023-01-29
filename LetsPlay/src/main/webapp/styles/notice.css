@@ -65,7 +65,6 @@
 }
 
 .LetplNum {
-	color: red;
     flex-basis: 100px;
     text-align: center;
 }
@@ -130,4 +129,13 @@
 	width: 1100px;
 	margin-top: 100px;
 	
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination > li {
+	margin: auto 10px;
 }

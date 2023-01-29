@@ -93,6 +93,15 @@
 			}
 		});
 	}
+	
+	function checkAll(){
+	    var isChecked = document.getElementById('chkAll').checked;
+	    var chks = document.getElementsByClassName('chk');
+	    for(let i=0; i<chks.length; i++){
+	     chks[i].checked = isChecked;
+	    }
+	  }
+	
 </script>
 
 <form action="/member/signup" method="post">
@@ -190,7 +199,7 @@
           <input
           type="text"
 		 id="phoneChk"
-          value='인증번호를 입력해주세요'/>
+          placeholder='인증번호를 입력해주세요'/>
           <button type="button" id="phoneChkBtn">인증확인</button>
         </div>
         <div class='formBtn'>
@@ -209,25 +218,25 @@
           <div class='agreementTitle'>
             <span class='agreementAsk'>이용약관동의</span>
             <span class='redColour'>*</span>
-            <label><span><input id='chkAll' type='checkbox' onClick={checkAll}></input></span>
+            <label><span><input id='chkAll' type='checkbox' onclick="checkAll();"></input></span>
             <span style="font-size:larger; font-weight:bold">전체 동의합니다.</span></label>
           </div>
         <div class='agreement'>
           <div>
             <label><span><input class='chk' type='checkbox'></input></span>
-            <span>이용약관 동의(필수)</span></label>
+            <span class='agrChk'>이용약관 동의(필수)</span></label>
           </div>
           <div>
           <label><span><input class='chk' type='checkbox'></input></span>
-            <span>개인정보 수집•이용 동의(필수)</span></label>
+            <span class='agrChk'>개인정보 수집•이용 동의(필수)</span></label>
           </div>
           <div>
           <label><span><input class='chk' type='checkbox'></input></span>
-            <span>할인 쿠폰 등 혜택/정보 수신 동의(선택)</span></label>
+            <span class='agrChk'>할인 쿠폰 등 혜택/정보 수신 동의(선택)</span></label>
           </div>
           <div>
           <label><span><input class='chk' type='checkbox'></input></span>
-            <span>만 14세 이상입니다.(필수)</span></label>
+            <span class='agrChk'>만 14세 이상입니다.(필수)</span></label>
           </div>
           <div class='signUpBtn'>
             <button type="submit" id="signup" style="width:350px; cursor: pointer">가입하기</button>
