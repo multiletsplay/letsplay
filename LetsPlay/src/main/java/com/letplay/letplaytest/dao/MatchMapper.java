@@ -90,7 +90,7 @@ public interface MatchMapper {
 		" </script>"})
 	List<MatchDto> searchMatch(SearchDto dto);
 	
-	@Select(" SELECT m.*, s.SPO_NAME, NICKNAME, "
+	@Select(" SELECT m.*, s.SPO_NAME, NICKNAME, FAC_NAME, "
 			+ "	(SELECT COUNT(r.REP_SEQ)"
 			+ "		FROM REPLY r "
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
@@ -101,8 +101,8 @@ public interface MatchMapper {
 			+ "		FROM MATCH_JOIN j "
 			+ " WHERE j.MATCH_SEQ=#{matchSeq} AND j.id=#{id}) JOIN_STATUS "
 				+ " FROM "
-				+ "	MATCH_BOARD m, MEMBER mb, SPORTS s "
-				+ " WHERE m.ID=mb.ID AND m.SPO_ID=s.SPO_ID AND m.MATCH_SEQ=#{matchSeq} "
+				+ "	MATCH_BOARD m, MEMBER mb, SPORTS s, FACILITY f "
+				+ " WHERE m.ID=mb.ID AND m.SPO_ID=s.SPO_ID AND m.MATCH_SEQ=#{matchSeq} AND m.FAC_SEQ=f.FAC_SEQ "
 		
 				)
 
@@ -127,7 +127,7 @@ public interface MatchMapper {
 	List<MatchDto> selectEndList(int spoId);
 
 
-	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchLevel}, #{matchFacility}, DEFAULT, #{startTime}, #{endTime}, #{matchDay}) ")
+	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchLevel}, #{matchFacility}, DEFAULT, #{startTime}, #{endTime}, #{matchDay}, #{facSeq}) ")
 	int insertMatch(MatchDto dto);
 
 	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_ENDDATE=#{matchEnddate}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility},MATCH_DAY=#{matchDay}, START_TIME=#{startTime}, ENDTIME=#{endTime} WHERE MATCH_SEQ=#{matchSeq} ")

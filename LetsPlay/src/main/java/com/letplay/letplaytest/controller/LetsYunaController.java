@@ -97,8 +97,8 @@ public class LetsYunaController {
 		
 		//datetime -> 날짜와 시간으로 각각 나눠서 view에 전달
 		List<TimeDto> datelist = facBiz.selectTime(facSeq);
-		Map<TimeDto, List<String>> datetimeMap = new HashMap<TimeDto, List<String>>();
-		List<String> timelist = new ArrayList<String>();
+		//Map<TimeDto, List<String>> datetimeMap = new HashMap<TimeDto, List<String>>();
+		//List<String> timelist = new ArrayList<String>();
 		for(TimeDto dto : datelist) {
 			Date dt = dto.getDt();
 			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -107,8 +107,8 @@ public class LetsYunaController {
 			String time = ds.substring(11);
 			dto.setDate(date);
 			dto.setTime(time);
-			timelist.add(time);
-			datetimeMap.put(dto, null);
+			//timelist.add(time);
+			//datetimeMap.put(dto, null);
 		}
 //		List<List<String>> times = new ArrayList<>();
 //		int partitionSize = 24;
@@ -119,7 +119,7 @@ public class LetsYunaController {
 // 		for(TimeDto dto : datelist) {
 // 			datetimeMap.put(dto, times.get(0));
 // 		}
-		model.addAttribute("timeMap", datetimeMap);
+		//model.addAttribute("timeMap", datetimeMap);
 
 		model.addAttribute("time", datelist);
 		
@@ -245,7 +245,7 @@ public class LetsYunaController {
 		
 		if(facBiz.insertRes(dto)>0) {
 			model.addAttribute("msg", "예약 성공");
-			model.addAttribute("url", "/mypage");
+			model.addAttribute("url", "/member/mypage");
 			return "alert";
 		}else {
 			model.addAttribute("msg", "예약 실패");

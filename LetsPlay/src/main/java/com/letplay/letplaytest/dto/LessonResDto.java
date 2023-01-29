@@ -122,7 +122,7 @@ public class LessonResDto {
 	public void setResDatetime(Date resDatetime) {
 		this.resDatetime = resDatetime;
 	}
-	
+
 }
 
 

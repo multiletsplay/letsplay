@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
 <style type="text/css">
 	#updateBtn { visibility: hidden; }
 </style>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99a2faf19be558d2479cdc1cce8e0ae0&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(document).ready(function(){
@@ -20,9 +21,21 @@
 		
 		$("#pathfinding").click(pathFinding);
 		$("#likeBtn").click(like);
-		$("#dellikeBtn").click(dellike);
-		
-		
+		$("#dellikeBtn").click(dellike); 
+
+		$("#resDate").change(function(){
+			var selectBox = $("#resTime");
+	       	selectBox.children().remove();
+	        
+	       	const rdate = $("#resDate").val();
+	       	var date = rdate.toString();
+           	selectBox.append("<option value=''>=== 선택 ===</option>");
+           	<c:forEach var="time" items="${time }">
+           	<fmt:formatDate value="${time.dt}" pattern="yyyy-MM-dd" var="t"/>
+			if (date == '${t}')
+				selectBox.append("<option value='${time.time }' <c:if test='${time.resStatus eq 1}'>disabled='disabled'</c:if>>${time.time }</option>");
+			</c:forEach> 
+	    });
 	});
 	
 	function like(){
@@ -141,8 +154,10 @@
 			<th>날짜</th>
 			<td><input type="date" id="resDate" name="resDate"></td>
 			<th>시간</th>
-			<td><input type="time" id="resStarttime" name="resStarttime">
-				
+			<td><!-- <input type="time" id="resStarttime" name="resStarttime"> -->
+				<select id="resTime" name="resStarttime">
+					<option value="">=== 시간 ===</option>
+				</select>
 			</td>
 		</tr>
 		<tr>

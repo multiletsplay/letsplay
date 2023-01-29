@@ -163,5 +163,6 @@ public class LessonDto {
 	public void setCntReview(int cntReview) {
 		this.cntReview = cntReview;
 	}
+
 	
 }

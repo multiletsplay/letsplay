@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,7 @@
 		$("#pathfinding").click(pathFinding);
 		$("#likeBtn").click(like);
 		$("#dellikeBtn").click(dellike);
+		
 	});
 	
 	function pathFinding(){
@@ -122,10 +124,10 @@
 			<td><input type="date" name="resDate"></td>
 			<th>시간</th>
 			<td>
-				<select name="resStarttime">
+				<select name="resStarttime" id="resTime">
 					<option value="">시간을 선택해주세요</option>
 					<c:forEach items="${schlist }" var="sch">
-						<option value="${sch.schStarttime }">${sch.schStarttime } ~ ${sch.schEndtime }</option>
+						<option value="${sch.schStarttime }" <c:if test='${sch.cntRes eq sch.schPeople}'>disabled='disabled'</c:if>>${sch.schStarttime } ~ ${sch.schEndtime }</option>
 					</c:forEach>
 				</select>
 			</td>
