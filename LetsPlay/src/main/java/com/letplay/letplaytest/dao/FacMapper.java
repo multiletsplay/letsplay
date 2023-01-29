@@ -41,8 +41,7 @@ public interface FacMapper {
 	FacDto selectFac(int facSeq);
 	
 	@Select(" SELECT d.DT, IF(d.DT = fr.RES_DATE, 1, 0) AS RES_STATUS "
-			+ " FROM DETM d, FACILITY_RESERVATION fr"
-			+ " WHERE fr.FAC_SEQ = #{facSeq} ")
+			+ " FROM DETM d LEFT OUTER JOIN FACILITY_RESERVATION fr ON fr.FAC_SEQ = #{facSeq} ")
 	List<TimeDto> selectTime(int facSeq);
 	
 	@Delete(" DELETE FROM FACILITY WHERE FAC_SEQ = #{facSeq} ")
