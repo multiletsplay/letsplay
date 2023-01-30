@@ -251,7 +251,7 @@
 																	<c:when test="${review.revRate ==2}" ><span class="star">⭐⭐</span></c:when>
 																	<c:when test="${review.revRate ==3}" ><span class="star">⭐⭐⭐</span></c:when>
 																	<c:when test="${review.revRate ==4}" ><span class="star">⭐⭐⭐⭐</span></c:when>
-																	<c:otherwise ><span>⭐⭐⭐⭐⭐</span></c:otherwise>
+																	<c:otherwise ><span class="star">⭐⭐⭐⭐⭐</span></c:otherwise>
 																</c:choose>
 															</div>	
 	
@@ -262,6 +262,7 @@
 											
 							
 										</div>
+										<p onclick="location.href='/facility/list'">목록</p>
 									</div>
 								</div>
 								</main>

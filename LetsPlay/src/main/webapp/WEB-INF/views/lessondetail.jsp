@@ -108,29 +108,39 @@
 							<h4>상세정보</h4>
 							<div>
 								<div class="tel">
-									<p>시설 전화 번호 : </p>
 									<p>${dto.lesContact}</p>
 								</div>
 
 
-									<p>레슨 종류</p>
+								<h4>레슨 종류</h4>
 									<c:choose>
 										<c:when test="${dto.lesType eq 'personal' }">
-											<p>개인</p>
+											<div class="icon_list">
+												<span class="material-symbols-outlined fill">person</span>
+												<span>개인</span>
+											</div>
 										</c:when>
 										<c:otherwise>
-											<p>그룹</p>
+											<div class="icon_list">
+												<span class="material-symbols-outlined fill">groups</span>
+												<span>그룹</span>
+											</div>
 										</c:otherwise>
 									</c:choose>
 
 
-									<p>레슨 종류</p>
 									<c:choose>
 										<c:when test="${dto.lesWeekend eq 'weekday' }">
-											<p>평일</p>
+											<div class="icon_list">
+												<span class="material-symbols-outlined fill">date_range</span>
+												<span>평일</span>
+											</div>
 										</c:when>
 										<c:otherwise>
-											<p>주말</p>
+											<div class="icon_list">
+												<span class="material-symbols-outlined fill">event</span>
+												<span>주말</span>
+											</div>
 										</c:otherwise>
 									</c:choose>
 
@@ -144,33 +154,36 @@
 							<h4>주의사항</h4>
 							<div>상세정보 어쩌구 저쩌고상세정보 어쩌구 저쩌고상세정보 어쩌구 저쩌고</div>
 						</div> -->
-						<h4 style="margin: 40px auto;">후기</h4>
+						
 						<div class="comment">
+							<h4 style="margin: 40px auto;">후기</h4>
 							<c:choose>
 								<c:when test="${empty reviewlist }">
-										<td colspan="3">------ 후기가 없습니다. ------</td>
+										<div>이 레슨에 대한 후기가 아직 없어요, 후기를 남겨주세요!</div>
 								</c:when>
 								<c:otherwise>
 										<c:forEach items="${reviewlist }" var="review">
-											<div>
+											<div class="review-list">
 												<h5>${review.nickname}</h5>
 												<span>${review.revContent }</span>
-											</div>	
-
+											
 												<c:choose>
-													<c:when test="${review.revRate ==1}" ><span>⭐</span></c:when>
-													<c:when test="${review.revRate ==2}" ><span>⭐⭐</span></c:when>
-													<c:when test="${review.revRate ==3}" ><span>⭐⭐⭐</span></c:when>
-													<c:when test="${review.revRate ==4}" ><span>⭐⭐⭐⭐</span></c:when>
-													<c:otherwise ><span>⭐⭐⭐⭐⭐</span></c:otherwise>
+													<c:when test="${review.revRate ==1}" ><span class="star">⭐</span></c:when>
+													<c:when test="${review.revRate ==2}" ><span class="star">⭐⭐</span></c:when>
+													<c:when test="${review.revRate ==3}" ><span class="star">⭐⭐⭐</span></c:when>
+													<c:when test="${review.revRate ==4}" ><span class="star">⭐⭐⭐⭐</span></c:when>
+													<c:otherwise ><span class="star">⭐⭐⭐⭐⭐</span></c:otherwise>
 												</c:choose>
+												</div>	
+
 										</c:forEach>
 								</c:otherwise>
 						</c:choose>
 							
 			
 						</div>
-						<input type="button" value="목록" onclick="location.href='/lesson/list'">
+						<p style="margin-top: 20px;" onclick="location.href='/lesson/list'">목록</p>
+						<!-- <input type="button" value="목록" class="list_btn" onclick="location.href='/lesson/list'"> -->
 					</div>
 				</div>
 				</main>
