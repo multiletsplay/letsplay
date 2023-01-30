@@ -317,6 +317,7 @@
 		</c:choose>
 </div>
 
+<hr>
 <h2>1대1문의</h2>
 	<table border="1">
 		<tr>
