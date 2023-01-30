@@ -176,6 +176,32 @@ public class LetsMemberController {
 		return "mypage";
 	}
 	
+	@GetMapping("/cancelfacres")
+	public String cancelFacres(Model model, String resId) {
+		if(facbiz.cancelres(resId)>0) {
+			model.addAttribute("msg", "취소 성공");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
+		}else {
+			model.addAttribute("msg", "취소 실패");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
+		}
+	}
+	
+	@GetMapping("/cancellesres")
+	public String cancelLesres(Model model, String resId) {
+		if(lessonbiz.cancelres(resId)>0) {
+			model.addAttribute("msg", "취소 성공");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
+		}else {
+			model.addAttribute("msg", "취소 실패");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
+		}
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/phoneAuth", method=RequestMethod.POST)
 	public Boolean phoneAuth(String tel, HttpSession session) {

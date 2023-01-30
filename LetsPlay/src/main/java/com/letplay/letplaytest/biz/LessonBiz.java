@@ -18,5 +18,6 @@ public interface LessonBiz {
 	public List<LessonSchDto> selectSchedule(int lesSeq);	//레슨 스케줄 불러오기
 	
 	public int insertRes(LessonResDto dto);
+	public int cancelres(String resId);
 	
 }
