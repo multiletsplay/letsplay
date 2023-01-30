@@ -67,7 +67,6 @@ public class LetsLessonController {
 		return "lessonlist";
 	}
 	
-	//시설 검색	
 	@GetMapping("/lesson/search")
 	public String searchfac(HttpServletRequest request, Model model, SearchDto dto) {
 		HttpSession session = request.getSession();

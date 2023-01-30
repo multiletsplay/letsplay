@@ -79,5 +79,4 @@ public class LessonImpl implements LessonBiz{
 	public List<LessonDto> searchLes(SearchDto dto) {
 		return lessonMapper.searchLesson(dto);
 	}
-
 }
