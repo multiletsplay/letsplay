@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!-- <style type="text/css">
 	ul{list-style: none; }
 	li{float: left; margin-right: 10px;}
 </style> -->
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 $(function() {
@@ -20,12 +22,32 @@ $(function() {
 		});
 		
 	})
-</script>
-<h2>공지사항</h2>
+	
+	function fn1(){
+	if (confirm("게시글을 삭제하시겠습니까?")) {
+		location.href='/notice/delete?noticeSeq=${dto.noticeSeq}'
+	}
+};
 
+	function showContent() {
+		console.log("clicked")
+		var Contents = document.getElementById('PersonalResult');
+		if(Contents.style.display === 'block'){
+			Contents.style.display = 'none';
+		}else {
+			Contents.style.display = 'block';
+		}
+	}
+
+</script>
 
 <div class='NoticeTop'>
 <div class='LetplNoticeMain'>
+
+<div class='noticeBanner'>
+<h2>공지사항</h2>
+</div>
+
 <div class='LetplCompose'>
 	<input type="button" value="글쓰기" onclick="location.href='/notice/insertform'"/>
 </div>
@@ -42,12 +64,21 @@ $(function() {
 </c:when>
 <c:otherwise>
 <c:forEach items="${noticelist}" var="notice">
+	<div id='listSection'>
 	<li>
 		<div class='listNum'>${notice.noticeSeq }</div>
 		<div class='listWriter'>${notice.id }</div>
- 		<a  class='listTitle' href="/notice/detail?noticeSeq=${notice.noticeSeq }">${notice.noticeTitle }</a>
+ 		<div  class='listTitle' onclick='showContent();'>${notice.noticeTitle }</div>
  		<div class='listDate'><fmt:formatDate value="${notice.noticeDate }" pattern="yyyy-MM-dd(E)" /></div>
 	</li>
+	<div id='PersonalResult'>
+        <div>${notice.noticeContent }</div>
+        <div class='modBtn'>
+          <button type="button" onclick="location.href='/notice/updateform?noticeSeq=${notice.noticeSeq}'">수정</button>
+       	  <button style='margin-right:15px;' type="button" onclick="javascript:fn1();">삭제</button>
+        </div>
+      </div>
+      </div>
 </c:forEach>
 </c:otherwise>
 </c:choose>	
