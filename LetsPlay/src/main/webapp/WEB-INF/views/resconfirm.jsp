@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	#payment-submit{ display:none;}
-</style>
+<%@ include file="header.jsp" %>  
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
@@ -50,11 +43,69 @@ function requestPay() {
     });
   }
 </script>
-</head>
-<body>
-<h1>예약 상세정보</h1>
+
+<div class="container inner pt40">
+	<div class="row">
+		<p class="bookicon"><span class="material-symbols-outlined">receipt_long</span></p>
+
+<div class="book_wrap">
 <form action="/facility/payment" method="post" id="payment-form">
-<input type="hidden" name="resId" value="${dto.resId }">
+	<input type="hidden" name="resId" value="${dto.resId }">
+<input type="hidden" name="id" value="${member.id }">
+<input type="hidden" name="facSeq" value="${dto.facSeq }">
+	<h3>예약 상세정보</h3>
+	<div class="info__detail">
+		<p>${dto.facName }</p>
+		<p><img src="${dto.facImgpath }"></p>
+		<ul>
+			<li>
+				<p>주소</p>
+				<p class="">${dto.facLocation }</p>
+			</li>
+			<li>
+				<p>시설 전화번호</p>
+				<p>${dto.facContact }</p>
+			</li>
+		</ul>
+	</div>
+
+	<div class="book__detail">
+			<ul>
+			<li>
+				<p>이름(닉네임)</p>
+				<p>${member.name }(${member.nickname })</p>
+			</li>
+			<li>
+				<p>휴대폰</p>
+				<p>${member.phone }</p>
+			</li>
+			<li>
+				<p>이메일</p>
+				<p>${member.email }</p>
+			</li>
+			<li>
+				<p>예약날짜</p>
+				<p>${dto.resDate }</p>
+			</li>
+			<li>
+				<p>시작시간</p>
+				<p>${dto.resStarttime }</p>
+			</li>
+		</ul>
+	</div>
+
+	
+	
+	<div class="pay__detail">
+		<p>결제 예정 금액</p>
+		<p><input type="hidden" name="resPrice" value="${dto.resPrice }">${dto.resPrice }<span style="color: var(--font);"> 원</span></p>
+	</div>
+
+	<div>
+		<input type="button" value="결제하기" onclick="requestPay()" class="pay_Btn">
+		<input type="submit" id="payment-submit">
+	</div>
+<!-- <input type="hidden" name="resId" value="${dto.resId }">
 <input type="hidden" name="id" value="${member.id }">
 <input type="hidden" name="facSeq" value="${dto.facSeq }">
 	<table class="reservation-table" border="1">
@@ -91,7 +142,9 @@ function requestPay() {
 				<input type="submit" id="payment-submit">
 			</td>
 		</tr>
-	</table>
+	</table> -->
 </form>
-</body>
-</html>
+</div>
+</div>
+</div>
+<%@ include file="footer.jsp" %>  
