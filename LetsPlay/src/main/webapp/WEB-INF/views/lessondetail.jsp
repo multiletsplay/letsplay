@@ -2,14 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>LessonDetail</title>
-<style type="text/css">
-	#updateBtn { visibility: hidden; }
-</style>
+<%@ include file="header.jsp" %>    
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
@@ -77,10 +71,165 @@
 		});
 	}
 </script>
-</head>
-<body>
+<div class="container inner pt40">
+
 <form action="/lesson/reserve" method="POST">
+<div class="m40 row">
 <input type="hidden" name="lesSeq" value="${dto.lesSeq }">
+<div class="col-lg-8">
+	<input type="button" id="updateBtn" value="레슨 수정" onclick="location.href='/lesson/updateform?lesSeq=${dto.lesSeq}'">
+	<div>
+		<div class="match_detail_lay">
+			<main>
+				<div class="main-content">
+					<span class="sport-type">
+						<button>${dto.spoName }</button>
+					</span>
+					<h2>${dto.lesName }</h2>
+					<h5 style="margin-bottom: 30px;">강사명 : ${dto.lesTeacher}</h5>
+					<div class="carousel slide" style="margin-bottom: 20px;">
+						<div class="carousel-inner">
+							<div class="carousel-item active carousel-item-start">
+								<img class="d-block w-100" src="${dto.lesImgpath }" alt="${dto.lesImgpath }">
+							</div>
+						</div>
+						
+						<!-- <ul class="df">
+							<li class="match-category">참가비</li>
+							<li class="match-category">상세정보</li>
+							<li class="match-category">주의사항</li>
+							<li class="match-category">추천시설</li>
+						</ul> -->
+						<h4 style="margin-bottom: 7px; font-weight: bold;">레슨비</h4>
+						
+						<div><strong style="font-size: x-large; color: rgb(232, 13, 13);">${dto.lesCost}</strong> 원/시간</div>
+				
+						<div class="info">
+							<h4>상세정보</h4>
+							<div>
+								<div class="tel">
+									<p>${dto.lesContact}</p>
+								</div>
+
+
+								<h4>레슨 종류</h4>
+									<c:choose>
+										<c:when test="${dto.lesType eq 'personal' }">
+											<div class="icon_list">
+												<span class="material-symbols-outlined fill">person</span>
+												<span>개인</span>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="icon_list">
+												<span class="material-symbols-outlined fill">groups</span>
+												<span>그룹</span>
+											</div>
+										</c:otherwise>
+									</c:choose>
+
+
+									<c:choose>
+										<c:when test="${dto.lesWeekend eq 'weekday' }">
+											<div class="icon_list">
+												<span class="material-symbols-outlined fill">date_range</span>
+												<span>평일</span>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="icon_list">
+												<span class="material-symbols-outlined fill">event</span>
+												<span>주말</span>
+											</div>
+										</c:otherwise>
+									</c:choose>
+
+
+								
+
+							</div>
+						</div>
+						<!--<hr>
+						 <div class="info">
+							<h4>주의사항</h4>
+							<div>상세정보 어쩌구 저쩌고상세정보 어쩌구 저쩌고상세정보 어쩌구 저쩌고</div>
+						</div> -->
+						
+						<div class="comment">
+							<h4 style="margin: 40px auto;">후기</h4>
+							<c:choose>
+								<c:when test="${empty reviewlist }">
+										<div>이 레슨에 대한 후기가 아직 없어요, 후기를 남겨주세요!</div>
+								</c:when>
+								<c:otherwise>
+										<c:forEach items="${reviewlist }" var="review">
+											<div class="review-list">
+												<h5>${review.nickname}</h5>
+												<span>${review.revContent }</span>
+											
+												<c:choose>
+													<c:when test="${review.revRate ==1}" ><span class="star">⭐</span></c:when>
+													<c:when test="${review.revRate ==2}" ><span class="star">⭐⭐</span></c:when>
+													<c:when test="${review.revRate ==3}" ><span class="star">⭐⭐⭐</span></c:when>
+													<c:when test="${review.revRate ==4}" ><span class="star">⭐⭐⭐⭐</span></c:when>
+													<c:otherwise ><span class="star">⭐⭐⭐⭐⭐</span></c:otherwise>
+												</c:choose>
+												</div>	
+
+										</c:forEach>
+								</c:otherwise>
+						</c:choose>
+							
+			
+						</div>
+						<p style="margin-top: 20px;" onclick="location.href='/lesson/list'">목록</p>
+						<!-- <input type="button" value="목록" class="list_btn" onclick="location.href='/lesson/list'"> -->
+					</div>
+				</div>
+				</main>
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-lg-4">
+		<div class="main-banner">
+	
+
+			<div>
+				<div class="favorite">
+					<c:choose>
+						<c:when test="${like == 0}">
+							<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+						</c:when>
+						<c:otherwise>
+							<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div class="check-display">LESSON</div>
+				<h3 style="margin-bottom: 10px;">${dto.lesName }</h3>
+				<div style="margin-bottom: 3px;" name="facLocation">${dto.lesLocation}</div>
+				<div style="margin-bottom: 15px;" class="location__btn"><input type="button" value="길찾기" id="pathfinding"></div>
+				<div style="font-size: small;"><input type="date" id="resDate" data-placeholder="날짜 선택" name="resDate"></div>
+				<!-- <h3 style="margin-bottom: 15px;">2022.12.30(수)</h3> -->
+				<div class="time" style="font-size: small; margin-bottom: 7px;">
+					<select name="resStarttime" id="resTime">
+						<option value="">시간을 선택해주세요</option>
+						<c:forEach items="${schlist }" var="sch">
+							<option value="${sch.schStarttime }" <c:if test='${sch.cntRes eq sch.schPeople}'>disabled='disabled'</c:if>>${sch.schStarttime } ~ ${sch.schEndtime }</option>
+						</c:forEach>
+					</select>
+				</div>
+				<!-- <button style="border-radius: 10%; border-style: none; background-color: gold; margin-bottom: 17px; padding: 5px 8px;">11:30</button> -->
+				<div>
+					<input type="submit" value="예약하기" class="re__Btn" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--
 	<table border="1">
 		<tr>
 			<td>
@@ -166,8 +315,9 @@
 			</td>
 		</tr>
 	</table>
+	-->
 	</form>
-<hr>
+	<!--
 <h3>후기</h3>
 <table border="1">
 	<tr>
@@ -196,5 +346,7 @@
         </c:otherwise>
     </c:choose>
 </table>
-</body>
-</html>
+-->
+</div>
+</div>
+<%@ include file="footer.jsp" %>
