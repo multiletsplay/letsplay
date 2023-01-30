@@ -68,3 +68,138 @@
   flex-direction: column;
   text-align: center;
 }
+
+.mypageWrapper {
+	height: 1300px;
+	display: flex;
+	justify-content: center;
+}
+
+.tab_menu {
+	width:1140px;
+	position: relative;
+}
+
+.tab_menu > ul {
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	margin-top:50px;
+	position: relative;
+	height: 1300px;
+}
+
+.tab_menu > ul > li > a > h2 {
+	border: none;
+    background-color: transparent;
+    padding: 8px;
+    font-size: .95rem;
+    text-align: left;
+}
+
+.cont {
+	position: absolute;
+	left: 150px;
+	top: 8px;
+	width: 86.9%;
+	height: auto;
+}
+
+.memberProfile {
+	margin-top: 20px;
+}
+
+.memberMod {
+	margin-bottom: 20px;
+}
+
+.memberMod > p {
+	font-size: 0.8em;
+}
+
+.memberMod > div {
+	border: 2px solid #ddd;
+    border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+}
+
+#nickname {
+	border-radius: 15px;
+    padding: 15px;
+    width: 90%;
+	border: 2px solid #ddd;
+}
+
+#nicknameChk {
+	transform: translate(15%);
+	border-radius: 8px;
+	border: none;
+	background-color: var(--primary);
+    color: #fff;
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+#Email {
+	border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+	border: 2px solid #ddd;
+}
+
+#clientName {
+	border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+	border: 2px solid #ddd;
+}
+
+#clientNum {
+	border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+	border: 2px solid #ddd;
+}
+
+#confirmMod {
+	float: right;
+	margin-top: 30px;
+	border-radius: 8px;
+	border: none;
+	background-color: var(--primary);
+    color: #fff;
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+#withdrawl {
+	position: absolute;
+	left: 40%;
+	top: 1000px;
+	border-radius: 8px;
+	width: 200px;
+	height: 50px;
+	background-color: red;
+	color: white;
+	border-style: none;
+	font-weight: 600;
+	font-size: larger;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
