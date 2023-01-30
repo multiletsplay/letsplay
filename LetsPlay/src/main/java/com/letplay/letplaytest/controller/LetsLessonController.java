@@ -33,6 +33,7 @@ import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.LikesDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
+import com.letplay.letplaytest.dto.SearchDto;
 import com.letplay.letplaytest.dto.TimeDto;
 
 @Controller
@@ -63,6 +64,17 @@ public class LetsLessonController {
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("lessonlist", LessonBiz.selectSports(member.getId(), spoId));
+		return "lessonlist";
+	}
+	
+	//시설 검색	
+	@GetMapping("/lesson/search")
+	public String searchfac(HttpServletRequest request, Model model, SearchDto dto) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
+		dto.setId(member.getId());
+		model.addAttribute("lessonlist", LessonBiz.searchLes(dto));
 		return "lessonlist";
 	}
 	

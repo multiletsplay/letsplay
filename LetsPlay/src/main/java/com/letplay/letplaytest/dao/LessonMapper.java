@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.LessonSchDto;
-import com.letplay.letplaytest.dto.TimeDto;
+import com.letplay.letplaytest.dto.SearchDto;
 
 @Mapper
 public interface LessonMapper {
@@ -81,11 +81,13 @@ public interface LessonMapper {
 			" <where>",
 			" 	<if test='searchRegion1 != null'>LES_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
 			"	<if test='searchRegion2 != null'>AND LES_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
-			" 	<if test='optCost.equals(\"T\")'>AND FAC_COSTCHECK=#{optCost} </if> ",
-			" 	<if test='optCost.equals(\"F\")'>AND FAC_COSTCHECK=FALSE </if> ",
+			" 	<if test='optType != null'>AND LES_TYPE=#{optType} </if> ",
+			//" 	<if test='optType.equals(\"G\")'>AND LES_TYPE='group' </if> ",
+			" 	<if test='optWeekend != null'>AND LES_WEEKEND=#{optWeekend} </if> ",
+			//" 	<if test='optWeekend.equals(\"W\")'>AND LES_WEEKEND='weekend' </if> ",
 			" </where> ",
 			" GROUP BY l.LES_SEQ ",
 			" </script>" })
-	List<LessonDto> searchLesson(String id);
+	List<LessonDto> searchLesson(SearchDto dto);
 
 }

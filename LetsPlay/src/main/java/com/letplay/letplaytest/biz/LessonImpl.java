@@ -13,6 +13,7 @@ import com.letplay.letplaytest.dao.LessonMapper;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.LessonSchDto;
+import com.letplay.letplaytest.dto.SearchDto;
 
 @Service
 public class LessonImpl implements LessonBiz{
@@ -74,8 +75,9 @@ public class LessonImpl implements LessonBiz{
 		return lessonMapper.cancelRes(resId);
 	}
 
-	//@Override
-	//public LessonResDto selectLesRes(int lesSeq, String id, Date resDate, String resStarttime) {
-	//	return lessonMapper.selectLesRes(lesSeq, id, resDate, resStarttime);
-	//}
+	@Override
+	public List<LessonDto> searchLes(SearchDto dto) {
+		return lessonMapper.searchLesson(dto);
+	}
+
 }
