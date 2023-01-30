@@ -50,3 +50,92 @@
     justify-content: space-between;
     margin: auto 60px;
 }
+
+.LetplCompose {
+    float: right;
+    margin-top: 65px;
+}
+
+.LetplNotice {
+    margin-top: 100px;
+    padding: 20px 0px;
+    border-bottom: 1px solid rgb(51, 51, 51);
+    border-top: 2px solid rgb(51, 51, 51);
+    display: flex;
+}
+
+.LetplNum {
+    flex-basis: 100px;
+    text-align: center;
+}
+
+.LetplWriter {
+    flex-basis: 100px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+}
+
+.LetplTitle {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.LetplDate {
+    flex-basis: 100px;
+    text-align: center;
+}
+
+.LetplList > li {
+    display: flex;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.listNum {
+    text-align: center;
+    padding: 20px 0px;
+    color: rgb(76, 76, 76);
+    flex-basis: 100px;
+}
+
+.listWriter {
+    text-align: center;
+    padding: 20px 0px;
+    color: rgb(76, 76, 76);
+    flex-basis: 100px;
+}
+
+.listTitle {
+    padding: 20px 0px 20px 50px;
+    color: rgb(76, 76, 76);
+    flex: 1 1 0%;
+    text-align: left;
+}
+
+.listDate {
+    text-align: center;
+    padding: 20px 0px;
+    flex-basis: 120px;
+    color: rgb(153, 153, 153);
+}
+
+.NoticeTop {
+	display: flex;
+	justify-content: center;
+}
+
+.LetplNoticeMain {
+	width: 1100px;
+	margin-top: 100px;
+	
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination > li {
+	margin: auto 10px;
+}

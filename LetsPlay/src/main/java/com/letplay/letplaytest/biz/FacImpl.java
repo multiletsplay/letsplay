@@ -77,6 +77,11 @@ public class FacImpl implements FacBiz{
 		return facMapper.selectTime(facSeq);
 	}
 
+	@Override
+	public int cancelres(String resId) {
+		return facMapper.cancelRes(resId);
+	}
+
 //	@Override
 //	public FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime) {
 //		return facMapper.selectRes(facSeq, id, resDate, resStarttime);

@@ -61,7 +61,6 @@ public class LetsMatchController {
 				Duration duration = Duration.between(matchEnddate, matchRegdate);
 				int days = ((int) duration.toDays()-1)*-1;
 				dto.setdDay(days);
-				System.out.println("Remaining days: " + days);
 				dDayMap.put(dto, days);
 			}
 			model.addAttribute("ddays", dDayMap);
@@ -190,9 +189,11 @@ public class LetsMatchController {
 		}
 		
 		@PostMapping("/match/insertreply")
-		public String insertReply(String repContent, String id, int matchSeq) {
+		public String insertReply(HttpServletRequest request, String repContent, int matchSeq, Model model) {
+			HttpSession session = request.getSession();
+			MemberDto member = (MemberDto) session.getAttribute("login");
+			String id = member.getId();
 			if(matchBiz.insertReply(repContent, id, matchSeq)>0) {
-//				matchBiz.cntReply(matchSeq);
 				return "redirect:/match/detail?matchSeq=" + matchSeq;
 			}else {
 				return "redirect:/match/detail?matchSeq=" + matchSeq;

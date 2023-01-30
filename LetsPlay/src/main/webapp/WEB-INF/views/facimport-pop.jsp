@@ -9,15 +9,21 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$("#selectBtn").click(selectfac);
+});
 function selectfac() {
-	  var facSeq = $("#facSeq").val();
-	  var facName = $("#facname").val();
 
+	  var facSeq = $(this).prop('idx');
+	  var facName = $(this).prop('fname');
+
+	  console.log(facSeq);
+	  console.log(facName);
 	  var parent = window.opener;
 	  window.opener.document.getElementById("facSeq").value = facSeq;
 	  window.opener.document.getElementById("facname").value = facName;
 
-	self.close();
+// 	self.close();
 	}
 </script>
 </head>
@@ -42,8 +48,7 @@ function selectfac() {
 		            		<td>${dto.resDatetime }</td>
 		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }"><input type="text" value="${dto.facName }" id="facname"></a></td>
 		            		<td>${dto.facLocation }</td>
-		            		<td><input type="button" value="시설 선택" onclick="selectfac()"></td>
-		            		<td><input type="hidden" value="${dto.facSeq }" id="facSeq" ></td>
+		            		<td><input type="button" value="시설 선택" idx="${dto.facSeq }" fname="${dto.facName }" id="selectBtn"></td>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>
