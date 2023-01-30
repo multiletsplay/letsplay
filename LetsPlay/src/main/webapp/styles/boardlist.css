@@ -294,6 +294,14 @@ input.value {
   cursor: pointer;
   margin-right: 10px;
   position: relative;
+  line-height: 45px;
+}
+
+.filter-btn input{
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 0.9rem;
 }
 
 
@@ -304,11 +312,6 @@ input.value {
   color: var(--primary);
   display: inline-block;
 }
-
-.filter-btn span:first-child{
-  margin-right:5px;
-}
-
 
 
 .wrap-filter{
@@ -422,13 +425,72 @@ ul{ list-style:none; }
   left: 10px;
 }
 
-.facility-list-fl{
+.facility-list-fl, .lesson-list-l{
   float: left;
   margin-right: 5px;
   width: 24.5%;
 }
 
-.facility-list-fl:nth-child(4n){
+.facility-list-fl:nth-child(4n+1){
   margin-right: 0px;
+}
 
+.lesson-list-l:nth-child(4n){
+  margin-right:0px;
+}
+
+.wrap__filter{
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+#facility-search form{
+  display: flex;
+  justify-content: space-between;
+}
+
+.search__location div{
+  float: left;
+  margin-right:20px;
+}
+.search__location h4, .search__options h4{
+  margin-bottom: 10px;
+}
+.search__location select{
+  padding: 10px;
+  width: 150px;
+}
+
+
+.search__options .list-facility{
+  display: flex;
+}
+
+
+.list-facility li label {
+  display: block;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  font-size: 12px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 34px;
+  letter-spacing: -.5px;
+  text-align: center;
+  color: #656565;
+  padding: 2px 15px;
+  margin-right: 5px;
+}
+
+
+
+.list-facility li input:checked+label {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.list-facility li input{
+  display: none;
 }

@@ -104,8 +104,8 @@
 		});
 	}
 </script>
-		<div class="container inner">
-			<input type="button" id="updateBtn" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
+		<div class="container inner pt40">
+			<p class="Mbtn"><input type="button" id="updateBtn" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'"></p>
 			<form action="/facility/reserve" method="POST">
 			<div class="m40 row">
 				<input type="hidden" name="facSeq" value="${dto.facSeq }" >
@@ -125,13 +125,13 @@
 											</div>
 										</div>
 										
-										<!-- <ul>
+										<ul class="df">
 											<li class="match-category">참가비</li>
 											<li class="match-category">상세정보</li>
 											<li class="match-category">주의사항</li>
 											<li class="match-category">추천시설</li>
-										</ul> -->
-										<h4 style="margin-bottom: 7px; font-weight: bold;">레슨비/시설비</h4>
+										</ul>
+										<h4 style="margin-bottom: 7px; font-weight: bold;">시설비</h4>
 										
 										<div><strong style="font-size: x-large; color: rgb(232, 13, 13);">${dto.facCost }</strong>원/시간</div>
 								
@@ -221,8 +221,9 @@
 							
 										</div>
 									</div>
+								</div>
 								</main>
-							
+								
 							</div>
 						</div>
 					</div>
@@ -241,15 +242,15 @@
 							</div>
 		
 							<div>
-								<div class="check-display">시설확정</div>
+								<div class="check-display">FACILITY</div>
 								<h3 style="margin-bottom: 10px;">${dto.facName }</h3>
 								<div style="margin-bottom: 3px;" name="facLocation">${dto.facLocation }</div>
-								<div style="margin-bottom: 15px;"><input type="button" value="길찾기" id="pathfinding"></div>
-								<div style="font-size: small;"><input type="date" id="resDate" name="resDate"></div>
+								<div style="margin-bottom: 15px;" class="location__btn"><input type="button" value="길찾기" id="pathfinding"></div>
+								<div style="font-size: small;"><input type="date" id="resDate" data-placeholder="날짜 선택" name="resDate"></div>
 								<!-- <h3 style="margin-bottom: 15px;">2022.12.30(수)</h3> -->
-								<div style="font-size: small; margin-bottom: 7px;">
+								<div class="time" style="font-size: small; margin-bottom: 7px;">
 									<select id="resTime" name="resStarttime">
-										<option value="">=== 시간 ===</option>
+										<option value="">예약 시간을 선택해주세요</option>
 									</select>
 								</div>
 								<!-- <button style="border-radius: 10%; border-style: none; background-color: gold; margin-bottom: 17px; padding: 5px 8px;">11:30</button> -->
