@@ -86,8 +86,10 @@
 				<div>
 					<select id="region2" name="searchRegion2">
 						<option value="">군/구</option>
+						<option value="강남구">강남구</option>
 						<option value="강서구">강서구</option>
 						<option value="구로구">구로구</option>
+						<option value="노원구">노원구</option>
 						<option value="동작구">동작구</option>
 						<option value="서초구">서초구</option>
 						<option value="송파구">송파구</option>
@@ -102,10 +104,10 @@
 				<ul class="list-facility">
 					
 					<li>
-						<input id="lesson-PERSONAL" type="checkbox" name="" value="true">
+						<input id="lesson-PERSONAL" type="checkbox" name="optType" value="personal">
 						<label for="lesson-PERSONAL">개인</label>
 					</li>
-					<li><input id="lesson-GROUP" type="checkbox" name="" value="true">
+					<li><input id="lesson-GROUP" type="checkbox" name="optType" value="group">
 							<label for="lesson-GROUP">그룹</label>
 					</li>		
 				</ul>
@@ -114,9 +116,9 @@
 			<div class="search__options">
 				<h4>평일/주말</h4>
 				<ul class="list-facility">
-					<li><input id="date-WEEKDAY" type="checkbox" name="" value="T">
+					<li><input id="date-WEEKDAY" type="checkbox" name="optWeekend" value="weekday">
 						<label for="date-WEEKDAY">평일</label></li>
-					<li><input id="date-WEEKEND" type="checkbox" name="" value="F">
+					<li><input id="date-WEEKEND" type="checkbox" name="optWeekend" value="weekend">
 						<label for="date-WEEKEND">주말</label></li>
 				</ul>
 			</div>
