@@ -98,8 +98,8 @@
 		</div>
 		<div class='memberMod'>
 			<p>닉네임</p>
-			<input type="text" id="nickname" name="nickname" value="${member.nickname}">
-			<button type="button" id="nicknameChk">중복확인</button>
+			<input type="text" id="clientNickname" name="nickname" value="${member.nickname}">
+			<button type="button" id="clientNicknameChk">중복확인</button>
 		</div>	
 		<div class='memberMod'>
 			<p>이메일</p>
@@ -363,14 +363,18 @@
     <li>
       <a href="#tab5" class="btn"><h2>1대1 문의</h2></a>
       <div id="tab5" class="cont">
-		<table border="1">
-		<tr>
-			<th>INQ_SEQ</th>
-			<th>REPLY_CHECK</th>
-			<th>TITLE</th>
-			<th>ID</th>
-			<th>DATE</th>
-		</tr>
+      	<h3>1대1 문의</h3>
+        <p>1대1 문의하신 내역입니다</p>
+        <div id='inqWrapper'>
+        <div class='inqList'>
+			<ul>
+				<li class='inqListNum'>번호</li>
+				<li class='inqListChk'>답변상태</li>
+				<li class='inqListTitle'>제목</li>
+				<li class='inqListID'>ID</li>
+				<li class='inqListDate'>날짜</li>
+			</ul>
+		</div>
 		<c:choose>
 			<c:when test="${empty inqlist }">
 				<tr>
@@ -379,20 +383,20 @@
 			</c:when>
 			<c:otherwise>	
 				<c:forEach items="${inqlist}" var="dto">
-					<tr>
-						<td>${dto.inqSeq }</td>
+					<ul id='inqContentsList'>
+						<li class='inqListNum'>${dto.inqSeq }</li>
 						<c:choose>
-							<c:when test="${dto.replyCheck == 0 }"><td>답변대기</td></c:when>
-							<c:otherwise><td>답변완료</td></c:otherwise>
+							<c:when test="${dto.replyCheck == 0 }"><li class='inqListChk'>답변대기</li></c:when>
+							<c:otherwise><li class='inqListChk'>답변완료</li></c:otherwise>
 						</c:choose>
-						<td><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></td>
-						<td>${dto.id }</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.inqDate }"/></td>
-					</tr>
+						<li class='inqListTitle'><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></li>
+						<li class='inqListID'>${dto.id }</td>
+						<li class='inqListDate'><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.inqDate }"/></li>
+					</ul>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>	
-	</table>
+		</div>
 	</div>
     </li>
     
