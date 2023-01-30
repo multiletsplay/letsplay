@@ -460,6 +460,8 @@ ul{ list-style:none; }
 .search__location select{
   padding: 10px;
   width: 150px;
+  border-color: #ddd;
+  border-radius: 5px;
 }
 
 
@@ -467,6 +469,15 @@ ul{ list-style:none; }
   display: flex;
 }
 
+.search__location input[type=date]{
+position: relative;
+min-height: 30px;
+padding: 10px 12px;
+border: none;
+border-bottom: 1px solid #666;
+background-color: transparent;
+margin-bottom: 0px;
+}
 
 .list-facility li label {
   display: block;

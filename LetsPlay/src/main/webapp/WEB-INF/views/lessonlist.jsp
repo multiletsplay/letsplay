@@ -98,35 +98,26 @@
 			</div>
 		
 			<div class="search__options">
-				<h4>상세조건</h4>
+				<h4>레슨종류</h4>
 				<ul class="list-facility">
 					
 					<li>
-						<input id="facility-PARK" type="checkbox" name="optParking" value="true">
-						<label for="facility-PARK">주차</label>
+						<input id="lesson-PERSONAL" type="checkbox" name="" value="true">
+						<label for="lesson-PERSONAL">개인</label>
 					</li>
-					<li><input id="facility-RENT" type="checkbox" name="optLent" value="true">
-							<label for="facility-RENT">장비대여</label>
-						</li>
-					<li><input id="facility-SWR" type="checkbox" name="optShower" value="true">
-							<label for="facility-SWR" >샤워시설</label>
-						</li>
-					<li><input id="facility-STASH" type="checkbox" name="optLocker" value="true">
-							<label for="facility-STASH">락커</label>
-						</li>
-					<li><input id="facility-LIGHT" type="checkbox" name="optLight" value="true">
-							<label for="facility-LIGHT">조명</label>
-						</li>					
+					<li><input id="lesson-GROUP" type="checkbox" name="" value="true">
+							<label for="lesson-GROUP">그룹</label>
+					</li>		
 				</ul>
 			</div>
 
 			<div class="search__options">
-				<h4>가격</h4>
+				<h4>평일/주말</h4>
 				<ul class="list-facility">
-					<li><input id="fee-PAY" type="checkbox" name="optCost" value="T">
-						<label for="fee-PAY">유료</label></li>
-					<li><input id="fee-FREE" type="checkbox" name="optCost" value="F">
-						<label for="fee-FREE">무료</label></li>
+					<li><input id="date-WEEKDAY" type="checkbox" name="" value="T">
+						<label for="date-WEEKDAY">평일</label></li>
+					<li><input id="date-WEEKEND" type="checkbox" name="" value="F">
+						<label for="date-WEEKEND">주말</label></li>
 				</ul>
 			</div>
 			<input type="submit" id="search" value="검색" style="display: none;"/>
@@ -144,16 +135,16 @@
 <div id="lessonlist">
 	<form action="/lesson/delete" method="post">
 	<div>
-		<input id="selectAll" type="checkbox"> 전체선택
+		<input id="selectAll" type="checkbox">
 		<input type="submit" id="deleteBtn" value="선택 삭제">
 	</div>
 
 	<div class="facility-list">
 			<c:choose>
 					<c:when test="${empty lessonlist }">
-						<tr>
-							<td colspan="4">---- 등록된 레슨이 없습니다 ----</td>
-						</tr>
+
+							<p style="text-align: center;">아직 등록된 레슨이 없습니다.  조금만 기다려주세요!</p>
+
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${lessonlist }" var="dto">

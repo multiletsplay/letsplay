@@ -75,7 +75,7 @@ text-decoration: underline;
 }
 
 
-input[type="date"]{
+.main-banner input[type="date"]{
     position: relative;
     min-height:30px;
     padding: 10px 12px;

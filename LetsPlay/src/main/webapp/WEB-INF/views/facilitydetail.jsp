@@ -230,18 +230,19 @@
 					
 					<div class="col-lg-4">
 						<div class="main-banner">
-							<div class="favorite">
-								<c:choose>
-									<c:when test="${like == 0}">
-										<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
-									</c:when>
-									<c:otherwise>
-										<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-									</c:otherwise>
-								</c:choose>
-							</div>
-		
+						
 							<div>
+								<div class="favorite">
+									<c:choose>
+										<c:when test="${like == 0}">
+											<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+										</c:when>
+										<c:otherwise>
+											<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+										</c:otherwise>
+									</c:choose>
+								</div>
+			
 								<div class="check-display">FACILITY</div>
 								<h3 style="margin-bottom: 10px;">${dto.facName }</h3>
 								<div style="margin-bottom: 3px;" name="facLocation">${dto.facLocation }</div>
