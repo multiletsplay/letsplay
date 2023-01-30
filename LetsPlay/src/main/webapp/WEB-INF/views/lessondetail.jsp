@@ -85,11 +85,12 @@
 					<span class="sport-type">
 						<button>${dto.spoName }</button>
 					</span>
-					<h2>${dto.lesName }</h2>
-					<h5 style="margin-bottom: 30px;">강사명 : ${dto.lesTeacher}</h5>
+					<h2><input type="hidden" name="lesName" value="${dto.lesName }">${dto.lesName }</h2>
+					<h5 style="margin-bottom: 30px;"><input type="hidden" name="lesTeacher" value="${dto.lesTeacher }">강사명 : ${dto.lesTeacher}</h5>
 					<div class="carousel slide" style="margin-bottom: 20px;">
 						<div class="carousel-inner">
 							<div class="carousel-item active carousel-item-start">
+								<input type="hidden" name="lesImgpath" value="${dto.lesImgpath }">
 								<img class="d-block w-100" src="${dto.lesImgpath }" alt="${dto.lesImgpath }">
 							</div>
 						</div>
@@ -102,13 +103,13 @@
 						</ul> -->
 						<h4 style="margin-bottom: 7px; font-weight: bold;">레슨비</h4>
 						
-						<div><strong style="font-size: x-large; color: rgb(232, 13, 13);">${dto.lesCost}</strong> 원/시간</div>
+						<div><strong style="font-size: x-large; color: rgb(232, 13, 13);"><input type="hidden" name="resPrice" value="${dto.lesCost }">${dto.lesCost}</strong> 원/시간</div>
 				
 						<div class="info">
 							<h4>상세정보</h4>
 							<div>
 								<div class="tel">
-									<p>${dto.lesContact}</p>
+									<p><input type="hidden" name="lesContact" value="${dto.lesContact }">${dto.lesContact}</p>
 								</div>
 
 
@@ -209,7 +210,7 @@
 				</div>
 				<div class="check-display">LESSON</div>
 				<h3 style="margin-bottom: 10px;">${dto.lesName }</h3>
-				<div style="margin-bottom: 3px;" name="facLocation">${dto.lesLocation}</div>
+				<div style="margin-bottom: 3px;" name="facLocation"><input type="hidden" name="lesLocation" value="${dto.lesLocation }">${dto.lesLocation}</div>
 				<div style="margin-bottom: 15px;" class="location__btn"><input type="button" value="길찾기" id="pathfinding"></div>
 				<div style="font-size: small;"><input type="date" id="resDate" data-placeholder="날짜 선택" name="resDate"></div>
 				<!-- <h3 style="margin-bottom: 15px;">2022.12.30(수)</h3> -->

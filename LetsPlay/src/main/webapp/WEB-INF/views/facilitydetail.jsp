@@ -117,10 +117,11 @@
 									<span class="sport-type">
 										<button>${dto.spoName }</button>
 									</span>
-									<h2>${dto.facName }</h2>
+									<h2><input type="hidden" name="facName" value="${dto.facName }">${dto.facName }</h2>
 									<div class="carousel slide" style="margin-bottom: 20px;">
 										<div class="carousel-inner">
 											<div class="carousel-item active carousel-item-start">
+												<input type="hidden" name="facImgpath" value="${dto.facImgpath }">
 												<img class="d-block w-100" src="${dto.facImgpath }" alt="${dto.facImgpath }">
 											</div>
 										</div>
@@ -133,13 +134,13 @@
 										</ul> -->
 										<h4 style="margin-bottom: 7px; font-weight: bold;">시설비</h4>
 										
-										<div><strong style="font-size: x-large; color: rgb(232, 13, 13);">${dto.facCost }</strong> 원/시간</div>
+										<div><strong style="font-size: x-large; color: rgb(232, 13, 13);"><input type="hidden" name="resPrice" value="${dto.facCost }">${dto.facCost }</strong> 원/시간</div>
 								
 										<div class="info">
 											<h4>상세정보</h4>
 											<div>
 												<div class="tel">
-													<p>${dto.facContact}</p>
+													<p><input type="hidden" name="facContact" value="${dto.facContact }">${dto.facContact}</p>
 												</div>
 												<c:choose>
 													<c:when test="${dto.facParking eq true }">
@@ -288,7 +289,7 @@
 			
 								<div class="check-display">FACILITY</div>
 								<h3 style="margin-bottom: 10px;">${dto.facName }</h3>
-								<div style="margin-bottom: 3px;" name="facLocation">${dto.facLocation }</div>
+								<div style="margin-bottom: 3px;" name="facLocation"><input type="hidden" name="facLocation" value="${dto.facLocation }">${dto.facLocation }</div>
 								<div style="margin-bottom: 15px;" class="location__btn"><input type="button" value="길찾기" id="pathfinding"></div>
 								<div style="font-size: small;"><input type="date" id="resDate" data-placeholder="날짜 선택" name="resDate"></div>
 								<!-- <h3 style="margin-bottom: 15px;">2022.12.30(수)</h3> -->

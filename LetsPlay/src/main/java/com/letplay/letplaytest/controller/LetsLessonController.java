@@ -165,7 +165,6 @@ public class LetsLessonController {
 		HttpSession session = request.getSession();
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
-		
 		//예약번호 부여
 		LocalDateTime now = LocalDateTime.now();
 		String localtime = now.format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
@@ -173,7 +172,6 @@ public class LetsLessonController {
 		dto.setResId(resId);
 		
 		model.addAttribute("dto", dto);
-		LessonBiz.insertRes(dto);
 		return "reslesconfirm";
 	}
 	

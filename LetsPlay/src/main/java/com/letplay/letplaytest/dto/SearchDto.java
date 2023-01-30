@@ -28,6 +28,11 @@ public class SearchDto {
 	private String searchFacStatus;
 	private int searchTotal;
 	private String searchStartTime;
+	
+	//레슨
+	private char optType;
+	private char optWeekend;
+	
 	public SearchDto() {
 		super();
 		// TODO Auto-generated constructor stub
