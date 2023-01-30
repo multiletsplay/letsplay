@@ -43,7 +43,7 @@
 .check-display {
     border-radius: 20px;
     border-style: none;
-    background-color: var(--font-300);
+    background-color: var(--bs-yellow);
     margin-bottom: 15px;
     color: white;
     font-size: .8rem;
@@ -77,10 +77,15 @@
 
 .info {
     margin: 30px auto;
+    overflow: hidden;
 }
 
 .info h4 {
     margin: 15px auto;
+}
+
+.info span{
+    display: block;
 }
 
 .comment > div{
@@ -92,4 +97,8 @@
 .comment h5 {
     font-size: x-small;
     margin-bottom: 7px;
+}
+
+.comment {
+    clear: both;
 }

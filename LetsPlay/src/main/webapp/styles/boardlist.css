@@ -413,8 +413,7 @@ background-color: var(--font-50);
 ul{ list-style:none; }
 #optionBtn { display: none; }
 .searchOption { display:none; }
-#insertBtn { visibility: hidden; }
-#deleteBtn { visibility: hidden; }
+#insertBtn, #updateBtn, #deleteBtn { visibility: hidden; }
 #selectAll { display: none; }
 .delList { display: none; }
 
@@ -504,4 +503,67 @@ margin-bottom: 0px;
 
 .list-facility li input{
   display: none;
+}
+
+
+.re__Btn{
+  width: 100%;
+  padding: 15px 0px;
+  border-radius: 10px;
+  background-color: #333;
+  color: #fff;
+}
+
+.tel {
+  padding-bottom: 20px;
+}
+
+.tel p{
+  color: var(--font);
+  margin-bottom: 5px;
+}
+
+.tel p:last-child{
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+
+.fill {
+  color:var(--primary) !important;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48,
+}
+
+.material-symbols-outlined{
+  font-size: 2rem;
+  color:var(--font-200);
+}
+
+.icon_list{
+  float: left;
+  padding: 10px 30px;
+  border: 1px solid #DDD;
+  text-align: center;
+  margin-right: 15px;
+  border-radius: 10px;
+}
+
+.icon_list span:last-child{
+  margin-top: 10px;
+  font-size: .8rem;
+}
+
+
+.review-list{
+  position: relative;
+}
+
+.review-list span.star{
+  position: absolute;
+  top:40px;
+  right:30px;
 }

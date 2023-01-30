@@ -77,6 +77,7 @@
 <div class="m40 row">
 <input type="hidden" name="lesSeq" value="${dto.lesSeq }">
 <div class="col-lg-8">
+	<input type="button" id="updateBtn" value="레슨 수정" onclick="location.href='/lesson/updateform?lesSeq=${dto.lesSeq}'">
 	<div>
 		<div class="match_detail_lay">
 			<main>
@@ -93,40 +94,43 @@
 							</div>
 						</div>
 						
-						<ul class="df">
+						<!-- <ul class="df">
 							<li class="match-category">참가비</li>
 							<li class="match-category">상세정보</li>
 							<li class="match-category">주의사항</li>
 							<li class="match-category">추천시설</li>
-						</ul>
+						</ul> -->
 						<h4 style="margin-bottom: 7px; font-weight: bold;">레슨비</h4>
 						
-						<div><strong style="font-size: x-large; color: rgb(232, 13, 13);">${dto.lesCost}</strong>원/시간</div>
+						<div><strong style="font-size: x-large; color: rgb(232, 13, 13);">${dto.lesCost}</strong> 원/시간</div>
 				
 						<div class="info">
 							<h4>상세정보</h4>
 							<div>
-								<p>시설 전화 번호 : ${dto.lesContact}</p>
+								<div class="tel">
+									<p>시설 전화 번호 : </p>
+									<p>${dto.lesContact}</p>
+								</div>
 
 
-									<th>레슨 종류</th>
+									<p>레슨 종류</p>
 									<c:choose>
 										<c:when test="${dto.lesType eq 'personal' }">
-											<td>개인</td>
+											<p>개인</p>
 										</c:when>
 										<c:otherwise>
-											<td>그룹</td>
+											<p>그룹</p>
 										</c:otherwise>
 									</c:choose>
 
 
-									<th>레슨 평일/주말</th>
+									<p>레슨 종류</p>
 									<c:choose>
 										<c:when test="${dto.lesWeekend eq 'weekday' }">
-											<td>평일</td>
+											<p>평일</p>
 										</c:when>
 										<c:otherwise>
-											<td>주말</td>
+											<p>주말</p>
 										</c:otherwise>
 									</c:choose>
 
@@ -166,6 +170,7 @@
 							
 			
 						</div>
+						<input type="button" value="목록" onclick="location.href='/lesson/list'">
 					</div>
 				</div>
 				</main>
@@ -176,18 +181,19 @@
 	
 	<div class="col-lg-4">
 		<div class="main-banner">
-			<div class="favorite">
-				<c:choose>
-					<c:when test="${like == 0}">
-						<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
-					</c:when>
-					<c:otherwise>
-						<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-					</c:otherwise>
-				</c:choose>
-			</div>
+	
 
 			<div>
+				<div class="favorite">
+					<c:choose>
+						<c:when test="${like == 0}">
+							<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+						</c:when>
+						<c:otherwise>
+							<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+						</c:otherwise>
+					</c:choose>
+				</div>
 				<div class="check-display">LESSON</div>
 				<h3 style="margin-bottom: 10px;">${dto.lesName }</h3>
 				<div style="margin-bottom: 3px;" name="facLocation">${dto.lesLocation}</div>
@@ -204,9 +210,7 @@
 				</div>
 				<!-- <button style="border-radius: 10%; border-style: none; background-color: gold; margin-bottom: 17px; padding: 5px 8px;">11:30</button> -->
 				<div>
-					<input type="button" value="목록" onclick="location.href='/lesson/list'">
-					<input type="button" id="updateBtn" value="레슨 수정" onclick="location.href='/lesson/updateform?lesSeq=${dto.lesSeq}'">
-					<input type="submit" value="예약하기">
+					<input type="submit" value="예약하기" class="re__Btn" />
 				</div>
 			</div>
 		</div>
