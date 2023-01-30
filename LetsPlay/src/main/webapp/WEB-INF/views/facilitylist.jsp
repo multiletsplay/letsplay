@@ -275,6 +275,9 @@
 				<option value="중구">중구</option>
 			</select>
 		</span>
+		<span>
+			<input type="date" name="searchDate">
+		</span>
 		<div>
 			<strong>상세조건</strong>
 			<input type="checkbox" id="optionBtn">
