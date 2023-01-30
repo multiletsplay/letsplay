@@ -5,10 +5,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -86,6 +88,24 @@ public class LetsMemberController {
 			return "alert";
 		}
 	}
+	
+	@PostMapping(value = "signup")
+    public String validCheck(@Valid MemberDto dto, Errors errors, Model model){
+        if(errors.hasErrors()){
+        //패스워드 유효성 검사 부적합
+            Map<String, String> validatorResult = membiz.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+
+            // 유효성 통과 못한 필드와 메시지를 핸들링
+
+            return "/singup";
+        }
+        return "/login";
+    }
+ 
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/idcheck", method=RequestMethod.GET)
@@ -205,12 +225,18 @@ public class LetsMemberController {
 		int result = membiz.nicknamecheck(nickname);
 		return result;
 	}
+	
 	@GetMapping("/reviewinsertform")
-	public String reviewinsert(HttpSession session, Model model, @RequestParam(value="facSeq", required = false)int facSeq, @RequestParam(required = false)int lesSeq) {
+	public String reviewinsert(HttpSession session, Model model, @RequestParam(value="facSeq", required=false)Integer facSeq, @RequestParam(value="lesSeq", required=false)Integer lesSeq) {
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", membiz.selectmember(member.getId()));
+		System.out.println(facSeq);
+		System.out.println(lesSeq);
+		if(facSeq != null) {
 		model.addAttribute("dto", facbiz.selectFac(facSeq));
+		} else {
 		model.addAttribute("dto", lessonbiz.selectLesson(lesSeq));
+		}
 		return "reviewinsert";
 	}
 	
