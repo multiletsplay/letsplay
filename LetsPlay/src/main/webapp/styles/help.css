@@ -1,0 +1,410 @@
+.helpContainer {
+    width: 1100px;
+    height: 110px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.helpContainer h1 {
+    font-weight: bolder;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.selectorContainer button {
+    margin: 0 20px;
+    font-weight: bolder;
+}
+
+.helpTop {
+    background: var(--hero-bg);
+    padding: 80px 0 !important;
+    height: 210px;
+    display: flex;
+    justify-content: center;
+}
+
+.selector {
+    background-color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 0 0 10px;
+    border-color: #6bd098;
+    color: #6bd098;
+    opacity: 1;
+    box-sizing: border-box;
+    border-width: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    width: 100px;
+    padding: 3px 15px;
+    line-height: 1.75;
+    transition: all 300ms linear;
+}
+
+.selector:focus {
+    color: white;
+    background-color: #198754;
+}
+
+.selector:hover {
+    transform: scale(1.05);
+    transition: all 300ms linear;
+}
+
+.helpMain {
+    height: 2100px;
+    display: flex;
+    justify-content: center;
+}
+
+.MainContainer {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 1100px;
+}
+
+.MainContainer > h5 {
+    font-weight: bolder;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.faq {
+    border-radius: 15% 0 0 0;
+    background-color: beige;
+    position: relative;
+    top: 90px;
+    height: 60px;
+    margin-bottom: 50px;
+    box-shadow: 2px 2px 10px 0.1px grey;
+    cursor: pointer;
+    transition: all 300ms linear;
+}
+
+.accordion {
+    margin-top: 50px;
+}
+
+.accordion-button {
+    border-radius: 30% 0 0 0 !important;
+    background-color: beige;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: beige;
+    color: black;
+    font-weight: bold;
+}
+
+.accordion-item {
+    border-style: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: none;
+}
+
+.faq:hover {
+    transform: scale(1.009);
+    transition: all 300ms linear;
+}
+
+.faq > label {
+    background-color: #198754;
+    border-radius: 0.2rem;
+    color: white;
+    text-align: center;
+    padding: 2px 5px;
+    font-size: 11px;
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 25px;
+    font-weight: bold;
+}
+
+.faq > h5 {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 120px;
+    font-weight: 700;
+}
+
+/* .faqContent {
+    background-color: beige;
+    margin-top: 35px;
+    width: 100%;
+    height: 100px;
+    cursor: pointer;
+    transition: all 300ms linear;
+    z-index: 1;
+    border-top-style: none;
+} */
+
+
+.MainBoardPersonal {
+    height: 1000px;
+    display: flex;
+    justify-content: center;
+}
+
+.BoardMain {
+    width: 1100px;
+}
+
+.topper {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.topper > h5 {
+    font-size: xx-large;
+    margin-bottom: 10px;
+}
+
+.tableData {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.tableDataTop {
+    margin-top: 50px;
+    border-top: 2px solid rgb(51, 51, 51);
+    color: rgb(51, 51, 51);
+}
+
+.DataTitle {
+    width: 130px;
+    padding: 13px 0px 13px 20px;
+    background-color: rgb(247, 245, 248);
+    border-top: 1px solid rgb(244, 244, 244);
+    text-align: left;
+    font-weight: 500;
+}
+
+.DataContent {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.BoardContents {
+    border: 1px solid pink;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 200px;
+}
+
+.Inquery {
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+
+.InqueryWrapper {
+    display: flex;
+    justify-content: center;
+    height: 1500px;
+}
+
+.MarkStar {
+    color: red;
+}
+
+.InquerySort {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.InqueryBlank > select {
+    padding: 0px 11px 1px 15px;
+    border: 1px solid rgb(221, 221, 221);
+    width: 700px;
+    border-radius: 4px;
+}
+
+.InqueryTitle {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.TitleCustom {
+    border-bottom: 1px solid rgb(221, 221, 221);
+    margin: 5px auto;
+    padding-bottom: 5px;
+}
+
+.InqueryBlank > input {
+    height: 44px;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    border: 1px solid rgb(221, 221, 221);
+    font-weight: 400;
+    width: 700px;
+}
+
+.MainArea {
+    width: 1100px;
+    border-top:  solid rgb(51, 51, 51);
+}
+
+.InqueryBlank > select > option {
+    border: 1px solid #DDD;
+    background: #fff;
+    background-repeat: no-repeat;
+    background-position: right 6px top 50%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 35px 0 18px;
+    font-size: 14px;
+    box-sizing: border-box;
+    border-radius: 40px;
+}
+
+.InqueryName {
+    margin-right: -60px;
+}
+
+.BlankContent > input {
+    height: 300px;
+    padding-bottom: 270px;
+}
+
+.InqueryKind {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.InqueryKind > h4 {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.InqueryKind > span {
+    color: red;
+}
+
+.KindCustom {
+    margin-top: 50px;
+    padding-top: 60px;
+    border-bottom: solid rgb(51, 51, 51);
+}
+
+.BlankCustom > input {
+    background-color: #F8F8F8;
+    border-color: #DDD;
+    border-radius: 4px;
+    width: 270px;
+}
+
+.PhoneCustom > select {
+    background-color: #F8F8F8;
+    border-color: #DDD;
+    width: 86px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.PhoneCustom > input {
+    background-color: #F8F8F8;
+    border-color: #DDD;
+    width: 86px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.PhoneCustomNum {
+    margin-left: 5px;
+}
+
+.AgreementContainer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.AgreementBox {
+    line-height: 1.6;
+    font-size: 14px;
+    padding: 21px 32px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    overflow-y: scroll;
+    height: 133px;
+    width: 1100px;
+}
+
+.color_red {
+    color: red;
+}
+
+.RadioCustom {
+    display: flex;
+    float: right;
+}
+
+.RadioCustom > div {
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.RadioCustom > div > input, label {
+    cursor: pointer;
+}
+
+.ConfirmCustom {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.ConfirmCustom div {
+    height: 45px;
+    line-height: 43px;
+    padding: 0 18px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #414141;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    cursor: pointer;
+    width: 160px;
+    margin: 10px;
+}
+
+.ConfirmCustomCancel {
+    color: #000000 !important;
+    background-color: #ffffff;
+}
+
+.ConfirmCustomOkay {
+    color: #ffffff !important;
+    background-color: #414141;
+
+}

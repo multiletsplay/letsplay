@@ -1,6 +1,9 @@
 package com.letplay.letplaytest.controller;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.letplay.letplaytest.biz.FacBiz;
 import com.letplay.letplaytest.biz.LessonBiz;
+import com.letplay.letplaytest.biz.MatchBiz;
 import com.letplay.letplaytest.biz.MemberBiz;
 import com.letplay.letplaytest.biz.ReviewBiz;
+import com.letplay.letplaytest.dto.MatchDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
 
@@ -35,6 +40,8 @@ public class LetsMemberController {
 	private ReviewBiz reviewBiz;
 	@Autowired
 	private MemberBiz membiz;
+	@Autowired
+	private MatchBiz matchbiz;
 	@Autowired
 	private FacBiz facbiz;
 	@Autowired
@@ -137,13 +144,39 @@ public class LetsMemberController {
 	
 	// 마이페이지
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
-	public String selectmember(HttpSession session,Model model ) {
+	public String selectmember(HttpSession session, Model model ) {
 		MemberDto member = (MemberDto) session.getAttribute("login");
+		List<MatchDto> matchlist = membiz.selectMatchList(member.getId());
+		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
+		for(MatchDto dto : matchlist) {
+			LocalDateTime matchEnddate = dto.getMatchEnddate();
+			LocalDateTime matchRegdate = dto.getMatchRegdate();
+			Duration duration = Duration.between(matchEnddate, matchRegdate);
+			int days = ((int) duration.toDays()-1)*-1;
+			dto.setdDay(days);
+			System.out.println("Remaining days: " + days);
+			dDayMap.put(dto, days);
+		}
+		List<MatchDto> matchjoinlist = membiz.selectMatchjoinList(member.getId());
+		Map<MatchDto, Integer> dDayMap2 = new HashMap<MatchDto, Integer>();
+		for(MatchDto dto : matchjoinlist) {
+			LocalDateTime matchEnddate = dto.getMatchEnddate();
+			LocalDateTime matchRegdate = dto.getMatchRegdate();
+			Duration duration = Duration.between(matchEnddate, matchRegdate);
+			int days = ((int) duration.toDays()-1)*-1;
+			dto.setdDay(days);
+			System.out.println("Remaining days: " + days);
+			dDayMap2.put(dto, days);
+		}
+		model.addAttribute("ddays", dDayMap);
+		model.addAttribute("ddays2", dDayMap2);
+		model.addAttribute("list", membiz.selectMatchList(member.getId()));
+		model.addAttribute("joinlist", membiz.selectMatchjoinList(member.getId()));
 		model.addAttribute("member", membiz.selectmember(member.getId()));
 		model.addAttribute("faclist", membiz.selectResfac(member.getId()));
 		model.addAttribute("leslist", membiz.selectResles(member.getId()));
 		model.addAttribute("likesfaclist", membiz.selectLikesfac(member.getId()));
-		//model.addAttribute("likesmatlist", membiz.selectLikesmat(member.getId()));
+		model.addAttribute("likesmatlist", membiz.selectLikesmat(member.getId()));
 		model.addAttribute("likesleslist", membiz.selectLikesles(member.getId()));
 		//model.addAttribute("listdto", membiz.selectmyreview(member.getId()) );
 		model.addAttribute("inqlist", membiz.selectInq(member.getId()));
@@ -161,6 +194,32 @@ public class LetsMemberController {
 			model.addAttribute("leslist", membiz.selectResles(member.getId()));
 		}
 		return "mypage";
+	}
+	
+	@GetMapping("/cancelfacres")
+	public String cancelFacres(Model model, String resId) {
+		if(facbiz.cancelres(resId)>0) {
+			model.addAttribute("msg", "취소 성공");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
+		}else {
+			model.addAttribute("msg", "취소 실패");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
+		}
+	}
+	
+	@GetMapping("/cancellesres")
+	public String cancelLesres(Model model, String resId) {
+		if(lessonbiz.cancelres(resId)>0) {
+			model.addAttribute("msg", "취소 성공");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
+		}else {
+			model.addAttribute("msg", "취소 실패");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
+		}
 	}
 	
 	@ResponseBody

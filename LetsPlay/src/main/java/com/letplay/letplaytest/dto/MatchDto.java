@@ -2,7 +2,6 @@ package com.letplay.letplaytest.dto;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -51,6 +50,12 @@ public class MatchDto {
 	private int cntJoin;
 	private int joinStatus;
 	private int likesStatus;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date matchDay;
+	private String nickName;
+	private int facSeq;
+	private String facName;
+
 	public MatchDto() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -58,7 +63,8 @@ public class MatchDto {
 	public MatchDto(int matchSeq, String id, int spoId, String spoName, String matchTitle, String matchContent,
 			LocalDateTime matchRegdate, Date matchModidate, LocalDateTime matchEnddate, int dDay, String matchLocation,
 			int matchTotal, int matchCnt, int matchLevel, String matchFacility, char matchStatus, int cntComment,
-			String startTime, String endTime, int cntJoin, int joinStatus, int likesStatus) {
+			String startTime, String endTime, int cntJoin, int joinStatus, int likesStatus, Date matchDay,
+			String nickName, int facSeq, String facName) {
 		super();
 		this.matchSeq = matchSeq;
 		this.id = id;
@@ -82,6 +88,10 @@ public class MatchDto {
 		this.cntJoin = cntJoin;
 		this.joinStatus = joinStatus;
 		this.likesStatus = likesStatus;
+		this.matchDay = matchDay;
+		this.nickName = nickName;
+		this.facSeq = facSeq;
+		this.facName = facName;
 	}
 	public int getMatchSeq() {
 		return matchSeq;
@@ -215,5 +225,28 @@ public class MatchDto {
 	public void setLikesStatus(int likesStatus) {
 		this.likesStatus = likesStatus;
 	}
-	
+	public Date getMatchDay() {
+		return matchDay;
+	}
+	public void setMatchDay(Date matchDay) {
+		this.matchDay = matchDay;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public int getFacSeq() {
+		return facSeq;
+	}
+	public void setFacSeq(int facSeq) {
+		this.facSeq = facSeq;
+	}
+	public String getFacName() {
+		return facName;
+	}
+	public void setFacName(String facName) {
+		this.facName = facName;
+	}
 }

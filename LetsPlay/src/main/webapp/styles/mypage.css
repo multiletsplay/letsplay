@@ -1,0 +1,70 @@
+.mypage__list{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.mypage__list button{
+  border: none;
+  background-color: transparent;
+  padding: 8px;
+  font-size: .95rem;
+  text-align: left;
+}
+
+
+.button--on{
+  color: var(--font);
+  font-weight: 800;
+}
+
+.button--off{
+  color: var(--font-300);
+}
+
+
+.form__wrap{
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form__wrap p{
+  font-size: .8rem;
+  margin-bottom: 5px;
+}
+
+.form__wrap input{
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  padding: 15px;
+  width: 100%;
+}
+
+.btn__wrap{
+  display: flex;
+  margin-top:50px;
+}
+
+.btn__wrap button{
+  border: none;
+  background-color: var(--font-50);
+  padding:10px 20px;
+  border-radius: 15px;
+  color: var(--font-300);
+  margin-right:10px;
+  font-size: .8rem;
+}
+
+.btn__wrap button:first-child{
+  background-color: var(--primary);
+  color:#fff;
+}
+
+
+.tac {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}

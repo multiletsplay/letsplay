@@ -99,6 +99,16 @@ public class MatchImpl implements MatchBiz {
 		return matchMapper.selectJoinList(matchSeq);
 	}
 
+	@Override
+	public int fixMatch(int matchSeq) {
+		return matchMapper.fixMatch(matchSeq);
+	}
+
+	@Override
+	public int unfixMatch(int matchSeq) {
+		return matchMapper.unfixMatch(matchSeq);
+	}
+
 //	@Override
 //	public List<MatchDto> joinMatchList(String id) {
 //		return matchMapper.joinMatchList(id);

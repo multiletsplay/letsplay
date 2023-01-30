@@ -6,19 +6,21 @@ public class LessonSchDto {
 	private String schStarttime;
 	private String schEndtime;
 	private int schPeople;
+	private int cntRes;
 	
 	public LessonSchDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public LessonSchDto(int schId, int lesSeq, String schStarttime, String schEndtime, int schPeople) {
+	public LessonSchDto(int schId, int lesSeq, String schStarttime, String schEndtime, int schPeople, int cntRes) {
 		super();
 		this.schId = schId;
 		this.lesSeq = lesSeq;
 		this.schStarttime = schStarttime;
 		this.schEndtime = schEndtime;
 		this.schPeople = schPeople;
+		this.cntRes = cntRes;
 	}
 	
 	public int getSchId() {
@@ -51,6 +53,15 @@ public class LessonSchDto {
 	public void setSchPeople(int schPeople) {
 		this.schPeople = schPeople;
 	}
+
+	public int getCntRes() {
+		return cntRes;
+	}
+
+	public void setCntRes(int cntRes) {
+		this.cntRes = cntRes;
+	}
+	
 	
 	
 }

@@ -1,0 +1,64 @@
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+ 
+/* modal창 */
+.modalBody {
+  position: absolute;
+  width: 50%;
+  height: 500px;
+  padding: 40px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  overflow: auto;
+}
+ 
+.modal_btn_wrap {
+  border: none;
+  color: rgba(0, 0, 0, 0.7);
+  background-color: transparent;
+  font-size: 20px;
+  text-align: center;
+}
+
+.modal_btn_wrap button#modalCloseBtn {
+  margin-right: 10px;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.modal_btn_wrap button#modalCloseBtn:last-child{
+  margin-right: 0;
+  background-color: var(--font-100);
+}
+ 
+
+
+.Modal h3{
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+
+.modalBody textarea {
+  width: 100%;
+  min-height: 100px;
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  padding: 10px;
+}

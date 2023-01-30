@@ -69,6 +69,11 @@ public class LessonImpl implements LessonBiz{
 		return lessonMapper.selectSchedule(lesSeq);
 	}
 
+	@Override
+	public int cancelres(String resId) {
+		return lessonMapper.cancelRes(resId);
+	}
+
 	//@Override
 	//public LessonResDto selectLesRes(int lesSeq, String id, Date resDate, String resStarttime) {
 	//	return lessonMapper.selectLesRes(lesSeq, id, resDate, resStarttime);

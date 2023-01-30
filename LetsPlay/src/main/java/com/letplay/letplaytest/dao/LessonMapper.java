@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.LessonSchDto;
+import com.letplay.letplaytest.dto.TimeDto;
 
 @Mapper
 public interface LessonMapper {
@@ -52,14 +53,23 @@ public interface LessonMapper {
 	
 	@Insert(" INSERT INTO `LESSON_RESERVATION` VALUES(#{resId}, #{lesSeq}, #{id}, #{resDate}, #{resPrice} )")
 	int insertRes(LessonResDto dto);
+	
+	@Delete(" DELETE FROM LESSON_RESERVATION WHERE RES_ID = #{resId} ")
+	int cancelRes(String resId);
 
 	//@Select("SELECT NAME, NICKNAME, EMAIL, PHONE, LES_IMG, LES_NAME, LES_LOCATION, LES_CONTACT, LES_COST, RES_DATE, RES_STARTTIME, RES_ENDTIME, SCH_STARTTIME, SCH_ENDTIME "
 	//		+ " FROM LESSON_RESERVATION, MEMBER, LESSON, LESSON_SCHEDULE "
 	//		+ " WHERE LES_SEQ = #{lesSeq} AND MEMBER = #{ID} AND RES_DATE=#{resDate} AND RES_STARTTIME=#{resStarttime}; ")
 	//LessonResDto selectLesRes(int lesSeq, String id, Date resDate, String resStarttime);
 	
-	@Select(" SELECT s.* "
-			+" FROM LESSON l, LESSON_SCHEDULE s "
-			+" WHERE l.LES_SEQ=#{lesSeq} AND l.LES_SEQ = s.LES_SEQ ")
+	@Select(" SELECT s.*,"
+			+ " (SELECT COUNT(lr.RES_ID) "
+			+ " FROM LESSON_RESERVATION lr "
+			+ " WHERE lr.LES_SEQ=#{lesSeq} AND s.SCH_STARTTIME IN ( "
+			+ " 	SELECT DATE_FORMAT(RES_DATE, '%H:%i') AS RES_DATE "
+			+ "		FROM LESSON_RESERVATION lr )) CNT_RES "
+			+ " FROM LESSON l, LESSON_SCHEDULE s "
+			+ " WHERE l.LES_SEQ=#{lesSeq} AND l.LES_SEQ = s.LES_SEQ ")
 	List<LessonSchDto> selectSchedule(int lesSeq);
+
 }

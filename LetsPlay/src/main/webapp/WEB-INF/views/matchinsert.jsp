@@ -11,7 +11,9 @@
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
-
+function openPopUp() {
+    window.open("/match/facimport", "시설 선택", "width=450, height=400, top=150, left=200");
+}
 </script>
 
 <div>
@@ -62,6 +64,13 @@
 					<option value="중구">중구</option>
 				</select>
 				</td>
+				<td><input type="button" value="시설 등록" onclick="openPopUp()"></td>
+				<td><input type="text" id="facname"></td>
+				<td><input type="hidden" id="facSeq" name="facSeq"></td>
+			</tr>
+			<tr>
+				<th>매칭날짜</th>
+				<td><input type="date" name="matchDay"></td>
 			</tr>
 			<tr>
 				<th>시작시간</th>
@@ -69,7 +78,7 @@
 			</tr>
 			<tr>
 				<th>종료시간</th>
-				<td><input type="time" name="endTime" min="06:00" max="23:59" step="30:00" value="14:00"></td>
+				<td><input type="time" name="endTime" min="06:00" max="23:59" value="14:00"></td>
 			</tr>
 			<tr>
 				<th>내  용</th>
