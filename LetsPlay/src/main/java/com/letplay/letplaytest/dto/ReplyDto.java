@@ -53,10 +53,10 @@ public class ReplyDto {
 	public void setMatchSeq(int matchSeq) {
 		this.matchSeq = matchSeq;
 	}
-	public String getNickName() {
+	public String getnickName() {
 		return nickName;
 	}
-	public void setNickName(String nickName) {
+	public void setnickName(String nickName) {
 		this.nickName = nickName;
 	}
 }

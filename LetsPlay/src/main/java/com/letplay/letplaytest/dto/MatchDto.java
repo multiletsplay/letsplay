@@ -231,10 +231,10 @@ public class MatchDto {
 	public void setMatchDay(Date matchDay) {
 		this.matchDay = matchDay;
 	}
-	public String getNickName() {
+	public String getnickName() {
 		return nickName;
 	}
-	public void setNickName(String nickName) {
+	public void setnickName(String nickName) {
 		this.nickName = nickName;
 	}
 	public int getFacSeq() {
