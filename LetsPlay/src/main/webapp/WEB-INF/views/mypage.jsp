@@ -197,6 +197,7 @@
 		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
 		            		<td>${dto.facLocation }</td>
 		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?facSeq=${dto.facSeq }'"></td>
+		            		<td><input type="button" value="예약 취소" onclick="location.href='/member/cancelfacres?resId=${dto.resId }'"></td>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>
@@ -208,6 +209,7 @@
 		            		<td><a href="/lesson/detail?lesSeq=${dto.lesSeq }">${dto.lesName }</a></td>
 		            		<td>${dto.lesLocation }</td>
 		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?lesSeq=${dto.lesSeq }'"></td>
+		            		<td><input type="button" value="예약 취소" onclick="location.href='/member/cancellesres?resId=${dto.resId }'"></td>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>
@@ -315,6 +317,7 @@
 		</c:choose>
 </div>
 
+<hr>
 <h2>1대1문의</h2>
 	<table border="1">
 		<tr>
