@@ -577,8 +577,8 @@ margin-bottom: 0px;
 
 
 /* 결제 예정 금액 */
+#payment-submit{ display:none;}
 .book_wrap{
-  width: 50%;
   margin: 100px auto 0 auto;
   padding: 80px;
   border: 1px solid #ddd;
@@ -586,8 +586,10 @@ margin-bottom: 0px;
 }
 
 .book_wrap h3{
-  margin-top: 80px;
+  text-align: center;
   font-size: 2rem;
+  margin-bottom: 80px;
+  font-weight: 300;
 }
 
 .info__detail p, .book__detail p, .pay__detail p{
@@ -595,9 +597,17 @@ margin-bottom: 0px;
 } 
 
 .info__detail{
-  margin: 20px 0px;
+  /* margin: 20px 0px;
   border-bottom: 1px solid rgb(155, 155, 155);
-  padding:30px 0px;
+  padding:30px 0px; */
+  margin-left: 40px;
+  float: right;
+  width: 45%;
+}
+
+.info__detail img{
+  width: 100%;
+  height: 350px;
 }
 
 .info__detail ul li, .book__detail ul li{
@@ -614,7 +624,8 @@ margin-bottom: 0px;
 
 
 .book__detail{
-  width: 100%;
+  width: 48%;
+  float: left;
 }
 .bookicon {
   text-align: center;
@@ -624,7 +635,7 @@ margin-bottom: 0px;
   transform: translate(-50%, -50%);
 }
 .bookicon span{
-font-size: 7rem !important;
+font-size: 5rem !important;
 text-align: center;
 color: #fff;
 background: #8db6f5;
@@ -635,11 +646,12 @@ border-radius: 50%;
 
 .pay__detail{
   border-top: 1px solid rgb(155, 155, 155);
-  padding: 25px 0px;
+  padding: 36px 0px;
   display: flex;
   justify-content: space-between;
   line-height: 22px;
-  margin: 20px 0px;
+  margin: 14px 0px;
+  clear: both;
 }
 
 
@@ -651,12 +663,38 @@ border-radius: 50%;
 
 
 .pay_Btn{
-  width: 100%;
-  height: 80px;
+  width: 20%;
+  height: 70px;
   background-color: #10a26d;
   border-radius: 10px;
   color: #fff;
   border: none;
   cursor: pointer;
   font-size: 1.1rem;
+  float: right;
+}
+
+.pay_Btn:hover{
+  transform: scale( 1.1, 1.1 )
+}
+
+.info__detail p:first-child{
+  margin-bottom:20px;
+  font-weight: 500;
+  color: var(--font);
+  font-size: 1.2rem;
+}
+
+p.book_title{
+  color: var(--font);
+  font-weight: 700;
+  font-size: 2.3rem;
+  margin-bottom: 60px;
+  letter-spacing: -1px;
+}
+
+
+.book_fa_info{
+  padding-bottom: 60px;
+  border-bottom: var(--font-200);
 }
