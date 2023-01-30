@@ -40,8 +40,10 @@ public interface FacMapper {
 			+ " WHERE FAC_SEQ = #{facSeq} AND f.SPO_ID = s.SPO_ID ")
 	FacDto selectFac(int facSeq);
 	
-	@Select(" SELECT d.DT, IF(d.DT = fr.RES_DATE, 1, 0) AS RES_STATUS "
-			+ " FROM DETM d LEFT OUTER JOIN FACILITY_RESERVATION fr ON fr.FAC_SEQ = #{facSeq} ")
+	@Select(" SELECT DT, SUM(RES_STATUS) AS RES_STATUS "
+			+ " FROM (SELECT d.DT, IF(d.DT = fr.RES_DATE, 1, 0) AS RES_STATUS "
+			+ "		FROM DETM d LEFT OUTER JOIN FACILITY_RESERVATION fr ON fr.FAC_SEQ = #{facSeq} ) d "
+			+ " GROUP BY DT ")
 	List<TimeDto> selectTime(int facSeq);
 	
 	@Delete(" DELETE FROM FACILITY WHERE FAC_SEQ = #{facSeq} ")
