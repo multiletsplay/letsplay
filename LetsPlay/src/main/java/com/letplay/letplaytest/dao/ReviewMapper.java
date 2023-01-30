@@ -23,7 +23,7 @@ public interface ReviewMapper {
 			+ "ORDER BY REV_ID DESC ")
 	List<ReviewDto> selectLessonList(int lesSeq);
 
-	@Insert(" INSERT INTO REVIEW VALUES(NULL, #{nickname}, #{lesSeq}, #{facSeq}, #{revRate}, #{revContent}, #{revWritedate}, #{revModidate} ) ")
+	@Insert(" INSERT INTO REVIEW VALUES(NULL, #{id}, #{lesSeq}, #{facSeq}, #{revRate}, #{revContent}, #{revWritedate}, #{revModidate} ) ")
 	int reviewInsert(ReviewDto dto);
 
 }
