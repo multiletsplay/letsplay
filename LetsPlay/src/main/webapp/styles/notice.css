@@ -147,7 +147,7 @@
 	margin: auto 10px;
 }
 
-#PersonalResult {
+.PersonalResult {
 	display:none;
 	padding: 10px 30px 10px 250px;
 	background-color: white;
@@ -156,11 +156,11 @@
 	margin-bottom: 15px;
 }
 
-#PersonalResult > div:first-child {
+.PersonalResult > div:first-child {
 	width:85%;
 }
 
-#PersonalResult > div:nth-child(2){
+.PersonalResult > div:nth-child(2){
 	display:flex;
 	flex-direction: row-reverse;
 }
@@ -197,9 +197,64 @@
 	margin-bottom: 50px;
 }
 
+.noticeInsertMainContent {
+	width: 600px;
+	display: flex;
+	flex-direction: column;
+}
 
+.noticeInsertMainContent > div {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
 
+.noticeInsertMainContent > div > input {
+	border: 0.5px solid grey;
+	border-radius: 8px;
+}
 
+.noticeInsertMainContent > div:nth-child(2) > input {
+	height: 200px;
+}
 
+.noticeInsertMainContent > div:nth-child(3) > input {
+	width: 200px;
+	transform: translate(-140%);
+}
 
+.noticeInsertMainContent > div:last-child {
+	display: flex;
+	justify-content: center;
+}
+
+.noticeInsertMainContent > div:last-child > button {
+	margin: 30px;
+	width:100px;
+	height: 50px;
+	border-style: none;
+	color: white;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.NoticeredColour {
+	color: red;
+	position: absolute;
+	left: 34px;
+	line-height: 27px;
+}
+
+.NoticeredColourID {
+	left: 22px;
+}
+
+#Cancelation {
+	background-color: grey;
+}
+
+#Registration {
+	background-color: var(--primary-600);
+}
 

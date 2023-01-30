@@ -12,28 +12,27 @@
 <hr style='width: 700px; margin-bottom: 30px;'/>
 <div id="notice-insert">
     <form action="/notice/insert" method="post">
-        <table class="notice-table">
-       		 <tr>
-                <th>제목</th>
-                <td><input type="text" name="noticeTitle"></td>
-            </tr>
-        	
-            
-            <tr>
-                <th>내용</th>
-                <td><textarea rows="10" cols="80" name="noticeContent"></textarea></td>
-            </tr>
-            <tr>
-                <th>ID</th>
-                <td><input type="text" name="id"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="right">
-					<input type="submit" value="등록">
-					<input type="button" value="취소" onclick="location.href='/notice/list'">
-				</td>
-            </tr>
-        </table>
+        <div class='noticeInsertMainContent'>
+			<div>
+				<span>제목</span>
+				<span class='NoticeredColour'>*</span>
+				<input type='text' name='noticeTitle'></input>
+			</div>
+			<div>
+				<span>내용</span>
+				<span class='NoticeredColour'>*</span>
+				<input type='text' name='noticeContent'></input>
+			</div>
+			<div>
+				<span>ID</span>
+				<span class='NoticeredColour NoticeredColourID'>*</span>
+				<input type='text' name='id'></input>
+			</div>
+			<div class='InsertContentBtn'>
+				<button id='Cancelation' type="button" onclick="location.href='/notice/list'">취소</button>
+				<button id='Registration' type="submit">등록</button>
+			</div>
+	    </div>
     </form>
 </div>
 </div>
