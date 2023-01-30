@@ -424,23 +424,11 @@ ul{ list-style:none; }
 
 .facility-list-fl{
   float: left;
-  margin-right: 8px;
+  margin-right: 5px;
   width: 24.5%;
 }
 
-.facility-list-fl:nth-child(4n+1){
+.facility-list-fl:nth-child(4n){
   margin-right: 0px;
 
-}
-
-
-
-/* filter  */
-
-
-.wrap__filter{
-  width: 100%;
-  border: 1px solid var(--font-200);
-  height: 150px;
-  border-radius: 10px;
 }

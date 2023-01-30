@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <%@ include file="header.jsp" %>
 
 <!-- <h1>letsplay</h1>
@@ -24,34 +24,7 @@
 <br> -->
 
 <!-- 메인 -->
-<script type="text/javascript">
-	function like(){
-		let lesSeq = $(this).attr('idx');
-		
-		$.ajax({
-			url : "/lesson/likes",
-			type : "POST",
-			data : { 'lesSeq' : lesSeq },
-			success : function(){
-				alert("찜 성공");
-				window.location.reload();
-			}
-		});
-	}
-	
-	function dellike(){
-		let lesSeq = $(this).attr('idx');
-		$.ajax({
-			url : "/lesson/dellikes",
-			type : "GET",
-			data : { 'lesSeq' : lesSeq },
-			success : function(){
-				alert("취소 성공");
-				window.location.reload();
-			}
-		});
-	}
-</script>
+
 <section class="visual">
    <div class="inner align-contents">
       <div class="hero__content">
@@ -385,54 +358,93 @@
           <button class="sports" value="수영">수영</button>
           <button class="sports" value="골프">골프</button>
         </div>
-
-
-        <form action="/lesson/delete" method="post">
-
-        <c:choose>
-          <c:when test="${empty lessonlist }">
-            <div class="lesson">---- 등록된 레슨이 없습니다 ----</div>
-        </c:when>
-    
-       
-
-        <c:otherwise>
-				<c:forEach items="${lessonlist }" var="dto">
+        
         <div class="mb-20 col-md-4 col-lg-3">
           <div class="lesson">
-            <a href="/lesson/detail?lesSeq=${dto.lesSeq}">
-              <p class="img">
-                <span class="sports-category">${dto.spoName }</span>
-								<img src="${dto.lesImgpath }">
+            <a href="/lesson/1">
+              <p class="img"><span class="sports-category">테니스</span></p>
             </a>
             
             <div>
-              <a href="/lesson/detail?lesSeq=${dto.lesSeq}">
-                <p class="fac-title">${dto.lesName }</p>
+              <a href="/lesson/1">
+                <p class="fac-title">테니스 매칭구합니다.</p>
               </a>
-              <p class="review-count">이용자 리뷰 ${dto.cntReview }개</p>
-              <p><span class="match-location">${dto.lesLocation }</span></p>
+              <p class="review-count">이용자 리뷰 10개</p>
+              <p><span class="match-location">서울시 강서구 화곡동</span></p>
               
-              <div class="favorite">
-								<c:choose>
-			   				<c:when test="${dto.likesStatus eq 1 }">
-			   					<img id="dellikeBtn" idx="${dto.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-			   				</c:when>
-			   				<c:otherwise>
-			   					<img id="likeBtn" idx="${dto.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
-			   				</c:otherwise>
-			   			</c:choose>
-							</div>
-              
+              <div class="favorite"><i class="ri-heart-line"></i></div>
             </div>
           </div>
         </div>
-      </c:forEach> 
-    </c:otherwise>
-  </c:choose>
-  </form>    
+        
+        <div class="mb-20 col-md-4 col-lg-3">
+          <div class="lesson">
+            <a href="/lesson/2">
+              <p class="img"><span class="sports-category">풋살</span></p>
+            </a>
 
+            <div>
+            <a href="/lesson/2">
+              <p class="fac-title">풋살 매칭구합니다.</p>
+            </a>
+            
+            <p class="review-count">이용자 리뷰 10개</p>
+            <p><span class="match-location">서울시 강서구 어디어디</span></p>
+            
+            <div class="favorite">
+              <i class="ri-heart-line"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mb-20 col-md-4 col-lg-3">
+        <div class="lesson">
+          <a href="/lesson/3">
+            <p class="img">
+              <span class="sports-category">배드민턴</span>
+            </p>
+          </a>
+          
+          <div>
+            <a href="/lesson/3">
+              <p class="fac-title">배드민턴 매칭구합니다.</p>
+            </a>
+            
+            <p class="review-count">이용자 리뷰 10개</p>
+            <p>
+              <span class="match-location">서울시 강남 어디 저기</span>
+            </p>
+            
+            <div class="favorite">
+              <i class="ri-heart-line"></i>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+      
+      <div class="mb-20 col-md-4 col-lg-3">
+        <div class="lesson">
+          <a href="/lesson/4">
+            <p class="img">
+              <span class="sports-category">탁구</span>
+            </p>
+          </a>
 
+          <div>
+            <a href="/lesson/4">
+              <p class="fac-title">탁구 매칭구합니다.</p>
+            </a>
+            <p class="review-count">이용자 리뷰 10개</p>
+            <p><span class="match-location">서울시 강남 어디 저기</span></p>
+            
+            <div class="favorite">
+              <i class="ri-heart-line"></i>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
