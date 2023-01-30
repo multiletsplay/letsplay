@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+//import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -96,21 +96,21 @@ public class LetsMemberController {
 		}
 	}
 	
-	@PostMapping(value = "signup")
-    public String validCheck(@Valid MemberDto dto, Errors errors, Model model){
-        if(errors.hasErrors()){
-        //패스워드 유효성 검사 부적합
-            Map<String, String> validatorResult = membiz.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
-
-            // 유효성 통과 못한 필드와 메시지를 핸들링
-
-            return "/singup";
-        }
-        return "/login";
-    }
+//	@PostMapping(value = "signup")
+//    public String validCheck(@Valid MemberDto dto, Errors errors, Model model){
+//        if(errors.hasErrors()){
+//        //패스워드 유효성 검사 부적합
+//            Map<String, String> validatorResult = membiz.validateHandling(errors);
+//            for (String key : validatorResult.keySet()) {
+//                model.addAttribute(key, validatorResult.get(key));
+//            }
+//
+//            // 유효성 통과 못한 필드와 메시지를 핸들링
+//
+//            return "/singup";
+//        }
+//        return "/login";
+//    }
  
 	
 	

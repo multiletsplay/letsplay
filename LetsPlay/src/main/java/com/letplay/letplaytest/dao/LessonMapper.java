@@ -71,5 +71,21 @@ public interface LessonMapper {
 			+ " FROM LESSON l, LESSON_SCHEDULE s "
 			+ " WHERE l.LES_SEQ=#{lesSeq} AND l.LES_SEQ = s.LES_SEQ ")
 	List<LessonSchDto> selectSchedule(int lesSeq);
+	
+	@Select( {"<script>",
+			" SELECT l.*, s.SPO_NAME, ANY_VALUE(ls.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW ",
+			" FROM LESSON l ",
+			"	LEFT OUTER JOIN SPORTS s ON l.SPO_ID=s.SPO_ID ",
+			" 	LEFT OUTER JOIN LIKES ls ON l.LES_SEQ=ls.LES_SEQ AND ls.ID=#{id} ",
+			"	LEFT OUTER JOIN REVIEW r ON l.LES_SEQ=r.LES_SEQ ",
+			" <where>",
+			" 	<if test='searchRegion1 != null'>LES_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
+			"	<if test='searchRegion2 != null'>AND LES_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
+			" 	<if test='optCost.equals(\"T\")'>AND FAC_COSTCHECK=#{optCost} </if> ",
+			" 	<if test='optCost.equals(\"F\")'>AND FAC_COSTCHECK=FALSE </if> ",
+			" </where> ",
+			" GROUP BY l.LES_SEQ ",
+			" </script>" })
+	List<LessonDto> searchLesson(String id);
 
 }
