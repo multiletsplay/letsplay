@@ -45,8 +45,10 @@
           <span>
            <a href="/match/insertform"><span class='btn01'>매칭만들기</span></a> 
           </span>
-          <span>
-            <a href="/member/loginform"><span class='btn01'>로그인</span></a>
+          <span class="login"><span class="material-symbols-outlined" onclick="location.href='/member/loginform'">login</span>
+
+            <!-- 로그아웃 시에는 login -> logout 으로 변경해주시면 아이콘이 변경됩니다! -->
+            
           </span>
           <!-- <div  class='alarm'>
             <span  class="fav__icon">
