@@ -205,6 +205,5 @@ public class SearchDto {
 	public void setOptWeekend(String optWeekend) {
 		this.optWeekend = optWeekend;
 	}
-	
-	
+
 }
