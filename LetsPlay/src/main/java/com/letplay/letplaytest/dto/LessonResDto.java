@@ -20,6 +20,7 @@ public class LessonResDto {
 	private String resPrice;
 	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
 	private Date resDatetime;
+	private int revStatus;
 	
 	public LessonResDto() {
 		super();
@@ -27,7 +28,7 @@ public class LessonResDto {
 
 	public LessonResDto(String resId, String id, int lesSeq, String lesName, String lesImgpath, String lesLocation,
 			String lesTeacher, String lesContact, String resDate, String resStarttime, String resEndtime,
-			String resPrice, Date resDatetime) {
+			String resPrice, Date resDatetime, int revStatus) {
 		super();
 		this.resId = resId;
 		this.id = id;
@@ -42,6 +43,7 @@ public class LessonResDto {
 		this.resEndtime = resEndtime;
 		this.resPrice = resPrice;
 		this.resDatetime = resDatetime;
+		this.revStatus = revStatus;
 	}
 
 	public String getResId() {
@@ -121,6 +123,14 @@ public class LessonResDto {
 	}
 	public void setResDatetime(Date resDatetime) {
 		this.resDatetime = resDatetime;
+	}
+
+	public int getRevStatus() {
+		return revStatus;
+	}
+
+	public void setRevStatus(int revStatus) {
+		this.revStatus = revStatus;
 	}
 
 }
