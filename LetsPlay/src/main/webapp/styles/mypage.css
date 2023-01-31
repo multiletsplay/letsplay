@@ -196,6 +196,23 @@
 	margin-top: 20px;
 }
 
+#inqListWrapperTop {
+	height: 700px;
+	display: flex;
+	justify-content: center;
+	position: relative;
+}
+
+#inqListWrapper {
+	margin-top: 150px;
+	width: 1100px;
+}
+
+.inqListpaging {
+	margin-top: 100px;
+	transform: translate(-4.5%);
+}
+
 .inqList {
 	width: 100%;
 	padding: 20px 0px;
@@ -249,4 +266,60 @@
 	padding: 20px 0;
 	border-bottom: 1px solid rgb(244, 244, 244);
 }
+
+#BookedMatch {
+	display: flex;
+	flex-direction: column;
+}
+
+.BookedMatchInform {
+	border-bottom: 1px solid rgb(51, 51, 51);
+    border-top: 2px solid rgb(51, 51, 51);
+    margin-top: 20px;
+    padding: 10px 0px;
+	display: flex;
+	justify-content: space-around;
+}
+
+/* .BookedMatchInform > span::after {
+	content: '|';
+    padding-left: 15px;
+    line-height: 10px;
+    font-size: 10px;
+} */
+
+.BookedMatchSport {
+	display: flex;
+	justify-content: center;
+	padding: 10px 0;
+	border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+#bookedMatchFirst {
+	padding: 10px 0px;
+	display: flex;
+	justify-content: space-around;
+	border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+#bookedMatchSecond {
+	padding: 10px 0px;
+	display: flex;
+	justify-content: space-around;
+	border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.inqListWrapperTitle {
+	position: absolute;
+	top: 50px;
+	left: 46%;
+}
+
+.inquirylistContentsWrap {
+	
+}
+
+
+
+
 

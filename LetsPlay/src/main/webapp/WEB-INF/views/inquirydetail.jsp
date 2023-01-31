@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="header.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <style type="text/css">
 	#commentBtn { visibility: hidden; }
 	#comUpdateBtn { visibility: hidden; }
@@ -27,9 +25,10 @@
 		$(".reply-update").attr("style", "display:table")
 	}
 </script>
-</head>
-<body>
-<h1>1대1문의 디테일</h1>
+<div id='InquiryDetailForm'>
+<div class='InquiryDetailHeader'>
+<h1>1대1 문의</h1>
+</div>
 <table class="board-table">
     <tr>
         <th>제목</th>
@@ -133,5 +132,5 @@
 		</c:otherwise>
 	</c:choose>
 </table>
-</body>
-</html>
+</div>
+<%@ include file="footer.jsp" %>

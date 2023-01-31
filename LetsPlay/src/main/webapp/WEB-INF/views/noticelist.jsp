@@ -85,17 +85,17 @@ $(function() {
 </ul>
 
 
-<div class="paging">
+<div class="NoticeListPaging">
 	<form action="<c:url value='/notice/list'/>" name="pageForm">
 		<ul class="pagination" id="pagination">
 <%-- 			<c:if test="${paging.prev ne true }"> --%>
-				<li class="page-item"><a class="page-link" href="<c:url value='/notice/list?page=${paging.startPage-1}'/>" data-pageNum="${paging.startPage-1}">이전</a></li>
+				<li class="page-item"><a class="page-link" href="<c:url value='/notice/list?page=${paging.startPage-1}'/>" data-pageNum="${paging.startPage-1}"><</a></li>
 <%-- 			</c:if> --%>
 			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
 				<li class="{paging.pageNum == num ? 'page-item active' : ''}" page-item><a class="page-link" href="#" data-pageNum="${num}">${num}</a></li>
 			</c:forEach>
 <%-- 			<c:if test="${paging.next ne true }"> --%>
-				<li class="page-item"><a class="page-link" href="<c:url value='/notice/list?page=${paging.endPage+1}'/>" data-pageNum="${paging.endPage+1}">다음</a></li>
+				<li class="page-item"><a class="page-link" href="<c:url value='/notice/list?page=${paging.endPage+1}'/>" data-pageNum="${paging.endPage+1}">></a></li>
 <%-- 			</c:if> --%>
 		</ul>
 		<input type="hidden" name="pageNum" value="${paging.cri.pageNum}">

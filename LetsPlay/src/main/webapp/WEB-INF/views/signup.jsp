@@ -210,8 +210,15 @@
           <button type="button" id="phoneChkBtn">인증확인</button>
         </div>
         <div class='formBtn'>
-          <input type="radio" name="gender" value="M">
-          <input type="radio" name="gender" value="F">
+       	  <label class='formBtnGender'>
+	          <input type="radio" name="gender" value="M">
+	          <span>남자</span>
+          </label>
+          
+          <label class='formBtnGender'>
+	          <input type="radio" name="gender" value="F">
+	          <span>여자</span>
+           </label>
         </div>
         <div class='formDate'>
           <div>생년월일</div>

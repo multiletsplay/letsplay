@@ -105,6 +105,7 @@
 }
 
 .listWriter {
+	font-weight: 200;
     text-align: center;
     padding: 20px 0px;
     color: rgb(76, 76, 76);
@@ -112,6 +113,8 @@
 }
 
 .listTitle {
+	font-weight: 500;
+	font-size: large;
     padding: 20px 0px 20px 50px;
     color: rgb(76, 76, 76);
     flex: 1 1 0%;
@@ -134,8 +137,6 @@
 .LetplNoticeMain {
 	width: 1100px;
 	margin-top: 100px;
-	margin-bottom: 250px;
-	
 }
 
 .pagination {
@@ -156,13 +157,19 @@
 	margin-bottom: 15px;
 }
 
-.PersonalResult > div:first-child {
-	width:85%;
+#PersonalResult > div:first-child {
+	transform: translate(17%);
+	width:70%;
 }
 
-.PersonalResult > div:nth-child(2){
+.NoticeListPaging {
+	margin-top: 60px;
+}
+
+#PersonalResult > div:nth-child(2){
 	display:flex;
 	flex-direction: row-reverse;
+	transform: translate(-0.5%);
 }
 
 .modBtn {
@@ -247,7 +254,7 @@
 }
 
 .NoticeredColourID {
-	left: 22px;
+	left: 25px;
 }
 
 #Cancelation {
@@ -257,4 +264,26 @@
 #Registration {
 	background-color: var(--primary-600);
 }
+
+#InquiryDetailForm {
+	display: flex;
+	
+}
+
+.InquiryDetailHeader {
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
