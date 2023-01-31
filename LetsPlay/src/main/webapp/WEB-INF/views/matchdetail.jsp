@@ -18,14 +18,16 @@
         <div class="container col-8 mt-2" style="background-color:white">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
+
 		$(document).ready(function(){
+
 			var mem = '${member.id }';
 			if (mem=='${dto.id}'){
 				$("#joinbtn").attr('style', "display:none;");
 				$("#fixmatch").show();
 				$("#unfixmatch").show();
-			
 			}
+			
 			
 			$("#joinbtn").click(join);
 			$("#unjoinbtn").click(unjoin)
@@ -115,17 +117,7 @@
 				location.href='/match/delete?matchSeq=${dto.matchSeq}'
 			}
 		};
-// 		function fn2(a,b){
-// 			if (confirm("매칭에 참여하시겠습니까?")) {
-// 				if(a >= b){
-// 					alert("이미 정원이 가득 찼습니다")
-// 					return;
-// 				}
-// 				const btnElement = document.getElementById('btn');
-// 				btnElement.innerText = '매칭취소';
-// 				location.href='/match/joinMatch?matchSeq=${dto.matchSeq}'
-// 			}
-// 		};
+
 	
 	
 	</script>	
@@ -210,7 +202,7 @@
 					<button type="button" id="unjoinbtn">참여취소</button>
 					</c:if>
 					<c:if test="${ dto.joinStatus eq 0 }">
-					<button type="button" id="joinbtn">참여하기</button>
+					<button type="button" id="joinbtn" onclick="fn2(${dto.cntJoin},${dto.matchTotal });" >참여하기</button>
 					</c:if>
 				</div>
 					<div style="text-align:center">

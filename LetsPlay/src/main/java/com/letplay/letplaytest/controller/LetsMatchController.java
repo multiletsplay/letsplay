@@ -235,43 +235,6 @@ public class LetsMatchController {
 				System.out.println("취소 실패");
 			}
 		}
-//		@GetMapping("/match/session")
-//		public String JavaSession(Model model, HttpServletRequest request) {
-//			// 세션생성
-//		    HttpSession session = request.getSession();
-//		    HttpSession session1 = request.getSession(true);
-//		    HttpSession session2 = request.getSession(false);
-//
-//		    // 새로운세션 생성여부
-//		    boolean sNew = session.isNew();
-//
-//		    // 세션 유지시간 설정(초단위로)
-//		    // 60*60 = 1시간
-//		    int sTime = 60*60; 
-//		    session.setMaxInactiveInterval(sTime);
-//
-//		    // 무한대설정
-//		    session.setMaxInactiveInterval(-1);
-//
-//		    // 세션Id 값 가져오기
-//		    String sId = session.getId();
-//		    
-//		    String hello = "Hello session!!";
-//
-//		    // 세션에 값 저장하기
-//		    session.setAttribute("session_hello", hello);
-//
-//		    // 세션에서 값 가져오기
-//		    String word = (String) session.getAttribute("session_hello");
-//		    System.out.println(word);
-//		    
-//		    // 세션에서 일부 값 삭제하기
-//		    session.removeAttribute("session_hello");
-//
-//		    // 모든세션 정보 삭제하기
-//		    session.invalidate();
-//		    return null;
-//		}
 		//매치 찜하기
 		@ResponseBody
 		@RequestMapping(value="/match/likes", method=RequestMethod.POST)
