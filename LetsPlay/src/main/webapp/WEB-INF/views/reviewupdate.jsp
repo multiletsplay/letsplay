@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Review Insert</title>
+<title>Insert title here</title>
 </head>
 <body>
-<div>
-
-<form action="/member/review/insert" method="POST">
+<form action="/member/review/update" method="post">
+<table class="reviewupdate" border="1">
 	<c:choose>
 	<c:when test="${dto.facName eq ''}">
-		<table class="reviewinsert" border="1">
+		<table class="reviewupdate" border="1">
 			<tr>
 				<td>
 					<input type="hidden" name="lesSeq" value="${dto.lesSeq} ">
@@ -48,13 +46,13 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="작성 완료">
+					<input type="submit" value="수정 완료">
 				</td>
 			</tr>
 		</table>
 		</c:when>
 		<c:otherwise>
-		<table class="reviewinsert" border="1">
+		<table class="reviewupdate" border="1">
 			<tr>
 				<td>
 					<input type="hidden" name="facSeq" value="${dto.facSeq} ">
@@ -91,8 +89,7 @@
 		</table>
 		</c:otherwise>
 		</c:choose>
-	</form>
-	<input type="submit" id="cancelBtn" value="취소" onclick="location.href='/member/mypage'">
-</div>
+</table> 
+</form>
 </body>
 </html>

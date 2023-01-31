@@ -231,7 +231,15 @@
 		            		<td>시설</td>
 		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
 		            		<td>${dto.facLocation }</td>
-		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?facSeq=${dto.facSeq }'"></td>
+		            		<c:choose>
+		            		<c:when test="${dto.revStatus ne 1 } ">
+		            			<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?facSeq=${dto.facSeq }'"></td>
+		            		</c:when>
+		            		<c:otherwise>
+		            			<td><input type="button" value="후기 수정" onclick="location.href='/member/reviewupdateform?facSeq=${dto.facSeq }'"></td>
+		            		
+		            		</c:otherwise>
+		            		</c:choose>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>
@@ -243,6 +251,7 @@
 		            		<td><a href="/lesson/detail?lesSeq=${dto.lesSeq }">${dto.lesName }</a></td>
 		            		<td>${dto.lesLocation }</td>
 		            		<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?lesSeq=${dto.lesSeq }'"></td>
+		            		<td><input type="button" value="후기 수정" onclick="location.href='/member/reviewupdateform?lesSeq=${dto.lesSeq }'"></td>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>
