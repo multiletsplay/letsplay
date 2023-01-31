@@ -196,6 +196,23 @@
 	margin-top: 20px;
 }
 
+#inqListWrapperTop {
+	height: 700px;
+	display: flex;
+	justify-content: center;
+	position: relative;
+}
+
+#inqListWrapper {
+	margin-top: 150px;
+	width: 1100px;
+}
+
+.inqListpaging {
+	margin-top: 100px;
+	transform: translate(-4.5%);
+}
+
 .inqList {
 	width: 100%;
 	padding: 20px 0px;
@@ -292,9 +309,15 @@
 	border-bottom: 1px solid rgb(244, 244, 244);
 }
 
+.inqListWrapperTitle {
+	position: absolute;
+	top: 50px;
+	left: 46%;
+}
 
-
-
+.inquirylistContentsWrap {
+	
+}
 
 
 

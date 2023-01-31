@@ -209,6 +209,8 @@
     <li>
       <a href="#tab3" class="btn"><h2>예약 내역</h2></a>
       <div id="tab3" class="cont">
+     	 <h3>예약 내역</h3>
+        <p>예약완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
 			<form action="/member/mypage/resselect" method="get">
 		<button type="submit" name="type" value="F">시설</button>
 		<button type="submit" name="type" value="L">레슨</button>
