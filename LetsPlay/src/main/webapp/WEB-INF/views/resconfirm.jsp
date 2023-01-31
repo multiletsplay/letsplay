@@ -54,6 +54,7 @@ function requestPay() {
 <input type="hidden" name="id" value="${member.id }">
 <input type="hidden" name="facSeq" value="${dto.facSeq }">
 	<h3>예약 상세정보</h3>
+
 	<p class="book_title">${dto.facName }</p>
 	<div class="info__detail">
 		<p><img src="${dto.facImgpath }"></p>
@@ -70,6 +71,7 @@ function requestPay() {
 				<p>${dto.facContact }</p>
 			</li>
 		</ul>
+
 
 			<ul class="book_user_info">
 			<li>
@@ -90,7 +92,6 @@ function requestPay() {
 			</li>
 			<li>
 				<p>시작시간</p>
-				<p name="resStarttime" value="${dto.resStarttime }">${dto.resStarttime }</p>
 			</li>
 		</ul>
 	</div>
