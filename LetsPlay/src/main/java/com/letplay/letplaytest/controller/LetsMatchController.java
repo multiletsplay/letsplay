@@ -1,7 +1,15 @@
 package com.letplay.letplaytest.controller;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,19 +29,7 @@ import com.letplay.letplaytest.dto.MatchDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.NoticeDto;
 import com.letplay.letplaytest.dto.PageDto;
-import com.letplay.letplaytest.dto.ReplyDto;
 import com.letplay.letplaytest.dto.SearchDto;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
@@ -105,7 +101,7 @@ public class LetsMatchController {
 		
 		//매칭 검색	
 			@GetMapping("/match/search")
-			public String searchmatch(Model model, SearchDto dto, HttpServletRequest request) {
+		public String searchmatch(Model model, SearchDto dto, HttpServletRequest request) {
 				HttpSession session = request.getSession();
 				MemberDto member = (MemberDto) session.getAttribute("login");
 				List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
@@ -207,15 +203,6 @@ public class LetsMatchController {
 			return "redirect:/match/detail?matchSeq=" + matchSeq;
 		}
 		
-//		@GetMapping("/match/joinMatchList")
-//		public String joinMatchList(HttpSession session,Model model) {
-//			MemberDto member = (MemberDto) session.getAttribute("login");
-//			
-//			model.addAttribute("joinmatchlist", member.getId()); 
-//			
-//			return "matchdetail";
-//		}
-			
 		@ResponseBody
 		@PostMapping("/match/matchJoin")
 		public void MatchJoin(@RequestParam int matchSeq, @RequestParam String id) {
@@ -349,6 +336,30 @@ public class LetsMatchController {
 			}
 		}
 		
+		//메인
 		
+		@GetMapping("/index")
+		public String selectMainList(Model model, HttpServletRequest request, int spoId, String id) {
+			HttpSession session = request.getSession();
+			MemberDto member = (MemberDto) session.getAttribute("login");
+			List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
+			Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
+			for(MatchDto dto : matchlist) {
+				LocalDateTime matchEnddate = dto.getMatchEnddate();
+				LocalDateTime matchRegdate = dto.getMatchRegdate();
+				Duration duration = Duration.between(matchEnddate, matchRegdate);
+				int days = ((int) duration.toDays()-1)*-1;
+				dto.setdDay(days);
+				dDayMap.put(dto, days);
+			}
+			model.addAttribute("ddays", dDayMap);
+			model.addAttribute("list",matchBiz.selectMatchList(member.getId()));
+			model.addAttribute("cnt",matchBiz.matchListCount());
+			model.addAttribute("endcnt",matchBiz.matchEndCount());
+			
+			model.addAttribute("spolist",matchBiz.selectMainSports(spoId));
+			model.addAttribute("Hot",matchBiz.selectMainHot(id));
+			return "index";
+		}
 		
 }

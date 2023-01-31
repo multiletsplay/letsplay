@@ -178,11 +178,59 @@ public interface MatchMapper {
 	@Update(" UPDATE MATCH_BOARD SET MATCH_STATUS='N' WHERE MATCH_SEQ=#{matchSeq} ")
 	int unfixMatch(int matchSeq);
 
-
-
 	
+	//메인페이지
 
+	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
+			+ "(SELECT COUNT(r.REP_SEQ) "
+			+ "		FROM REPLY r"
+			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
+			+ "(SELECT COUNT(j.JOIN_SEQ) + 1 "
+			+ "		FROM MATCH_JOIN j "
+			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
+			+ " FROM MATCH_BOARD m "
+			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
+			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
+			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
+			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
+			+ " GROUP BY m.MATCH_SEQ "
+			+ " ORDER BY "
+			+ " m.MATCH_SEQ DESC limit 4 ")
+	List<MatchDto> selectMainList(String id);
 	
+	@Select("SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
+			+ "	(SELECT COUNT(r.REP_SEQ) "
+			+ "		FROM REPLY r "
+			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
+			+ " (SELECT COUNT(j.JOIN_SEQ) + 1 "
+			+ "		FROM MATCH_JOIN j "
+			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
+			+ " FROM MATCH_BOARD m "
+			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
+			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
+			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
+			+ " WHERE m.SPO_ID = s.SPO_ID AND m.SPO_ID = #{spoId} AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE "
+			+ " GROUP BY m.MATCH_SEQ"
+			+ " ORDER BY "
+			+ " MATCH_SEQ DESC limit 4 ")
+	List<MatchDto> selectMainSports(int spoId);
+
+	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
+			+ "(SELECT COUNT(r.REP_SEQ) "
+			+ "		FROM REPLY r"
+			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
+			+ "(SELECT COUNT(j.JOIN_SEQ) + 1 "
+			+ "		FROM MATCH_JOIN j "
+			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
+			+ " FROM MATCH_BOARD m "
+			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
+			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
+			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
+			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
+			+ " GROUP BY m.MATCH_SEQ "
+			+ " ORDER BY "
+			+ " m.CNT_JOIN ASC limit 4 ")
+	List<MatchDto> selectMainHot(String id);
 	
 	
 	

@@ -109,10 +109,21 @@ public class MatchImpl implements MatchBiz {
 		return matchMapper.unfixMatch(matchSeq);
 	}
 
-//	@Override
-//	public List<MatchDto> joinMatchList(String id) {
-//		return matchMapper.joinMatchList(id);
-//	}
+	@Override
+	public List<MatchDto> selectMainList(String id) {
+		return matchMapper.selectMainList(id);
+	}
+
+	@Override
+	public List<MatchDto> selectMainSports(int spoId) {
+		return matchMapper.selectMainSports(spoId);
+	}
+
+	@Override
+	public List<MatchDto> selectMainHot(String id) {
+		return matchMapper.selectMainHot(id);
+	}
+
 
 	
 
