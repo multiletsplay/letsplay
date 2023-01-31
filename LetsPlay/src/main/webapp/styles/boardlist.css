@@ -294,6 +294,14 @@ input.value {
   cursor: pointer;
   margin-right: 10px;
   position: relative;
+  line-height: 45px;
+}
+
+.filter-btn input{
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 0.9rem;
 }
 
 
@@ -304,11 +312,6 @@ input.value {
   color: var(--primary);
   display: inline-block;
 }
-
-.filter-btn span:first-child{
-  margin-right:5px;
-}
-
 
 
 .wrap-filter{
@@ -410,11 +413,10 @@ background-color: var(--font-50);
 ul{ list-style:none; }
 #optionBtn { display: none; }
 .searchOption { display:none; }
-#insertBtn { visibility: hidden; }
-#deleteBtn { visibility: hidden; }
+#insertBtn, #updateBtn, #deleteBtn { visibility: hidden; }
 #selectAll { display: none; }
 .delList { display: none; }
-
+#payment-submit{ display:none;}
 
 .facility .sports-category{
   position: absolute;
@@ -422,13 +424,223 @@ ul{ list-style:none; }
   left: 10px;
 }
 
-.facility-list-fl{
+.facility-list-fl, .lesson-list-l{
   float: left;
   margin-right: 5px;
   width: 24.5%;
 }
 
-.facility-list-fl:nth-child(4n){
+.facility-list-fl:nth-child(4n+1){
   margin-right: 0px;
+}
 
+.lesson-list-l:nth-child(4n){
+  margin-right:0px;
+}
+
+.wrap__filter{
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+#facility-search form{
+  display: flex;
+  justify-content: space-between;
+}
+
+.search__location div{
+  float: left;
+  margin-right:20px;
+}
+.search__location h4, .search__options h4{
+  margin-bottom: 10px;
+}
+.search__location select{
+  padding: 10px;
+  width: 150px;
+  border-color: #ddd;
+  border-radius: 5px;
+}
+
+
+.search__options .list-facility{
+  display: flex;
+}
+
+.search__location input[type=date]{
+position: relative;
+min-height: 30px;
+padding: 10px 12px;
+border: none;
+border-bottom: 1px solid #666;
+background-color: transparent;
+margin-bottom: 0px;
+}
+
+.list-facility li label {
+  display: block;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  font-size: 12px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 34px;
+  letter-spacing: -.5px;
+  text-align: center;
+  color: #656565;
+  padding: 2px 15px;
+  margin-right: 5px;
+}
+
+
+
+.list-facility li input:checked+label {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.list-facility li input{
+  display: none;
+}
+
+
+.re__Btn{
+  width: 100%;
+  padding: 15px 0px;
+  border-radius: 10px;
+  background-color: #333;
+  color: #fff;
+}
+
+.tel {
+  padding-bottom: 20px;
+}
+
+.tel p{
+  color: var(--font);
+  margin-bottom: 5px;
+}
+
+.tel p:last-child{
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+
+.fill {
+  color:var(--primary) !important;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48,
+}
+
+.material-symbols-outlined{
+  font-size: 2rem;
+  color:var(--font-200);
+}
+
+.icon_list{
+  float: left;
+  padding: 10px 30px;
+  border: 1px solid #DDD;
+  text-align: center;
+  margin-right: 15px;
+  border-radius: 10px;
+}
+
+.icon_list span:last-child{
+  margin-top: 10px;
+  font-size: .8rem;
+}
+
+
+.review-list{
+  position: relative;
+}
+
+.review-list span.star{
+  position: absolute;
+  top:40px;
+  right:30px;
+}
+
+
+
+
+
+
+
+
+
+/* 결제 예정 금액 */
+  margin: 100px auto 0 auto;
+  padding: 80px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+}
+
+.book_wrap h3{
+}
+
+.info__detail p, .book__detail p, .pay__detail p{
+  color: var(--font-500);
+} 
+
+.info__detail{
+}
+
+.info__detail ul li, .book__detail ul li{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom:20px;
+} 
+
+.info__detail ul li p:last-child, .book__detail ul li p:last-child{
+  font-weight: 700;
+  color: var(--font);
+}
+
+
+
+.book__detail{
+}
+.bookicon {
+  text-align: center;
+  position: absolute;
+  top:137px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.bookicon span{
+text-align: center;
+color: #fff;
+background: #8db6f5;
+padding: 20px;
+border-radius: 50%;
+}
+
+
+.pay__detail{
+  border-top: 1px solid rgb(155, 155, 155);
+}
+
+
+.pay__detail p:last-child{
+  font-size: 2rem;
+  color: var(--bs-red);
+  font-weight: 700;
+}
+
+
+.pay_Btn{
+  background-color: #10a26d;
+  border-radius: 10px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
 }

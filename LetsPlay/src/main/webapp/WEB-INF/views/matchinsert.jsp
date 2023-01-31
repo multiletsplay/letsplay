@@ -8,14 +8,14 @@
 <title>Insert title here</title>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-</head>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 function openPopUp() {
     window.open("/match/facimport", "시설 선택", "width=450, height=400, top=150, left=200");
 }
 </script>
-
+</head>
 <div>
 	<form action="/match/insert" method="post">
 	<input type="hidden" name="matchCnt" value="1">
@@ -66,7 +66,7 @@ function openPopUp() {
 				</td>
 				<td><input type="button" value="시설 등록" onclick="openPopUp()"></td>
 				<td><input type="text" id="facname"></td>
-				<td><input type="hidden" id="facSeq" name="facSeq"></td>
+				<td><input type="hidden" id="facSeq" name="facSeq" value="0"></td>
 			</tr>
 			<tr>
 				<th>매칭날짜</th>

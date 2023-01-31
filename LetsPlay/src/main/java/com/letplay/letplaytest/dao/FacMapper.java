@@ -40,9 +40,10 @@ public interface FacMapper {
 			+ " WHERE FAC_SEQ = #{facSeq} AND f.SPO_ID = s.SPO_ID ")
 	FacDto selectFac(int facSeq);
 	
-	@Select(" SELECT d.DT, IF(d.DT = fr.RES_DATE, 1, 0) AS RES_STATUS "
-			+ " FROM DETM d, FACILITY_RESERVATION fr"
-			+ " WHERE fr.FAC_SEQ = #{facSeq} ")
+	@Select(" SELECT DT, SUM(RES_STATUS) AS RES_STATUS "
+			+ " FROM (SELECT d.DT, IF(d.DT = fr.RES_DATE, 1, 0) AS RES_STATUS "
+			+ "		FROM DETM d LEFT OUTER JOIN FACILITY_RESERVATION fr ON fr.FAC_SEQ = #{facSeq} ) d "
+			+ " GROUP BY DT ")
 	List<TimeDto> selectTime(int facSeq);
 	
 	@Delete(" DELETE FROM FACILITY WHERE FAC_SEQ = #{facSeq} ")
@@ -60,35 +61,36 @@ public interface FacMapper {
 	@Insert(" INSERT INTO `FACILITY_RESERVATION` VALUES(#{resId}, #{id}, #{facSeq}, #{resDatetime}, #{resPrice} )")
 	int insertRes(FacResDto dto);
 	
-//	@Select("SELECT NAME, NICKNAME, PHONE, EMAIL, RES_DATE, RES_PRICE, RES_STARTTIME, RES_ENDTIME, FAC_IMG, FAC_NAME, FAC_LOCATION, FAC_CONTACT "
-//			+ " FROM ( "
-//			+ "	SELECT r.`ID` AS r_id, m.`ID` AS m_id, r.FAC_SEQ AS r_seq, f.FAC_SEQ AS f_seq, NAME, NICKNAME, PHONE, EMAIL, RES_DATE, RES_STARTTIME, RES_ENDTIME, RES_PRICE, FAC_IMG, FAC_NAME, FAC_LOCATION, FAC_CONTACT "
-//			+ "	FROM `FACILITY_RESERVATION` r, `MEMBER` m, `FACILITY` f "
-//			+ "	WHERE r.ID=m.ID AND r.FAC_SEQ=f.FAC_SEQ "
-//			+ "	) TMP "
-//			+ " WHERE r_seq=#{facSeq} AND r_id=#{id} AND RES_DATE=#{resDate} AND RES_STARTTIME=#{resStarttime}; ")
-//	FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime);
+	//예약취소
+	@Delete(" DELETE FROM FACILITY_RESERVATION WHERE RES_ID = #{resId} ")
+	int cancelRes(String resId);
 	
 	@Select( {"<script>",
-		" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW ",
-		" FROM FACILITY f ",
-		"	LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID ",
-		" 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} ",
-		"	LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ ",
-		" <where>",
-		" 	<if test='searchRegion1 != null'>FAC_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
-		"	<if test='searchRegion2 != null'>AND FAC_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
-//		"	<if test='searchDate != null'>AND FAC_DATE=#{searchDate} </if>",
-		" 	<if test='optParking == true '>AND FAC_PARKING=#{optParking} </if> ",
-		" 	<if test='optLent == true'>AND FAC_LENT=#{optLent} </if> ",
-		" 	<if test='optShower == true'>AND FAC_SHOWER=#{optShower} </if> ",
-		" 	<if test='optLocker == true'>AND FAC_LOCKER=#{optLocker} </if> ",
-		" 	<if test='optLight == true'>AND FAC_LIGHT=#{optLight} </if> ",
-		" 	<if test='optCost.equals(\"T\")'>AND FAC_COSTCHECK=#{optCost} </if> ",
-		" 	<if test='optCost.equals(\"F\")'>AND FAC_COSTCHECK=FALSE </if> ",
-		" </where> ",
-		" GROUP BY f.FAC_SEQ ",
-		" </script>" })
+	" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW ",
+	" FROM FACILITY f ",
+	"	LEFT OUTER JOIN (SELECT ANY_VALUE(DT) AS DT, FAC_SEQ, SUM(RES_STATUS) AS RES_STATUS ",
+	"		FROM (SELECT d.DT, f.FAC_SEQ , ANY_VALUE(IF(d.DT = fr.RES_DATE , 1, 0)) AS RES_STATUS ",
+	"		FROM (SELECT DT FROM DETM ",
+	"		WHERE DATE_FORMAT(DT, '%Y-%m-%d') = DATE_FORMAT(#{searchDate}, '%Y-%m-%d')) d , FACILITY f ",
+	"	LEFT OUTER JOIN FACILITY_RESERVATION fr ON fr.FAC_SEQ = f.FAC_SEQ) TMP\n",
+	"	GROUP BY FAC_SEQ) TMP2 ON f.FAC_SEQ = TMP2.FAC_SEQ",
+	"	LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID ",
+	" 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} ",
+	"	LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ ",
+	" <where>",
+	" 	<if test='searchRegion1 != null'>FAC_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
+	"	<if test='searchRegion2 != null'>AND FAC_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
+	" 	<if test='searchDate != null '>AND RES_STATUS != 17 </if> ",
+	" 	<if test='optParking == true '>AND FAC_PARKING=#{optParking} </if> ",
+	" 	<if test='optLent == true'>AND FAC_LENT=#{optLent} </if> ",
+	" 	<if test='optShower == true'>AND FAC_SHOWER=#{optShower} </if> ",
+	" 	<if test='optLocker == true'>AND FAC_LOCKER=#{optLocker} </if> ",
+	" 	<if test='optLight == true'>AND FAC_LIGHT=#{optLight} </if> ",
+	" 	<if test='optCost.equals(\"T\")'>AND FAC_COSTCHECK=#{optCost} </if> ",
+	" 	<if test='optCost.equals(\"F\")'>AND FAC_COSTCHECK=FALSE </if> ",
+	" </where> ",
+	" GROUP BY f.FAC_SEQ ",
+	" </script>" })
 	List<FacDto> searchFac(SearchDto dto);
 	
 	//평점 좋은 순으로 4개까지 불러오기
@@ -99,4 +101,5 @@ public interface FacMapper {
 			+ " ORDER BY AVGF DESC "
 			+ " LIMIT 4 ")
 	List<FacDto> selectRateavg();
+
 }

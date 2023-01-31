@@ -6,20 +6,26 @@ public class ReviewDto {
 	private int revId;
 	private String id;
 	private String nickname;
-	private int lesSeq;
-	private int facSeq;
+	private Integer lesSeq;
+	private Integer facSeq;
 	private int revRate;
 	private String revContent;
 	private Date revWritedate;
 	private Date revModidate;
+	private int con;
+	private String facName;
+	private String facLocation;
+	private String lesName;
+	private String lesLocation;
 	
 	public ReviewDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReviewDto(int revId, String id, String nickname, int lesSeq, int facSeq, int revRate, String revContent,
-			Date revWritedate, Date revModidate) {
+	public ReviewDto(int revId, String id, String nickname, Integer lesSeq, Integer facSeq, int revRate,
+			String revContent, Date revWritedate, Date revModidate, int con, String facName, String facLocation,
+			String lesName, String lesLocation) {
 		super();
 		this.revId = revId;
 		this.id = id;
@@ -30,6 +36,11 @@ public class ReviewDto {
 		this.revContent = revContent;
 		this.revWritedate = revWritedate;
 		this.revModidate = revModidate;
+		this.con = con;
+		this.facName = facName;
+		this.facLocation = facLocation;
+		this.lesName = lesName;
+		this.lesLocation = lesLocation;
 	}
 
 	public int getRevId() {
@@ -48,19 +59,27 @@ public class ReviewDto {
 		this.id = id;
 	}
 
-	public int getLesSeq() {
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public Integer getLesSeq() {
 		return lesSeq;
 	}
 
-	public void setLesSeq(int lesSeq) {
+	public void setLesSeq(Integer lesSeq) {
 		this.lesSeq = lesSeq;
 	}
 
-	public int getFacSeq() {
+	public Integer getFacSeq() {
 		return facSeq;
 	}
 
-	public void setFacSeq(int facSeq) {
+	public void setFacSeq(Integer facSeq) {
 		this.facSeq = facSeq;
 	}
 
@@ -96,14 +115,47 @@ public class ReviewDto {
 		this.revModidate = revModidate;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public int getCon() {
+		return con;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setCon(int con) {
+		this.con = con;
 	}
 
+	public String getFacName() {
+		return facName;
+	}
+
+	public void setFacName(String facName) {
+		this.facName = facName;
+	}
+
+	public String getFacLocation() {
+		return facLocation;
+	}
+
+	public void setFacLocation(String facLocation) {
+		this.facLocation = facLocation;
+	}
+
+	public String getLesName() {
+		return lesName;
+	}
+
+	public void setLesName(String lesName) {
+		this.lesName = lesName;
+	}
+
+	public String getLesLocation() {
+		return lesLocation;
+	}
+
+	public void setLesLocation(String lesLocation) {
+		this.lesLocation = lesLocation;
+	}
+
+	
 	
 	
 }

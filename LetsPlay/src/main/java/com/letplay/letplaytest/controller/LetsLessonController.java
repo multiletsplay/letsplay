@@ -33,6 +33,7 @@ import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.LikesDto;
 import com.letplay.letplaytest.dto.MemberDto;
 import com.letplay.letplaytest.dto.ReviewDto;
+import com.letplay.letplaytest.dto.SearchDto;
 import com.letplay.letplaytest.dto.TimeDto;
 
 @Controller
@@ -63,6 +64,16 @@ public class LetsLessonController {
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("lessonlist", LessonBiz.selectSports(member.getId(), spoId));
+		return "lessonlist";
+	}
+	
+	@GetMapping("/lesson/search")
+	public String searchfac(HttpServletRequest request, Model model, SearchDto dto) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
+		dto.setId(member.getId());
+		model.addAttribute("lessonlist", LessonBiz.searchLes(dto));
 		return "lessonlist";
 	}
 	
@@ -165,7 +176,6 @@ public class LetsLessonController {
 		HttpSession session = request.getSession();
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
-		
 		//예약번호 부여
 		LocalDateTime now = LocalDateTime.now();
 		String localtime = now.format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
@@ -173,7 +183,6 @@ public class LetsLessonController {
 		dto.setResId(resId);
 		
 		model.addAttribute("dto", dto);
-		LessonBiz.insertRes(dto);
 		return "reslesconfirm";
 	}
 	
@@ -187,7 +196,7 @@ public class LetsLessonController {
 		System.out.println(dto.getResDatetime());
 		if(LessonBiz.insertRes(dto)>0) {
 			model.addAttribute("msg", "예약 성공");
-			model.addAttribute("url", "/mypage");
+			model.addAttribute("url", "/member/mypage");
 			return "alert";
 		}else {
 			model.addAttribute("msg", "예약 실패");
@@ -198,4 +207,3 @@ public class LetsLessonController {
 	
 	
 }
-

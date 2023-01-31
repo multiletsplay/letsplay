@@ -18,6 +18,7 @@ public class LessonDto {
 	private int lesCost;
 	private int likesStatus;
 	private int cntReview;
+	private int facName;
 	
 	public LessonDto() {
 		super();
@@ -25,7 +26,7 @@ public class LessonDto {
 
 	public LessonDto(int lesSeq, String lesName, int spoId, String spoName, String lesTeacher, String lesLocation,
 			String lesContact, String lesImg, String lesImgpath, Date lesDate, String lesType, String lesWeekend,
-			int lesCost, int likesStatus, int cntReview) {
+			int lesCost, int likesStatus, int cntReview, int facName) {
 		super();
 		this.lesSeq = lesSeq;
 		this.lesName = lesName;
@@ -42,6 +43,7 @@ public class LessonDto {
 		this.lesCost = lesCost;
 		this.likesStatus = likesStatus;
 		this.cntReview = cntReview;
+		this.facName = facName;
 	}
 
 	public int getLesSeq() {
@@ -108,6 +110,14 @@ public class LessonDto {
 		this.lesImg = lesImg;
 	}
 
+	public String getLesImgpath() {
+		return lesImgpath;
+	}
+
+	public void setLesImgpath(String lesImgpath) {
+		this.lesImgpath = lesImgpath;
+	}
+
 	public Date getLesDate() {
 		return lesDate;
 	}
@@ -140,14 +150,6 @@ public class LessonDto {
 		this.lesCost = lesCost;
 	}
 
-	public String getLesImgpath() {
-		return lesImgpath;
-	}
-
-	public void setLesImgpath(String lesImgpath) {
-		this.lesImgpath = lesImgpath;
-	}
-
 	public int getLikesStatus() {
 		return likesStatus;
 	}
@@ -162,6 +164,14 @@ public class LessonDto {
 
 	public void setCntReview(int cntReview) {
 		this.cntReview = cntReview;
+	}
+
+	public int getFacName() {
+		return facName;
+	}
+
+	public void setFacName(int facName) {
+		this.facName = facName;
 	}
 
 	

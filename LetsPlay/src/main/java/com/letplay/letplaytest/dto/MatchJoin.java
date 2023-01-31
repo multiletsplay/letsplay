@@ -34,10 +34,10 @@ public class MatchJoin {
 	public void setJoinSeq(int joinSeq) {
 		this.joinSeq = joinSeq;
 	}
-	public String getNickName() {
+	public String getnickName() {
 		return nickName;
 	}
-	public void setNickName(String nickName) {
+	public void setnickName(String nickName) {
 		this.nickName = nickName;
 	}
 }

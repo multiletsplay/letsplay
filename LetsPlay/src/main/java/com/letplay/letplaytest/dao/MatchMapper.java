@@ -130,7 +130,7 @@ public interface MatchMapper {
 	@Insert(" INSERT INTO MATCH_BOARD VALUES(NULL, #{id}, #{spoId}, #{matchTitle}, #{matchContent}, NOW(), NOW(), #{matchEnddate}, #{matchLocation}, #{matchTotal}, #{matchLevel}, #{matchFacility}, DEFAULT, #{startTime}, #{endTime}, #{matchDay}, #{facSeq}) ")
 	int insertMatch(MatchDto dto);
 
-	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_ENDDATE=#{matchEnddate}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility},MATCH_DAY=#{matchDay}, START_TIME=#{startTime}, ENDTIME=#{endTime} WHERE MATCH_SEQ=#{matchSeq} ")
+	@Update(" UPDATE MATCH_BOARD SET MATCH_TITLE=#{matchTitle}, MATCH_CONTENT=#{matchContent}, MATCH_ENDDATE=#{matchEnddate}, MATCH_LOCATION=#{matchLocation}, MATCH_TOTAL=#{matchTotal}, MATCH_LEVEL=#{matchLevel}, MATCH_FACILITY=#{matchFacility}, MATCH_DAY=#{matchDay}, START_TIME=#{startTime}, END_TIME=#{endTime}, FAC_SEQ=#{facSeq} WHERE MATCH_SEQ=#{matchSeq} ")
 	int updateMatch(MatchDto dto);
 
 	@Delete(" DELETE FROM MATCH_BOARD WHERE MATCH_SEQ = #{matchSeq} ")

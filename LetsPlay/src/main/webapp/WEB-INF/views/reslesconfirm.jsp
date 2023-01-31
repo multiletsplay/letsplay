@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	#payment-submit{ display:none;}
-</style>
+<%@ include file="header.jsp" %>  
+
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
@@ -38,14 +32,71 @@ function requestPay() {
     });
   }
 </script>
-</head>
-<body>
-<h1>레슨 예약 상세정보</h1>
+
+<div class="container inner pt40">
+	<div class="row">
+		<p class="bookicon"><span class="material-symbols-outlined">receipt_long</span></p>
+
+<div class="book_wrap">
 <form action="/lesson/payment" method="post" id="payment-form">
 <input type="hidden" name="resId" value="${dto.resId }">
 <input type="hidden" name="id" value="${member.id }">
 <input type="hidden" name="lesSeq" value="${dto.lesSeq }">
-	<table class="reservation-table" border="1">
+<h3>예약 상세정보</h3>
+<p class="book_title">${dto.lesName }</p>
+<div class="info__detail">
+	<p><img src="${dto.lesImgpath }"></p>
+</div>
+
+<div class="book__detail">
+		
+	<ul class="book_fa_info">
+		<li>
+			<p>시설 주소</p>
+			<p>${dto.lesLocation }</p>
+		</li>
+		<li>
+			<p>시설 전화번호</p>
+			<p>${dto.lesContact }</p>
+		</li>
+	</ul>
+
+		<ul class="book_user_info">
+		<li>
+			<p>이름(닉네임)</p>
+			<p>${member.name }(${member.nickname })</p>
+		</li>
+		<li>
+			<p>휴대폰</p>
+			<p>${member.phone }</p>
+		</li>
+		<li>
+			<p>이메일</p>
+			<p>${member.email }</p>
+		</li>
+		<li>
+			<p>예약날짜</p>
+			<p>${dto.resDate }</p>
+		</li>
+		<li>
+			<p>시작시간</p>
+			<p name="resStarttime" value="${dto.resStarttime }">${dto.resStarttime }</p>
+		</li>
+	</ul>
+</div>
+<div class="pay__detail">
+	<p>결제 예정 금액			<span><img src="../img/kakaopayicon_bg.svg" style="width: 10%;"></span></p>
+	<p>	
+		<span><input type="hidden" name="resPrice" value="${dto.resPrice }">${dto.resPrice }</span>
+		<span style="color: var(--font);"> 원</span></p>
+</div>
+
+<div>
+	<input type="button" value="결제하기" onclick="requestPay()" class="pay_Btn">
+	<input type="submit" id="payment-submit">
+</div>
+
+	<!-- <table class="reservation-table" border="1">
 		<tr>
 			<th>이름(닉네임)</th>
 			<th>예약날짜</th>
@@ -55,7 +106,7 @@ function requestPay() {
 		</tr>
 		<tr>
 			<td>${member.name }(${member.nickname })</td>
-			<td><input type="text" name="resDate" value="${dto.resDate }">${dto.resDate }</td>
+			<td><input type="text" name="resDate" value="${dto.resDate }"></td>
 			<td><input type="hidden" name="resStarttime" value="${dto.resStarttime }">${dto.resStarttime }</td>
 			<td>${member.phone }</td>
 			<td>${member.email }</td>
@@ -79,7 +130,9 @@ function requestPay() {
 				<input type="submit" id="payment-submit">
 			</td>
 		</tr>
-	</table>
+	</table> -->
 </form>
-</body>
-</html>
+</div>
+</div>
+</div>
+<%@ include file="footer.jsp" %>  

@@ -2,15 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	#updateBtn { visibility: hidden; }
-</style>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=앱키&libraries=services"></script>
+<%@ include file="header.jsp" %>    
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99a2faf19be558d2479cdc1cce8e0ae0&libraries=services"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 	$(document).ready(function(){
@@ -110,12 +104,212 @@
 		});
 	}
 </script>
-</head>
-<body>
-<input type="button" id="updateBtn" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
-<br><br>
-<form action="/facility/reserve" method="POST">
-<input type="hidden" name="facSeq" value="${dto.facSeq }" >
+		<div class="container inner pt40">
+			<p class="Mbtn"><input type="button" id="updateBtn" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'"></p>
+			<form action="/facility/reserve" method="POST">
+			<div class="m40 row">
+				<input type="hidden" name="facSeq" value="${dto.facSeq }" >
+				<div class="col-lg-8">
+					<div>
+						<div class="match_detail_lay">
+							<main>
+								<div class="main-content">
+									<span class="sport-type">
+										<button>${dto.spoName }</button>
+									</span>
+									<h2><input type="hidden" name="facName" value="${dto.facName }">${dto.facName }</h2>
+									<div class="carousel slide" style="margin-bottom: 20px;">
+										<div class="carousel-inner">
+											<div class="carousel-item active carousel-item-start">
+												<input type="hidden" name="facImgpath" value="${dto.facImgpath }">
+												<img class="d-block w-100" src="${dto.facImgpath }" alt="${dto.facImgpath }">
+											</div>
+										</div>
+										
+										<!-- <ul class="df">
+											<li class="match-category">참가비</li>
+											<li class="match-category">상세정보</li>
+											<li class="match-category">주의사항</li>
+											<li class="match-category">추천시설</li>
+										</ul> -->
+										<h4 style="margin-bottom: 7px; font-weight: bold;">시설비</h4>
+										
+										<div><strong style="font-size: x-large; color: rgb(232, 13, 13);"><input type="hidden" name="resPrice" value="${dto.facCost }">${dto.facCost }</strong> 원/시간</div>
+								
+										<div class="info">
+											<h4>상세정보</h4>
+											<div>
+												<div class="tel">
+													<p><input type="hidden" name="facContact" value="${dto.facContact }">${dto.facContact}</p>
+												</div>
+												<c:choose>
+													<c:when test="${dto.facParking eq true }">
+														<div class="icon_list">
+															<span class="material-symbols-outlined fill">local_parking</span>
+															<span>주차시설 있음</span>
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="icon_list">
+															<span class="material-symbols-outlined">local_parking</span>
+															<span>주차시설 없음</span>
+														</div>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${dto.facLent eq true }">
+														<div class="icon_list">
+														<span class="material-symbols-outlined fill">sports_tennis</span>
+														<span>장비대여 가능</span>
+													</div>
+													</c:when>
+													<c:otherwise>
+														<div class="icon_list">
+														<span class="material-symbols-outlined">sports_tennis</span>
+														<span>장비대여 불가능</span>
+													</div>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${dto.facShower eq true }">
+														<div class="icon_list">
+														<span class="material-symbols-outlined fill">shower</span>
+														<span>샤워시설 있음</span>
+													</div>
+													</c:when>
+													<c:otherwise>
+														<div class="icon_list">
+														<span class="material-symbols-outlined">shower</span>
+														<span>샤워시설 없음</span>
+													</div>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${dto.facLocker eq true }">
+													<div class="icon_list">
+														<span class="material-symbols-outlined fill">lock</span>
+														<span>락커 있음</span>
+													</div>
+													</c:when>
+													<c:otherwise>
+													<div class="icon_list">
+														<span class="material-symbols-outlined">lock</span>
+														<span>락커 없음</span>
+													</div>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${dto.facLight eq true }">
+														<div class="icon_list">
+															<span class="material-symbols-outlined fill">highlight</span>
+															<span>조명 있음</span>
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="icon_list">
+															<span class="material-symbols-outlined ">highlight</span>
+															<span>조명 없음</span>
+														</div>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													
+													<c:when test="${dto.facCostcheck eq true }">
+														<!-- 유료/무료 -->
+														<div class="icon_list">
+															<span class="material-symbols-outlined fill">payments</span>
+															<span>유료</span>
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="icon_list">
+															<span class="material-symbols-outlined">payments</span>
+															<span>무료</span>
+														</div>																												
+													</c:otherwise>
+											</c:choose>
+											</div>
+										</div>
+										<!--<hr>
+										 <div class="info">
+											<h4>주의사항</h4>
+											<div>상세정보 어쩌구 저쩌고상세정보 어쩌구 저쩌고상세정보 어쩌구 저쩌고</div>
+										</div> -->
+									
+										<div class="comment">
+											<h4 style="margin: 40px auto;">후기</h4>
+											<c:choose>
+												<c:when test="${empty reviewlist }">
+													<div>이 시설에 대한 후기가 아직 없어요, 후기를 남겨주세요!</div>
+												</c:when>
+												<c:otherwise>
+														<c:forEach items="${reviewlist }" var="review">
+															<div class="review-list">
+																<h5>${review.nickname}</h5>
+																<span>${review.revContent }</span>
+																<c:choose>
+																	<c:when test="${review.revRate ==1}" ><span class="star">⭐</span></c:when>
+																	<c:when test="${review.revRate ==2}" ><span class="star">⭐⭐</span></c:when>
+																	<c:when test="${review.revRate ==3}" ><span class="star">⭐⭐⭐</span></c:when>
+																	<c:when test="${review.revRate ==4}" ><span class="star">⭐⭐⭐⭐</span></c:when>
+																	<c:otherwise ><span class="star">⭐⭐⭐⭐⭐</span></c:otherwise>
+																</c:choose>
+															</div>	
+	
+																
+														</c:forEach>
+												</c:otherwise>
+										</c:choose>
+											
+							
+										</div>
+										<p onclick="location.href='/facility/list'">목록</p>
+									</div>
+								</div>
+								</main>
+								
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-4">
+						<div class="main-banner">
+						
+							<div>
+								<div class="favorite">
+									<c:choose>
+										<c:when test="${like == 0}">
+											<img id="likeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+										</c:when>
+										<c:otherwise>
+											<img id="dellikeBtn" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+										</c:otherwise>
+									</c:choose>
+								</div>
+			
+								<div class="check-display">FACILITY</div>
+								<h3 style="margin-bottom: 10px;">${dto.facName }</h3>
+								<div style="margin-bottom: 3px;" name="facLocation"><input type="hidden" name="facLocation" value="${dto.facLocation }">${dto.facLocation }</div>
+								<div style="margin-bottom: 15px;" class="location__btn"><input type="button" value="길찾기" id="pathfinding"></div>
+								<div style="font-size: small;"><input type="date" id="resDate" data-placeholder="날짜 선택" name="resDate"></div>
+								<!-- <h3 style="margin-bottom: 15px;">2022.12.30(수)</h3> -->
+								<div class="time" style="font-size: small; margin-bottom: 7px;">
+									<select id="resTime" name="resStarttime">
+										<option value="">예약 시간을 선택해주세요</option>
+									</select>
+								</div>
+								<!-- <button style="border-radius: 10%; border-style: none; background-color: gold; margin-bottom: 17px; padding: 5px 8px;">11:30</button> -->
+								<div>
+									<button class="join-btn" type="submit">참여하기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+<!-- form action="/facility/reserve" method="POST">
 	<table class="facility-infrom" border="1" >
 		<tr>
 			<td>
@@ -154,8 +348,10 @@
 			<th>날짜</th>
 			<td><input type="date" id="resDate" name="resDate"></td>
 			<th>시간</th>
-			<td><!-- <input type="time" id="resStarttime" name="resStarttime"> -->
-				<select id="resTime" name="resStarttime">
+			<td>
+				-->
+				<!-- <input type="time" id="resStarttime" name="resStarttime"> -->
+					<!--<select id="resTime" name="resStarttime">
 					<option value="">=== 시간 ===</option>
 				</select>
 			</td>
@@ -170,8 +366,8 @@
 			</td>
 		</tr>
 	</table>
-<hr>
-	<!-- 상세정보 -->
+<hr> -->
+	<!-- 
 	<h3>상세정보</h3>
 	<table class="facility-detail" border="1">
 		<tr>
@@ -225,7 +421,7 @@
 			</c:choose>
 		</tr>
 	</table>
-</form>
+
 <hr>
 <h3>후기</h3>
 <table border="1">
@@ -255,5 +451,8 @@
         </c:otherwise>
     </c:choose>
 </table>
-</body>
-</html>
+-->
+</div>
+</form>
+</div>
+<%@ include file="footer.jsp" %>

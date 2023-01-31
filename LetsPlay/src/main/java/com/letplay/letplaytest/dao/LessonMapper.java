@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.LessonSchDto;
-import com.letplay.letplaytest.dto.TimeDto;
+import com.letplay.letplaytest.dto.SearchDto;
 
 @Mapper
 public interface LessonMapper {
@@ -53,6 +53,9 @@ public interface LessonMapper {
 	
 	@Insert(" INSERT INTO `LESSON_RESERVATION` VALUES(#{resId}, #{lesSeq}, #{id}, #{resDate}, #{resPrice} )")
 	int insertRes(LessonResDto dto);
+	
+	@Delete(" DELETE FROM LESSON_RESERVATION WHERE RES_ID = #{resId} ")
+	int cancelRes(String resId);
 
 	//@Select("SELECT NAME, NICKNAME, EMAIL, PHONE, LES_IMG, LES_NAME, LES_LOCATION, LES_CONTACT, LES_COST, RES_DATE, RES_STARTTIME, RES_ENDTIME, SCH_STARTTIME, SCH_ENDTIME "
 	//		+ " FROM LESSON_RESERVATION, MEMBER, LESSON, LESSON_SCHEDULE "
@@ -68,4 +71,21 @@ public interface LessonMapper {
 			+ " FROM LESSON l, LESSON_SCHEDULE s "
 			+ " WHERE l.LES_SEQ=#{lesSeq} AND l.LES_SEQ = s.LES_SEQ ")
 	List<LessonSchDto> selectSchedule(int lesSeq);
+	
+	@Select( {"<script>",
+			" SELECT l.*, s.SPO_NAME, ANY_VALUE(ls.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW ",
+			" FROM LESSON l ",
+			"	LEFT OUTER JOIN SPORTS s ON l.SPO_ID=s.SPO_ID ",
+			" 	LEFT OUTER JOIN LIKES ls ON l.LES_SEQ=ls.LES_SEQ AND ls.ID=#{id} ",
+			"	LEFT OUTER JOIN REVIEW r ON l.LES_SEQ=r.LES_SEQ ",
+			" <where>",
+			" 	<if test='searchRegion1 != null'>LES_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
+			"	<if test='searchRegion2 != null'>AND LES_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
+			" 	<if test='optType != null'>AND LES_TYPE=#{optType} </if> ",
+			" 	<if test='optWeekend != null'>AND LES_WEEKEND=#{optWeekend} </if> ",
+			" </where> ",
+			" GROUP BY l.LES_SEQ ",
+			" </script>" })
+	List<LessonDto> searchLesson(SearchDto dto);
+
 }
