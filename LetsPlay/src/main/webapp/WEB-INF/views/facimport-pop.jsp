@@ -13,6 +13,7 @@ function selectfac() {
 
 	  let facSeq = $(event.target).attr('idx');
 	  let facName = $(event.target).attr('fname');
+ 
 
 	  console.log(facSeq);
 	  console.log(facName);
