@@ -52,7 +52,7 @@
 <div>
 	<a href="/member/findidform">아이디 찾기</a> &nbsp;&nbsp; <a href="/member/findpwform">비밀번호 찾기</a>
 </div>
-<div id="loginChk"></div> -->
+-->
 
 
 <div class="container">
@@ -66,6 +66,7 @@
 				<div class="inputBox">
 					<input type="password" placeholder="비밀번호" id="password" name="password" label="Password">
 				</div>
+				<div id="loginChk">dddd</div> 
 				<div class="mainBtn">
 					<button class="loginBtn" id="login" onclick="login();">로그인</button></div>
 
