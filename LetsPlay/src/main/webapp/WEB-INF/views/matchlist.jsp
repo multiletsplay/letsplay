@@ -112,12 +112,13 @@
 		<div class="search__location">
 			<h4>참가인원</h4>
 			<div class="counting">
-				<input type='button' onclick='count("plus")' value='+'/>
+				<input type='button' onclick="fnCalCount('p',this);"value='+'/>
 			 <span class="countspan">
-					<label for="count_people" id='result'>2</label><span> 명</span>
-					<input type="number" name="searchTotal" value="2" min="2" max="22" id="count_people" style="display: none;"> 
+				<span class="bseq_ea" style="display: none;">22</span>
+					<!-- <label for="count_people" id='result'>2</label><span> 명</span> -->
+					<input type="text" name="searchTotal" value="2" min="2" max="22" id="count_people"> 
 				</span>	
-				<input type='button' onclick='count("minus")' value='-'/>
+				<input type='button' onclick="fnCalCount('m', this);" value='-'/>
 			</div>
 		</div>
 
@@ -205,24 +206,30 @@
 </div>
 
 <script>
-	function count(type)  {
-  // 결과를 표시할 element
-  const resultElement = document.getElementById('result');
-  
-  // 현재 화면에 표시된 값
-  let number = resultElement.innerText;
-  
-  // 더하기/빼기
-  if(type === 'plus') {
-    number = parseInt(number) + 1;
-  }else if(type === 'minus')  {
-    number = parseInt(number) - 1;
-  }
-  
-  // 결과 출력
-  resultElement.innerText = number;
-}
-</script>
+	function fnCalCount(type, ths){
+			var $input = $(ths).parents("div.counting").find("input[name='searchTotal']");
+			var tCount = Number($input.val());
+			var tEqCount = Number($(ths).parents("div").find("span.bseq_ea").html());
+			
+			if(type=='p'){
+					if(tCount < tEqCount){
+						$input.val(Number(tCount)+1)
+					}else{
+						alert("더 이상 추가하실 수 없습니다.");
+					};
+			}else{
+					if(tCount > 2) {
+						$input.val(Number(tCount)-1);
+					}else if(tCount == 2){
+						alert("최소 인원 본인포함 2명 입니다.");   
+					}
+	}
+	}
+		</script>
+
+
+
+
 
 	</div>
 </div>
