@@ -135,14 +135,14 @@
         <p>매치가 완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
  			<div id='BookedMatch'>
 				<div class='BookedMatchInform'>
-					<span style='flex-basis:100px; text-align: center;'>작성자</span>
+					<span style='flex-basis:90px; text-align: center;'>작성자</span>
 					<span style='flex-basis:80px; text-align: center;'>종목</span>
 					<span style='flex-basis:200px; text-align: center;'>제목</span>
-					<span style='flex-basis:150px; text-align: center;'>매칭날짜</span>
-					<span style='flex-basis:150px; text-align: center;'>남은날짜</span>
+					<span style='flex-basis:140px; text-align: center;'>매칭날짜</span>
+					<span style='flex-basis:140px; text-align: center;'>남은날짜</span>
 					<span style='flex-basis:100px; text-align: center;'>장소</span>
-					<span style='flex-basis:90px; text-align: center;'>시작시간 ~ 종료시간</span>
-					<span>참여인원/총인원</span>
+					<span style='flex-basis:120px; text-align: center;'>시작시간 ~ 종료시간</span>
+					<span style='flex-basis:70px; text-align: center;'>참여인원/총인원</span>
 					<span>레벨</span>
 					<span>댓글 수</span>
 				</div>
@@ -288,26 +288,22 @@
 			</c:when>
 			<c:otherwise>
 	        	<c:if test="${not empty likesfaclist }">
-	        	<table border="1">
-						<tr>
-							<th>종목</th>
-							<th>이미지</th>
-							<th>시설/레슨명</th>
-							<th>리뷰개수</th>
-							<th>주소</th>
-							<th>찜여부</th>
-						</tr>
+	        	<table>
+						
 		            <c:forEach items="${likesfaclist }" var="fac">
-	           			<tr>
-		            		<td>${fac.spoName}</td>
-		            		<td><img width="100" src="${fac.facImgpath }"></td>
-		            		<td><a href="/facility/detail?facSeq=${fac.facSeq }">${fac.facName }</a></td>
-		            		<td>${fac.facLocation }</td>
-		            		<td>이용자 리뷰 ${fac.cntReview }개</td>
-		            		<td>
-				   					<img id="dellikeBtn" idx="${fac.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-		            		</td>
-	            		</tr>
+	           			<li class="n-prd-row" onclick="active_list('check_1535332');">
+       						<a href="/facility/detail?facSeq=${fac.facSeq }" class="img-block">
+        					    <img id="facImageSource" src="${fac.facImgpath}" alt="시설 사진">
+      					    </a>
+	         			    <ul class="info">
+					            <li class="brand"><button id="facSpoBtn">${fac.spoName}</button></li>
+					            <li class="name"><a style='font-size:24px; font-weight:bold;' href="/facility/detail?facSeq=${fac.facSeq }">${fac.facName }</a></li>
+					            <li class="price">
+					                <em>${fac.facLocation }</em>
+					            </li>
+					            <li class="like"><div class="n-like like-sm"><img id="dellikeBtn" idx="${fac.facSeq }" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="좋아요"><span>이용자 리뷰 ${fac.cntReview }개</span></div></li>
+					        </ul>
+					    </li>
 		            </c:forEach>
 		            </table>
 	            </c:if>
@@ -392,9 +388,9 @@
 		</div>
 		<c:choose>
 			<c:when test="${empty inqlist }">
-				<tr>
-					<td colspan="5">---- 작성된 글이 없습니다 ----</td>
-				</tr>
+				<div style='display:flex; justify-content: center; margin: 20px 0;'>
+					<div>---- 작성된 글이 없습니다 ----</div>
+				</div>
 			</c:when>
 			<c:otherwise>	
 				<c:forEach items="${inqlist}" var="dto">
