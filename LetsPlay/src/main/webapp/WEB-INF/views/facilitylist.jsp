@@ -205,7 +205,7 @@
 										
 										<p class="review-count">이용자 리뷰  ${dto.cntReview }개</p>
 										
-										<p>
+										<p style=" height: 19px; width: 240px;">
 											<span class="match-location">${dto.facLocation }</span>
 										</p>
 										<div class="favorite">
