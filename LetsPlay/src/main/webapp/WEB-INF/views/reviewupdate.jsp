@@ -5,15 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Review Insert</title>
+<title>Insert title here</title>
 </head>
 <body>
-<div>
-
-<form action="/member/review/insert" method="POST">
+<form action="/member/review/update" method="post">
+<input type="hidden" name="revId" value="${dto.revId}">
 	<c:choose>
-	<c:when test="${dto.facName eq ''}">
-		<table class="reviewinsert" border="1">
+	<c:when test="${dto.facName eq null}">
+		<table class="reviewupdate" border="1">
 			<tr>
 				<td>
 					<input type="hidden" name="lesSeq" value="${dto.lesSeq} ">
@@ -22,7 +21,7 @@
 			</tr>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="id" value="${member.id}"></td>
+				<td><input type="text" name="id" value="${member.id}" readonly></td>
 			</tr>
 			
 			
@@ -40,21 +39,22 @@
 			</tr>
 			<tr>
 				<th>별점</th>
-				<td><input type="text" style="width:100px;" name="revRate"></td>
+				<td><input type="text" style="width:100px;" name="revRate" value="${dto.revRate} "></td>
 			</tr>
 			<tr>
 				<th>본문</th>
-				<td><input type="text" style="width:300px; height:200px;" name="revContent"></td>
+				<td><input type="text" style="width:300px; height:200px;" name="revContent" value="${dto.revContent} "></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="작성 완료">
+					<input type="submit" value="수정 완료">
+					<input type="button" value="후기 삭제" onclick="location.href='/member/review/delete?revId=${dto.revId}'">
 				</td>
 			</tr>
 		</table>
 		</c:when>
 		<c:otherwise>
-		<table class="reviewinsert" border="1">
+		<table class="reviewupdate" border="1">
 			<tr>
 				<td>
 					<input type="hidden" name="facSeq" value="${dto.facSeq} ">
@@ -63,7 +63,7 @@
 			</tr>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="id" value="${member.id}"></td>
+				<td><input type="text" name="id" value="${member.id}" readonly></td>
 			</tr>
 			
 			
@@ -77,22 +77,22 @@
 			</tr>
 			<tr>
 				<th>별점</th>
-				<td><input type="text" style="width:100px;" name="revRate"></td>
+				<td><input type="text" style="width:100px;" name="revRate" value="${dto.revRate}" }></td>
 			</tr>
 			<tr>
 				<th>본문</th>
-				<td><input type="text" style="width:300px; height:200px;" name="revContent"></td>
+				<td><input type="text" style="width:300px; height:200px;" name="revContent" value="${dto.revContent}"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="작성 완료">
+					<input type="submit" value="수정 완료">
+					<input type="button" value="후기 삭제" onclick="location.href='/member/review/delete?revId=${dto.revId}'">
 				</td>
 			</tr>
 		</table>
 		</c:otherwise>
 		</c:choose>
-	</form>
-	<input type="submit" id="cancelBtn" value="취소" onclick="location.href='/member/mypage'">
-</div>
+
+</form>
 </body>
 </html>

@@ -588,6 +588,7 @@ margin-bottom: 0px;
   font-weight: 300;
 }
 
+
 .info__detail p, .book__detail p, .pay__detail p{
   color: var(--font-500);
 } 
@@ -623,6 +624,7 @@ margin-bottom: 0px;
   width: 48%;
   float: left;
 }
+
 .bookicon {
   text-align: center;
   position: absolute;
@@ -630,6 +632,7 @@ margin-bottom: 0px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .bookicon span{
 font-size: 5rem !important;
 text-align: center;
@@ -651,11 +654,13 @@ border-radius: 50%;
 }
 
 
+
 .pay__detail p:last-child{
   font-size: 2rem;
   color: var(--bs-red);
   font-weight: 700;
 }
+
 
 
 .pay_Btn{
@@ -754,3 +759,4 @@ color: #fff;
 .btn-color{
   background-color: var(--bs-red) !important;
 }
+

@@ -198,6 +198,23 @@ hr {
 	transform:translate(-1.5%);
 }
 
+.formBtn input[type="radio"] {
+	display: none;
+}
+
+.formBtn input[type="radio"] + span {
+	width: 120px;
+	height: 35px;
+    background-color: rgb(219, 219, 219);
+    display: inline-block;
+    padding: 15px 10px;
+    border-style: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 10px;
+	font-weight: 600;
+    }
 
 .Validate {
     position: absolute;

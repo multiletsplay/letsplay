@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 //import javax.validation.Valid;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,37 +82,50 @@ public class LetsMemberController {
 		return "signup";
 	}
 	
-	@RequestMapping("/signup")
-	public String insertRes(MemberDto dto, Model model) {
-		int res = membiz.insert(dto);
-		
-		if(res>0) {
-			model.addAttribute("msg", "회원가입 성공");
-			model.addAttribute("url", "/member/loginform");
-			return "alert";
-		}else {
-			model.addAttribute("msg", "회원가입 실패");
-			model.addAttribute("url", "/member/signupform");
-			return "alert";
-		}
-	}
+	//@RequestMapping("/signup")
+	//public String insertRes(MemberDto dto, Model model) {
+	//	int res = membiz.insert(dto);
+	//	
+	//	if(res>0) {
+	//		model.addAttribute("msg", "회원가입 성공");
+	//		model.addAttribute("url", "/member/loginform");
+	//		return "alert";
+	//	}else {
+	//		model.addAttribute("msg", "회원가입 실패");
+	//		model.addAttribute("url", "/member/signupform");
+	//		return "alert";
+	//	}
+	//}
 	
-//	@PostMapping(value = "signup")
-//    public String validCheck(@Valid MemberDto dto, Errors errors, Model model){
-//        if(errors.hasErrors()){
-//        //패스워드 유효성 검사 부적합
-//            Map<String, String> validatorResult = membiz.validateHandling(errors);
-//            for (String key : validatorResult.keySet()) {
-//                model.addAttribute(key, validatorResult.get(key));
-//            }
-//
-//            // 유효성 통과 못한 필드와 메시지를 핸들링
-//
-//            return "/singup";
-//        }
-//        return "/login";
-//    }
- 
+	@PostMapping(value = "/signup")
+    public String validCheck(@Valid MemberDto dto, Errors errors, Model model){
+        if(errors.hasErrors()){
+        	model.addAttribute("dto", dto);
+        //패스워드 유효성 검사 부적합
+            Map<String, String> validatorResult = membiz.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+
+            // 유효성 통과 못한 필드와 메시지를 핸들링
+            
+            return "signup";
+        } else {
+        	if(membiz.insert(dto)>0) {
+                model.addAttribute("msg", "회원가입 성공");
+                model.addAttribute("url", "/member/loginform");
+                return "alert";
+            }else {
+                model.addAttribute("msg", "회원가입 실패");
+                model.addAttribute("url", "/member/signupform");
+                return "alert";
+            }
+        
+        
+        }
+        
+    }
+	
 	
 	
 	@ResponseBody
@@ -289,8 +303,6 @@ public class LetsMemberController {
 	public String reviewinsert(HttpSession session, Model model, @RequestParam(value="facSeq", required=false)Integer facSeq, @RequestParam(value="lesSeq", required=false)Integer lesSeq) {
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", membiz.selectmember(member.getId()));
-		System.out.println(facSeq);
-		System.out.println(lesSeq);
 		if(facSeq != null) {
 		model.addAttribute("dto", facbiz.selectFac(facSeq));
 		} else {
@@ -298,20 +310,88 @@ public class LetsMemberController {
 		}
 		return "reviewinsert";
 	}
-	
-	@RequestMapping(value="/mypage/reviewinsert", method=RequestMethod.POST)
+
+	@RequestMapping(value="/review/insert", method=RequestMethod.POST)
 	public String reviewInsert(Model model, ReviewDto dto) {
+		if(dto.getCon() == 1) {
+			dto.setFacSeq(null);
+			
+			if(reviewBiz.reviewInsert(dto)>0) {
+				model.addAttribute("msg", "후기 작성 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 작성 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
+		} else {
+			dto.setLesSeq(null);
+			if(reviewBiz.reviewInsert(dto)>0) {
+				model.addAttribute("msg", "후기 작성 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 작성 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
+		}
+	}
+	
+	@GetMapping("/reviewupdateform")
+	public String reviewUpdate(HttpSession session, Model model, @RequestParam(value="facSeq", required=false)Integer facSeq, @RequestParam(value="lesSeq", required=false)Integer lesSeq) {
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", membiz.selectmember(member.getId()));
+		if(facSeq != null) {
+		model.addAttribute("dto", reviewBiz.selectFac(facSeq, member.getId()));
+		} else {
+		ReviewDto dto = reviewBiz.selectLesson(lesSeq, member.getId());
+		model.addAttribute("dto", reviewBiz.selectLesson(lesSeq, member.getId()));
+		}
+		return "reviewupdate";
+	}
+
+	@RequestMapping(value="/review/update", method=RequestMethod.POST)
+	public String reviewUpdate(Model model, ReviewDto dto) {
+		if(dto.getCon() == 1) {
+			dto.setFacSeq(null);
+			
+			if(reviewBiz.reviewUpdate(dto)>0) {
+				model.addAttribute("msg", "후기 수정 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 수정 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
+		} else {
+			dto.setLesSeq(null);
+			if(reviewBiz.reviewUpdate(dto)>0) {
+				model.addAttribute("msg", "후기 수정 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 수정 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
+		}
+	}
+	
+	@GetMapping("/review/delete")
+	public String reviewDelete(int revId, Model model) {
 		
-		if(reviewBiz.reviewInsert(dto)>0) {
-			model.addAttribute("msg", "후기 작성 완료");
-			model.addAttribute("url", "/mypage");
+		if(reviewBiz.reviewDelete(revId)>0) {
+			model.addAttribute("msg", "후기 삭제 완료");
+			model.addAttribute("url", "/member/mypage");
 			return "alert";
-		}else {
-			model.addAttribute("msg", "후기 작성 실패");
-			model.addAttribute("url", "/mypage/insert");
+		} else {			
+			model.addAttribute("msg", "후기 삭제 실패");
+			model.addAttribute("url", "/member/mypage");
 			return "alert";
 		}
-		
 	}
 	
 }

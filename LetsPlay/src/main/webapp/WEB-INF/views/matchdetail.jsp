@@ -12,14 +12,16 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
+
 		$(document).ready(function(){
+
 			var mem = '${member.id }';
 			if (mem=='${dto.id}'){
 				$("#joinbtn").attr('style', "display:none;");
 				$("#fixmatch").show();
 				$("#unfixmatch").show();
-			
 			}
+			
 			
 			$("#joinbtn").click(join);
 			$("#unjoinbtn").click(unjoin)
@@ -29,18 +31,26 @@
 			$("#unfixmatch").click(unfixmatch);
 		});
 		function join(){
-			var matchSeq = ${dto.matchSeq}
-			var id = '${member.id}';
-			$.ajax({
-				url : "/match/matchJoin",
-				type : "POST",
-				data : { 'matchSeq' : matchSeq, 'id' : id},
-				success : function(){
-					alert("매칭 참여");
-					window.location.reload();
-				}
-			});
-		}
+			var cntJoin = ${dto.cntJoin};
+			var matchTotal = ${dto.matchTotal};
+			if(cntJoin==matchTotal){
+				alert("더 이상 참여할 수 없습니다.");
+				
+			}else{
+				var matchSeq = ${dto.matchSeq}
+				var id = '${member.id}';
+				$.ajax({
+					url : "/match/matchJoin",
+					type : "POST",
+					data : { 'matchSeq' : matchSeq, 'id' : id},
+					success : function(){
+						alert("매칭 참여");
+						window.location.reload();
+					}
+				});
+			}
+			}
+			
 		
 		function unjoin(){
 			var matchSeq = ${dto.matchSeq}
@@ -109,17 +119,7 @@
 				location.href='/match/delete?matchSeq=${dto.matchSeq}'
 			}
 		};
-// 		function fn2(a,b){
-// 			if (confirm("매칭에 참여하시겠습니까?")) {
-// 				if(a >= b){
-// 					alert("이미 정원이 가득 찼습니다")
-// 					return;
-// 				}
-// 				const btnElement = document.getElementById('btn');
-// 				btnElement.innerText = '매칭취소';
-// 				location.href='/match/joinMatch?matchSeq=${dto.matchSeq}'
-// 			}
-// 		};
+
 	
 	
 	</script>	

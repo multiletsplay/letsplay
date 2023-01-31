@@ -100,7 +100,7 @@ p {
 
 h1,
 h2 {
-  font-size: var(--heading-fontSize) !important;
+  font-size: var(--heading-fontSize) /* !important */;
 }
 
 ul {
