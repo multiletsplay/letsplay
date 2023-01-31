@@ -105,6 +105,7 @@
 }
 
 .listWriter {
+	font-weight: 200;
     text-align: center;
     padding: 20px 0px;
     color: rgb(76, 76, 76);
@@ -112,6 +113,8 @@
 }
 
 .listTitle {
+	font-weight: 500;
+	font-size: large;
     padding: 20px 0px 20px 50px;
     color: rgb(76, 76, 76);
     flex: 1 1 0%;
