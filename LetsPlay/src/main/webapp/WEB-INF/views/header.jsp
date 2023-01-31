@@ -43,6 +43,11 @@
         <div class="nav__icons">
                   
           <span>
+          
+          
+          <a href="/member/mypage">마이페이지</a>
+          
+          
            <a href="/match/insertform"><span class='btn01'>매칭만들기</span></a> 
           </span>
           <span class="login"><span class="material-symbols-outlined" onclick="location.href='/member/loginform'">login</span>
