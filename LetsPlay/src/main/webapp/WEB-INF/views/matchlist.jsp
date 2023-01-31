@@ -193,7 +193,6 @@
 <%-- 							<fmt:formatDate type="hidden" value="${dto.matchRegdate}" pattern="yyyy-MM-dd" /></td> --%>
 <!-- 							<td> -->
 						</tr>
-						
 					</c:forEach>
 					<c:forEach items="${end }" var="end">
 						<tr align="center" bgcolor="gray">
