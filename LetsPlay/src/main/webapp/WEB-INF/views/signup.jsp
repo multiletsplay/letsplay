@@ -211,12 +211,12 @@
         </div>
         <div class='formBtn'>
        	  <label class='formBtnGender'>
-	          <input type="radio" name="gender" value="M">
+	          <input type="radio" name="gender" value="M"/>
 	          <span>남자</span>
           </label>
           
           <label class='formBtnGender'>
-	          <input type="radio" name="gender" value="F">
+	          <input type="radio" name="gender" value="F"/>
 	          <span>여자</span>
            </label>
         </div>
