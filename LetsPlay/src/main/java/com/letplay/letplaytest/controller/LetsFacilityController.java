@@ -4,12 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,19 +23,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.letplay.letplaytest.biz.FacBiz;
-import com.letplay.letplaytest.biz.InqReplyBiz;
-import com.letplay.letplaytest.biz.InquiryBiz;
 import com.letplay.letplaytest.biz.LikesBiz;
 import com.letplay.letplaytest.biz.MemberBiz;
 import com.letplay.letplaytest.biz.ReviewBiz;
-import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
-import com.letplay.letplaytest.dto.InqReplyDto;
-import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.LikesDto;
 import com.letplay.letplaytest.dto.MemberDto;
-import com.letplay.letplaytest.dto.PageDto;
 import com.letplay.letplaytest.dto.SearchDto;
 import com.letplay.letplaytest.dto.TimeDto;
 
@@ -93,8 +83,6 @@ public class LetsFacilityController {
 		
 		//datetime -> 날짜와 시간으로 각각 나눠서 view에 전달
 		List<TimeDto> datelist = facBiz.selectTime(facSeq);
-		//Map<TimeDto, List<String>> datetimeMap = new HashMap<TimeDto, List<String>>();
-		//List<String> timelist = new ArrayList<String>();
 		for(TimeDto dto : datelist) {
 			Date dt = dto.getDt();
 			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -103,37 +91,16 @@ public class LetsFacilityController {
 			String time = ds.substring(11);
 			dto.setDate(date);
 			dto.setTime(time);
-			//timelist.add(time);
-			//datetimeMap.put(dto, null);
 		}
-//		List<List<String>> times = new ArrayList<>();
-//		int partitionSize = 24;
-//		times.add(timelist.subList(0,18));
-//// 		for(int i=18; i<timelist.size(); i+=partitionSize) {
-////			times.add(timelist.subList(i, Math.min(i + partitionSize, timelist.size())));
-////		}
-// 		for(TimeDto dto : datelist) {
-// 			datetimeMap.put(dto, times.get(0));
-// 		}
-		//model.addAttribute("timeMap", datetimeMap);
 
 		model.addAttribute("time", datelist);
-		
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
 		model.addAttribute("like", likesBiz.selectfac(facSeq, member.getId()));
 		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
 		return "facilitydetail";
 	}
-	
-//	@RequestMapping(value="/facility/pathfind", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
-//	@ResponseBody
-//	public RedirectView findPath(@RequestParam("facName") String facName, @RequestParam("coordsy") String coordsy, @RequestParam("coordsx") String coordsx) {
-//		RedirectView redirectView = new RedirectView();
-//		redirectView.setUrl("https://map.kakao.com/link/to/"+facName+","+coordsy+","+coordsx);
-//		return redirectView;
-//	}
-	
+
 	@PostMapping("/facility/delete")
 	public String deletFac(Model model, @RequestParam(value="delList", required=false) List<Integer> ids) {
 		if (ids == null) {
