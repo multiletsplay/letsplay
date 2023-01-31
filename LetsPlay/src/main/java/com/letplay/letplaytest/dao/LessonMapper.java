@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.LessonDto;
 import com.letplay.letplaytest.dto.LessonResDto;
 import com.letplay.letplaytest.dto.LessonSchDto;
@@ -87,5 +88,24 @@ public interface LessonMapper {
 			" GROUP BY l.LES_SEQ ",
 			" </script>" })
 	List<LessonDto> searchLesson(SearchDto dto);
-
+	
+	//평점 좋은 순으로 4개까지 불러오기
+	@Select(" SELECT l.*, SPO_NAME, AVG(REV_RATE) AS AVG_RATE , COUNT(REV_ID) CNT_REVIEW "
+			+ " FROM LESSON l "
+			+ "	LEFT OUTER JOIN SPORTS s ON s.SPO_ID =l.SPO_ID  "
+			+ " LEFT OUTER JOIN REVIEW r ON l.LES_SEQ=r.LES_SEQ "
+			+ " GROUP BY LES_SEQ "
+			+ " ORDER BY AVG_RATE DESC "
+			+ " LIMIT 4 ")
+	List<LessonDto> selectRateavg();
+	
+	@Select(" SELECT l.*, SPO_NAME, AVG(REV_RATE) AS AVG_RATE , COUNT(REV_ID) CNT_REVIEW "
+			+ " FROM LESSON l "
+			+ "	LEFT OUTER JOIN SPORTS s ON s.SPO_ID =l.SPO_ID  "
+			+ " LEFT OUTER JOIN REVIEW r ON l.LES_SEQ=r.LES_SEQ "
+			+ " WHERE l.SPO_ID=#{spoId} "
+			+ " GROUP BY LES_SEQ "
+			+ " ORDER BY AVG_RATE DESC "
+			+ " LIMIT 4 ")
+	List<LessonDto> selectRatesports(int spoId);
 }
