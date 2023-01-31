@@ -330,14 +330,15 @@ public class LetsMemberController {
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", membiz.selectmember(member.getId()));
 		if(facSeq != null) {
-		model.addAttribute("dto", facbiz.selectFac(facSeq));
+		model.addAttribute("dto", reviewBiz.selectFac(facSeq, member.getId()));
 		} else {
-		model.addAttribute("dto", lessonbiz.selectLesson(lesSeq));
+		ReviewDto dto = reviewBiz.selectLesson(lesSeq, member.getId());
+		model.addAttribute("dto", reviewBiz.selectLesson(lesSeq, member.getId()));
 		}
 		return "reviewupdate";
 	}
 
-	@RequestMapping(value="/review/upate", method=RequestMethod.POST)
+	@RequestMapping(value="/review/update", method=RequestMethod.POST)
 	public String reviewUpdate(Model model, ReviewDto dto) {
 		if(dto.getCon() == 1) {
 			dto.setFacSeq(null);
@@ -366,13 +367,16 @@ public class LetsMemberController {
 	}
 	
 	@GetMapping("/review/delete")
-	public String reviewDelete(HttpSession session) {
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		String id = member.getId();
-		if(membiz.delete(id)>0) {
-			return "redirect:/member/mypage";
+	public String reviewDelete(int revId, Model model) {
+		
+		if(reviewBiz.reviewDelete(revId)>0) {
+			model.addAttribute("msg", "후기 삭제 완료");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
 		} else {			
-			return "redirect:/member/mypage";
+			model.addAttribute("msg", "후기 삭제 실패");
+			model.addAttribute("url", "/member/mypage");
+			return "alert";
 		}
 	}
 	

@@ -14,6 +14,13 @@ public interface ReviewBiz {
 
 	public int reviewUpdate(ReviewDto dto);
 	
-	public int reviewDelete(ReviewDto dto);
+	public int reviewDelete(int revId);
+
+	public ReviewDto selectFac(Integer facSeq, String id);
+
+	public ReviewDto selectLesson(Integer lesSeq, String id);
+
+	
+
 	
 }
