@@ -31,6 +31,18 @@ public interface ReviewMapper {
 	int reviewUpdate(ReviewDto dto);
 	
 	@Delete(" DELETE FROM REVIEW WHERE REV_ID = #{revId} ")
-	int reviewDelete(ReviewDto dto);
+	int reviewDelete(int revId);
+
+	@Select(" SELECT r.* , FAC_NAME, FAC_LOCATION "
+			+ " FROM REVIEW r , FACILITY f "
+			+ " WHERE r.FAC_SEQ = f.FAC_SEQ AND r.FAC_SEQ = #{facSeq} AND r.ID=#{id} ")
+	ReviewDto selectFac(Integer facSeq, String id);
+
+	@Select(" SELECT r.* , LES_NAME, LES_LOCATION "
+			+ " FROM REVIEW r , LESSON l "
+			+ " WHERE r.LES_SEQ = l.LES_SEQ AND r.LES_SEQ = #{lesSeq} AND r.ID=#{id} ")
+	ReviewDto selectLesson(Integer lesSeq, String id);
+	
+	
 	
 }

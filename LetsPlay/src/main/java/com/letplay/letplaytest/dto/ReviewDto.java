@@ -13,6 +13,10 @@ public class ReviewDto {
 	private Date revWritedate;
 	private Date revModidate;
 	private int con;
+	private String facName;
+	private String facLocation;
+	private String lesName;
+	private String lesLocation;
 	
 	public ReviewDto() {
 		super();
@@ -20,7 +24,8 @@ public class ReviewDto {
 	}
 
 	public ReviewDto(int revId, String id, String nickname, Integer lesSeq, Integer facSeq, int revRate,
-			String revContent, Date revWritedate, Date revModidate, int con) {
+			String revContent, Date revWritedate, Date revModidate, int con, String facName, String facLocation,
+			String lesName, String lesLocation) {
 		super();
 		this.revId = revId;
 		this.id = id;
@@ -32,6 +37,10 @@ public class ReviewDto {
 		this.revWritedate = revWritedate;
 		this.revModidate = revModidate;
 		this.con = con;
+		this.facName = facName;
+		this.facLocation = facLocation;
+		this.lesName = lesName;
+		this.lesLocation = lesLocation;
 	}
 
 	public int getRevId() {
@@ -114,6 +123,39 @@ public class ReviewDto {
 		this.con = con;
 	}
 
+	public String getFacName() {
+		return facName;
+	}
+
+	public void setFacName(String facName) {
+		this.facName = facName;
+	}
+
+	public String getFacLocation() {
+		return facLocation;
+	}
+
+	public void setFacLocation(String facLocation) {
+		this.facLocation = facLocation;
+	}
+
+	public String getLesName() {
+		return lesName;
+	}
+
+	public void setLesName(String lesName) {
+		this.lesName = lesName;
+	}
+
+	public String getLesLocation() {
+		return lesLocation;
+	}
+
+	public void setLesLocation(String lesLocation) {
+		this.lesLocation = lesLocation;
+	}
+
+	
 	
 	
 }

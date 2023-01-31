@@ -34,8 +34,19 @@ public class ReviewImpl implements ReviewBiz{
 	}
 
 	@Override
-	public int reviewDelete(ReviewDto dto) {
-		return reviewMapper.reviewDelete(dto);
+	public int reviewDelete(int revId) {
+		return reviewMapper.reviewDelete(revId);
 	}
+
+	@Override
+	public ReviewDto selectFac(Integer facSeq, String id) {
+		return reviewMapper.selectFac(facSeq, id);
+	}
+
+	@Override
+	public ReviewDto selectLesson(Integer lesSeq, String id) {
+		return reviewMapper.selectLesson(lesSeq, id);
+	}
+
 
 }
