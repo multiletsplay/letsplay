@@ -22,7 +22,8 @@ function openPopUp() {
 		<table border="1">
 			<tr>
 				<th>제  목</th>
-				<td><input type="text" name="matchTitle"></td>
+				<td><input type="text" name="matchTitle" required>
+				</td>
 			</tr>
 			<tr>
 				<th>작성자</th>
@@ -39,7 +40,7 @@ function openPopUp() {
 			</tr>
 			<tr>
 				<th>마감일자</th>
-				<td><input type="datetime-local" name="matchEnddate" ></td>
+				<td><input type="datetime-local" name="matchEnddate" required></td>
 			</tr>
 <!-- 			<tr> -->
 <!-- 				<th>마감일자</th> -->
@@ -65,12 +66,12 @@ function openPopUp() {
 				</select>
 				</td>
 				<td><input type="button" value="시설 등록" onclick="openPopUp()"></td>
-				<td><input type="text" id="facname"></td>
-				<td><input type="hidden" id="facSeq" name="facSeq" value="0"></td>
+				<td><input type="text" id="facname" required></td>
+				<td><input type="hidden" id="facSeq" name="facSeq"></td>
 			</tr>
 			<tr>
 				<th>매칭날짜</th>
-				<td><input type="date" name="matchDay"></td>
+				<td><input type="date" name="matchDay" required></td>
 			</tr>
 			<tr>
 				<th>시작시간</th>
@@ -93,8 +94,8 @@ function openPopUp() {
 				<td><input type="range" name="matchLevel" min="1" max="5" value="3"></td>
 			</tr>
 			<tr>
-		        <th>시설유무</th>
-		        <td><input type="checkbox" name="matchFacility" value="Y" checked></td>
+		        <th></th>
+		        <td><input type="hidden" name="matchFacility" value="Y" ></td>
 		    </tr>
 			<tr>
 				<td colspan="2" align="right">
