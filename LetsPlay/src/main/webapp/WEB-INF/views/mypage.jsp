@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>My Page</title>
+<%@ include file="header.jsp" %>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -51,57 +47,90 @@
 }
 	
 </script>
+
+
+
+<style>
+  .tab_menu{position:relative;}
+  .tab_menu .list{overflow:hidden;}
+  .tab_menu .list li{float:left; margin-right:14px;}
+  .tab_menu .list .btn{font-size:13px;}
+  .tab_menu .list .cont{display:none; position:absolute;}
+  .tab_menu .list li.is_on .btn{font-weight:bold; color:green;}
+  .tab_menu .list li.is_on .cont{display:block;}
+</style>
+
 </head>
 <body>
-<h1>마이페이지</h1>
-<h2>회원 정보</h2>
-<form action="/member/update" method="POST">
-<table border="1">
-	<tr>
-		<th>아이디</th>
-		<td>${member.id}</td>
-	</tr>
-	<tr>
-		<th>생년월일</th>
-		<td>${member.birth}</td>
-	</tr>
-	<tr>
-		<th>비밀번호</th>
-		<td>${member.password}</td>
-	</tr>
-	<tr>
-		<th>이름</th>
-		<td><input type="text" name="name" value="${member.name}"></td>
-	</tr>
-	<tr>
-		<th>성별</th>
-		<td>${member.gender}</td>
-	</tr>
-	<tr>
-		<th>닉네임</th>
-		<td><input type="text" id="nickname" name="nickname" value="${member.nickname}"></td>
-		<td><button type="button" id="nicknameChk">닉네임 중복확인</button>
-	</tr>
-	<tr>
-		<th>이메일</th>
-		<td><input type="text" name="email" value="${member.email}"></td>
-	</tr>
-	<tr>
-		<th>전화번호</th>
-		<td><input type="text" name="phone" value="${member.phone}"></td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<input type="submit" value="수정 완료" >
-		</td>
-	</tr>
-</table>
-<input type="button" value="회원 탈퇴" onclick="location.href='/member/delete'">
-</form>
 
-<hr>
-<h2>매치 내역</h2>
-<table border="1">
+
+<div class='mypageWrapper'>
+<div class="tab_menu">
+  <ul class="list">
+    <li class="is_on">
+      <a href="#tab1" class="btn"><h2>회원 정보</h2></a>
+      <div id="tab1" class="cont">
+            <h3>프로필</h3>
+            <p>정보 수정이 가능합니다</p>
+      	<div class='memberProfile'>
+		
+			<form action="/member/update" method="POST">
+		<div>
+		<div class='memberMod'>
+			<p>아이디</p>
+			<div style='background-color:lightgrey'>${member.id}</div>
+		</div>
+		<div class='memberMod'>
+			<p>생년월일</p>
+			<div style='background-color:lightgrey'>${member.birth}</div>
+		</div>
+		<div class='memberMod'>
+			<p>비밀번호</p>
+			<div style='background-color:lightgrey'>${member.password}</div>
+		</div>
+		<div class='memberMod'>
+			<p>이름</p>
+			<input id='clientName' type="text" name="name" value="${member.name}">
+		</div>
+		<div class='memberMod'>
+			<p>성별</p>
+			<div style='background-color:lightgrey'>${member.gender}</div>
+		</div>
+		<div class='memberMod'>
+			<p>닉네임</p>
+			<input type="text" id="clientNickname" name="nickname" value="${member.nickname}">
+			<button type="button" id="clientNicknameChk">중복확인</button>
+		</div>	
+		<div class='memberMod'>
+			<p>이메일</p>
+			<input id="Email" type="text" name="email" value="${member.email}">
+		</div>
+		<div class='memberMod'>
+			<p>전화번호</p>
+			<input id='clientNum' type="text" name="phone" value="${member.phone}">
+		</div>
+		
+	</div>
+		<div>
+			<input id='confirmMod' type="submit" value="수정 완료" >
+		</div>
+	<div>
+		<input id='withdrawl' type="button" value="회원 탈퇴" onclick="location.href='/member/delete'">
+	</div>
+	</form>
+	</div>
+	
+
+      	
+      </div>
+      
+    </li>
+    	<!-- 회원 정보 끝 -->
+    	
+    <li>
+      <a href="#tab2" class="btn"><h2>매치 내역</h2></a>
+      <div id="tab2" class="cont">
+ 		<table border="1">
 			<tr align="center">
 				<th>작성자</th>
 				<th>종목</th>
@@ -168,10 +197,16 @@
 				</c:otherwise>
 			</c:choose>
 </table>
-
-<hr>
-<h2>예약 내역</h2>
-<form action="/member/mypage/resselect" method="get">
+ 		
+		</div>
+    </li>
+    
+    <!-- 매치 내역 끝 -->
+    
+    <li>
+      <a href="#tab3" class="btn"><h2>예약 내역</h2></a>
+      <div id="tab3" class="cont">
+			<form action="/member/mypage/resselect" method="get">
 		<button type="submit" name="type" value="F">시설</button>
 		<button type="submit" name="type" value="L">레슨</button>
 </form>
@@ -217,10 +252,15 @@
 	    </c:choose>
     </table>
 </div>
-
-<hr>
-<h2>찜한 목록</h2>
-<form action="/member/mypage/likeselect" method="get">
+		</div>
+    </li>
+    
+    <!-- 예약 내역 끝 -->
+    
+    <li>
+      <a href="#tab4" class="btn"><h2>찜한 내역</h2></a>
+      <div id="tab4" class="cont">
+		<form action="/member/mypage/likeselect" method="get">
 		<button type="submit" name="type" value="M">매치</button>
 		<button type="submit" name="type" value="F">시설</button>
 		<button type="submit" name="type" value="L">레슨</button>
@@ -316,6 +356,7 @@
 			</c:otherwise>
 		</c:choose>
 </div>
+<<<<<<< ey
 
 <hr>
 <h2>1대1문의</h2>
@@ -327,6 +368,29 @@
 			<th>ID</th>
 			<th>DATE</th>
 		</tr>
+=======
+		
+	</div>
+    </li>
+    
+    <!-- 찜한 목록 끝 -->
+    
+    <li>
+      <a href="#tab5" class="btn"><h2>1대1 문의</h2></a>
+      <div id="tab5" class="cont">
+      	<h3>1대1 문의</h3>
+        <p>1대1 문의하신 내역입니다</p>
+        <div id='inqWrapper'>
+        <div class='inqList'>
+			<ul>
+				<li class='inqListNum'>번호</li>
+				<li class='inqListChk'>답변상태</li>
+				<li class='inqListTitle'>제목</li>
+				<li class='inqListID'>ID</li>
+				<li class='inqListDate'>날짜</li>
+			</ul>
+		</div>
+>>>>>>> main
 		<c:choose>
 			<c:when test="${empty inqlist }">
 				<tr>
@@ -335,19 +399,39 @@
 			</c:when>
 			<c:otherwise>	
 				<c:forEach items="${inqlist}" var="dto">
-					<tr>
-						<td>${dto.inqSeq }</td>
+					<ul id='inqContentsList'>
+						<li class='inqListNum'>${dto.inqSeq }</li>
 						<c:choose>
-							<c:when test="${dto.replyCheck == 0 }"><td>답변대기</td></c:when>
-							<c:otherwise><td>답변완료</td></c:otherwise>
+							<c:when test="${dto.replyCheck == 0 }"><li class='inqListChk'>답변대기</li></c:when>
+							<c:otherwise><li class='inqListChk'>답변완료</li></c:otherwise>
 						</c:choose>
-						<td><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></td>
-						<td>${dto.id }</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.inqDate }"/></td>
-					</tr>
+						<li class='inqListTitle'><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></li>
+						<li class='inqListID'>${dto.id }</td>
+						<li class='inqListDate'><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.inqDate }"/></li>
+					</ul>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>	
-	</table>
-</body>
-</html>
+		</div>
+	</div>
+    </li>
+    
+    <!-- 1대1 문의 끝 -->
+    
+  </ul>
+</div>
+</div>
+
+<script type="text/javascript">
+const tabList = document.querySelectorAll('.tab_menu .list li');
+for(var i = 0; i < tabList.length; i++){
+  tabList[i].querySelector('.btn').addEventListener('click', function(e){
+    e.preventDefault();
+    for(var j = 0; j < tabList.length; j++){
+      tabList[j].classList.remove('is_on');
+    }
+    this.parentNode.classList.add('is_on');
+  });
+}
+</script>
+<%@ include file="footer.jsp" %>
