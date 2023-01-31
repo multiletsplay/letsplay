@@ -577,8 +577,6 @@ margin-bottom: 0px;
 
 
 /* 결제 예정 금액 */
-.book_wrap{
-  width: 50%;
   margin: 100px auto 0 auto;
   padding: 80px;
   border: 1px solid #ddd;
@@ -586,8 +584,6 @@ margin-bottom: 0px;
 }
 
 .book_wrap h3{
-  margin-top: 80px;
-  font-size: 2rem;
 }
 
 .info__detail p, .book__detail p, .pay__detail p{
@@ -595,9 +591,6 @@ margin-bottom: 0px;
 } 
 
 .info__detail{
-  margin: 20px 0px;
-  border-bottom: 1px solid rgb(155, 155, 155);
-  padding:30px 0px;
 }
 
 .info__detail ul li, .book__detail ul li{
@@ -614,7 +607,6 @@ margin-bottom: 0px;
 
 
 .book__detail{
-  width: 100%;
 }
 .bookicon {
   text-align: center;
@@ -624,7 +616,6 @@ margin-bottom: 0px;
   transform: translate(-50%, -50%);
 }
 .bookicon span{
-font-size: 7rem !important;
 text-align: center;
 color: #fff;
 background: #8db6f5;
@@ -635,11 +626,6 @@ border-radius: 50%;
 
 .pay__detail{
   border-top: 1px solid rgb(155, 155, 155);
-  padding: 25px 0px;
-  display: flex;
-  justify-content: space-between;
-  line-height: 22px;
-  margin: 20px 0px;
 }
 
 
@@ -651,8 +637,6 @@ border-radius: 50%;
 
 
 .pay_Btn{
-  width: 100%;
-  height: 80px;
   background-color: #10a26d;
   border-radius: 10px;
   color: #fff;

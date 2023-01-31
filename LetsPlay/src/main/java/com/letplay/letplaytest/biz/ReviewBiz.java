@@ -12,5 +12,8 @@ public interface ReviewBiz {
 
 	public int reviewInsert(ReviewDto dto);
 
+	public int reviewUpdate(ReviewDto dto);
+	
+	public int reviewDelete(ReviewDto dto);
 	
 }

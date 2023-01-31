@@ -48,18 +48,19 @@ public interface MemberMapper {
 	@Select(" SELECT COUNT(NICKNAME) FROM `MEMBER` WHERE NICKNAME=#{nickname} ")
 	int nicknamecheck(String nickname);
 	
-	
-	@Select(" SELECT fr.*, f.FAC_NAME , f.FAC_LOCATION "
+	@Select(" SELECT fr.*, f.FAC_NAME, f.FAC_LOCATION, IF(REV_ID is null , 0 , 1) AS REV_STATUS "
 			+ " FROM FACILITY_RESERVATION fr "
 			+ " LEFT OUTER JOIN FACILITY f ON fr.FAC_SEQ = f.FAC_SEQ "
-			+ " WHERE ID=#{id} "
+			+ " LEFT OUTER JOIN REVIEW r ON r.FAC_SEQ = fr.FAC_SEQ AND r.ID = #{id} "
+			+ " WHERE fr.ID= #{id} "
 			+ " ORDER BY RES_DATE DESC ")
 	List<FacResDto> selectResfac(String id);
 	
-	@Select(" SELECT lr.*, l.LES_NAME , l.LES_LOCATION "
+	@Select(" SELECT lr.*, l.LES_NAME , l.LES_LOCATION, IF(REV_ID is null , 0 , 1) AS REV_STATUS "
 			+ " FROM LESSON_RESERVATION lr "
 			+ " LEFT OUTER JOIN LESSON l ON lr.LES_SEQ = l.LES_SEQ "
-			+ " WHERE ID=#{id} "
+			+ " LEFT OUTER JOIN REVIEW r ON r.LES_SEQ = lr.LES_SEQ AND r.ID = #{id} "
+			+ " WHERE lr.ID= #{id} "
 			+ " ORDER BY RES_DATE DESC ")
 	List<LessonResDto> selectResles(String id);
 	

@@ -54,12 +54,16 @@ function requestPay() {
 <input type="hidden" name="id" value="${member.id }">
 <input type="hidden" name="facSeq" value="${dto.facSeq }">
 	<h3>예약 상세정보</h3>
+
+	<p class="book_title">${dto.facName }</p>
 	<div class="info__detail">
-		<p>${dto.facName }</p>
 		<p><img src="${dto.facImgpath }"></p>
-		<ul>
+	</div>
+	<div class="book__detail">
+		
+		<ul class="book_fa_info">
 			<li>
-				<p>주소</p>
+				<p>시설 주소</p>
 				<p class="">${dto.facLocation }</p>
 			</li>
 			<li>
@@ -67,10 +71,9 @@ function requestPay() {
 				<p>${dto.facContact }</p>
 			</li>
 		</ul>
-	</div>
 
-	<div class="book__detail">
-			<ul>
+
+			<ul class="book_user_info">
 			<li>
 				<p>이름(닉네임)</p>
 				<p>${member.name }(${member.nickname })</p>
@@ -89,7 +92,6 @@ function requestPay() {
 			</li>
 			<li>
 				<p>시작시간</p>
-				<p>${dto.resStarttime }</p>
 			</li>
 		</ul>
 	</div>
@@ -97,8 +99,10 @@ function requestPay() {
 	
 	
 	<div class="pay__detail">
-		<p>결제 예정 금액</p>
-		<p><input type="hidden" name="resPrice" value="${dto.resPrice }">${dto.resPrice }<span style="color: var(--font);"> 원</span></p>
+		<p>결제 예정 금액			<span><img src="../img/kakaopayicon_bg.svg" style="width: 10%;"></span></p>
+		<p>	
+			<span><input type="hidden" name="resPrice" value="${dto.resPrice }">${dto.resPrice }</span>
+			<span style="color: var(--font);"> 원</span></p>
 	</div>
 
 	<div>
