@@ -129,6 +129,10 @@
   cursor: pointer;
 }
 
+.service a .service__item:hover{
+  transform: scale(1.1);
+}
+
 .service__item span{
   font-size: 2.2rem;
   background: var(--primary-color);
