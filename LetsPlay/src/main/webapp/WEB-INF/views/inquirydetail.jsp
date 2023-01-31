@@ -42,6 +42,8 @@
     	<span>날짜</span>
         <span>${dto.inqDate }</span>
     </div>
+    <hr style='width:955px; height:1px; background-color:rgb(244, 244, 244)'/>
+    <br/>
     <div>
         <span>내용</span>
         <span><div class='inquiryContentSentence'>${dto.inqContent }</div></span>
@@ -55,7 +57,7 @@
 	</div>
 	</div>
 	
-	
+	<div id='InquiryDetailSecondMain'>
 	<c:choose>
 		<c:when test="${empty reply }">
 			<form action="/inquiry/reply/insert" method="post">
@@ -133,8 +135,7 @@
 			</form>
 		</c:otherwise>
 	</c:choose>
-	
-</div>
+	</div>
 </div>
 
 <%@ include file="footer.jsp" %>

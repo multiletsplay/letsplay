@@ -135,13 +135,13 @@
         <p>매치가 완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
  			<div id='BookedMatch'>
 				<div class='BookedMatchInform'>
-					<span>작성자</span>
-					<span>종목</span>
-					<span>제목</span>
-					<span>매칭날짜</span>
-					<span>남은날짜</span>
-					<span>장소</span>
-					<span>시작시간 ~ 종료시간</span>
+					<span style='flex-basis:100px; text-align: center;'>작성자</span>
+					<span style='flex-basis:80px; text-align: center;'>종목</span>
+					<span style='flex-basis:200px; text-align: center;'>제목</span>
+					<span style='flex-basis:150px; text-align: center;'>매칭날짜</span>
+					<span style='flex-basis:150px; text-align: center;'>남은날짜</span>
+					<span style='flex-basis:100px; text-align: center;'>장소</span>
+					<span style='flex-basis:90px; text-align: center;'>시작시간 ~ 종료시간</span>
 					<span>참여인원/총인원</span>
 					<span>레벨</span>
 					<span>댓글 수</span>
@@ -231,7 +231,7 @@
 	        <c:otherwise>
 	        	<c:if test="${not empty faclist }">
 		            <c:forEach items="${faclist }" var="dto">
-	           			<tr>
+	           			<tr style='border: 1px solid red;'>
 		            		<td>${dto.resDatetime }</td>
 		            		<td>시설</td>
 		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
