@@ -22,15 +22,10 @@
 			$('.delList').prop("checked", checked);
 		});
 		
-		
-		//찜
-		$("#likeBtn").click(like);
-		$("#dellikeBtn").click(dellike);
-		
 	});
 	
 	function like(){
-		let facSeq = $(this).attr('idx');
+		let facSeq = $(event.target).attr('idx');
 		
 		$.ajax({
 			url : "/facility/likes",
@@ -44,8 +39,8 @@
 	}
 	
 	function dellike(){
-		let facSeq = $(this).attr('idx');
-		console.log(facSeq);
+		let facSeq = $(event.target).attr('idx');
+
 		$.ajax({
 			url : "/facility/dellikes",
 			type : "GET",
@@ -211,10 +206,10 @@
 										<div class="favorite">
 											<c:choose>
 												<c:when test="${dto.likesStatus eq 1 }">
-													<img id="dellikeBtn" idx="${dto.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+													<img onclick="dellike()" idx="${dto.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 												</c:when>
 												<c:otherwise>
-													<img id="likeBtn" idx="${dto.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+													<img onclick="like()" idx="${dto.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
 												</c:otherwise>
 											</c:choose>
 										</div>

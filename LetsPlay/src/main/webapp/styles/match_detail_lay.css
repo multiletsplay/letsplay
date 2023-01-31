@@ -11,8 +11,9 @@
 .main-banner {
     position: fixed;
     z-index: 1;
-    margin-left: 30px;
+    margin-left: 80px;
     margin-top: 40px;
+    width: 350px;
 }
 
 .main-banner > div {
@@ -49,12 +50,11 @@
     font-size: .8rem;
     text-align: center;
     padding: 4px;
-    width: 70px;
+    width: 90px;
     margin-top: 15px;
 }
 
 .main-banner > div > div > a {
-    color: violet;
     font-size: small;
 }
 
@@ -64,6 +64,13 @@
     color: white;
     background-color: #333;
     border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.join-btn:hover{
+    font-weight: 800;
+    transform: scale(1.1);
 }
 /* 
 .match-category button {
@@ -101,4 +108,73 @@
 
 .comment {
     clear: both;
+}
+
+
+.p_tit{
+    font-size: .9rem;
+    color: var(--font-500);
+}
+
+.match_left_list{margin-bottom: 40px;}
+.match_left_list h3{
+    font-size: 1.7rem;
+    margin-top: 10px;
+}
+.match_left_list ul li{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.match_left_list ul li p:last-child{
+    color: var(--font);
+}
+
+.location_name{
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
+.location__btn{
+    font-size: .8rem;
+    color: var(--bs-green);
+}
+
+.del_btn{
+    float: right;
+    color: var(--bs-green);
+    font-size: .7rem;
+    cursor: pointer;
+}
+
+
+
+
+
+.comment_write span{
+    display: inline-block;
+    width: 8%;
+    margin-left: 10px;
+    background-color: var(--primary);
+    text-align: center;
+}
+
+.comment_write span input[type=submit]{
+    background: transparent;
+    border: none;
+    height: 100px;
+    color: #fff;
+}
+
+.user_btn_list{
+    margin-top:50px;
+    border-top:1px solid #ddd;
+    padding-top: 30px;
+    text-align: right;
+}
+
+.user_btn_list span{
+    margin-left:10px;
+    cursor: pointer;
 }

@@ -20,7 +20,6 @@
 
 .navigation{
   text-align: center;
-  width: 40%;
 }
 
 .container{
@@ -28,9 +27,9 @@
 }
 
 .nav__wrapper{
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
 }
 
 .logo{
@@ -38,11 +37,11 @@
   column-gap: 8px;
   align-items: center;
   width: 100%;
+  justify-content: space-between;
 }
 
 .logo div:first-child{
-  margin-left: 5%;
-  margin-right:20%;
+  margin-left: 3%;
 }
 
 .logo img{
@@ -75,6 +74,7 @@
   display: flex;
   align-items: center;
   column-gap: 1.2rem;
+  margin-right:3%;
 }
 
 
@@ -193,6 +193,18 @@ span.btn02{
   border-radius: 10px;
 }
 
+
 span.btn02 i{
   color: #fff;
+}
+
+
+.login span{
+  color: var(--font);
+  cursor: pointer;
+}
+
+.login span:hover{
+  color: var(--font);
+  transform: scale(1.1);
 }
