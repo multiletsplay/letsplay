@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
@@ -127,79 +128,81 @@
     </li>
     	<!-- 회원 정보 끝 -->
     	
-    <li>
+   <li>
       <a href="#tab2" class="btn"><h2>매치 내역</h2></a>
       <div id="tab2" class="cont">
- 		<table border="1">
-			<tr align="center">
-				<th>작성자</th>
-				<th>종목</th>
-				<th>제목</th>
-				<th>매칭날짜</th>
-				<th>남은날짜</th>
-				<th>장소</th>
-				<th>시작시간 ~ 종료시간</th>
-				<th>참여인원/총인원</th>
-				<th>레벨</th>
-				<th>댓글 수</th>
-			</tr>
+      	<h3>매치 내역</h3>
+        <p>매치가 완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
+ 			<div id='BookedMatch'>
+				<div class='BookedMatchInform'>
+					<span>작성자</span>
+					<span>종목</span>
+					<span>제목</span>
+					<span>매칭날짜</span>
+					<span>남은날짜</span>
+					<span>장소</span>
+					<span>시작시간 ~ 종료시간</span>
+					<span>참여인원/총인원</span>
+					<span>레벨</span>
+					<span>댓글 수</span>
+				</div>
 			<c:choose>
 				<c:when test="${empty list and empty joinlist }">
-					<tr>
-						<td colspan="10" align="center">등록된 매칭이 없습니다.</td>
-					</tr>
+					<div class='BookedMatchSport'>
+						<span>---- 등록된 매칭이 없습니다 ----</span>
+					</div>
 				</c:when>
 				<c:otherwise>
 				<c:if test="${not empty list }">
 					<c:forEach items="${list }" var="dto">
-						<tr align="center">
-							<td>${dto.nickName }</td>
-							<td>${dto.spoName}</td>
-							<td><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></td>
-							<td><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
-							<td>
-								<c:forEach var="i" items="${ddays }">
-									<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
-										마감 ${i.value }일 전
-									</c:if>
-								</c:forEach>
-							</td>
-							<td>${dto.matchLocation }</td>
-							<td>${dto.startTime } ~ ${dto.endTime }</td>
-							<td>${dto.cntJoin }/${dto.matchTotal }</td>
-							<td>${dto.matchLevel }</td>
-							<td>${dto.cntComment }</td>
-						</tr>
+						<div id='bookedMatchFirst'>
+							<span>${dto.nickName }</span>
+							<span>${dto.spoName}</span>
+							<span><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></span>
+							<span><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" /></span>
+							<span>
+							  <c:forEach var="i" items="${ddays }">
+							    <c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+							      마감 ${i.value }일 전
+							    </c:if>
+							  </c:forEach>
+							</span>
+							<span>${dto.matchLocation }</span>
+							<span>${dto.startTime } ~ ${dto.endTime }</span>
+							<span>${dto.cntJoin }/${dto.matchTotal }</span>
+							<span>${dto.matchLevel }</span>
+							<span>${dto.cntComment }</span>
+							</div>
 					</c:forEach>
 					</c:if>
 					<c:if test ="${not empty joinlist }">
 						<c:forEach items="${joinlist }" var="dto">
-						<tr align="center">
-							<td>${dto.nickName }</td>
-							<td>${dto.spoName}</td>
-							<td><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></td>
-							<td><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
-							<td>
+						<div id='bookedMatchSecond'>
+							<span>${dto.nickName }</span>
+							<span>${dto.spoName}</span>
+							<span><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></span>
+							<span><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" /></span>
+							<span>
 								<c:forEach var="i" items="${ddays2 }">
 									<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
 										마감 ${i.value }일 전
 									</c:if>
 								</c:forEach>
-							</td>
-							<td>${dto.matchLocation }</td>
-							<td>${dto.startTime } ~ ${dto.endTime }</td>
-							<td>${dto.cntJoin }/${dto.matchTotal }</td>
-							<td>${dto.matchLevel }</td>
-							<td>${dto.cntComment }</td>
-						</tr>
+							</span>
+							<span>${dto.matchLocation }</span>
+							<span>${dto.startTime } ~ ${dto.endTime }</span>
+							<span>${dto.cntJoin }/${dto.matchTotal }</span>
+							<span>${dto.matchLevel }</span>
+							<span>${dto.cntComment }</span>
+						</div>
 					</c:forEach>
 					</c:if>
 				</c:otherwise>
 			</c:choose>
-</table>
- 		
+ 		</div>
 		</div>
     </li>
+
     
     <!-- 매치 내역 끝 -->
     
