@@ -51,8 +51,8 @@
     <div class="container inner">
       <div class="row">
         <div class="col-md-3 col-lg-4 service">
-          <a href="/matching">
-            <div class="service__item" style="background: rgb(253, 239, 230); transform: none;">
+          <a href="/match/list">
+            <div class="service__item" style="background: rgb(253, 239, 230);">
               <span class="material-symbols-outlined">
                 hub
                 </span>
@@ -65,8 +65,8 @@
         </div>
 
         <div class="col-md-3 col-lg-4 service">
-          <a href="/facility">
-            <div class="service__item" style="background: rgb(206, 235, 233); transform: none;">
+          <a href="/facility/list">
+            <div class="service__item" style="background: rgb(206, 235, 233);">
               <span class="material-symbols-outlined">
                 hotel_class
                 </span>
@@ -79,7 +79,7 @@
         </div>
         
         <div class="col-md-3 col-lg-4 service">
-          <a href="/lesson">
+          <a href="/lesson/list">
             <div class="service__item" style="background: rgb(226, 242, 178);">
               <span class="material-symbols-outlined">
                 bookmarks
@@ -100,7 +100,7 @@
   <div class="container inner">
     <div class="row">
       <div class="text-center col-lg-12">
-        <p class="match-b-title">랫플 매칭이 총 000건 성사 되었습니다!</p>
+        <p class="match-b-title">랫플 매칭이 총 <span class="count-num" data-count="425">0</span>건 성사 되었습니다!</p>
       </div>
       
       <div class="home__sport">
@@ -112,6 +112,7 @@
         <button class="sports" value="수영">수영</button>
         <button class="sports" value="골프">골프</button>
       </div>
+
       
       <div class="mb-20 col-md-4 col-lg-3">
         <div>
