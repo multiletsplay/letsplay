@@ -13,18 +13,18 @@
 <div id="notice-insert">
     <form action="/notice/insert" method="post">
         <div class='noticeInsertMainContent'>
-			<div>
+			<div style="align-items:center;">
 				<span>제목</span>
 				<span class='NoticeredColour'>*</span>
 				<input type='text' name='noticeTitle'></input>
 			</div>
-			<div>
+			<div style="align-items:center;">
 				<span>내용</span>
 				<span class='NoticeredColour'>*</span>
 				<input type='text' name='noticeContent'></input>
 			</div>
-			<div>
-				<span>ID</span>
+			<div style="align-items:center;">
+				<span>I D</span>
 				<span class='NoticeredColour NoticeredColourID'>*</span>
 				<input type='text' name='id'></input>
 			</div>
