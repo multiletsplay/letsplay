@@ -49,8 +49,6 @@
 	
 </script>
 
-
-
 <style>
   .tab_menu{position:relative;}
   .tab_menu .list{overflow:hidden;}
@@ -211,63 +209,62 @@
       <div id="tab3" class="cont">
      	 <h3>예약 내역</h3>
         <p>예약완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
-			<form action="/member/mypage/resselect" method="get">
-		<button type="submit" name="type" value="F">시설</button>
-		<button type="submit" name="type" value="L">레슨</button>
-</form>
-<div id="reserv-list">
-	<br><br>
-	<table border="1">
-		<tr>
-			<th>예약날짜</th>
-			<th>시설/레슨</th>
-			<th>이름</th>
-			<th>주소</th>
-		</tr>
-	    <c:choose>
+        
+			<nav id="tab-button-nav">
+	          <button class="tab-button" data-tab-section="tab-section-1">시설</button>
+	          <button class="tab-button" data-tab-section="tab-section-2">레슨</button>
+      	    </nav>
+      	    
+      	     <c:choose>
 	        <c:when test="${empty faclist and empty leslist }">
 	            <td colspan="5">------ 예약이 없습니다. ------</td>
 	        </c:when>
 	        <c:otherwise>
 	        	<c:if test="${not empty faclist }">
 		            <c:forEach items="${faclist }" var="dto">
-	           			<tr style='border: 1px solid red;'>
-		            		<td>${dto.resDatetime }</td>
-		            		<td>시설</td>
-		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }">${dto.facName }</a></td>
-		            		<td>${dto.facLocation }</td>
-		            		<c:if test="${dto.revStatus eq 1 }">
-		            			<td><input type="button" value="후기 수정" onclick="location.href='/member/reviewupdateform?facSeq=${dto.facSeq }'"></td>
-		            		</c:if>
-		            		<c:if test="${dto.revStatus eq 0 }">
-		            			<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?facSeq=${dto.facSeq }'"></td>
-		            		</c:if>
-		            		<td><input type="button" value="예약 취소" onclick="location.href='/member/cancelfacres?resId=${dto.resId }'"></td>
-	            		</tr>
-		            </c:forEach>
-	            </c:if>
-	            <c:if test="${not empty leslist }">
+      	    
+      	    <section id="tab-section-1" class="tab-section">
+         	 <div>
+	            <div class="match-list" style='width:210px;'>
+	                <p><span class="sports-category">시설</span></p>
+	                <a href="/facility/detail?facSeq=${dto.facSeq }"><p class="match-title">${dto.facName }</p></a>
+	                <p class="match-location">${dto.facLocation }</p>
+	                <p class="match-location">${dto.resDatetime }</p>
+	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewupdateform?facSeq=${dto.facSeq }'">후기 수정</button>
+	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewinsertform?facSeq=${dto.facSeq }'">후기 작성</button>
+	            </div>
+       		  </div>
+      	  </section>
+      	  
+      	   
+          <div>
+			<c:if test="${not empty leslist }">
 		            <c:forEach items="${leslist }" var="dto">
-	           			<tr>
-		            		<td>${dto.resDatetime }</td>
-		            		<td>레슨</td>
-		            		<td><a href="/lesson/detail?lesSeq=${dto.lesSeq }">${dto.lesName }</a></td>
-		            		<td>${dto.lesLocation }</td>
-		            		<c:if test="${dto.revStatus eq 1 }">
-		            			<td><input type="button" value="후기 수정" onclick="location.href='/member/reviewupdateform?lesSeq=${dto.lesSeq }'"></td>
-		            		</c:if>
-		            		<c:if test="${dto.revStatus eq 0 }">
-		            			<td><input type="button" value="후기 작성" onclick="location.href='/member/reviewinsertform?lesSeq=${dto.lesSeq }'"></td>
-		            		</c:if>
-		            		<td><input type="button" value="예약 취소" onclick="location.href='/member/cancellesres?resId=${dto.resId }'"></td>
-	            		</tr>
+		            <section id="tab-section-2" class="tab-section" hidden>
+	           			<div>
+		            		 <div class="match-list" style='width:210px;'>
+				                <p><span class="sports-category">레슨</span></p>
+				                <a href="/lesson/detail?lesSeq=${dto.lesSeq }"><p class="match-title">${dto.lesName }</p></a>
+				                <p class="match-location">${dto.lesLocation }</p>
+				                <p class="match-location">${dto.resDatetime }</p>
+				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancellesres?resId=${dto.resId }'">예약취소</button>
+				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewupdateform?lesSeq=${dto.lesSeq }'">후기수정</button>
+				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewinsertform?lesSeq=${dto.lesSeq }'">후기 작성</button>
+				            </div>
+	            		</div>
 		            </c:forEach>
 	            </c:if>
-	        </c:otherwise>
-	    </c:choose>
-    </table>
-</div>
-		</div>
+			</div>
+        </section>
+      	  
+      	  
+      	  </c:forEach>
+	            </c:if>
+        
+        </c:otherwise>
+        </c:choose>
+        
+
     </li>
     
     <!-- 예약 내역 끝 -->
@@ -289,7 +286,6 @@
 			<c:otherwise>
 	        	<c:if test="${not empty likesfaclist }">
 	        	<table>
-						
 		            <c:forEach items="${likesfaclist }" var="fac">
 	           			<li class="n-prd-row" onclick="active_list('check_1535332');">
        						<a href="/facility/detail?facSeq=${fac.facSeq }" class="img-block">
@@ -429,4 +425,24 @@ for(var i = 0; i < tabList.length; i++){
   });
 }
 </script>
+<script>
+        const $nav = document.querySelector('#tab-button-nav')
+        const $sections = document.querySelectorAll('.tab-section');
+    
+        $nav.addEventListener('click', (e) => {
+          if (!e.target.classList.contains('tab-button')) {
+            return;
+          }
+          
+          const focusedTabId = e.target.dataset.tabSection;
+    
+          $sections.forEach(($section) => {
+            if ($section.id === focusedTabId) {
+              $section.removeAttribute('hidden');
+            } else {
+              $section.setAttribute('hidden', true);
+            }
+          });
+        });
+      </script>
 <%@ include file="footer.jsp" %>

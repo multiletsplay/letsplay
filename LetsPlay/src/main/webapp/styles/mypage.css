@@ -384,7 +384,9 @@ ul, li {
 	align-items: center;
 }
 
-
+.review__btn {
+	cursor: pointer;
+}
 
 
 
