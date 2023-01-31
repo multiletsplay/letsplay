@@ -68,3 +68,185 @@
   flex-direction: column;
   text-align: center;
 }
+
+.mypageWrapper {
+	height: 1300px;
+	display: flex;
+	justify-content: center;
+}
+
+.tab_menu {
+	width:1140px;
+	position: relative;
+}
+
+.tab_menu > ul {
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	margin-top:50px;
+	position: relative;
+	height: 1300px;
+}
+
+.tab_menu > ul > li > a > h2 {
+	border: none;
+    background-color: transparent;
+    padding: 8px;
+    font-size: .95rem;
+    text-align: left;
+}
+
+.cont {
+	position: absolute;
+	left: 150px;
+	top: 8px;
+	width: 86.9%;
+	height: auto;
+}
+
+.memberProfile {
+	margin-top: 20px;
+}
+
+.memberMod {
+	margin-bottom: 20px;
+}
+
+.memberMod > p {
+	font-size: 0.8em;
+}
+
+.memberMod > div {
+	border: 2px solid #ddd;
+    border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+}
+
+#clientNickname {
+	border-radius: 15px;
+    padding: 15px;
+    width: 90%;
+	border: 2px solid #ddd;
+}
+
+#clientNicknameChk {
+	transform: translate(15%);
+	border-radius: 8px;
+	border: none;
+	background-color: var(--primary);
+    color: #fff;
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+#Email {
+	border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+	border: 2px solid #ddd;
+}
+
+#clientName {
+	border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+	border: 2px solid #ddd;
+}
+
+#clientNum {
+	border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+	border: 2px solid #ddd;
+}
+
+#confirmMod {
+	float: right;
+	margin-top: 30px;
+	border-radius: 8px;
+	border: none;
+	background-color: var(--primary);
+    color: #fff;
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+#withdrawl {
+	position: absolute;
+	left: 40%;
+	top: 1000px;
+	border-radius: 8px;
+	width: 200px;
+	height: 50px;
+	background-color: red;
+	color: white;
+	border-style: none;
+	font-weight: 600;
+	font-size: larger;
+	cursor: pointer;
+}
+
+#inqWrapper {
+	margin-top: 20px;
+}
+
+.inqList {
+	width: 100%;
+	padding: 20px 0px;
+    border-bottom: 1px solid rgb(51, 51, 51);
+    border-top: 2px solid rgb(51, 51, 51);
+}
+
+.inqList > ul {
+	display: flex;
+}
+
+.inqListNum {
+    flex-basis: 100px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.inqListChk {
+	flex-basis: 65px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.inqListTitle {
+	-webkit-box-flex: 1;
+    flex-grow: 1;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.inqListID {
+	flex-basis: 100px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.inqListDate {
+	flex-basis: 100px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+#inqContentsList {
+	display: flex;
+	flex-direction: row;
+	padding: 20px 0;
+	border-bottom: 1px solid rgb(244, 244, 244);
+}
+
