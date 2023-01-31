@@ -37,8 +37,6 @@ public class LetsMatchController {
 	@Autowired
 	private MatchBiz matchBiz;
 	@Autowired
-	private NoticeBiz noticeBiz;
-	@Autowired
 	private MemberBiz memBiz;
 	@Autowired
 	private LikesBiz likesBiz;
@@ -278,62 +276,6 @@ public class LetsMatchController {
 			
 			model.addAttribute("faclist",memBiz.selectResfac(member.getId()));
 			return "facimport-pop";
-		}
-		
-		//공지사항
-		@GetMapping("/notice/list")
-		public String selectNoticelist(NoticeDto dto, Model model, Criteria criteria) {
-			int noticeListCnt = noticeBiz.getTotal();
-			PageDto paging = new PageDto();
-			paging.setCri(criteria);
-			paging.setTotal(noticeListCnt);
-			model.addAttribute("noticelist", noticeBiz.selectNoticeList(criteria));
-			model.addAttribute("paging", paging);
-			return "noticelist";
-		}
-
-		@GetMapping("/notice/detail")
-		public String selectNoticeOne(Model model, int noticeSeq) {
-			model.addAttribute("dto", noticeBiz.selectNoticeOne(noticeSeq));
-			return "noticedetail";
-		}
-		
-		@GetMapping("/notice/insertform")
-		public String insertNoticeForm() {
-			return "noticeinsert";
-		}
-		
-		@PostMapping("/notice/insert")
-		public String insertNotice(NoticeDto dto) {
-			if(noticeBiz.insertNotice(dto)>0) {
-				return "redirect:/notice/list";
-			}else {
-				return "redirect:/notice/insertform";
-			}
-		}
-		
-		@GetMapping("/notice/updateform")
-		public String updateForm(Model model, int noticeSeq) {
-			model.addAttribute("dto", noticeBiz.selectNoticeOne(noticeSeq));
-			return "noticeupdate";
-		}
-		
-		@PostMapping("/notice/update")
-		public String updateNotice(NoticeDto dto) {
-			if(noticeBiz.updateNotice(dto) > 0) {
-				return "redirect:/notice/detail?noticeSeq="+dto.getNoticeSeq();
-			}else {
-				return "redirect:/notice/updateform?noticeSeq="+dto.getNoticeSeq();
-			}
-		}
-		
-		@GetMapping("/notice/delete")
-		public String deleteNotice(int noticeSeq) {
-			if(noticeBiz.deleteNotice(noticeSeq)>0) {
-				return "redirect:/notice/list";
-			}else {
-				return "redirect:/notice/detail?noticeSeq="+noticeSeq;
-			}
 		}
 		
 		//메인
