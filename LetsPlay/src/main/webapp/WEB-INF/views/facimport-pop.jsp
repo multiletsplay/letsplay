@@ -15,8 +15,8 @@ function selectfac() {
 	  let facName = $(event.target).attr('fname');
  
 
-	  console.log(facSeq);
-	  console.log(facName);
+// 	  console.log(facSeq);
+// 	  console.log(facName);
 	  var parent = window.opener;
 	  window.opener.document.getElementById("facSeq").value = facSeq;
 	  window.opener.document.getElementById("facname").value = facName;

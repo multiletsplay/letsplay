@@ -37,18 +37,26 @@
 			$("#unfixmatch").click(unfixmatch);
 		});
 		function join(){
-			var matchSeq = ${dto.matchSeq}
-			var id = '${member.id}';
-			$.ajax({
-				url : "/match/matchJoin",
-				type : "POST",
-				data : { 'matchSeq' : matchSeq, 'id' : id},
-				success : function(){
-					alert("매칭 참여");
-					window.location.reload();
-				}
-			});
-		}
+			var cntJoin = ${dto.cntJoin};
+			var matchTotal = ${dto.matchTotal};
+			if(cntJoin==matchTotal){
+				alert("더 이상 참여할 수 없습니다.");
+				
+			}else{
+				var matchSeq = ${dto.matchSeq}
+				var id = '${member.id}';
+				$.ajax({
+					url : "/match/matchJoin",
+					type : "POST",
+					data : { 'matchSeq' : matchSeq, 'id' : id},
+					success : function(){
+						alert("매칭 참여");
+						window.location.reload();
+					}
+				});
+			}
+			}
+			
 		
 		function unjoin(){
 			var matchSeq = ${dto.matchSeq}
@@ -177,10 +185,6 @@
 		<tr>
 			<th>레  벨</th>
 			<td>${dto.matchLevel }</td>
-		</tr>
-		<tr>
-			<th>시설유무</th>
-			<td>${dto.matchFacility }</td>
 		</tr>
 		<tr>
 			<th>참여한 사람</th>

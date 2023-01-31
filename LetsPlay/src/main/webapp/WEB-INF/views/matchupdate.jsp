@@ -85,8 +85,8 @@ function fn1(){
 				<td><input type="range" name="matchLevel" min="0" max="5"></td>
 			</tr>
 			<tr>
-		        <th>시설유무</th>
-		        <td><input type="checkbox" name="matchFacility" value="Y" checked></td>
+		        <th></th>
+		        <td><input type="hidden" name="matchFacility" value="Y" ></td>
 		    </tr>
             <tr>
                 <td colspan="2" align="right">
