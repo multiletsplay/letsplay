@@ -194,9 +194,6 @@
 	margin-bottom: 250px;
 }
 
-.headCover {
-}
-
 .subhead {
 	transform: translate(-10%);
 	font-size: 14px;
@@ -336,4 +333,48 @@
 #InquiryAdminDetailForm {
 	border: 1px solid red;
 }
+
+.replyTable {
+	width: 50%;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 30px;
+	margin-left: 361px;
+}
+
+.replyTable > div {
+	margin-bottom: 15px;
+}
+
+.replyTable > div > span:last-child {
+	padding-left: 150px;
+}
+
+.replyTable > div > span:last-child > div {
+	transform: translate(33%);
+}
+
+.replyContentSentence {
+	width: 560px;
+	height: 150px;
+	border: 1px solid grey;
+	border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
