@@ -12,6 +12,7 @@
 		$("#phoneChkBtn").click(authChk);
 	});
 	
+	
 	function idChk(){
 		let id = $("#id").val().trim();
 		
@@ -209,8 +210,8 @@
           <button type="button" id="phoneChkBtn">인증확인</button>
         </div>
         <div class='formBtn'>
-          <button type="radio" name="gender" value="M">남자</button>
-          <button name="gender" value="F">여자</button>
+          <input type="radio" name="gender" value="M">
+          <input type="radio" name="gender" value="F">
         </div>
         <div class='formDate'>
           <div>생년월일</div>
