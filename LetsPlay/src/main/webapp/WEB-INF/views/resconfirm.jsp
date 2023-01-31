@@ -58,10 +58,12 @@ function requestPay() {
 		<p>${dto.facName }</p>
 		<p><img src="${dto.facImgpath }"></p>
 		<ul>
+			
 			<li>
 				<p>주소</p>
 				<p class="">${dto.facLocation }</p>
 			</li>
+
 			<li>
 				<p>시설 전화번호</p>
 				<p>${dto.facContact }</p>
