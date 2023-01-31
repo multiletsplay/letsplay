@@ -12,6 +12,7 @@
 		$("#phoneChkBtn").click(authChk);
 	});
 	
+	
 	function idChk(){
 		let id = $("#id").val().trim();
 		
@@ -122,19 +123,21 @@
           placeholder='아이디를 입력해주세요'
           id="id"
           name="id"/>
+          <span>${valid_id}</span>
           <button type='button' id="idChk">중복확인</button>
         </div>
         
         <div class='ValTarget pwCheck'>
           <div>
-          <span>비밀번호</span>
-          <span class='redColour'>*</span>
+          <span >비밀번호</span>
+          <span class='redColour' >*</span>
           </div>
           <input
           type="text"
           placeholder="영문,숫자,특수문자 포함 8자 이상 15자 이하"
           name="password"
           />
+          <span>${valid_password}</span>
         </div>
        
         <div class='ValTarget pwDCheck'>
@@ -157,6 +160,7 @@
           type="text"
           placeholder='이름을 입력해주세요'
           name="name"/>
+          <span>${valid_name }</span>
         </div>
         
         <div class='ValTarget nicCheck'>
@@ -170,6 +174,7 @@
           id="nickname"
 	      name="nickname"/>
 		 <button type='button' id="nicknameChk">중복확인</button>
+		 <span>${valid_nickname }</span>
         </div>
         <div class='ValTarget emailCheck'>
           <div>
@@ -180,6 +185,7 @@
           type="text"
           placeholder='ex) multi_7@campus.com'
           name="email"/>
+          <span>${valid_email }</span>
         </div>
         
         <div class='ValTarget numCheck'>
@@ -192,6 +198,7 @@
           placeholder='숫자만 입력해주세요'
           name="phone"
           id="phone"/>
+          <span>${valid_phone }</span>
           <button type='button' id="phoneBtn">인증받기</button>
         </div>
        
@@ -203,13 +210,21 @@
           <button type="button" id="phoneChkBtn">인증확인</button>
         </div>
         <div class='formBtn'>
-          <button name="gender" value="M">남자</button>
-          <button name="gender" value="F">여자</button>
+       	  <label class='formBtnGender'>
+	          <input type="radio" name="gender" value="M">
+	          <span>남자</span>
+          </label>
+          
+          <label class='formBtnGender'>
+	          <input type="radio" name="gender" value="F">
+	          <span>여자</span>
+           </label>
         </div>
         <div class='formDate'>
           <div>생년월일</div>
         <div class='formDate'>
           <input type="date" name="birth" style="padding-left:80px"/>
+          <span>${valid_birth }</span>
         </div>
         </div>
         </div>

@@ -1,6 +1,9 @@
 package com.letplay.letplaytest.biz;
 
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.validation.Errors;
 
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
@@ -37,4 +40,5 @@ public interface MemberBiz {
 	public List<InquiryDto> selectInq(String id);			//1대1내역 불러오기
 	public List<MatchDto> selectMatchList(String id);		//내가 쓴 매칭글 보기
 	public List<MatchDto> selectMatchjoinList(String id);	//내가 참여한 매칭글 보기
+	public Map<String, String> validateHandling(Errors errors);
 }
