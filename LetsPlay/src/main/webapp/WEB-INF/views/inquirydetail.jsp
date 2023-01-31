@@ -25,7 +25,10 @@
 		$(".reply-update").attr("style", "display:table")
 	}
 </script>
-<h1>1대1문의 디테일</h1>
+<div id='InquiryDetailForm'>
+<div class='InquiryDetailHeader'>
+<h1>1대1 문의</h1>
+</div>
 <table class="board-table">
     <tr>
         <th>제목</th>
@@ -129,4 +132,5 @@
 		</c:otherwise>
 	</c:choose>
 </table>
+</div>
 <%@ include file="footer.jsp" %>

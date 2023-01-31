@@ -203,7 +203,7 @@
           <button type="button" id="phoneChkBtn">인증확인</button>
         </div>
         <div class='formBtn'>
-          <button type="radio" name="gender" value="M">남자</button>
+          <button name="gender" value="M">남자</button>
           <button name="gender" value="F">여자</button>
         </div>
         <div class='formDate'>
