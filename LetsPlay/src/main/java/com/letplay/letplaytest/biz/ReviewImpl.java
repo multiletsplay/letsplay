@@ -28,4 +28,14 @@ public class ReviewImpl implements ReviewBiz{
 		return reviewMapper.reviewInsert(dto);
 	}
 
+	@Override
+	public int reviewUpdate(ReviewDto dto) {
+		return reviewMapper.reviewUpdate(dto);
+	}
+
+	@Override
+	public int reviewDelete(ReviewDto dto) {
+		return reviewMapper.reviewDelete(dto);
+	}
+
 }

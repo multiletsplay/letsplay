@@ -49,10 +49,11 @@ public interface MemberMapper {
 	int nicknamecheck(String nickname);
 	
 	
-	@Select(" SELECT fr.*, f.FAC_NAME , f.FAC_LOCATION "
+	@Select(" SELECT fr.*, f.FAC_NAME , f.FAC_LOCATION , IF(REV_ID is null , 0 , 1) AS REV_STATUS"
 			+ " FROM FACILITY_RESERVATION fr "
 			+ " LEFT OUTER JOIN FACILITY f ON fr.FAC_SEQ = f.FAC_SEQ "
-			+ " WHERE ID=#{id} "
+			+ " LEFT OUTER JOIN REVIEW r ON r.FAC_SEQ = fr.FAC_SEQ AND r.ID = #{id} "
+			+ " WHERE fr.ID= #{id} "
 			+ " ORDER BY RES_DATE DESC ")
 	List<FacResDto> selectResfac(String id);
 	

@@ -289,8 +289,6 @@ public class LetsMemberController {
 	public String reviewinsert(HttpSession session, Model model, @RequestParam(value="facSeq", required=false)Integer facSeq, @RequestParam(value="lesSeq", required=false)Integer lesSeq) {
 		MemberDto member = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", membiz.selectmember(member.getId()));
-		System.out.println(facSeq);
-		System.out.println(lesSeq);
 		if(facSeq != null) {
 		model.addAttribute("dto", facbiz.selectFac(facSeq));
 		} else {
@@ -298,20 +296,84 @@ public class LetsMemberController {
 		}
 		return "reviewinsert";
 	}
-	
-	@RequestMapping(value="/mypage/reviewinsert", method=RequestMethod.POST)
+
+	@RequestMapping(value="/review/insert", method=RequestMethod.POST)
 	public String reviewInsert(Model model, ReviewDto dto) {
-		
-		if(reviewBiz.reviewInsert(dto)>0) {
-			model.addAttribute("msg", "후기 작성 완료");
-			model.addAttribute("url", "/mypage");
-			return "alert";
-		}else {
-			model.addAttribute("msg", "후기 작성 실패");
-			model.addAttribute("url", "/mypage/insert");
-			return "alert";
+		if(dto.getCon() == 1) {
+			dto.setFacSeq(null);
+			
+			if(reviewBiz.reviewInsert(dto)>0) {
+				model.addAttribute("msg", "후기 작성 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 작성 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
+		} else {
+			dto.setLesSeq(null);
+			if(reviewBiz.reviewInsert(dto)>0) {
+				model.addAttribute("msg", "후기 작성 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 작성 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
 		}
-		
+	}
+	
+	@GetMapping("/reviewupdateform")
+	public String reviewUpdate(HttpSession session, Model model, @RequestParam(value="facSeq", required=false)Integer facSeq, @RequestParam(value="lesSeq", required=false)Integer lesSeq) {
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", membiz.selectmember(member.getId()));
+		if(facSeq != null) {
+		model.addAttribute("dto", facbiz.selectFac(facSeq));
+		} else {
+		model.addAttribute("dto", lessonbiz.selectLesson(lesSeq));
+		}
+		return "reviewupdate";
+	}
+
+	@RequestMapping(value="/review/upate", method=RequestMethod.POST)
+	public String reviewUpdate(Model model, ReviewDto dto) {
+		if(dto.getCon() == 1) {
+			dto.setFacSeq(null);
+			
+			if(reviewBiz.reviewUpdate(dto)>0) {
+				model.addAttribute("msg", "후기 수정 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 수정 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
+		} else {
+			dto.setLesSeq(null);
+			if(reviewBiz.reviewUpdate(dto)>0) {
+				model.addAttribute("msg", "후기 수정 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 수정 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
+		}
+	}
+	
+	@GetMapping("/review/delete")
+	public String reviewDelete(HttpSession session) {
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		String id = member.getId();
+		if(membiz.delete(id)>0) {
+			return "redirect:/member/mypage";
+		} else {			
+			return "redirect:/member/mypage";
+		}
 	}
 	
 }
