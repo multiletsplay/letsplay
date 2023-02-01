@@ -239,7 +239,7 @@
       	      <section id="tab-section-1" class="tab-section">
       	     <c:choose>
 	        <c:when test="${empty faclist and empty leslist }">
-	            <td colspan="5">------ 예약이 없습니다. ------</td>
+	            <td>------ 예약이 없습니다. ------</td>
 	        </c:when>
 	        <c:otherwise>
 	        	<c:if test="${not empty faclist }">

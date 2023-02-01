@@ -146,13 +146,13 @@
 													<c:when test="${dto.facParking eq true }">
 														<div class="icon_list">
 															<span class="material-symbols-outlined fill">local_parking</span>
-															<span>주차시설 있음</span>
+															<span>주차가능</span>
 														</div>
 													</c:when>
 													<c:otherwise>
 														<div class="icon_list">
 															<span class="material-symbols-outlined">local_parking</span>
-															<span>주차시설 없음</span>
+															<span>주차불가</span>
 														</div>
 													</c:otherwise>
 												</c:choose>
@@ -166,7 +166,7 @@
 													<c:otherwise>
 														<div class="icon_list">
 														<span class="material-symbols-outlined">sports_tennis</span>
-														<span>장비대여 불가능</span>
+														<span>장비대여 불가</span>
 													</div>
 													</c:otherwise>
 												</c:choose>
@@ -300,7 +300,7 @@
 								</div>
 								<!-- <button style="border-radius: 10%; border-style: none; background-color: gold; margin-bottom: 17px; padding: 5px 8px;">11:30</button> -->
 								<div>
-									<button class="join-btn" type="submit">참여하기</button>
+									<button class="join-btn" type="submit">예약하기</button>
 								</div>
 							</div>
 						</div>
