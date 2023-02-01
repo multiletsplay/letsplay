@@ -181,7 +181,7 @@ public interface MatchMapper {
 	
 	//메인페이지
 	//최신순
-	@Select(  " SELECT m.*, s.SPO_NAME, FAC_NAME, "
+	@Select(" SELECT m.*, s.SPO_NAME, FAC_NAME, "
 			+ "(SELECT COUNT(j.JOIN_SEQ) + 1 "
 			+ "		FROM MATCH_JOIN j "
 			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
@@ -192,7 +192,7 @@ public interface MatchMapper {
 			+ " m.MATCH_SEQ ASC limit 4 ")
 	List<MatchDto> selectMainList();
 	//카테고리
-	@Select( "SELECT m.*, NICKNAME, s.SPO_NAME, "
+	@Select("SELECT m.*, NICKNAME, s.SPO_NAME, "
 			+ "	(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r "
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
@@ -227,6 +227,7 @@ public interface MatchMapper {
 			+ " CNT_JOIN DESC limit 4 "
 			+ " </script>"})
 	List<MatchDto> selectMainHot(Integer mspoId);
+	
 	
 	
 	
