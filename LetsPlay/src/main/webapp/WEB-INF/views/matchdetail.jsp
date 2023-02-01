@@ -159,10 +159,10 @@
 										<h4>참여한 사람</h4>
 										<span class="people">
 											${dto.nickName }
-											<c:forEach items="${joinlist}" var="join">
-												${join.nickName }
-											</c:forEach>
 										</span>
+										<c:forEach items="${joinlist}" var="join">
+											<span class="people">${join.nickName }</span>
+										</c:forEach>
 									</div>
 								</div>
 
