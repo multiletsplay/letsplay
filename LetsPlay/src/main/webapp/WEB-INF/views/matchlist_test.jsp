@@ -213,42 +213,6 @@
 					</tr>
 					
 				</c:forEach>
-				<c:forEach items="${end }" var="end">
-					<tr align="center" bgcolor="gray">
-						<td>
-						<c:choose>
-							 <c:when test="${end.likesStatus eq 1 }">
-								 <img id="dellikeBtn" idx="${end.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-							 </c:when>
-							 <c:otherwise>
-								 <img id="likeBtn" idx="${end.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
-							 </c:otherwise>
-						 </c:choose>
-						 </td>
-						<td>${end.nickName }</td>
-						<td>${end.spoName}</td>
-						<td>${end.matchTitle }</td>
-						<td><fmt:formatDate value="${end.matchDay }" pattern="yyyy-MM-dd(E)" /></td>
-<!-- 							<td> -->
-<%-- 							<fmt:parseDate value="${end.matchEnddate}"  --%>
-<%-- 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/> --%>
-<%-- 							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /></td> --%>
-<!-- 							<td> -->
-						<td><c:forEach var="i" items="${dEnddays }">
-								<c:if test="${end.matchSeq eq i.key.matchSeq }" >
-									마감
-											</c:if>
-							</c:forEach>
-						</td>
-						<td>${end.matchLocation }</td>
-						<td>${end.startTime } ~ ${end.endTime }</td>
-						<td>${end.cntJoin }/${end.matchTotal }</td>
-						<td>${end.matchLevel }</td>
-						<td>${end.cntComment }</td>
-						<td><input type="hidden" value="${end.matchSeq } " name="matchSeq" ></td>
-						
-					</tr>
-				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 		<tr>

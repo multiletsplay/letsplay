@@ -120,7 +120,7 @@ public interface MatchMapper {
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
 			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
 			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
-			+ " WHERE m.SPO_ID = #{spoId} AND MATCH_ENDDATE < MATCH_REGDATE "
+			+ " WHERE m.SPO_ID = #{spoId} AND MATCH_ENDDATE < DATE(NOW())"
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
 			+ " m.MATCH_SEQ DESC ")
@@ -181,7 +181,7 @@ public interface MatchMapper {
 	
 	//메인페이지
 	//최신순
-	@Select(" SELECT m.*, s.SPO_NAME, FAC_NAME, "
+	@Select(  " SELECT m.*, s.SPO_NAME, FAC_NAME, "
 			+ "(SELECT COUNT(j.JOIN_SEQ) + 1 "
 			+ "		FROM MATCH_JOIN j "
 			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
@@ -192,7 +192,7 @@ public interface MatchMapper {
 			+ " m.MATCH_SEQ ASC limit 4 ")
 	List<MatchDto> selectMainList();
 	//카테고리
-	@Select("SELECT m.*, NICKNAME, s.SPO_NAME, "
+	@Select( "SELECT m.*, NICKNAME, s.SPO_NAME, "
 			+ "	(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r "
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
@@ -208,7 +208,8 @@ public interface MatchMapper {
 			+ " CNT_JOIN DESC limit 4 ")
 	List<MatchDto> selectMainSports(int spoId);
 	//참여자 수 많은 순
-	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME,  "
+	@Select( {"<script>"
+			+ " SELECT m.*, s.SPO_NAME,  "
 			+ "(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r"
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
@@ -217,12 +218,15 @@ public interface MatchMapper {
 			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
 			+ " FROM MATCH_BOARD m "
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
-			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
-			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
+			+ " <where>"
+			+ " m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
+			+ " 	<if test='mspoId != null'>AND m.SPO_ID=#{spoId} </if> "
+			+ " </where> "
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
-			+ " CNT_JOIN DESC limit 4 ")
-	List<MatchDto> selectMainHot();
+			+ " CNT_JOIN DESC limit 4 "
+			+ " </script>"})
+	List<MatchDto> selectMainHot(Integer mspoId);
 	
 	
 	
