@@ -5,7 +5,7 @@
 <%@ include file="header.jsp" %>
 
 <div class="container">
-	<div class="row">
+	<div class="">
 		<div class="mainContent">
 			<h2 class="section__title mb-40">아이디 찾기</h2>
 <div class="findId">

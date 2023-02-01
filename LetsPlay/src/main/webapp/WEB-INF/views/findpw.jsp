@@ -53,7 +53,7 @@
 	}
 </script>
 <div class="container">
-	<div class="row">
+	<div class="">
 		<div class="mainContent">
 			<h2 class="section__title mb-40" >비밀번호 찾기</h2>
 
