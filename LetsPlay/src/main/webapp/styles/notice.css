@@ -66,7 +66,7 @@
 }
 
 .LetplNum {
-    flex-basis: 100px;
+    flex-basis: 120px;
     text-align: center;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .LetplTitle {
-    flex-grow: 1;
+    flex-basis:700px;
     text-align: center;
 }
 
@@ -367,7 +367,12 @@
 	border-radius: 4px;
 }
 
-
+.NoticeZero {
+	width: 100%;
+	padding: 20px;
+	text-align: center;
+	border-bottom: 1px solid rgb(244, 244, 244);
+}
 
 
 

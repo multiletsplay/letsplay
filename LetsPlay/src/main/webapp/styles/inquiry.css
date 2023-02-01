@@ -1,0 +1,76 @@
+.inquiryReadlist > div {
+	width: 100%;
+	padding: 20px;
+	text-align: center;
+	border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+#inquiry-update {
+	display: flex;
+	justify-content: center;
+}
+
+#inquiry-update > div {
+	margin-top: 50px;
+	width: 1100px;
+}
+
+.inquiry-table {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 30px;
+}
+
+.inquiry-table {
+	display: flex;
+	justify-content: space-between;
+}
+
+.inquiry-table > li {
+	margin-bottom: 30px;
+	width: 100%;
+	margin-left:200px;
+	align-items: center;
+}
+
+.inquiry-table > li > span:last-child {
+	margin-left: 50px;
+}
+
+.inquiry-table > li > span:last-child > input {
+	border-radius: 16px;
+}
+
+.ReqConfirm {
+	float: right;
+	margin-right: 125px;
+}
+
+.ReqConfirm > span > input {
+	border-style: none;
+	background-color: lightgrey;
+	width: 80px;
+	height: 40px;
+	border-radius: 8px;
+    background-color: var(--primary-600);
+	color: white;
+	cursor: pointer;
+	margin: 10px;
+	font-weight: bolder;
+}
+
+.InqTxtArea {
+	width:880px;
+	padding: 10px 20px;
+}
+
+
+
+
+
+
+
+
+
+

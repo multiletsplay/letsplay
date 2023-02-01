@@ -60,7 +60,7 @@ $(function() {
 <ul class='LetplList'>
 <c:choose>
 <c:when test="${empty noticelist }">
-<div>---- 공지사항이 없습니다 ----</div>
+<div class='NoticeZero'>---- 공지사항이 없습니다 ----</div>
 </c:when>
 <c:otherwise>
 <c:forEach items="${noticelist}" var="notice">
