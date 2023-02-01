@@ -453,7 +453,7 @@ ul, li {
 	height: 50px;
 	border-radius: 8px;
 	margin-left: 15px;
-    background-color: var(--primary-600);
+  background-color: var(--primary-600);
 	color: white;
 	cursor: pointer;
 }

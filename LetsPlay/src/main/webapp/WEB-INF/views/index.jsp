@@ -38,7 +38,7 @@
         <br />
         </p>
 
-        <button class="buy__btn">MATCHING NOW</button>
+        <button class="buy__btn" onclick="location.href='/match/list'">MATCHING NOW</button>
     </div>
 
     <div class="hero__img">
@@ -279,10 +279,11 @@ window.onload = () => {
       <div class="event_text">
         <div class="clock__top-content">
           <h4 class="text-white fs-6 mb-2">OPEN EVENT</h4>
-          <p class="text-white fs-5 mb-3 event__title">렛츠플레이 최고의<br>매치를 찾아서!</p>
+          <p class="text-white fs-5 mb-3 event__title">오픈기념 다양한 매칭을 만들어보세요!</p>
+          <!-- <p class="text-white mb-3">오픈 기간동안 가장 많은 매치를 한 사람을 찾아서!!</p> -->
         </div>
         <button class="buy__btn store__btn">
-          <a href="/facility/list">시설예약하기</a>
+          <a href="/match/list">매칭 만들기</a>
         </button>
       </div>
         <div class="event_img">

@@ -11,6 +11,18 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
+
+$(document).ready(function(){
+		var mem = '${member.type }';
+		
+		if (mem=='admin'){
+			$("#insertBtn").css("visibility","visible");
+			$("#deleteBtn").css("visibility","visible");
+			$("#writeBtn").css("visibility","visible");
+		}
+		
+	});
+
 $(function() {
 		$('#pagination').on('click', 'a', function(e) {
 			e.preventDefault();
@@ -49,7 +61,7 @@ $(function() {
 </div>
 
 <div class='LetplCompose'>
-	<input type="button" value="글쓰기" onclick="location.href='/notice/insertform'"/>
+	<input type="button" id="writeBtn" value="글쓰기" onclick="location.href='/notice/insertform'"/>
 </div>
 <div class='LetplNotice'>
 	<div class='LetplNum'>번호</div>
@@ -74,8 +86,8 @@ $(function() {
 	<div id='PersonalResult'>
         <div>${notice.noticeContent }</div>
         <div class='modBtn'>
-          <button type="button" onclick="location.href='/notice/updateform?noticeSeq=${notice.noticeSeq}'">수정</button>
-       	  <button style='margin-right:15px;' type="button" onclick="javascript:fn1();">삭제</button>
+          <button type="button" id="insertBtn" onclick="location.href='/notice/updateform?noticeSeq=${notice.noticeSeq}'">수정</button>
+       	  <button style='margin-right:15px;' id="deleteBtn" type="button" onclick="javascript:fn1();">삭제</button>
         </div>
       </div>
       </div>

@@ -56,7 +56,7 @@
 
 
 <div class="container">
-	<div class="row">
+	<div class="">
 		<div class="mainContent">
 			<h2 class="section__title mb-40">Login</h2>
 
@@ -79,7 +79,7 @@
 					</ul>
 
 				</div>
-					<div class="social_media">
+					<!-- <div class="social_media">
 						<h5>SNS로 간편하게 로그인하기</h5>
 						<div id="naverIdLogin">
 							<a id="naverIdLogin_loginButton" href="#">
@@ -88,9 +88,9 @@
 						<div id="kakao-login-btn">
 							<img id="kakao-login-btn" src="https://kauth.kakao.com/public/widget/login/kr/kr_02_medium.png" onmouseover="this.src='https://kauth.kakao.com/public/widget/login/kr/kr_02_medium_press.png'" onmouseout="this.src='https://kauth.kakao.com/public/widget/login/kr/kr_02_medium.png'" style="cursor: pointer">
 						</div>
-					</div>
+					</div> -->
 							
-					<div class="ask_signup">
+					<div class="ask_signup mt40">
 						<span>아직도 랫플 회원이 아니세요?</span>
 						<a href="/member/signupform"><span class="signup">회원가입</span></a>
 						</div>

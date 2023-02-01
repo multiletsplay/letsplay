@@ -1,35 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>1대1문의</h1>
-<div id="inquiry-insert">
+<%@ include file="header.jsp" %>
+<div class="container inner pt40">
+	<div class="m40 row">
+		<div class="match">
+            <h3>1:1 등록하기</h3>
+            <div>
+
+<div>
     <form action="/inquiry/insert" method="post">
-        <table class="inquiry-table">
-        	<tr>
-                <th>ID</th>
-                <td><input type="hidden" name="id" value="${member.id }">${member.id }</td>
-            </tr>
-            <tr>
-                <th>제목</th>
-                <td><input type="text" name="inqTitle"></td>
-            </tr>
-            <tr>
-                <th>내용</th>
-                <td><textarea rows="10" cols="80" name="inqContent"></textarea></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="right">
-					<input type="submit" value="등록">
-					<input type="button" value="취소" onclick="location.href='/inquiry/list'">
-				</td>
-            </tr>
-        </table>
+    <div >
+
+        <div class="match__insert">
+			<p>제목</p>
+			<input type='text' name='inqTitle'>
+		</div>
+
+        <div class="match__insert">
+			<p>문의 내용</p>
+			<textarea rows="10" cols="80" name="inqContent"></textarea>
+		</div>
+
+
+        <input type="submit" value="문의등록" class="pay_Btn">
+		<input type="button" value="취소" id="cancelbutton" onclick="location.href='/inquiry/list'" class="cancel">
+
     </form>
 </div>
 </body>
