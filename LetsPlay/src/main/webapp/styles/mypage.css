@@ -70,7 +70,7 @@
 }
 
 .mypageWrapper {
-	height: 1300px;
+	height: 2000px;
 	display: flex;
 	justify-content: center;
 }
@@ -86,7 +86,7 @@
 	flex-direction: column;
 	margin-top:50px;
 	position: relative;
-	height: 1300px;
+	height: 2000px;
 }
 
 .tab_menu > ul > li > a > h2 {
@@ -330,6 +330,12 @@ ul, li {
     font-size: 14px;
     text-align: left;
     position: relative;
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgb(244, 244, 244);
+}
+
+.n-prd-row:last-child {
+	border-style: none;
 }
 
 .n-prd-row .img-block {
@@ -348,20 +354,19 @@ ul, li {
     bottom: -10px;
 }
 
-.info {
+.Jjiminfo {
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 39px;
 }
 
-.info > li {
+.Jjiminfo > li {
 	margin-bottom: 15px;
 }
 
 #facImageSource {
-	width: 100%;
-	height: 100%;
+	width: 90%;
+	height: 80%;
 	border-radius: 24px;
 }
 
@@ -416,3 +421,33 @@ ul, li {
 .tab-section div:first-child {
 	margin-left: 0;
 }
+
+#MakeSorting {
+	transform: translate(20%);
+}
+
+#sorting-tab-button-nav {
+	transform: translate(10%);
+	margin: 15px;
+	margin-bottom: 100px;
+}
+
+#sorting-tab-button-nav > button {
+	border-style: none;
+	background-color: lightgrey;
+	width: 120px;
+	height: 50px;
+	border-radius: 8px;
+	margin-left: 15px;
+    background-color: var(--primary-600);
+	color: white;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+

@@ -317,12 +317,12 @@
     <li class='listLI'>
       <a href="#tab5" class="btn"><h2>찜한 내역</h2></a>
       <div id="tab5" class="cont">
-     <div style='width: 50px;'>
-		<form action="/member/mypage/likeselect" method="get">
+     <div id="MakeSorting">
+		<nav id="sorting-tab-button-nav">
 			<button type="submit" name="type" value="M">매치</button>
 			<button type="submit" name="type" value="F">시설</button>
 			<button type="submit" name="type" value="L">레슨</button>
-		</form>
+		</nav>
 		<div class="likes-list">
 
 		<c:choose>
@@ -336,7 +336,7 @@
        						<a href="/facility/detail?facSeq=${fac.facSeq }" class="img-block">
         					    <img id="facImageSource" src="${fac.facImgpath}" alt="시설 사진">
       					    </a>
-	         			    <ul class="info">
+	         			    <ul class="Jjiminfo">
 					            <li class="brand"><button id="facSpoBtn">${fac.spoName}</button></li>
 					            <li class="name"><a style='font-size:24px; font-weight:bold;' href="/facility/detail?facSeq=${fac.facSeq }">${fac.facName }</a></li>
 					            <li class="price">
@@ -350,27 +350,26 @@
 	            <c:if test="${not empty likesmatlist }">
 	            <table border="1">
 						<tr>
+							<th>제목</th>
+							<th>종목</th>
+							<th>시설명</th>
 							<th>날짜</th>
 							<th>시간</th>
-							<th>종목</th>
 							<th>총인원</th>
-							<th>제목</th>
-							<th>시설명</th>
 							<th>찜여부</th>
 						</tr>
 		            <c:forEach items="${likesmatlist }" var="mat">
 	           		
 	           			<tr>
+	           				<td><a href="/match/detail?matchSeq=${mat.matchSeq }">${mat.matchTitle }</a></td>
+	           				<td>${mat.spoName}</td>
 	           				<td><fmt:formatDate pattern="MM.dd" value="${mat.matchRegdate}"/></td>
 							<td>
 							<fmt:parseDate  value="${mat.matchRegdate}"
 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
 							<fmt:formatDate value="${parsedDateTime}" pattern="MM.dd" /></td>
-
 	           				<td>${mat.startTime } ~ ${mat.endTime }</td>
-		            		<td>${mat.spoName}</td>
 		            		<td>${mat.matchTotal }</td>
-		            		<td><a href="/match/detail?matchSeq=${mat.matchSeq }">${mat.matchTitle }</a></td>
 		            		<td></td>
 		            		<td>
 				   					<img id="dellikeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
@@ -379,31 +378,7 @@
 		            </c:forEach>
 		            </table>
 	            </c:if>
-	            <c:if test="${not empty likesleslist }">
-	            <table border="1">
-						<tr>
-							<th>종목</th>
-							<th>이미지</th>
-							<th>시설/레슨명</th>
-							<th>리뷰개수</th>
-							<th>주소</th>
-							<th>찜여부</th>
-						</tr>
-		            <c:forEach items="${likesleslist }" var="les">
-	           			
-	           			<tr>
-		            		<td>${les.spoName}</td>
-		            		<td><img width="100" src="${les.lesImgpath }"></td>
-		            		<td><a href="/lesson/detail?lesSeq=${les.lesSeq }">${les.lesName }</a></td>
-		            		<td>${les.lesLocation }</td>
-		            		<td>이용자 리뷰 ${les.cntReview }개</td>
-		            		<td>
-			   					<img id="dellikeBtn" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-		            		</td>
-	            		</tr>
-		            </c:forEach>
-		            </table>
-	            </c:if>
+	            
 			</c:otherwise>
 		</c:choose>
 	</div>
