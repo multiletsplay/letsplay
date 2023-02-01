@@ -39,6 +39,9 @@ public interface MemberMapper {
 	@Select(" SELECT ID FROM `MEMBER` WHERE NAME=#{name} AND PHONE=#{phone} ")
 	String findid(String name, String phone);
 	
+	@Select(" SELECT PASSWORD FROM `MEMBER` WHERE ID=#{id} ")
+	String findpw(String id);
+	
 	@Select(" SELECT COUNT(ID) FROM `MEMBER` WHERE ID=#{id} ")
 	int idcheck(String id);
 	
