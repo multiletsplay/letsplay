@@ -26,8 +26,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	function insert(){
+		alert("등록 완료")
 		$('#insertBtn').submit();
-		window.close();
 	}
 	
 	function cancel(){
@@ -70,7 +70,7 @@
                     </div>
                     <div class='ReviewAssign'>
                     <input style="background-color: red; color:white;" type="button" id="cancelBtn" value="취소" onclick="cancel()" >
-                        <input style="background-color: var(--primary-600); color:white;" type="submit" id="insertBtn" value="등록" onclick="insert()">
+                    <input type="submit" style= 'background-color: var(--primary-600); color:white;' type="submit" id="insertBtn" value="등록" onclick="insert()">
                     </div>
                 </c:when>
 
@@ -98,7 +98,7 @@
                     </div>
                     <div class='ReviewAssign'>
                     	<input style="background-color: red; color:white;" type="button" id="cancelBtn" value="취소" onclick="cancel()">
-                        <input style="background-color: var(--primary-600); color:white;" type="submit" id="insertBtn" value="등록" onclick="insert()">
+                        <input type="submit" style= 'background-color: var(--primary-600); color:white;' type="submit" id="insertBtn" value="등록" onclick="insert()">
                     </div>
                 </c:otherwise>
                 </c:choose>
