@@ -15,6 +15,7 @@
   <link rel="stylesheet" type="text/css" href="/styles/control.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script defer src="../../js/home.js"></script>
 
   <!-- CSS LINK -->
 
@@ -43,6 +44,7 @@
         <div class="nav__icons">
                   
           <span>
+
            <a href="/match/insertform"><span class='btn01'>매칭만들기</span></a> 
           </span>
           <c:if test="${sessionScope.login == null }">

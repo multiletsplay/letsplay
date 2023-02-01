@@ -58,6 +58,19 @@ function openPopUp() {
 		</ul>
 	</div>
 
+
+
+	<div class="match__insert">
+		<p>시설등록</p>
+		<div style="position: relative;">
+			<input type="hidden" id="facSeq" name="facSeq" style="display: none;">
+			<input type="text" id="facname" required readonly placeholder="시설을 먼저 등록해주세요!">
+
+			<input class="facBtn" type="button" value="시설 등록" onclick="openPopUp()" >
+			<input type="hidden" name="matchFacility" value="Y">
+		</div>
+	</div>
+
 	<div class="match__insert ">
 		<p>마감일자</p>
 		<input type="datetime-local" name="matchEnddate" required>
@@ -104,16 +117,7 @@ function openPopUp() {
 			</div>
 		</div>
 
-		<div>
-			<p>시설등록</p>
-			<div style="position: relative;">
-				<input type="hidden" id="facSeq" name="facSeq" style="display: none;">
-				<input type="text" id="facname" required readonly placeholder="시설을 먼저 등록해주세요!">
-	
-				<input class="facBtn" type="button" value="시설 등록" onclick="openPopUp()" >
-				<input type="hidden" name="matchFacility" value="Y">
-			</div>
-		</div>
+		
 	</div>
 
 	

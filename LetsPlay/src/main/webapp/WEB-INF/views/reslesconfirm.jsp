@@ -76,7 +76,7 @@ function requestPay() {
 		</li>
 		<li>
 			<p>예약날짜</p>
-			<p><input type="text" name="resDate" value="${dto.resDate }">${dto.resDate }</p>
+			<p><input type="hidden" name="resDate" value="${dto.resDate }">${dto.resDate }</p>
 		</li>
 		<li>
 			<p>시작시간</p>

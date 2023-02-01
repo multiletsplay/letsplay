@@ -71,7 +71,8 @@
 				<input type="text" id="phoneChk" placeholder="인증번호를 입력해주세요">
 				<button type="button" id="phoneChkBtn" class="btn__number">인증번호 확인</button>
 			</div>
-			<div class="passwordFind">${pw}</div>
+			<div class="passwordFind">
+				<p>고객님의 비밀번호는</p>${pw}</div>
 
 		</div>
 	</div>

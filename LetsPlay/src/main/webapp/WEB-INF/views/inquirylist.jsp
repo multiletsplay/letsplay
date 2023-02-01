@@ -41,9 +41,9 @@
 		<div class='inquirylistContentsWrap'>
 		<c:choose>
 			<c:when test="${empty inquirylist }">
-				<tr>
-					<td colspan="5">---- 작성된 글이 없습니다 ----</td>
-				</tr>
+				<div class='inquiryReadlist'>
+					<div>---- 작성된 글이 없습니다 ----</div>
+				</div>
 			</c:when>
 			<c:otherwise>	
 				<c:forEach items="${inquirylist}" var="dto">

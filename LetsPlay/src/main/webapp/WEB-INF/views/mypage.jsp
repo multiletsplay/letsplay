@@ -13,8 +13,24 @@
 		$("#dellikeBtn").click(dellike);
 	});
 	
-	function openPopUp() {
-	    window.open("/member/reviewupdateform?facSeq=${dto.facSeq }", "리뷰", "width=720, height=400, top=150, left=200");
+	function openPopUpf() {
+		let facSeq= $(event.target).attr('idx');
+	    window.open("/member/reviewinsertform?facSeq="+facSeq, "리뷰", "width=720, height=400, top=150, left=200");
+	}
+	
+	function openPopUpl() {
+		let lesSeq= $(event.target).attr('idx');
+	    window.open("/member/reviewinsertform?facSeq="+lesSeq, "리뷰", "width=720, height=400, top=150, left=200");
+	}
+	
+	function openPopUpfu() {
+		let facSeq= $(event.target).attr('idx');
+	    window.open("/member/reviewupdateform?facSeq="+facSeq, "리뷰", "width=720, height=400, top=150, left=200");
+	}
+	
+	function openPopUplu() {
+		let lesSeq= $(event.target).attr('idx');
+	    window.open("/member/reviewupdateform?facSeq="+lesSeq, "리뷰", "width=720, height=400, top=150, left=200");
 	}
 	
 	function nicknameChk(){
@@ -215,25 +231,32 @@
 			<nav id="tab-button-nav">
 	          <button class="tab-button" data-tab-section="tab-section-1">시설</button>
 	          <button class="tab-button" data-tab-section="tab-section-2">레슨</button>
-      	    
+      	     </nav>
       	      <section id="tab-section-1" class="tab-section">
       	     <c:choose>
 	        <c:when test="${empty faclist and empty leslist }">
-	            <td colspan="5">------ 예약이 없습니다. ------</td>
+	            <td>------ 예약이 없습니다. ------</td>
 	        </c:when>
 	        <c:otherwise>
 	        	<c:if test="${not empty faclist }">
 		            <c:forEach items="${faclist }" var="dto">
       	    
       	  
-         	 <div>
+         	 <div class='sectionDiv'>
 	            <div class="match-list">
 	                <p><span class="sports-category">시설</span></p>
 	                <a href="/facility/detail?facSeq=${dto.facSeq }"><p class="match-title">${dto.facName }</p></a>
 	                <p class="match-location">${dto.facLocation }</p>
-	                <p class="match-location">${dto.resDatetime }</p>
-	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewupdateform?facSeq=${dto.facSeq }'">후기 수정</button>
-	                <button class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
+	                <p class="match-location"><fmt:parseDate value="${dto.resDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDateTime" type="both"/>
+						<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd HH:mm" />
+					</p>
+	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancelfacres?resId=${dto.resId }'">예약취소</button>
+	                <c:if test="${dto.revStatus eq 1 }">
+	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUpfu()">후기 수정</button>
+	                </c:if>
+	                <c:if test="${dto.revStatus eq 0 }">
+	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUpf()">후기 작성</button>
+	                </c:if>
 	            </div>
        		  </div>
       
@@ -249,10 +272,16 @@
 				                <p><span class="sports-category">레슨</span></p>
 				                <a href="/lesson/detail?lesSeq=${dto.lesSeq }"><p class="match-title">${dto.lesName }</p></a>
 				                <p class="match-location">${dto.lesLocation }</p>
-				                <p class="match-location">${dto.resDatetime }</p>
+				                <p class="match-location"><fmt:parseDate value="${dto.resDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDateTime" type="both"/>
+								<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd HH:mm" />
+								</p>
 				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancellesres?resId=${dto.resId }'">예약취소</button>
-				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewupdateform?lesSeq=${dto.lesSeq }'">후기수정</button>
-				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewinsertform?lesSeq=${dto.lesSeq }'">후기 작성</button>
+				                <c:if test="${dto.revStatus eq 1 }">
+				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUplu()">후기 수정</button>
+				                </c:if>
+				                <c:if test="${dto.revStatus eq 0 }">
+				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUpl()">후기 작성</button>
+				                </c:if>
 				            </div>
 	            		</div>
 	            		</section>
@@ -262,7 +291,7 @@
         </c:otherwise>
         </c:choose>
         	  </section>
-        </nav>
+       
         </div>
 		</div>
     </li>
@@ -405,23 +434,23 @@ for(var i = 0; i < tabList.length; i++){
 </script>
 
 <script>
-        const $nav = document.querySelector('#tab-button-nav')
-        const $sections = document.querySelectorAll('.tab-section');
-    
-        $nav.addEventListener('click', (e) => {
-          if (!e.target.classList.contains('tab-button')) {
-            return;
-          }
-          
-          const focusedTabId = e.target.dataset.tabSection;
-    
-          $sections.forEach(($section) => {
-            if ($section.id === focusedTabId) {
-              $section.removeAttribute('hidden');
-            } else {
-              $section.setAttribute('hidden', true);
-            }
-          });
-        });
-      </script>
+    const $nav = document.querySelector('#tab-button-nav')
+    const $sections = document.querySelectorAll('.tab-section');
+
+    $nav.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('tab-button')) {
+        return;
+      }
+      
+      const focusedTabId = e.target.dataset.tabSection;
+
+      $sections.forEach(($section) => {
+        if ($section.id === focusedTabId) {
+          $section.removeAttribute('hidden');
+        } else {
+          $section.setAttribute('hidden', true);
+        }
+      });
+    });
+  </script>
 <%@ include file="footer.jsp" %>
