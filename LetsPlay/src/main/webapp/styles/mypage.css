@@ -70,7 +70,7 @@
 }
 
 .mypageWrapper {
-	height: 2000px;
+	height: 1000px;
 	display: flex;
 	justify-content: center;
 }
@@ -86,7 +86,7 @@
 	flex-direction: column;
 	margin-top:50px;
 	position: relative;
-	height: 2000px;
+	height: 1000px;
 }
 
 .tab_menu > ul > li > a > h2 {
@@ -402,13 +402,13 @@ ul, li {
 }
 
 .PuckAge {
-	display: flex;
+	/* display: flex; */
 }
 
 #tab-button-nav {
 	margin-top: 50px;
 	display: flex;
-	transform: translate(130%);
+	/* transform: translate(130%); */
 	
 }
 
@@ -421,13 +421,9 @@ ul, li {
     background-color: var(--primary-600);
 	color: white;
 	cursor: pointer;
-	margin: 20px;
+	margin-right:20px;
 }
 
-.tab-section {
-	margin-top: 100px;
-	transform: translate(-15%);
-}
 
 .tab-section div {
 	width: 260px;
@@ -464,8 +460,13 @@ ul, li {
 
 .sectionDiv {
 	float: left;
-	width: 200px;
+	width: 210px;
+	margin-left:20px;
 }
+
+.sectionDiv:first-child{
+	margin-left: 0px;
+} 
 
 
 

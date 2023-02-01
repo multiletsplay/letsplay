@@ -28,6 +28,7 @@
 <div class='inqListWrapperTitle'>
 <h1>1대1 문의</h1>
 </div>
+		<input type="button" value="글 작성" onclick="location.href='/inquiry/insertform'">
         <div id='inqListWrapper'>
         <div class='inqList'>
 			<ul>
