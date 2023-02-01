@@ -180,7 +180,7 @@ public interface MatchMapper {
 
 	
 	//메인페이지
-
+	//최신순
 	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
 			+ "(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r"
@@ -195,9 +195,9 @@ public interface MatchMapper {
 			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
-			+ " m.MATCH_SEQ DESC limit 4 ")
+			+ " m.MATCH_SEQ ASC limit 4 ")
 	List<MatchDto> selectMainList(String id);
-	
+	//카테고리
 	@Select("SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
 			+ "	(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r "
@@ -212,9 +212,9 @@ public interface MatchMapper {
 			+ " WHERE m.SPO_ID = s.SPO_ID AND m.SPO_ID = #{spoId} AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE "
 			+ " GROUP BY m.MATCH_SEQ"
 			+ " ORDER BY "
-			+ " MATCH_SEQ DESC limit 4 ")
+			+ " m.CNT_JOIN DESC limit 4 ")
 	List<MatchDto> selectMainSports(int spoId);
-
+	//참여자 수 많은 순
 	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
 			+ "(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r"
@@ -229,7 +229,7 @@ public interface MatchMapper {
 			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
-			+ " m.CNT_JOIN ASC limit 4 ")
+			+ " m.CNT_JOIN DESC limit 4 ")
 	List<MatchDto> selectMainHot(String id);
 	
 	
