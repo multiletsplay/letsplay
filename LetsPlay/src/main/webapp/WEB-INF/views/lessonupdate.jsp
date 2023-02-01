@@ -114,10 +114,10 @@
 			</ul> 
 	</div>
 
-	<div class="match__insert">
+	<!-- <div class="match__insert">
 		<p>레슨 이미지</p>
 		<input type="text" name="lesImg" value="${dto.lesImg }">
-	</div>
+	</div> -->
 
 
 	<input type="submit" value="수정완료" class="pay_Btn">
