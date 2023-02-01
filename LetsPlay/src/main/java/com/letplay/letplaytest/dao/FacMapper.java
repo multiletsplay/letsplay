@@ -16,7 +16,7 @@ import com.letplay.letplaytest.dto.TimeDto;
 @Mapper
 public interface FacMapper {
 	
-	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW, AVG(REV_RATE) AS AVG_RATE "
 			+ " FROM FACILITY f "
 			+ "		LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID "
 			+ " 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} "
@@ -25,7 +25,7 @@ public interface FacMapper {
 			+ " ORDER BY f.FAC_DATE DESC ")
 	List<FacDto> selectFacList(String id);
 	
-	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW, AVG(REV_RATE) AS AVG_RATE "
 			+ " FROM FACILITY f "
 			+ "		LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID "
 			+ " 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} "

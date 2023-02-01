@@ -67,6 +67,7 @@
 		}
 		function like(){
 			let matchSeq = ${dto.matchSeq};
+			
 			$.ajax({
 				url : "/match/likes",
 				type : "POST",

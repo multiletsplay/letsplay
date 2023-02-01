@@ -89,13 +89,28 @@
 		<span>
 			<select id="region2" name="searchRegion2">
 				<option value="">군/구</option>
+				<option value="강남구">강남구</option>
+				<option value="강동구">강동구</option>
+				<option value="강북구">강북구</option>
 				<option value="강서구">강서구</option>
-				<option value="구로구">구로구</option>
-				<option value="동작구">동작구</option>
-				<option value="서초구">서초구</option>
-				<option value="송파구">송파구</option>
-				<option value="종로구">종로구</option>
 				<option value="관악구">관악구</option>
+				<option value="광진구">광진구</option>
+				<option value="구로구">구로구</option>
+				<option value="금천구">금천구</option>
+				<option value="노원구">노원구</option>
+				<option value="도봉구">도봉구</option>
+				<option value="동대문구">동대문구</option>
+				<option value="동작구">동작구</option>
+				<option value="마포구">마포구</option>
+				<option value="서대문구">서대문구</option>
+				<option value="서초구">서초구</option>
+				<option value="성동구">성동구</option>
+				<option value="성북구">성북구</option>
+				<option value="양천구">양천구</option>
+				<option value="영등포구">영등포구</option>
+				<option value="용산구">용산구</option>
+				<option value="은평구">은평구</option>
+				<option value="종로구">종로구</option>
 				<option value="중구">중구</option>
 			</select>
 		</span>
@@ -107,7 +122,7 @@
 			<input type="checkbox" id="optionBtn">
 			<label for="optionBtn">▼ 열기</label>
 			<ul class="searchOption">
-				<li><input type="time" name="searchStartTime" min="05:00" value="" step="900"><label>시작시간</label>
+				<li><input type="time" name="searchStartTime" min="05:00" value="11:00" step="900"><label>시작시간</label>
 				<li><input type="checkbox" name="searchFacStatus" value="Y" checked><label>시설확정여부</label>
 				<li><input type="range" name="searchLevel" value="3" min="1" max="5"><label>레벨</label>
 				<li><input type="number" name="searchTotal" value="2" min="2" max="22"><label>참가인원</label>

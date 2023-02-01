@@ -110,8 +110,8 @@ public class MatchImpl implements MatchBiz {
 	}
 
 	@Override
-	public List<MatchDto> selectMainList(String id) {
-		return matchMapper.selectMainList(id);
+	public List<MatchDto> selectMainList() {
+		return matchMapper.selectMainList();
 	}
 
 	@Override
@@ -120,8 +120,8 @@ public class MatchImpl implements MatchBiz {
 	}
 
 	@Override
-	public List<MatchDto> selectMainHot(String id) {
-		return matchMapper.selectMainHot(id);
+	public List<MatchDto> selectMainHot() {
+		return matchMapper.selectMainHot();
 	}
 
 
