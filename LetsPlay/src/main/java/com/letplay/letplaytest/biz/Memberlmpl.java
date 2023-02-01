@@ -145,5 +145,10 @@ public class Memberlmpl implements MemberBiz{
 
         return validatorResult;
     }
+
+	@Override
+	public String findpw(String id) {
+		return memberMapper.findpw(id);
+	}
 	
 }

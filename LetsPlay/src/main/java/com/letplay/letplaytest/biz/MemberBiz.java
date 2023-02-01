@@ -21,6 +21,7 @@ public interface MemberBiz {
 	public int insert(MemberDto dto);						//회원가입
 	public int idcheck(String id);							//아이디중복확인
 	public String findid(String name, String phone);		//아이디찾기
+	public String findpw(String id);					//비밀번호찾기
 	
 	public String sendRandomMessage(String tel);
 	public int memberTelCount(String tel);
