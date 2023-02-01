@@ -13,7 +13,7 @@ IMP.init("imp31758044"); //가맹점식별코드
 function requestPay() {
     // IMP.request_pay(param, callback) 결제창 호출
     IMP.request_pay({ // param
-        pg: "kakaopay",				//PG사코드 kg이니시스:html5_inicis, kakaopay:kakaopay / kg이니시스는 체크카드결제시 실결제되므로 주의!! 
+        pg: "html5_inicis",				//PG사코드 kg이니시스:html5_inicis, kakaopay:kakaopay / kg이니시스는 체크카드결제시 실결제되므로 주의!! 
         pay_method: "card",				//결제수단
         merchant_uid: "${dto.resId }",	//고유 주문번호
         name: "${dto.facName}",			//주문명
@@ -86,11 +86,11 @@ function requestPay() {
 			</li>
 			<li>
 				<p>예약날짜</p>
-				<p>${dto.resDate }</p>
+				<p><input type="text" name="resDate" value="${dto.resDate }">${dto.resDate }</p>
 			</li>
 			<li>
 				<p>시작시간</p>
-				<p name="resStarttime" value="${dto.resStarttime }">${dto.resStarttime }</p>
+				<p><input type="hidden" name="resStarttime" value="${dto.resStarttime }">${dto.resStarttime }</p>
 			</li>
 		</ul>
 	</div>
