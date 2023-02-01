@@ -215,7 +215,7 @@
 			<nav id="tab-button-nav">
 	          <button class="tab-button" data-tab-section="tab-section-1">시설</button>
 	          <button class="tab-button" data-tab-section="tab-section-2">레슨</button>
-      	    
+      	     </nav>
       	      <section id="tab-section-1" class="tab-section">
       	     <c:choose>
 	        <c:when test="${empty faclist and empty leslist }">
@@ -226,7 +226,7 @@
 		            <c:forEach items="${faclist }" var="dto">
       	    
       	  
-         	 <div>
+         	 <div class='sectionDiv'>
 	            <div class="match-list">
 	                <p><span class="sports-category">시설</span></p>
 	                <a href="/facility/detail?facSeq=${dto.facSeq }"><p class="match-title">${dto.facName }</p></a>
@@ -262,7 +262,7 @@
         </c:otherwise>
         </c:choose>
         	  </section>
-        </nav>
+       
         </div>
 		</div>
     </li>
@@ -405,23 +405,23 @@ for(var i = 0; i < tabList.length; i++){
 </script>
 
 <script>
-        const $nav = document.querySelector('#tab-button-nav')
-        const $sections = document.querySelectorAll('.tab-section');
-    
-        $nav.addEventListener('click', (e) => {
-          if (!e.target.classList.contains('tab-button')) {
-            return;
-          }
-          
-          const focusedTabId = e.target.dataset.tabSection;
-    
-          $sections.forEach(($section) => {
-            if ($section.id === focusedTabId) {
-              $section.removeAttribute('hidden');
-            } else {
-              $section.setAttribute('hidden', true);
-            }
-          });
-        });
-      </script>
+    const $nav = document.querySelector('#tab-button-nav')
+    const $sections = document.querySelectorAll('.tab-section');
+
+    $nav.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('tab-button')) {
+        return;
+      }
+      
+      const focusedTabId = e.target.dataset.tabSection;
+
+      $sections.forEach(($section) => {
+        if ($section.id === focusedTabId) {
+          $section.removeAttribute('hidden');
+        } else {
+          $section.setAttribute('hidden', true);
+        }
+      });
+    });
+  </script>
 <%@ include file="footer.jsp" %>
