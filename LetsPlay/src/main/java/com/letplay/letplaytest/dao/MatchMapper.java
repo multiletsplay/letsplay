@@ -40,7 +40,7 @@ public interface MatchMapper {
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
 			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
 			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
-			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
+			+ " WHERE m.SPO_ID = s.SPO_ID AND DATE(NOW()) < DATE(MATCH_ENDDATE) AND MATCH_STATUS='N' "
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
 			+ " m.MATCH_SEQ DESC ")
@@ -57,7 +57,7 @@ public interface MatchMapper {
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
 			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
 			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
-			+ " WHERE m.SPO_ID = s.SPO_ID AND m.SPO_ID = #{spoId} AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE "
+			+ " WHERE m.SPO_ID = s.SPO_ID AND m.SPO_ID = #{spoId} AND DATE(NOW()) < DATE(MATCH_ENDDATE) "
 			+ " GROUP BY m.MATCH_SEQ"
 			+ " ORDER BY "
 			+ " MATCH_SEQ DESC ")
@@ -186,7 +186,7 @@ public interface MatchMapper {
 			+ "		FROM MATCH_JOIN j "
 			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
 			+ " FROM MATCH_BOARD m, SPORTS s, FACILITY f "
-			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' AND f.FAC_SEQ=m.FAC_SEQ "
+			+ " WHERE m.SPO_ID = s.SPO_ID AND DATE(NOW()) < DATE(MATCH_ENDDATE) AND MATCH_STATUS='N' AND f.FAC_SEQ=m.FAC_SEQ "
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
 			+ " m.MATCH_SEQ ASC limit 4 ")
@@ -219,7 +219,7 @@ public interface MatchMapper {
 			+ " FROM MATCH_BOARD m "
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
 			+ " <where>"
-			+ " m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
+			+ "   <![CDATA[m.SPO_ID = s.SPO_ID AND DATE(NOW()) < DATE(MATCH_ENDDATE) AND MATCH_STATUS='N' ]]> "
 			+ " 	<if test='mspoId != null'>AND m.SPO_ID=#{spoId} </if> "
 			+ " </where> "
 			+ " GROUP BY m.MATCH_SEQ "
