@@ -206,3 +206,5 @@ function fn1(){
 		</script>
 </div>
 </div>
+</div>
+<%@ include file="footer.jsp" %> 

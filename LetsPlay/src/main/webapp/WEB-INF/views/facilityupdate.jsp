@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="header.jsp" %> 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -28,13 +24,169 @@ $(document).ready(function(){
 	
 });
 </script>
-</head>
-<body>
-<h1>시설 추가</h1>
+<div class="container inner pt40">
+	<div class="m40 row">
+		<form action="/facility/update" method="post">
+			<input type="hidden" name="facSeq" value="${dto.facSeq }">
+		<div class="match">
+			<h3>시설 수정하기</h3>
+			<div class="match__insert ">
+				<p>매칭을 원하는 스포츠</p>
+				<ul>
+					<li>
+						<input id="sports_01" type="radio" name="spoId" value='1'>
+						<label for="sports_01">풋살</label>
+					</li>
+					<li>
+						<input id="sports_02" type="radio" name="spoId" value='2'>
+						<label for="sports_02">테니스</label>
+					</li>
+					<li>
+						<input id="sports_03" type="radio" name="spoId" value='3'>
+						<label for="sports_03">배드민턴</label>
+					</li>
+					<li>
+						<input id="sports_04" type="radio" name="spoId" value='4'>
+						<label for="sports_04">탁구</label>
+					</li>
+					<li>
+						<input id="sports_05" type="radio" name="spoId" value='5'>
+						<label for="sports_05">수영</label>
+					</li>
+					<li>
+						<input id="sports_06" type="radio" name="spoId" value='6'>
+						<label for="sports_06">골프</label>
+					</li>
+				</ul>
+			</div>
+
+			<div class="match__insert">
+				<p>시설 명</p>
+				<input type="text" name="facName" value="${dto.facName }">
+			</div>
+	
+			<div class="match__insert">
+				<p>이미지(시설이미지나 시설관련 이미지)</p>
+				<input type="file" name="file" multiple="multiple">
+			</div>
+	
+			<div class="match__insert">
+				<p>시설장소 주소(정확히 기입해주시기 바랍니다!)</p>
+				<input type="text" name="facLocation"  value="${dto.facLocation }">
+			</div>
+	
+			<div class="match__insert">
+				<p>시설 전화번호(정확히 기입해주시기 바랍니다!)</p>
+				<input type="text" name="facContact" value="${dto.facContact }">
+			</div>
+	
+			<div class="match__insert">
+				<p>시설 비용(시간당으로 기입해주세요! 없으면 0으로 기입!)</p>
+				<input type="text" name="facCost" value="${dto.facCost }">
+			</div>
+
+
+			<div class="match__insert">
+				<h4>상세정보</h4>
+				<div class="options__list" style=" margin-left: 0px;">
+					<p>주차장</p>
+					<ul>
+						<li>
+							<input id="facility-PARK-y" type="radio" name="facParking" value='true'>
+							<label for="facility-PARK-y">가능</label>
+						</li>
+						<li>
+							<input id="facility-PARK-n" type="radio" name="facParking" value='false'>
+							<label for="facility-PARK-n">불가능</label>
+						</li>
+					</ul>
+				</div>
+	
+				<div class="options__list">
+					<p>장비대여</p>
+					<ul>
+						<li>
+							<input id="facility-RENT-y" type="radio" name="facLent" value='true'>
+							<label for="facility-RENT-y">가능</label>
+						</li>
+						<li>
+							<input id="facility-RENT-n" type="radio" name="facLent" value='false'>
+							<label for="facility-RENT-n">불가능</label>
+						</li>
+					</ul>
+				</div>
+	
+				<div class="options__list">
+					<p>샤워시설</p>
+					<ul>
+						<li>
+							<input id="facility-SWR-y" type="radio" name="facShower" value='true'>
+							<label for="facility-SWR-y">가능</label>
+						</li>
+						<li>
+							<input id="facility-SWR-n" type="radio" name="facShower" value='false'>
+							<label for="facility-SWR-n">불가능</label>
+						</li>
+					</ul>
+				</div>
+	
+				<div class="options__list">
+					<p>락커</p>
+					<ul>
+						<li>
+							<input id="facility-STASH-y" type="radio" name="facLocker" value='true'>
+							<label for="facility-STASH-y">가능</label>
+						</li>
+						<li>
+							<input id="facility-STASH-n" type="radio" name="facLocker" value='false'>
+							<label for="facility-STASH-n">불가능</label>
+						</li>
+					</ul>
+				</div>
+	
+				<div class="options__list">
+					<p>조명</p>
+					<ul>
+						<li>
+							<input id="facility-LIGHT-y" type="radio" name="facLight" value='true'>
+							<label for="facility-LIGHT-y">가능</label>
+						</li>
+						<li>
+							<input id="facility-LIGHT-n" type="radio" name="facLight" value='false'>
+							<label for="facility-LIGHT-n">불가능</label>
+						</li>
+					</ul>
+				</div>
+	
+				<div class="options__list">
+					<p>가격 유무료</p>
+					<ul>
+						<li>
+							<input id="facility-FEE-f" type="radio" name="facCostcheck" value='false'>
+							<label for="facility-FEE-f">무료</label>
+						</li>
+						<li>
+							<input id="facility-FEE-p" type="radio" name="facCostcheck" value='true'>
+							<label for="facility-FEE-p">유료</label>
+						</li>
+					</ul>
+				</div>
+	
+			</div>
+
+
+
+
+			<p style="clear: both; margin-bottom: 70px;"></p>
+			<input type="submit" value="시설등록" class="pay_Btn">
+			<input type="button" value="취소" id="cancelbutton" onclick="location.href='/facility/detail?facSeq=${dto.facSeq }'" class="cancel">
+
+
+
+
 <div>
-	<form action="/facility/update" method="post">
-	<input type="hidden" name="facSeq" value="${dto.facSeq }">
-		<table class="facility-insert" border="1">
+
+		<!--table class="facility-insert" border="1">
 			<tr>
 				<th>종목</th>
 				<td>
@@ -128,8 +280,11 @@ $(document).ready(function(){
 					<input type="button" value="수정 취소" onclick="location.href='/facility/detail?facSeq=${dto.facSeq }'">
 				</td>
 			</tr>
-		</table>
+		</!--table>-->
 	</form>
 </div>
-</body>
-</html>
+</div>
+
+</div>
+</div>
+<%@ include file="footer.jsp" %> 
