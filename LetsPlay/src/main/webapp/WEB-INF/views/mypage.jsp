@@ -15,21 +15,25 @@
 	
 	function openPopUpf() {
 		let facSeq= $(event.target).attr('idx');
+		window.name="mypage";
 	    window.open("/member/reviewinsertform?facSeq="+facSeq, "리뷰", "width=720, height=400, top=150, left=200");
 	}
 	
 	function openPopUpl() {
 		let lesSeq= $(event.target).attr('idx');
+		window.name="mypage";
 	    window.open("/member/reviewinsertform?facSeq="+lesSeq, "리뷰", "width=720, height=400, top=150, left=200");
 	}
 	
 	function openPopUpfu() {
 		let facSeq= $(event.target).attr('idx');
+		window.name="mypage";
 	    window.open("/member/reviewupdateform?facSeq="+facSeq, "리뷰", "width=720, height=400, top=150, left=200");
 	}
 	
 	function openPopUplu() {
 		let lesSeq= $(event.target).attr('idx');
+		window.name="mypage";
 	    window.open("/member/reviewupdateform?facSeq="+lesSeq, "리뷰", "width=720, height=400, top=150, left=200");
 	}
 	

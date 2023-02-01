@@ -355,13 +355,30 @@ public class LetsMemberController {
 	}
 
 	@RequestMapping(value="/review/update", method=RequestMethod.POST)
-	public void reviewUpdate(Model model, ReviewDto dto) {
+	public String reviewUpdate(Model model, ReviewDto dto) {
 		if(dto.getCon() == 1) {
 			dto.setFacSeq(null);
-			reviewBiz.reviewUpdate(dto);
+			
+			if(reviewBiz.reviewUpdate(dto)>0) {
+				model.addAttribute("msg", "후기 수정 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 수정 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
 		} else {
 			dto.setLesSeq(null);
-			reviewBiz.reviewUpdate(dto);
+			if(reviewBiz.reviewUpdate(dto)>0) {
+				model.addAttribute("msg", "후기 수정 완료");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}else {
+				model.addAttribute("msg", "후기 수정 실패");
+				model.addAttribute("url", "/member/mypage");
+				return "alert";
+			}
 		}
 	}
 	
