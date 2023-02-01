@@ -97,11 +97,38 @@
   </div>
 </section>
 
+<script type="text/javascript">
+
+const counter = ($counter, max) => {
+  let now = max;
+  const handle = setInterval(() => {
+    $counter.innerHTML = Math.ceil(max - now);
+    // 목표수치에 도달하면 정지
+    if (now < 1) {
+      clearInterval(handle);
+    }
+    // 증가되는 값이 계속하여 작아짐
+    const step = now / 1;
+    
+    // 값을 적용시키면서 다음 차례에 영향을 끼침
+    now -= step;
+  }, 50);
+}
+
+window.onload = () => {
+  // 카운트를 적용시킬 요소
+  const $counter = document.querySelector(".count");
+  // 목표 수치
+  const max = '${cnt }';
+  setTimeout(() => counter($counter, max), 2000);
+}
+
+</script>
 <section class="rending__products">
   <div class="container inner">
     <div class="row">
       <div class="text-center col-lg-12" id="match">
-        <p class="match-b-title">랫플 매칭이 총 <span class="count-num" data-count="425">${cnt }</span>건 성사 되었습니다!</p>
+        <p class="match-b-title">랫플 매칭이 총 <span class="count" >0</span>건 성사 되었습니다!</p>
       </div>
       
       <div class="home__sport">
