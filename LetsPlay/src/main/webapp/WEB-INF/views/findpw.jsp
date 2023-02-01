@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="header.jsp" %>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
+
+
 	$(document).ready(function(){
 		$("#phoneBtn").click(auth);
 		$("#phoneChkBtn").click(authChk);
+		$(".passwordFind").hide();
+		$(".phoneNum").hide();
 	});
 	
 	function auth(){
@@ -22,10 +23,10 @@
 			data : {tel : phoneNum},
 			success: function(result){
 				if(result == true){
-					alert("이미 가입된 전화번호입니다.");
 					$("#findpw").attr("type", "button");
 				} else{
 					alert("인증 번호를 전송했습니다.");
+					$(".phoneNum").show();
 				}
 			}
 		});
@@ -45,31 +46,34 @@
 					$("#findpw").attr("type", "button");
 				} else{
 					alert("인증되었습니다.");
+					$(".passwordFind").show();
 				}
 			}
 		});
 	}
 </script>
-</head>
-<body>
-<h1>비밀번호 찾기</h1>
-<div class="findpw">
-	<p>ID : <input type="text" name="id"></p>
-	<p>전화번호 : <input type="text" name="phone" placeholder="010-0000-0000"> <button type="button" id="verifyNum">인증번호받기</button></p>
+<div class="container">
+	<div class="row">
+		<div class="mainContent">
+			<h2 class="section__title mb-40" >비밀번호 찾기</h2>
+
+			<div class="findpw">
+				<div class="inputBox">				
+					<input type="text" placeholder="아이디" name="id" >
+				</div>
+				<div class="inputBox">				
+					<input  type="text" name="phone" id="phone" placeholder="010-0000-0000" >
+					<button type="button" id="phoneBtn" class="btn__number">인증번호 받기</button>
+				</div>
+			</div>
+
+			<div class="inputBox phoneNum">				
+				<input type="text" id="phoneChk" placeholder="인증번호를 입력해주세요">
+				<button type="button" id="phoneChkBtn" class="btn__number">인증번호 확인</button>
+			</div>
+			<div class="passwordFind">${pw}</div>
+
+		</div>
+	</div>
 </div>
-<form action="/member/findpw" method="post">
-	<table>
-	<tr>
-			<th>전화번호</th>
-			<td><input type="text" name="phone" id="phone" placeholder="숫자만 입력해주세요"></td>
-			<td><button type="button" id="phoneBtn">인증번호 받기</button>
-		</tr>
-		<tr>
-			<th></th>
-			<td><input type="text" id="phoneChk" placeholder="인증번호를 입력해주세요"></td>
-			<td><button type="button" id="phoneChkBtn">인증번호 확인</button>
-		</tr>
-		</table>
-</form>
-</body>
-</html>
+<%@ include file="footer.jsp" %>
