@@ -49,7 +49,7 @@
                             ★★★★★
                             <span>★★★★★</span>
                             <input name="revRate" type="range" oninput="drawStar(this)" value="1" step="2" min="0" max="10">
-                          </span>
+                         </span>
                     </div>
                     <div class='ReviewRoom'>
                         <div>Review</div>
@@ -66,7 +66,7 @@
         </div>
         </div>
         </div>
-<script>
+<script type="text/javascript">
      const drawStar = (target) => {
    	 document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
   }

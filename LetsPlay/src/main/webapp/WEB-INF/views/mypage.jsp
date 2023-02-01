@@ -12,6 +12,11 @@
 		//찜
 		$("#dellikeBtn").click(dellike);
 	});
+	
+	function openPopUp() {
+	    window.open("/member/reviewupdateform?facSeq=${dto.facSeq }", "리뷰", "width=720, height=400, top=150, left=200");
+	}
+	
 	function nicknameChk(){
 		let nickname = $("#nickname").val().trim();
 		
@@ -62,7 +67,7 @@
 <div class='mypageWrapper'>
 <div class="tab_menu">
   <ul class="list">
-    <li class="is_on">
+    <li class="is_on listLI">
       <a href="#tab1" class="btn"><h2>회원 정보</h2></a>
       <div id="tab1" class="cont">
             <h3>프로필</h3>
@@ -122,7 +127,7 @@
     </li>
     	<%-- 회원 정보 끝 --%>
     	
-   <li>
+   <li class='listLI'>
       <a href="#tab2" class="btn"><h2>매치 내역</h2></a>
       <div id="tab2" class="cont">
       	<h3>매치 내역</h3>
@@ -200,7 +205,7 @@
     
     <%-- 매치 내역 끝 --%>
     
-    <li>
+    <li class='listLI'>
       <a href="#tab3" class="btn"><h2>예약 내역</h2></a>
       <div id="tab3" class="cont">
      	 <h3>예약 내역</h3>
@@ -228,7 +233,7 @@
 	                <p class="match-location">${dto.facLocation }</p>
 	                <p class="match-location">${dto.resDatetime }</p>
 	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewupdateform?facSeq=${dto.facSeq }'">후기 수정</button>
-	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewinsertform?facSeq=${dto.facSeq }'">후기 작성</button>
+	                <button class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
 	            </div>
        		  </div>
       	  </section>
@@ -261,108 +266,12 @@
 		</div>
     </li>
     
-    <%-- 예약 내역 끝 --%>
-    
-    <li>
-      <a href="#tab4" class="btn"><h2>찜한 내역</h2></a>
-      <div id="tab4" class="cont">
-		<%-- <form action="/member/mypage/likeselect" method="get">
-			<button type="submit" name="type" value="M">매치</button>
-			<button type="submit" name="type" value="F">시설</button>
-			<button type="submit" name="type" value="L">레슨</button>
-		</form>
-		<div class="likes-list">
-
-		<c:choose>
-			<c:when test="${empty likesfaclist and empty likesmatlist and empty likesleslist }">
-				<span>------ 찜 목록이 없습니다. ------</span>
-			</c:when>
-			<c:otherwise>
-	        	<c:if test="${not empty likesfaclist }">
-		            <c:forEach items="${likesfaclist }" var="fac">
-	           			<li class="n-prd-row" onclick="active_list('check_1535332');">
-       						<a href="/facility/detail?facSeq=${fac.facSeq }" class="img-block">
-        					    <img id="facImageSource" src="${fac.facImgpath}" alt="시설 사진">
-      					    </a>
-	         			    <ul class="info">
-					            <li class="brand"><button id="facSpoBtn">${fac.spoName}</button></li>
-					            <li class="name"><a style='font-size:24px; font-weight:bold;' href="/facility/detail?facSeq=${fac.facSeq }">${fac.facName }</a></li>
-					            <li class="price">
-					                <em>${fac.facLocation }</em>
-					            </li>
-					            <li class="like"><div class="n-like like-sm"><img id="dellikeBtn" idx="${fac.facSeq }" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="좋아요"><span>이용자 리뷰 ${fac.cntReview }개</span></div></li>
-					        </ul>
-					    </li>
-		            </c:forEach>
-	            </c:if>
-	            <c:if test="${not empty likesmatlist }">
-	            <table border="1">
-						<tr>
-							<th>날짜</th>
-							<th>시간</th>
-							<th>종목</th>
-							<th>총인원</th>
-							<th>제목</th>
-							<th>시설명</th>
-							<th>찜여부</th>
-						</tr>
-		            <c:forEach items="${likesmatlist }" var="mat">
-	           		
-	           			<tr>
-	           				<td><fmt:formatDate pattern="MM.dd" value="${mat.matchRegdate}"/></td>
-							<td>
-							<fmt:parseDate  value="${mat.matchRegdate}"
-								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
-							<fmt:formatDate value="${parsedDateTime}" pattern="MM.dd" /></td>
-
-	           				<td>${mat.startTime } ~ ${mat.endTime }</td>
-		            		<td>${mat.spoName}</td>
-		            		<td>${mat.matchTotal }
-		            		<td><a href="/match/detail?matchSeq=${mat.matchSeq }">${mat.matchTitle }</a></td>
-		            		<td></td>
-		            		<td>
-				   					<img id="dellikeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-		            		</td>
-	            		</tr>
-		            </c:forEach>
-		            </table>
-	            </c:if>
-	            <c:if test="${not empty likesleslist }">
-	            <table border="1">
-						<tr>
-							<th>종목</th>
-							<th>이미지</th>
-							<th>시설/레슨명</th>
-							<th>리뷰개수</th>
-							<th>주소</th>
-							<th>찜여부</th>
-						</tr>
-		            <c:forEach items="${likesleslist }" var="les">
-	           			
-	           			<tr>
-		            		<td>${les.spoName}</td>
-		            		<td><img width="100" src="${les.lesImgpath }"></td>
-		            		<td><a href="/lesson/detail?lesSeq=${les.lesSeq }">${les.lesName }</a></td>
-		            		<td>${les.lesLocation }</td>
-		            		<td>이용자 리뷰 ${les.cntReview }개</td>
-		            		<td>
-			   					<img id="dellikeBtn" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-		            		</td>
-	            		</tr>
-		            </c:forEach>
-		            </table>
-	            </c:if>
-			</c:otherwise>
-		</c:choose>
-	</div> --%>
-	</div>
-    </li>
     
     <%-- 찜한 목록 끝 --%>
     
-    <li>
-      <a href="#tab5" class="btn"><h2>1대1 문의</h2></a>
-      <div id="tab5" class="cont">
+    <li class='listLI'>
+      <a href="#tab4" class="btn"><h2>1대1 문의</h2></a>
+      <div id="tab4" class="cont">
       	<h3>1대1 문의</h3>
         <p>1대1 문의하신 내역입니다</p>
         <div id='inqWrapper'>
@@ -402,12 +311,112 @@
     
     <%-- 1대1 문의 끝 --%>
     
+    <%-- 예약 내역 끝 --%>
+    
+    <li class='listLI'>
+      <a href="#tab5" class="btn"><h2>찜한 내역</h2></a>
+      <div id="tab5" class="cont">
+     <div style='width: 50px;'>
+		<form action="/member/mypage/likeselect" method="get">
+			<button type="submit" name="type" value="M">매치</button>
+			<button type="submit" name="type" value="F">시설</button>
+			<button type="submit" name="type" value="L">레슨</button>
+		</form>
+		<div class="likes-list">
+
+		<c:choose>
+			<c:when test="${empty likesfaclist and empty likesmatlist and empty likesleslist }">
+				<span>------ 찜 목록이 없습니다. ------</span>
+			</c:when>
+			<c:otherwise>
+	        	<c:if test="${not empty likesfaclist }">
+		            <c:forEach items="${likesfaclist }" var="fac">
+	           			<div class="n-prd-row" onclick="active_list('check_1535332');">
+       						<a href="/facility/detail?facSeq=${fac.facSeq }" class="img-block">
+        					    <img id="facImageSource" src="${fac.facImgpath}" alt="시설 사진">
+      					    </a>
+	         			    <ul class="info">
+					            <li class="brand"><button id="facSpoBtn">${fac.spoName}</button></li>
+					            <li class="name"><a style='font-size:24px; font-weight:bold;' href="/facility/detail?facSeq=${fac.facSeq }">${fac.facName }</a></li>
+					            <li class="price">
+					                <em>${fac.facLocation }</em>
+					            </li>
+					            <li class="like"><div class="n-like like-sm"><img id="dellikeBtn" idx="${fac.facSeq }" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="좋아요"><span>이용자 리뷰 ${fac.cntReview }개</span></div></li>
+					        </ul>
+					    </div>
+		            </c:forEach>
+	            </c:if>
+	            <c:if test="${not empty likesmatlist }">
+	            <table border="1">
+						<tr>
+							<th>날짜</th>
+							<th>시간</th>
+							<th>종목</th>
+							<th>총인원</th>
+							<th>제목</th>
+							<th>시설명</th>
+							<th>찜여부</th>
+						</tr>
+		            <c:forEach items="${likesmatlist }" var="mat">
+	           		
+	           			<tr>
+	           				<td><fmt:formatDate pattern="MM.dd" value="${mat.matchRegdate}"/></td>
+							<td>
+							<fmt:parseDate  value="${mat.matchRegdate}"
+								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+							<fmt:formatDate value="${parsedDateTime}" pattern="MM.dd" /></td>
+
+	           				<td>${mat.startTime } ~ ${mat.endTime }</td>
+		            		<td>${mat.spoName}</td>
+		            		<td>${mat.matchTotal }</td>
+		            		<td><a href="/match/detail?matchSeq=${mat.matchSeq }">${mat.matchTitle }</a></td>
+		            		<td></td>
+		            		<td>
+				   					<img id="dellikeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+		            		</td>
+	            		</tr>
+		            </c:forEach>
+		            </table>
+	            </c:if>
+	            <c:if test="${not empty likesleslist }">
+	            <table border="1">
+						<tr>
+							<th>종목</th>
+							<th>이미지</th>
+							<th>시설/레슨명</th>
+							<th>리뷰개수</th>
+							<th>주소</th>
+							<th>찜여부</th>
+						</tr>
+		            <c:forEach items="${likesleslist }" var="les">
+	           			
+	           			<tr>
+		            		<td>${les.spoName}</td>
+		            		<td><img width="100" src="${les.lesImgpath }"></td>
+		            		<td><a href="/lesson/detail?lesSeq=${les.lesSeq }">${les.lesName }</a></td>
+		            		<td>${les.lesLocation }</td>
+		            		<td>이용자 리뷰 ${les.cntReview }개</td>
+		            		<td>
+			   					<img id="dellikeBtn" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+		            		</td>
+	            		</tr>
+		            </c:forEach>
+		            </table>
+	            </c:if>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	</div>
+	</div>
+    </li>
+    
+    
   </ul>
 </div>
 </div>
 
 <script type="text/javascript">
-const tabList = document.querySelectorAll('.tab_menu .list li');
+const tabList = document.querySelectorAll('.tab_menu .list li.listLI');
 for(var i = 0; i < tabList.length; i++){
   tabList[i].querySelector('.btn').addEventListener('click', function(e){
     e.preventDefault();
@@ -418,6 +427,7 @@ for(var i = 0; i < tabList.length; i++){
   });
 }
 </script>
+
 <script>
         const $nav = document.querySelector('#tab-button-nav')
         const $sections = document.querySelectorAll('.tab-section');
