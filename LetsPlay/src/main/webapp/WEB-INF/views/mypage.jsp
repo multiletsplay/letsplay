@@ -13,28 +13,10 @@
 		$("#dellikeBtn").click(dellike);
 	});
 	
-	function openPopUpf() {
+	function openPopUp() {
 		let facSeq= $(event.target).attr('idx');
 		window.name="mypage";
 	    window.open("/member/reviewinsertform?facSeq="+facSeq, "리뷰", "width=720, height=400, top=150, left=200");
-	}
-	
-	function openPopUpl() {
-		let lesSeq= $(event.target).attr('idx');
-		window.name="mypage";
-	    window.open("/member/reviewinsertform?facSeq="+lesSeq, "리뷰", "width=720, height=400, top=150, left=200");
-	}
-	
-	function openPopUpfu() {
-		let facSeq= $(event.target).attr('idx');
-		window.name="mypage";
-	    window.open("/member/reviewupdateform?facSeq="+facSeq, "리뷰", "width=720, height=400, top=150, left=200");
-	}
-	
-	function openPopUplu() {
-		let lesSeq= $(event.target).attr('idx');
-		window.name="mypage";
-	    window.open("/member/reviewupdateform?facSeq="+lesSeq, "리뷰", "width=720, height=400, top=150, left=200");
 	}
 	
 	function nicknameChk(){
@@ -256,10 +238,10 @@
 					</p>
 	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancelfacres?resId=${dto.resId }'">예약취소</button>
 	                <c:if test="${dto.revStatus eq 1 }">
-	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUpfu()">후기 수정</button>
+	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 수정</button>
 	                </c:if>
 	                <c:if test="${dto.revStatus eq 0 }">
-	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUpf()">후기 작성</button>
+	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
 	                </c:if>
 	            </div>
        		  </div>
@@ -282,10 +264,10 @@
 								</p>
 				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancellesres?resId=${dto.resId }'">예약취소</button>
 				                <c:if test="${dto.revStatus eq 1 }">
-				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUplu()">후기 수정</button>
+				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 수정</button>
 				                </c:if>
 				                <c:if test="${dto.revStatus eq 0 }">
-				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUpl()">후기 작성</button>
+				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
 				                </c:if>
 				            </div>
 	            		</div>
