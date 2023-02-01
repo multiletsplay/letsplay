@@ -128,7 +128,7 @@ window.onload = () => {
   <div class="container inner">
     <div class="row">
       <div class="text-center col-lg-12" id="match">
-        <p class="match-b-title">랫플 매칭이 총 <span class="count" >0</span>건 성사 되었습니다!</p>
+        <p class="match-b-title">랫플 매칭이 총 <span class="count" >0</span>건 매칭중 입니다!</p>
       </div>
       
       <div class="home__sport">
