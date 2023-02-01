@@ -232,10 +232,12 @@
         <p>예약완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
         
         	<div class='PuckAge'>
-			<nav id="tab-button-nav">
-	          <button class="tab-button" data-tab-section="tab-section-1">시설</button>
-	          <button class="tab-button" data-tab-section="tab-section-2">레슨</button>
-      	     </nav>
+        	<form action="/member/mypage/resselect?#tab3" method="get">
+				<nav id="tab-button-nav">
+		          <button class="tab-button" data-tab-section="tab-section-1" name="type" value="F">시설</button>
+		          <button class="tab-button" data-tab-section="tab-section-2" name="type" value="L">레슨</button>
+	      	     </nav>
+      	     </form>
       	      <section id="tab-section-1" class="tab-section">
       	     <c:choose>
 	        <c:when test="${empty faclist and empty leslist }">
@@ -270,7 +272,7 @@
       	   
 			<c:if test="${not empty leslist }">
 		            <c:forEach items="${leslist }" var="dto">
-		            <section id="tab-section-2" class="tab-section" hidden>
+		            <section id="tab-section-2" class="tab-section">
 	           			<div>
 		            		 <div class="match-list" style='width:210px;'>
 				                <p><span class="sports-category">레슨</span></p>
