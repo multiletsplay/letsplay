@@ -150,12 +150,23 @@ public class LetsMemberController {
 		return "forward:/member/findidform";
 	}
 	
+//	@RequestMapping("/findpwform")
+//	public String findPwform(Model model, HttpSession session ) {
+//		MemberDto member = (MemberDto) session.getAttribute("login");
+//		model.addAttribute("pw", membiz.findpw(member.getId()));
+//		return "findpw";
+//	}
+	
 	@RequestMapping("/findpwform")
-	public String findPwform(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		model.addAttribute("pw", membiz.findpw(member.getId()));
+	public String findPwform(Model model ) {
 		return "findpw";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/findpw", method=RequestMethod.GET)
+	public String findPw(Model model, @RequestParam String id ) {
+		String pw = membiz.findpw(id);
+		return pw;
 	}
 	
 	// 마이페이지
