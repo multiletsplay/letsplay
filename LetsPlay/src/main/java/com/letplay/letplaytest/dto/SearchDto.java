@@ -20,7 +20,7 @@ public class SearchDto {
 	private boolean optShower;
 	private boolean optLocker;
 	private boolean optLight;
-	private char optCost;
+	private String optCost;
 	
 	//match
 	private int searchLevel;
@@ -39,7 +39,7 @@ public class SearchDto {
 
 	public SearchDto(String searchRegion1, String searchRegion2, Date searchDate, String id, String searchTime1,
 			String searchTime2, boolean optParking, boolean optLent, boolean optShower, boolean optLocker,
-			boolean optLight, char optCost, int searchLevel, String searchFacStatus, int searchTotal,
+			boolean optLight, String optCost, int searchLevel, String searchFacStatus, int searchTotal,
 			String searchStartTime, String optType, String optWeekend) {
 		super();
 		this.searchRegion1 = searchRegion1;
@@ -150,11 +150,11 @@ public class SearchDto {
 		this.optLight = optLight;
 	}
 
-	public char getOptCost() {
+	public String getOptCost() {
 		return optCost;
 	}
 
-	public void setOptCost(char optCost) {
+	public void setOptCost(String optCost) {
 		this.optCost = optCost;
 	}
 

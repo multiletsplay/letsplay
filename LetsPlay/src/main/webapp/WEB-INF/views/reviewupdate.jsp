@@ -8,6 +8,23 @@
 <meta charset="UTF-8">
 <title>예약내역</title>
 <link rel="stylesheet" type="text/css" href="/styles/control.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	function updatereview(){
+		var frm = document.form;
+		frm.action="/member/review/update"
+		frm.target = opener.name;
+		frm.submit();
+		//self.close();
+		//window.open('', '_self').close();
+		window.close();
+	}
+	
+	function delreview(){
+		location.href="/member/review/delete?revId=${dto.revId}";
+		window.close();
+	}
+</script>
 </head>
 <body>
 <div id='reviewWrapping'>
@@ -28,7 +45,9 @@
 				<div><input type="text" name="id" value="${member.id}" readonly></div>
 			</div>
  --%>			
-			
+			<input type="hidden" name="lesSeq" value="${dto.lesSeq} ">
+			<input type="hidden" name="con" value="1">
+			<input type="hidden" name="id" value="${member.id}">
 			<div>
                ${dto.lesName}
 			</div>
@@ -45,11 +64,11 @@
 			</div>
 			<div class='ReviewRoom' style='margin-top:20px;'>
 				<div>Review</div>
-				<div class="revContentBox"><textarea style="width: 100%"; value="${dto.revContent} type="text" name="revContent"></textarea></div>
+				<div class="revContentBox"><textarea style="width: 100%"; name="revContent">${dto.revContent }</textarea></div>
 			</div>
 			<div class='ReviewUpdateRoom'>
-				<input style="background-color: red; color:white;" type="button" value="후기 삭제" onclick="location.href='/member/review/delete?revId=${dto.revId}'">
-				<input style= 'background-color: var(--primary-600); color:white;' type="submit" value="수정 완료">
+				<input type="submit" style="background-color: red; color:white;" type="button" value="후기 삭제" onclick="delreview()">
+				<input type="submit" style= 'background-color: var(--primary-600); color:white;' id="revUpdate" value="수정 완료" onclick="updatereview()">
 			</div>
 		</c:when>
 		<c:otherwise>
@@ -57,8 +76,6 @@
 				<div>아이디</div>
 				<div><input type="text" name="id" value="${member.id}" readonly></div>
 			</div>
-			
-			
 			<div>
 				${dto.facName}
 			</div>
@@ -74,11 +91,11 @@
 			</div>
 			<div>
 				<div>Review</div>
-				<div class="revContentBox"><textarea value="${dto.revContent} type="text" name="revContent"></textarea></div>
+				<div class="revContentBox"><textarea name="revContent">${dto.revContent }</textarea></div>
 			</div>
 			<div>
-				<input style="background-color: red; color:white;" type="button" value="후기 삭제" onclick="location.href='/member/review/delete?revId=${dto.revId}'">
-				<input style= 'background-color: var(--primary-600); color:white;' type="submit" value="수정 완료">
+				<input type="submit" style="background-color: red; color:white;" type="button" value="후기 삭제" onclick="delreview()">
+				<input type="submit" style= 'background-color: var(--primary-600); color:white;' id="revUpdate" value="수정 완료" onclick="updatereview()">
 			</div>
 		</c:otherwise>
 		</c:choose>

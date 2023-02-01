@@ -13,8 +13,28 @@
 		$("#dellikeBtn").click(dellike);
 	});
 	
-	function openPopUp() {
-	    window.open("/member/reviewupdateform?facSeq=${dto.facSeq }", "리뷰", "width=720, height=400, top=150, left=200");
+	function openPopUpf() {
+		let facSeq= $(event.target).attr('idx');
+		window.name="mypage";
+	    window.open("/member/reviewinsertform?facSeq="+facSeq, "리뷰", "width=720, height=400, top=150, left=200");
+	}
+	
+	function openPopUpl() {
+		let lesSeq= $(event.target).attr('idx');
+		window.name="mypage";
+	    window.open("/member/reviewinsertform?facSeq="+lesSeq, "리뷰", "width=720, height=400, top=150, left=200");
+	}
+	
+	function openPopUpfu() {
+		let facSeq= $(event.target).attr('idx');
+		window.name="mypage";
+	    window.open("/member/reviewupdateform?facSeq="+facSeq, "리뷰", "width=720, height=400, top=150, left=200");
+	}
+	
+	function openPopUplu() {
+		let lesSeq= $(event.target).attr('idx');
+		window.name="mypage";
+	    window.open("/member/reviewupdateform?facSeq="+lesSeq, "리뷰", "width=720, height=400, top=150, left=200");
 	}
 	
 	function nicknameChk(){
@@ -231,9 +251,16 @@
 	                <p><span class="sports-category">시설</span></p>
 	                <a href="/facility/detail?facSeq=${dto.facSeq }"><p class="match-title">${dto.facName }</p></a>
 	                <p class="match-location">${dto.facLocation }</p>
-	                <p class="match-location">${dto.resDatetime }</p>
-	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewupdateform?facSeq=${dto.facSeq }'">후기 수정</button>
-	                <button class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
+	                <p class="match-location"><fmt:parseDate value="${dto.resDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDateTime" type="both"/>
+						<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd HH:mm" />
+					</p>
+	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancelfacres?resId=${dto.resId }'">예약취소</button>
+	                <c:if test="${dto.revStatus eq 1 }">
+	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUpfu()">후기 수정</button>
+	                </c:if>
+	                <c:if test="${dto.revStatus eq 0 }">
+	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUpf()">후기 작성</button>
+	                </c:if>
 	            </div>
        		  </div>
       </section>
@@ -250,10 +277,16 @@
 				                <p><span class="sports-category">레슨</span></p>
 				                <a href="/lesson/detail?lesSeq=${dto.lesSeq }"><p class="match-title">${dto.lesName }</p></a>
 				                <p class="match-location">${dto.lesLocation }</p>
-				                <p class="match-location">${dto.resDatetime }</p>
+				                <p class="match-location"><fmt:parseDate value="${dto.resDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDateTime" type="both"/>
+								<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd HH:mm" />
+								</p>
 				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancellesres?resId=${dto.resId }'">예약취소</button>
-				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewupdateform?lesSeq=${dto.lesSeq }'">후기수정</button>
-				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewinsertform?lesSeq=${dto.lesSeq }'">후기 작성</button>
+				                <c:if test="${dto.revStatus eq 1 }">
+				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUplu()">후기 수정</button>
+				                </c:if>
+				                <c:if test="${dto.revStatus eq 0 }">
+				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUpl()">후기 작성</button>
+				                </c:if>
 				            </div>
 	            		</div>
 	            		
