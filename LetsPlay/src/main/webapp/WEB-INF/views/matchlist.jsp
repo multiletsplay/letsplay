@@ -146,7 +146,7 @@
 		<input type="checkbox" id="optionBtn">
 		<label for="optionBtn" >▼ 열기</label>
 			<ul class="searchOption">
-				<li><input type="time" name="searchStartTime" min="05:00" value="" step="900"> <label>시작시간</label>
+				<li><input type="time" name="searchStartTime" min="05:00" value="11:00" step="900"> <label>시작시간</label>
 				<li><input type="checkbox" name="searchFacStatus" value="Y" checked> <label>시설확정여부</label>
 				<li><input type="range" name="searchLevel" value="3" min="1" max="5"> <label>레벨</label>
 			</ul>
