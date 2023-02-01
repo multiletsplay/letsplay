@@ -34,7 +34,8 @@ public class LetsPlayApplication {
 	}
 	
 	@GetMapping("/")
-	public String root(Model model, @RequestParam(required = false) Integer mspoId, @RequestParam(required = false) Integer fspoId, @RequestParam(required = false) Integer lspoId) {
+	public String root(Model model, @RequestParam(required = false) Integer mspoId, @RequestParam(required = false) Integer fspoId, @RequestParam(required = false) Integer lspoId, 
+			@RequestParam(required = false) String match, @RequestParam(required = false) String facility, @RequestParam(required = false) String lesson) {
 		List<MatchDto> matchlist = matchBiz.selectMainList();
 		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchlist) {

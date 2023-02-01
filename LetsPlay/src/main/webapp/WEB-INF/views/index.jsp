@@ -132,7 +132,7 @@ window.onload = () => {
       </div>
       
       <div class="home__sport">
-      	<form action="/" method="get">
+      	<form action="/?#match" method="get">
         <button type="button"  class="sports" onclick="location.href='/#match'">전체</button>
         <button class="sports" name="mspoId" value="1">풋살</button>
         <button class="sports" name="mspoId" value="2">테니스</button>
@@ -188,7 +188,7 @@ window.onload = () => {
       </div>
       
       <div class="home__sport">
-      	<form action="/" method="get">
+      	<form action="/?#facility" method="get">
         <button type="button"  class="sports" onclick="location.href='/'">전체</button>
         <button class="sports" name="fspoId" value="1">풋살</button>
         <button class="sports" name="fspoId" value="2">테니스</button>
@@ -236,7 +236,7 @@ window.onload = () => {
           <h2 class="section__title">평점 좋은 레슨</h2>
         </div>
         <div class="home__sport">
-          <form action="/" method="get">
+          <form action="/?#lesson" method="get">
 	        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
 	        <button id="1" class="sports" name="lspoId" value="1">풋살</button>
 	        <button id="2" class="sports" name="lspoId" value="2">테니스</button>
