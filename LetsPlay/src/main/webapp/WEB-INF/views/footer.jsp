@@ -17,14 +17,14 @@
             <h4 class="quick__links-title">Top Categories</h4>
             <ul class="mb-3 list-group">
               <li class="ps-0 border-0 list-group-item">
-                <a href="/home">매칭하기</a>
+                <a href="/match/list">매칭하기</a>
               </li>
               <li class="ps-0 border-0 list-group-item">
-                <a href="/home">시설예약</a>
+                <a href="/facility/list">시설예약</a>
               </li>
               
               <li class="ps-0 border-0 list-group-item">
-                <a href="/home">레슨예약</a>
+                <a href="/lesson/list">레슨예약</a>
               </li>
             
             </ul>
@@ -36,19 +36,19 @@
             <h4 class="quick__links-title">Useful Links</h4>
             <ul class="mb-3 list-group">
               <li class="ps-0 border-0 list-group-item">
-                <a href="/help">고객센터</a>
+                <a href="/faqcontent">자주묻는질문</a>
               </li>
               <li class="ps-0 border-0 list-group-item">
-                <a href="/home">공지사항</a>
+                <a  href="/notice/list">공지사항</a>
               </li>
               
               <li class="ps-0 border-0 list-group-item">
-                <a href="/home">이용약관</a>
+                <a href="/inquiry/list">1:1문의</a>
               </li>
 
-              <li class="ps-0 border-0 list-group-item">
+              <!-- <li class="ps-0 border-0 list-group-item">
                 <a href="/home">개인정보처리방침</a>
-              </li>
+              </li> -->
             </ul>
           </div>
         

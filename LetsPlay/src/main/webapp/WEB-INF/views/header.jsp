@@ -26,7 +26,7 @@
     <div class='nav__wrapper'>
       <div class="logo">
         <div>
-          <h1>Let's Play</h1>
+          <h1><a href="/"></a>Let's Play</a></h1>
         </div>
 
 
