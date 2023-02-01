@@ -16,7 +16,7 @@ import com.letplay.letplaytest.dto.TimeDto;
 @Mapper
 public interface FacMapper {
 	
-	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW, AVG(REV_RATE) AS AVG_RATE "
 			+ " FROM FACILITY f "
 			+ "		LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID "
 			+ " 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} "
@@ -25,7 +25,7 @@ public interface FacMapper {
 			+ " ORDER BY f.FAC_DATE DESC ")
 	List<FacDto> selectFacList(String id);
 	
-	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW "
+	@Select(" SELECT f.*, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, COUNT(REV_ID) CNT_REVIEW, AVG(REV_RATE) AS AVG_RATE "
 			+ " FROM FACILITY f "
 			+ "		LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID "
 			+ " 	LEFT OUTER JOIN LIKES l ON f.FAC_SEQ=l.FAC_SEQ AND l.ID=#{id} "
@@ -94,23 +94,17 @@ public interface FacMapper {
 	List<FacDto> searchFac(SearchDto dto);
 	
 	//평점 좋은 순으로 4개까지 불러오기
-	@Select(" SELECT f.*, SPO_NAME, AVG(REV_RATE) AS AVG_RATE, COUNT(REV_ID) CNT_REVIEW "
-			+ " FROM FACILITY f "
-			+ "	LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID "
-			+ " LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ "
-			+ " GROUP BY FAC_SEQ "
-			+ " ORDER BY AVG_RATE DESC "
-			+ " LIMIT 4 ")
-	List<FacDto> selectRateavg();
-	
-	@Select(" SELECT f.*, SPO_NAME, AVG(REV_RATE) AS AVG_RATE, COUNT(REV_ID) CNT_REVIEW "
-			+ " FROM FACILITY f "
-			+ "	LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID "
-			+ " LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ "
-			+ " WHERE f.SPO_ID=#{spoId} "
-			+ " GROUP BY FAC_SEQ "
-			+ " ORDER BY AVG_RATE DESC "
-			+ " LIMIT 4 ")
-	List<FacDto> selectRatesports(int spoId);
-
+	@Select( {"<script>",
+			" SELECT f.*, SPO_NAME, AVG(REV_RATE) AS AVG_RATE, COUNT(REV_ID) CNT_REVIEW ",
+			" FROM FACILITY f ",
+			"	LEFT OUTER JOIN SPORTS s ON f.SPO_ID=s.SPO_ID ",
+			" LEFT OUTER JOIN REVIEW r ON f.FAC_SEQ=r.FAC_SEQ ",
+			" <where>",
+			" 	<if test='fspoId != null'>f.SPO_ID=#{spoId} </if> ",
+			" </where> ",
+			" GROUP BY FAC_SEQ ",
+			" ORDER BY AVG_RATE DESC ",
+			" LIMIT 4 ",
+			" </script>" })
+	List<FacDto> selectRateavg(Integer fspoId);
 }

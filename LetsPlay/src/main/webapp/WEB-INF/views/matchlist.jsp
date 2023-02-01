@@ -16,14 +16,10 @@
 			$('.searchOption').toggle('active');
 		});
 		
-		
+	});
 		//찜
-		$("#likeBtn").click(like);
-		$("#dellikeBtn").click(dellike);
-		});
-	
 	function like(){
-		let matchSeq = $(this).attr('idx');
+		let matchSeq = $(event.target).attr('idx');
 		
 		$.ajax({
 			url : "/match/likes",
@@ -37,7 +33,8 @@
 	}
 	
 	function dellike(){
-		let matchSeq = $(this).attr('idx');
+		let matchSeq = $(event.target).attr('idx');
+		
 		$.ajax({
 			url : "/match/dellikes",
 			type : "GET",
@@ -51,28 +48,32 @@
 
 
 	</script>
-<div class="container inner">
+<div class="container">
+
+		<div>
+			<div class="sport-div">
+			<form action="/match/category"  method="get">
+				<button type="button"  class="sport" name="spoId" onclick="location.href='/match/list'">전체</button>
+				<button type="submit"  class="sport" name="spoId" value="1">풋살</button>
+				<button type="submit"  class="sport" name="spoId" value="2">테니스</button>
+				<button type="submit"  class="sport" name="spoId" value="3">배드민턴</button>
+				<button type="submit"  class="sport" name="spoId" value="4">탁구</button>
+				<button type="submit"  class="sport" name="spoId" value="5">수영</button>
+				<button type="submit"  class="sport" name="spoId" value="6">골프</button>
+				<!-- <button type="button" name="spoId" onclick="location.href='/match/list'"><img src="../../img/football.jpg" width="35px">전체</button>
+				<button type="submit" name="spoId" value="1"><img src="../../img/football.jpg" width="35px">풋살</button>
+				<button type="submit" name="spoId" value="2"><img src="../../img/football.jpg" width="35px">테니스</button>
+				<button type="submit" name="spoId" value="3"><img src="../../img/football.jpg" width="35px">배드민턴</button>
+				<button type="submit" name="spoId" value="4"><img src="../../img/football.jpg" width="35px">탁구</button>
+				<button type="submit" name="spoId" value="5"><img src="../../img/football.jpg" width="35px">수영</button>
+				<button type="submit" name="spoId" value="6"><img src="../../img/football.jpg" width="35px">골프</button> -->
+			</form>
+			</div>
+		</div>
+
+	<div class="inner">
 	<div class="row list">
-<div>
-	<div class="sport-div">
-	<form action="/match/category"  method="get">
-		<button type="button"  class="sport" name="spoId" onclick="location.href='/match/list'">전체</button>
-		<button type="submit"  class="sport" name="spoId" value="1">풋살</button>
-		<button type="submit"  class="sport" name="spoId" value="2">테니스</button>
-		<button type="submit"  class="sport" name="spoId" value="3">배드민턴</button>
-		<button type="submit"  class="sport" name="spoId" value="4">탁구</button>
-		<button type="submit"  class="sport" name="spoId" value="5">수영</button>
-		<button type="submit"  class="sport" name="spoId" value="6">골프</button>
-		<!-- <button type="button" name="spoId" onclick="location.href='/match/list'"><img src="../../img/football.jpg" width="35px">전체</button>
-		<button type="submit" name="spoId" value="1"><img src="../../img/football.jpg" width="35px">풋살</button>
-		<button type="submit" name="spoId" value="2"><img src="../../img/football.jpg" width="35px">테니스</button>
-		<button type="submit" name="spoId" value="3"><img src="../../img/football.jpg" width="35px">배드민턴</button>
-		<button type="submit" name="spoId" value="4"><img src="../../img/football.jpg" width="35px">탁구</button>
-		<button type="submit" name="spoId" value="5"><img src="../../img/football.jpg" width="35px">수영</button>
-		<button type="submit" name="spoId" value="6"><img src="../../img/football.jpg" width="35px">골프</button> -->
-	</form>
-	</div>
-</div>
+
 <!-- 상세조건검색 -->
 <div class="wrap__filter"> 
 <div id="facility-search">
@@ -91,13 +92,31 @@
 			<div>
 				<select id="region2" name="searchRegion2">
 					<option value="">군/구</option>
+					<option value="강남구">강남구</option>
+					<option value="강동구">강동구</option>
+					<option value="강북구">강북구</option>
 					<option value="강서구">강서구</option>
+					<option value="관악구">관악구</option>
+					<option value="광진구">광진구</option>
 					<option value="구로구">구로구</option>
+					<option value="금천구">금천구</option>
+					<option value="노원구">노원구</option>
+					<option value="도봉구">도봉구</option>
+					<option value="동대문구">동대문구</option>
 					<option value="동작구">동작구</option>
+					<option value="마포구">마포구</option>
+					<option value="서대문구">서대문구</option>
 					<option value="서초구">서초구</option>
+					<option value="성동구">성동구</option>
+					<option value="성북구">성북구</option>
 					<option value="송파구">송파구</option>
+					<option value="양천구">양천구</option>
+					<option value="영등포구">영등포구</option>
+					<option value="용산구">용산구</option>
+					<option value="은평구">은평구</option>
 					<option value="종로구">종로구</option>
 					<option value="중구">중구</option>
+					<option value="중랑구">중랑구</option>
 				</select>
 			</div>
 		</div>
@@ -112,12 +131,13 @@
 		<div class="search__location">
 			<h4>참가인원</h4>
 			<div class="counting">
-				<input type='button' onclick='count("plus")' value='+'/>
+				<input type='button' onclick="fnCalCount('m', this);" value='-'/>
 			 <span class="countspan">
-					<label for="count_people" id='result'>2</label><span> 명</span>
-					<input type="number" name="searchTotal" value="2" min="2" max="22" id="count_people" style="display: none;"> 
+				<span class="bseq_ea" style="display: none;">22</span>
+					<!-- <label for="count_people" id='result'>2</label><span> 명</span> -->
+					<input type="text" name="searchTotal" value="2" min="2" max="22" id="count_people" style="width: 100%;"> 
 				</span>	
-				<input type='button' onclick='count("minus")' value='-'/>
+				<input type='button' onclick="fnCalCount('p',this);"value='+'/>
 			</div>
 		</div>
 
@@ -163,7 +183,7 @@
 												</c:if>
 											</c:forEach>
 										</span>
-										<span class="sports-category">테니스</span>
+										<span class="sports-category">${dto.spoName}</span>
 										<span class="num-people">${dto.cntJoin }/${dto.matchTotal }명</span>
 									</p>
 									
@@ -184,13 +204,13 @@
 									
 									<div class="favorite">
 										<c:choose>
-												 <c:when test="${dto.likesStatus eq 1 }">
-													 <img id="dellikeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
-												 </c:when>
-												 <c:otherwise>
-													 <img id="likeBtn" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
-												 </c:otherwise>
-											 </c:choose>
+												<c:when test="${dto.likesStatus eq 1 }">
+													<img onclick="dellike()" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+												</c:when>
+												<c:otherwise>
+													<img onclick="like()" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+												</c:otherwise>
+											</c:choose>
 									</div>
 								</div>
 							</div>
@@ -205,25 +225,31 @@
 </div>
 
 <script>
-	function count(type)  {
-  // 결과를 표시할 element
-  const resultElement = document.getElementById('result');
-  
-  // 현재 화면에 표시된 값
-  let number = resultElement.innerText;
-  
-  // 더하기/빼기
-  if(type === 'plus') {
-    number = parseInt(number) + 1;
-  }else if(type === 'minus')  {
-    number = parseInt(number) - 1;
-  }
-  
-  // 결과 출력
-  resultElement.innerText = number;
-}
-</script>
+	function fnCalCount(type, ths){
+			var $input = $(ths).parents("div.counting").find("input[name='searchTotal']");
+			var tCount = Number($input.val());
+			var tEqCount = Number($(ths).parents("div").find("span.bseq_ea").html());
+			
+			if(type=='p'){
+					if(tCount < tEqCount){
+						$input.val(Number(tCount)+1)
+					}else{
+						alert("더 이상 추가하실 수 없습니다.");
+					};
+			}else{
+					if(tCount > 2) {
+						$input.val(Number(tCount)-1);
+					}else if(tCount == 2){
+						alert("최소 인원 본인포함 2명 입니다.");   
+					}
+	}
+	}
+		</script>
 
+
+
+
+		</div>
 	</div>
 </div>
 	<%@ include file="footer.jsp" %>

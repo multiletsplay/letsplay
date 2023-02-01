@@ -453,7 +453,7 @@ ul{ list-style:none; }
 .search__location h4, .search__options h4{
   margin-bottom: 10px;
 }
-.search__location select{
+.search__location select, .match__insert select{
   padding: 10px;
   width: 150px;
   border-color: #ddd;
@@ -475,7 +475,7 @@ background-color: transparent;
 margin-bottom: 0px;
 }
 
-.list-facility li label {
+.list-facility li label, .match__insert ul li label {
   display: block;
   border-radius: 6px;
   border: 1px solid #e0e0e0;
@@ -493,12 +493,12 @@ margin-bottom: 0px;
 
 
 
-.list-facility li input:checked+label {
+.list-facility li input:checked+label, .match__insert ul li input:checked+label {
     color: var(--primary);
     border-color: var(--primary);
 }
 
-.list-facility li input{
+.list-facility li input, .match__insert ul li input[type=radio]{
   display: none;
 }
 
@@ -564,10 +564,6 @@ margin-bottom: 0px;
   top:40px;
   right:30px;
 }
-
-
-
-
 
 
 
@@ -675,6 +671,18 @@ border-radius: 50%;
   float: right;
 }
 
+.cancel{
+  width: 20%;
+  height: 70px;
+  background-color: #ddd;
+  border-radius: 10px;
+  color: var(--font-400);
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  float: left;
+}
+
 .pay_Btn:hover{
   transform: scale( 1.1, 1.1 )
 }
@@ -758,5 +766,171 @@ color: #fff;
 
 .btn-color{
   background-color: var(--bs-red) !important;
+}
+
+
+.match__insert input[type=text]{
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.match__insert p{
+  font-size: .8rem !important;
+  margin-bottom: 10px;
+}
+
+
+/* Styling the sliders*/
+input[type="range"] {
+	-webkit-appearance: none;
+  background-color: var(--bs-yellow);
+  width: 300px;
+  height: 10px;
+  border-radius: 50px;
+}
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+}
+input[type="range"]:focus {
+	outline: none;
+}
+input[type="range"]::-ms-track {
+	cursor: pointer;
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+}
+
+/*New range styles*/
+input[type="range"]::-webkit-slider-runnable-track {
+	height: 8px;
+	cursor: pointer;
+  background-color: var(--bs-yellow);
+  border-radius: 50px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 13px;
+	width: 13px;
+	margin-top: -3px;
+	background-color: var(--bs-red);
+  box-shadow: 0 0 0 6px #e2442865;
+	border-radius: 10px;
+	cursor: pointer;
+  will-change: contents;
+  transition: all 0.2s ease;
+}
+
+
+
+
+.match__insert{
+  clear: both;
+  margin-bottom: 20px;
+}
+.match{
+  width: 80%;
+  margin: 0 auto;
+}
+.match h3{
+ text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  font-weight: 300;
+  margin-top: 60px;
+  }
+
+.match__insert ul li{
+  display: inline-block;
+}
+
+.match__insert ul li label{
+  font-size: .9rem;
+  border: 2px solid #ddd;
+}
+
+.match__insert select{
+  border: 2px solid #ddd;
+  padding: 20px;
+  width: 49.8%;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+
+.match__insert input[type=datetime-local],
+.match__insert input[type=time],
+.match__insert input[type=date]
+{
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.match__insert input[type=text]:focus,
+.match__insert input[type=datetime-local]:focus,
+.match__insert input[type=time]:focus,
+.match__insert select:focus,
+.match__insert textarea:focus{
+  border-color: var(--bs-green);
+}
+
+.facBtn{
+  position: absolute;
+  right: 20px;
+  top:12px;
+  padding:10px 20px;
+  background-color:var(--primary);
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.facBtn:hover{
+  font-weight: 500;
+}
+
+.match_people{
+  position: relative;
+}
+
+.match_people button{
+  position: absolute;
+  padding: 5px;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  top: 16px;
+}
+
+.match_people button.f{
+  left: 20px;
+}
+
+.match_people button.s{
+  right: 20px;
+}
+
+.match_level, .match__insert textarea{
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+
+.match__insert .options__list{
+  float: left;
+  margin-left: 30px;
+  margin-top: 10px;
 }
 

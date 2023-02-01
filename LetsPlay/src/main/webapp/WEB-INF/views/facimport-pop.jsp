@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>예약내역</title>
+<link rel="stylesheet" type="text/css" href="/styles/control.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 function selectfac() {
@@ -24,16 +25,42 @@ function selectfac() {
 	self.close();
 	}
 </script>
+
+<style>
+	body{
+		text-align: center;
+		padding: 30px;
+	}
+
+	h2{
+		margin-bottom: 20px;
+	}
+
+	#reserv-list{
+		border: 2px solid #ddd !important;
+		border-radius: 15px !important;
+		padding: 20px !important;
+		font-size: 1rem !important;
+		text-align: left !important;
+	}
+	table{
+		width: 100%;
+	}
+	table td{
+		border-bottom: 1px solid #ddd;
+	}
+
+</style>
 </head>
 <body>
-<h2>예약 내역</h2>
+	<div>
+	<h2>예약 내역</h2>
 <div id="reserv-list">
-	<br><br>
-	<table border="1">
+	<table>
 		<tr>
 			<th>예약날짜</th>
 			<th>시설명</th>
-			<th>주소</th>
+			<th colspan="2">주소</th>
 		</tr>
 	    <c:choose>
 	        <c:when test="${empty faclist }">
@@ -44,9 +71,15 @@ function selectfac() {
 		            <c:forEach items="${faclist }" var="dto">
 	           			<tr>
 		            		<td>${dto.resDatetime }</td>
-		            		<td><a href="/facility/detail?facSeq=${dto.facSeq }"><input type="text" value="${dto.facName }" id="facname"></a></td>
+		            		<td><input type="text" value="${dto.facName }" id="facname" onclick="location.href='/facility/detail?facSeq=${dto.facSeq }'" style="padding-left: 0px;"></td>
 		            		<td>${dto.facLocation }</td>
-		            		<td><input type="button" value="시설 선택" idx="${dto.facSeq }" fname="${dto.facName }" onclick="selectfac();"></td>
+		            		<td><input type="button" value="시설 선택" idx="${dto.facSeq }" fname="${dto.facName }" onclick="selectfac();" style="
+											padding: 5px 10px;
+											background-color: var(--primary);
+											border: none;
+											color: #fff;
+											border-radius: 10px;
+											cursor: pointer;"></td>
 	            		</tr>
 		            </c:forEach>
 	            </c:if>
@@ -54,6 +87,6 @@ function selectfac() {
 	    </c:choose>
     </table>
 </div>
-
+</div>
 </body>
 </html>

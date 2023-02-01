@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ include file="header.jsp" %>
 
 <!-- <h1>letsplay</h1>
@@ -51,8 +52,8 @@
     <div class="container inner">
       <div class="row">
         <div class="col-md-3 col-lg-4 service">
-          <a href="/matching">
-            <div class="service__item" style="background: rgb(253, 239, 230); transform: none;">
+          <a href="/match/list">
+            <div class="service__item" style="background: rgb(253, 239, 230);">
               <span class="material-symbols-outlined">
                 hub
                 </span>
@@ -65,8 +66,8 @@
         </div>
 
         <div class="col-md-3 col-lg-4 service">
-          <a href="/facility">
-            <div class="service__item" style="background: rgb(206, 235, 233); transform: none;">
+          <a href="/facility/list">
+            <div class="service__item" style="background: rgb(206, 235, 233);">
               <span class="material-symbols-outlined">
                 hotel_class
                 </span>
@@ -79,7 +80,7 @@
         </div>
         
         <div class="col-md-3 col-lg-4 service">
-          <a href="/lesson">
+          <a href="/lesson/list">
             <div class="service__item" style="background: rgb(226, 242, 178);">
               <span class="material-symbols-outlined">
                 bookmarks
@@ -96,130 +97,84 @@
   </div>
 </section>
 
+<script type="text/javascript">
+
+const counter = ($counter, max) => {
+  let now = max;
+  const handle = setInterval(() => {
+    $counter.innerHTML = Math.ceil(max - now);
+    // 목표수치에 도달하면 정지
+    if (now < 1) {
+      clearInterval(handle);
+    }
+    // 증가되는 값이 계속하여 작아짐
+    const step = now / 1;
+    
+    // 값을 적용시키면서 다음 차례에 영향을 끼침
+    now -= step;
+  }, 50);
+}
+
+window.onload = () => {
+  // 카운트를 적용시킬 요소
+  const $counter = document.querySelector(".count");
+  // 목표 수치
+  const max = '${cnt }';
+  setTimeout(() => counter($counter, max), 2000);
+}
+
+</script>
 <section class="rending__products">
   <div class="container inner">
     <div class="row">
-      <div class="text-center col-lg-12">
-        <p class="match-b-title">랫플 매칭이 총 000건 성사 되었습니다!</p>
+      <div class="text-center col-lg-12" id="match">
+        <p class="match-b-title">랫플 매칭이 총 <span class="count" >0</span>건 매칭중 입니다!</p>
       </div>
       
       <div class="home__sport">
-        <button class="sports" value="all">전체</button>
-        <button class="sports" value="풋살">풋살</button>
-        <button class="sports" value="테니스">테니스</button>
-        <button class="sports" value="배드민턴">배드민턴</button>
-        <button class="sports" value="탁구">탁구</button>
-        <button class="sports" value="수영">수영</button>
-        <button class="sports" value="골프">골프</button>
+      	<form action="/?#match" method="get">
+        <button type="button"  class="sports" onclick="location.href='/#match'">전체</button>
+        <button class="sports" name="mspoId" value="1">풋살</button>
+        <button class="sports" name="mspoId" value="2">테니스</button>
+        <button class="sports" name="mspoId" value="3">배드민턴</button>
+        <button class="sports" name="mspoId" value="4">탁구</button>
+        <button class="sports" name="mspoId" value="5">수영</button>
+        <button class="sports" name="mspoId" value="6">골프</button>
+        </form>
       </div>
+
+      <c:forEach items="${matlisthot }" var="dto">	
+			<div class="mb-20 lesson-list-l">
+				<div>
+					<div class="match-list">
+						<p>
+							<span class="deadline">
+								<c:forEach var="i" items="${ddays }">
+									<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+										마감 ${i.value }일 전
+									</c:if>
+								</c:forEach>
+							</span>
+							<span class="sports-category">${dto.spoName}</span>
+							<span class="num-people">${dto.cntJoin }/${dto.matchTotal }명</span>
+						</p>
+						
+						<a href="/match/detail?matchSeq=${dto.matchSeq }">
+							<p class="match-title">${dto.matchTitle }</p>
+						</a>
+						<p class="match-location">${dto.matchLocation }</p>
+						
+						<div class="match-date">
+							<span class="date">											
+								<fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
+							</span>
+							<span class="time">${dto.startTime } ~ ${dto.endTime }</span>
+						</div>
+					</div>
+				</div>
+			</div>
+	</c:forEach>
       
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div>
-          <div class="match-list">
-            <p>
-              <span class="deadline">마감 10일 전</span>
-              <span class="sports-category">테니스</span>
-              <span class="num-people">4명</span>
-            </p>
-            
-            <a href="/matching/1">
-              <p class="match-title">테니스 매칭구합니다.</p>
-            </a>
-            <p class="match-location">서울시 강서구 화곡동</p>
-            
-            <div class="match-date">
-              <span class="date">2023-01-09</span>
-              <span class="time">10</span>
-            </div>
-            
-            <div class="favorite">
-              <i class="ri-heart-line"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div>
-          <div class="match-list">
-            <p>
-              <span class="deadline">마감 4일 전</span>
-              <span class="sports-category">풋살</span>
-              <span class="num-people">8명</span>
-            </p>
-            
-            <a href="/matching/2">
-              <p class="match-title">풋살 매칭구합니다.</p>
-            </a>
-            
-            <p class="match-location">서울시 강서구 어디어디</p>
-            
-            <div class="match-date">
-              <span class="date">2023-01-20</span>
-              <span class="time">4</span>
-            </div>
-            
-            <div class="favorite">
-              <i class="ri-heart-line"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div>
-          <div class="match-list">
-            <p>
-              <span class="deadline">마감 4일 전</span>
-              <span class="sports-category">배드민턴</span>
-              <span class="num-people">8명</span>
-            </p>
-            
-            <a href="/matching/3">
-              <p class="match-title">배드민턴 매칭구합니다.</p>
-            </a>
-            
-            <p class="match-location">서울시 강남 어디 저기</p>
-            <div class="match-date">
-              <span class="date">2023-01-11</span>
-              <span class="time">4</span>
-            </div>
-            
-            <div class="favorite">
-              <i class="ri-heart-line"></i>
-            </div>
-          
-          </div>
-        </div>
-      </div>
-      
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div>
-          <div class="match-list">
-            <p>
-              <span class="deadline">마감 4일 전</span>
-              <span class="sports-category">탁구</span>
-              <span class="num-people">8명</span>
-            </p>
-            
-            <a href="/matching/4">
-              <p class="match-title">탁구 매칭구합니다.</p>
-            </a>
-              <p class="match-location">서울시 강남 어디 저기</p>
-              <div class="match-date">
-                <span class="date">2023-01-11</span>
-                <span class="time">4</span>
-              </div>
-              
-              <div class="favorite">
-                <i class="ri-heart-line"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div><p class="match-btn"></p>
-      </div>
     </div>
   </div>
 </section>
@@ -228,223 +183,91 @@
 <section class="best__sales bg">
   <div class="container inner">
     <div class="row">
-      <div class="text-center col-lg-12">
+      <div class="text-center col-lg-12" id="facility">
         <h2 class="section__title">평점 좋은 시설</h2>
       </div>
       
       <div class="home__sport">
-        <button class="sports" value="all">전체</button>
-        <button class="sports" value="풋살">풋살</button>
-        <button class="sports" value="테니스">테니스</button>
-        <button class="sports" value="배드민턴">배드민턴</button>
-        <button class="sports" value="탁구">탁구</button>
-        <button class="sports" value="수영">수영</button>
-        <button class="sports" value="골프">골프</button>
+      	<form action="/?#facility" method="get">
+        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
+        <button class="sports" name="fspoId" value="1">풋살</button>
+        <button class="sports" name="fspoId" value="2">테니스</button>
+        <button class="sports" name="fspoId" value="3">배드민턴</button>
+        <button class="sports" name="fspoId" value="4">탁구</button>
+        <button class="sports" name="fspoId" value="5">수영</button>
+        <button class="sports" name="fspoId" value="6">골프</button>
+        </form>
       </div>
+      <c:forEach items="${faclist }" var="dto">
+		<div class="facility-list-fl">
+			<input type="checkbox" class="delList" name="delList" value="${dto.facSeq }"/>
+			<div class="facility">
+				<a href="/facility/detail?facSeq=${dto.facSeq }">
+					<p class="img">
+						<span class="sports-category">${dto.spoName}</span>
+						<img src="${dto.facImgpath }">
+						<span class="fac-review">${dto.avgRate }점</span>
+					</p>
+				</a>
+			<div>
+				<a href="/facility/detail?facSeq=${dto.facSeq }">
+					<p class="fac-title">${dto.facName }</p>
+				</a>
+				
+				<p class="review-count">이용자 리뷰  ${dto.cntReview }개</p>
+				
+				<p style=" height: 19px; width: 240px;">
+					<span class="match-location">${dto.facLocation }</span>
+				</p>
+			</div>
+		</div>
+		</div>
+      </c:forEach>
       
       
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div class="facility">
-          <a href="/facility/undefined">
-            <p class="img">
-              <img alt="">
-              <span class="fac-review">점</span>
-            </p>
-          </a>
-        <div>
-          <a href="/facility/undefined">
-            <p class="fac-title"></p>
-          </a>
-          
-          <p class="review-count">이용자 리뷰 개</p>
-          
-          <p>
-            <span class="match-location"></span>
-          </p>
-          <div class="favorite">
-            <i class="ri-heart-line"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="mb-20 col-md-4 col-lg-3">
-      <div class="facility">
-        <a href="/facility/undefined">
-          <p class="img">
-            <img alt="">
-            <span class="fac-review">점</span>
-          </p>
-        </a>
-        
-        <div>      
-        <a href="/facility/undefined">
-          <p class="fac-title"></p></a>
-          <p class="review-count">이용자 리뷰 개</p>
-          <p><span class="match-location"></span></p>
-          
-          <div class="favorite">
-            <i class="ri-heart-line"></i>
-          </div>
-        
-        </div>
-      </div>
-    </div>
-    
-    
-    <div class="mb-20 col-md-4 col-lg-3">
-      <div class="facility">
-        <a href="/facility/undefined">
-          <p class="img">
-            <img alt="">
-            <span class="fac-review">점</span>
-          </p>
-        </a>
-
-        <div>
-          <a href="/facility/undefined">
-            <p class="fac-title"></p>
-          </a>
-          
-          <p class="review-count">이용자 리뷰 개</p>
-          
-          <p><span class="match-location"></span></p>
-          
-          <div class="favorite">
-            <i class="ri-heart-line"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="mb-20 col-md-4 col-lg-3">
-      <div class="facility">
-        <a href="/facility/undefined">
-          <p class="img">
-            <img alt="">
-            <span class="fac-review">점</span>
-          </p>
-        </a>
-      <div>
-        <a href="/facility/undefined">
-          <p class="fac-title"></p>
-        </a>
-        <p class="review-count">이용자 리뷰 개</p>
-        <p><span class="match-location"></span></p>
-        
-        <div class="favorite">
-          <i class="ri-heart-line"></i>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 </div>
 </section>
 
-
 <section class="new__arrivals">
   <div class="container inner">
       <div class="row">
-        <div class="text-center mb-5 col-lg-12">
+        <div class="text-center mb-5 col-lg-12" id="lesson">
           <h2 class="section__title">평점 좋은 레슨</h2>
         </div>
         <div class="home__sport">
-          <button class="sports" value="all">전체</button>
-          <button class="sports" value="풋살">풋살</button>
-          <button class="sports" value="테니스">테니스</button>
-          <button class="sports" value="배드민턴">배드민턴</button>
-          <button class="sports" value="탁구">탁구</button>
-          <button class="sports" value="수영">수영</button>
-          <button class="sports" value="골프">골프</button>
+          <form action="/?#lesson" method="get">
+	        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
+	        <button id="1" class="sports" name="lspoId" value="1">풋살</button>
+	        <button id="2" class="sports" name="lspoId" value="2">테니스</button>
+	        <button id="3" class="sports" name="lspoId" value="3">배드민턴</button>
+	        <button id="4" class="sports" name="lspoId" value="4">탁구</button>
+	        <button id="5" class="sports" name="lspoId" value="5">수영</button>
+	        <button id="6" class="sports" name="lspoId" value="6">골프</button>
+	       </form>
         </div>
         
-        <div class="mb-20 col-md-4 col-lg-3">
-          <div class="lesson">
-            <a href="/lesson/1">
-              <p class="img"><span class="sports-category">테니스</span></p>
-            </a>
-            
-            <div>
-              <a href="/lesson/1">
-                <p class="fac-title">테니스 매칭구합니다.</p>
-              </a>
-              <p class="review-count">이용자 리뷰 10개</p>
-              <p><span class="match-location">서울시 강서구 화곡동</span></p>
-              
-              <div class="favorite"><i class="ri-heart-line"></i></div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="mb-20 col-md-4 col-lg-3">
-          <div class="lesson">
-            <a href="/lesson/2">
-              <p class="img"><span class="sports-category">풋살</span></p>
-            </a>
-
-            <div>
-            <a href="/lesson/2">
-              <p class="fac-title">풋살 매칭구합니다.</p>
-            </a>
-            
-            <p class="review-count">이용자 리뷰 10개</p>
-            <p><span class="match-location">서울시 강서구 어디어디</span></p>
-            
-            <div class="favorite">
-              <i class="ri-heart-line"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div class="lesson">
-          <a href="/lesson/3">
-            <p class="img">
-              <span class="sports-category">배드민턴</span>
-            </p>
-          </a>
-          
-          <div>
-            <a href="/lesson/3">
-              <p class="fac-title">배드민턴 매칭구합니다.</p>
-            </a>
-            
-            <p class="review-count">이용자 리뷰 10개</p>
-            <p>
-              <span class="match-location">서울시 강남 어디 저기</span>
-            </p>
-            
-            <div class="favorite">
-              <i class="ri-heart-line"></i>
-            </div>
-          
-          </div>
-        </div>
-      </div>
-      
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div class="lesson">
-          <a href="/lesson/4">
-            <p class="img">
-              <span class="sports-category">탁구</span>
-            </p>
-          </a>
-
-          <div>
-            <a href="/lesson/4">
-              <p class="fac-title">탁구 매칭구합니다.</p>
-            </a>
-            <p class="review-count">이용자 리뷰 10개</p>
-            <p><span class="match-location">서울시 강남 어디 저기</span></p>
-            
-            <div class="favorite">
-              <i class="ri-heart-line"></i>
-            </div>
-          </div>
-        </div>
-      </div>
+        <c:forEach items="${leslist }" var="dto">
+				<div class="lesson-list-l">
+					<input type="checkbox" class="delList" name="delList" value="${dto.lesSeq }"/>
+					<div class="lesson">
+						<a href="/lesson/detail?lesSeq=${dto.lesSeq}">
+							<p class="img">
+								<span class="sports-category">${dto.spoName}</span>
+								<img src="${dto.lesImgpath }">
+								<span class="les-review">${dto.avgRate }점</span>
+							</p>
+						</a>
+						<div>
+							<a href="/lesson/detail?lesSeq=${dto.lesSeq}">
+								<p class="fac-title">${dto.lesName }</p>
+							</a>
+							<p class="review-count">이용자 리뷰 ${dto.cntReview }개</p>
+							<p><span class="match-location">${dto.lesLocation }</span></p>
+						</div>
+					</div>
+				</div>
+				</c:forEach> 
     </div>
   </div>
 </section>
@@ -474,67 +297,27 @@
       </div>
     </div>
     
+    
     <ul class="listmatch">
-      <li>
-        <span class="sports-category">테니스</span>
-        <a href="/matching/1"><p>테니스 매칭구합니다.</p></a>
-        
-        <div class="mr-30">
-          <span class="match-location">서울시 강서구 화곡동</span>
-          <span class="match-location">하나테니스장</span>
-          <span class="deadline">마감10일</span>
-          <span class="num-people">4명</span>
-        </div>
-        
-        <div class="favorite">
-          <i class="ri-heart-line"></i>
-        </div>
-      </li>
-      
-      <li>
-        <span class="sports-category">풋살</span>
-        <a href="/matching/2"><p>풋살 매칭구합니다.</p></a>
-        <div class="mr-30">
-          <span class="match-location">서울시 강서구 어디어디</span>
-          <span class="match-location">하나풋살장</span>
-          <span class="deadline">마감4일</span>
-          <span class="num-people">8명</span>
-        </div>
-        
-        <div class="favorite">
-          <i class="ri-heart-line"></i>
-        </div>
-      </li>
-      
-      <li>
-        <span class="sports-category">배드민턴</span>
-        <a href="/matching/3"><p>배드민턴 매칭구합니다.</p></a>
-        <div class="mr-30">
-          <span class="match-location">서울시 강남 어디 저기</span>
-          <span class="match-location">하나배드민턴</span>
-          <span class="deadline">마감4일</span>
-          <span class="num-people">8명</span>
-        </div>
-        
-        <div class="favorite">
-          <i class="ri-heart-line"></i>
-        </div>
-      </li>
-      
-      <li>
-        <span class="sports-category">탁구</span>
-        <a href="/matching/4"><p>탁구 매칭구합니다.</p></a>
-        <div class="mr-30">
-          <span class="match-location">서울시 강남 어디 저기</span>
-          <span class="match-location">하나탁구</span>
-          <span class="deadline">마감4일</span>
-          <span class="num-people">8명</span>
-        </div>
-        
-        <div class="favorite">
-          <i class="ri-heart-line"></i>
-        </div>
-      </li>
+    	<c:forEach items="${matlist }" var="dto">
+	      <li>
+	        <span class="sports-category">${dto.spoName }</span>
+	        <a href="/match/detail?matchSeq=${dto.matchSeq }"><p>${dto.matchTitle }</p></a>
+	        
+	        <div class="mr-30">
+	          <span class="match-location">${dto.matchLocation }</span>
+	          <span class="match-location">${dto.facName }</span>
+	          <span class="deadline">
+	          	<c:forEach var="i" items="${ddays }">
+					<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+						마감 ${i.value }일 전
+					</c:if>
+				</c:forEach>
+			  </span>
+	          <span class="num-people">${dto.cntJoin }/${dto.matchTotal }명</span>
+	        </div>
+	      </li>
+	     </c:forEach>
     </ul>
   </div>
 </section>

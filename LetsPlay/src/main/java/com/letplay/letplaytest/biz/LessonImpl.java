@@ -79,4 +79,9 @@ public class LessonImpl implements LessonBiz{
 	public List<LessonDto> searchLes(SearchDto dto) {
 		return lessonMapper.searchLesson(dto);
 	}
+
+	@Override
+	public List<LessonDto> selectRateavg(Integer lspoId) {
+		return lessonMapper.selectRateavg(lspoId);
+	}
 }

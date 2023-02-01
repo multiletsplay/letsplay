@@ -30,11 +30,6 @@ public class FacImpl implements FacBiz{
 		return facMapper.searchFac(dto);
 	}
 	
-//	@Override
-//	public List<FacDto> searchFac(String region1, String region2, boolean parking) {
-//		return facMapper.searchFac(region1, region2, parking);
-//	}
-	
 	@Override
 	public List<FacDto> selectSports(int spoId, String id) {
 		return facMapper.selectSports(spoId, id);
@@ -82,9 +77,9 @@ public class FacImpl implements FacBiz{
 		return facMapper.cancelRes(resId);
 	}
 
-//	@Override
-//	public FacResDto selectRes(int facSeq, String id, Date resDate, String resStarttime) {
-//		return facMapper.selectRes(facSeq, id, resDate, resStarttime);
-//	}
+	@Override
+	public List<FacDto> selectRateavg(Integer fspoId) {
+		return facMapper.selectRateavg(fspoId);
+	}
 
 }

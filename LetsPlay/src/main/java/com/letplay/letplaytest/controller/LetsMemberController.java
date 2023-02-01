@@ -64,7 +64,6 @@ public class LetsMemberController {
 			session.setAttribute("login", res);
 			check=true;
 		}
-		
 		Map<String, Boolean> map = new HashMap<String,Boolean>();	
 		map.put("check", check);
 		
@@ -73,7 +72,7 @@ public class LetsMemberController {
 	
 	@RequestMapping("/logout")
 	public String logout() {
-		return "login";
+		return "logout";
 	}
 	
 	//회원가입
@@ -152,7 +151,10 @@ public class LetsMemberController {
 	}
 	
 	@RequestMapping("/findpwform")
-	public String findPwform() {
+	public String findPwform(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("pw", membiz.findpw(member.getId()));
 		return "findpw";
 	}
 	

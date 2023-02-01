@@ -21,4 +21,6 @@ public interface FacBiz {
 	
 	public int insertRes(FacResDto dto);						//예약 등록
 	public int cancelres(String resId);							//예약 취소
+	
+	public List<FacDto> selectRateavg(Integer fspoId);
 }

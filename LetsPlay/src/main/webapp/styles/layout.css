@@ -72,7 +72,7 @@ p.match-b-title{
   margin-right:0px;
 }
 
-.match-list p span, .sports-category, .fac-review, .listmatch div > span{
+.match-list p span, .sports-category, .fac-review, .listmatch div > span, .les-review{
   font-size:0.6em;
   padding:5px 10px;
   margin-right: 5px;
@@ -93,7 +93,7 @@ p.match-b-title{
   background-color: var(--font-100);
 }
 
-.fac-review{
+.fac-review, .les-review{
   background-color: var(--bs-orange);
   color: #fff;
   font-size: 0.8rem;
@@ -148,7 +148,7 @@ p.match-b-title{
   cursor: pointer;
   font-size: 1.3rem;
   width: 25px;
-  z-index: 9;
+  z-index: 3;
 }
 
 .main-banner{
@@ -259,7 +259,7 @@ p.match-b-title{
   padding: 0 10px 30px 15px;
 }
 
-.facility .img .fac-review{
+.facility .img .fac-review ,.lesson .img .les-review {
   position: absolute;
   right: 10px;
   bottom:10px;

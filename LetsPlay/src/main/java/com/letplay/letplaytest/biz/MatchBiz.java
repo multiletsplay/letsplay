@@ -29,4 +29,8 @@ public interface MatchBiz {
 	public int fixMatch(int matchSeq);			//매칭확정
 	public int unfixMatch(int matchSeq);		//확정취소
 	
+	//메인
+	public List<MatchDto> selectMainList();
+	public List<MatchDto> selectMainHot(Integer mspoId);
+	
 }

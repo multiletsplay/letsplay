@@ -21,5 +21,6 @@ public interface LessonBiz {
 	
 	public int insertRes(LessonResDto dto);
 	public int cancelres(String resId);
-
+	
+	public List<LessonDto> selectRateavg(Integer lspoId);
 }
