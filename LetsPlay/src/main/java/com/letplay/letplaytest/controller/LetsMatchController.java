@@ -133,7 +133,10 @@ public class LetsMatchController {
 			
 	
 	@PostMapping("/match/insert")
-	public String insertMatch(MatchDto dto) {
+	public String insertMatch(MatchDto dto, HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		dto.setId(member.getId());
 		if(matchBiz.insertMatch(dto) > 0 ) {
 			return "redirect:/match/list";
 		}else {
