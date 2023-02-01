@@ -47,7 +47,7 @@ public class LetsPlayApplication {
 			dDayMap.put(dto, days);
 		}
 		model.addAttribute("ddays", dDayMap);
-		model.addAttribute("cnt",matchBiz.matchListCount());
+		model.addAttribute("cnt",matchBiz.matchListCount()+55);
 		model.addAttribute("matlist", matchBiz.selectMainList());
 		model.addAttribute("matlisthot", matchBiz.selectMainHot(mspoId));
 		model.addAttribute("faclist", facBiz.selectRateavg(fspoId));
