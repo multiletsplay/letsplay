@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,11 +45,17 @@
           <span>
            <a href="/match/insertform"><span class='btn01'>매칭만들기</span></a> 
           </span>
-          <span class="login"><span class="material-symbols-outlined" onclick="location.href='/member/loginform'">login</span>
+          <c:if test="${sessionScope.login == null }">
+          	<span class="login"><span class="material-symbols-outlined" onclick="location.href='/member/loginform'">login</span>
 
             <!-- 로그아웃 시에는 login -> logout 으로 변경해주시면 아이콘이 변경됩니다! -->
             
           </span>
+          </c:if>
+          <c:if test="${sessionScope.login != null }">
+          	<span class="mypage"><span class="material-symbols-outlined" onclick="location.href='/member/mypage'">mypage</span>
+          	<span class="logout"><span class="material-symbols-outlined" onclick="location.href='/member/logout'">logout</span>
+          </c:if>
           <!-- <div  class='alarm'>
             <span  class="fav__icon">
               <i class='ri-notification-line'></i>
