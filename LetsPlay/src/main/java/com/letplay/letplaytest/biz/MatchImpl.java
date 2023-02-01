@@ -114,10 +114,6 @@ public class MatchImpl implements MatchBiz {
 		return matchMapper.selectMainList();
 	}
 
-	@Override
-	public List<MatchDto> selectMainSports(int spoId) {
-		return matchMapper.selectMainSports(spoId);
-	}
 
 	@Override
 	public List<MatchDto> selectMainHot(Integer mspoId) {

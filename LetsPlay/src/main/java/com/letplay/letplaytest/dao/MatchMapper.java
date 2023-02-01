@@ -191,22 +191,7 @@ public interface MatchMapper {
 			+ " ORDER BY "
 			+ " m.MATCH_SEQ ASC limit 4 ")
 	List<MatchDto> selectMainList();
-	//카테고리
-	@Select("SELECT m.*, NICKNAME, s.SPO_NAME, "
-			+ "	(SELECT COUNT(r.REP_SEQ) "
-			+ "		FROM REPLY r "
-			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
-			+ " (SELECT COUNT(j.JOIN_SEQ) + 1 "
-			+ "		FROM MATCH_JOIN j "
-			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
-			+ " FROM MATCH_BOARD m "
-			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
-			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
-			+ " WHERE m.SPO_ID = s.SPO_ID AND m.SPO_ID = #{spoId} AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE "
-			+ " GROUP BY m.MATCH_SEQ"
-			+ " ORDER BY "
-			+ " CNT_JOIN DESC limit 4 ")
-	List<MatchDto> selectMainSports(int spoId);
+
 	//참여자 수 많은 순
 	@Select( {"<script>"
 			+ " SELECT m.*, s.SPO_NAME,  "
