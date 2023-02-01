@@ -71,12 +71,6 @@ function openPopUp() {
 		</div>
 	</div>
 
-	<div class="match__insert ">
-		<p>마감일자</p>
-		<input type="datetime-local" name="matchEnddate" required>
-	</div>
-
-
 	<div class="match__insert">
 
 		<div>
@@ -116,15 +110,24 @@ function openPopUp() {
 				</select>
 			</div>
 		</div>
-
-		
 	</div>
 
-	
+
+
+	<div class="match__insert ">
+		<p>매칭 마감일자</p>
+		<input type="datetime-local" name="matchEnddate" required>
+	</div>
+
 		<div class="match__insert">
 			<p>매칭 날짜</p>
 			<input type="date" name="matchDay" required>
 		</div>
+
+		<p style="margin-bottom: 50px; color: var(--bs-red);">
+			* 매칭 등록 유저의 시설 예약 환불 기준에 대한 불이익을 최소화하기 위해 
+			시설 이용 날짜와 매칭 마감 날짜의 간격을 최소 3일 기준으로 한다. 
+		</p>
 
 		<div class="match__insert">
 			<p>매칭 시작시간</p>
@@ -162,7 +165,7 @@ function openPopUp() {
 		<input type="submit" value="등록" class="pay_Btn">
 		<input type="button" value="목록" onclick="location.href='/match/list'" class="cancel">
 
-
+	
 	</div>
 
 	<script>

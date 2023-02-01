@@ -27,21 +27,24 @@ hr {
     transform: translate(5%);
 }
 .formBoxTop {
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
 }
 .formBox {
     position: relative;
     margin-top: 30px;
-    width: 90%;
+    /* width: 90%; */
 }
 .redColour {
     color: red;
 }
 .ValTarget {
-    display: flex;
+    /* display: flex; */
     margin-bottom: 26px;
     align-items: center;
+    position: relative;
+    padding-bottom:15px;
+    line-height: 40px;
 }
 .ValTarget > button {
     background-color: grey;
@@ -50,6 +53,7 @@ hr {
     font-size: smaller;
     color: white;
     border-radius: 8px;
+    float: right;
 }
 .ValTarget > input {
     border: 0.5px solid darkgray;
@@ -58,13 +62,27 @@ hr {
     border-radius: 4px;
     font-size: 12px;
 }
-.idCheck {
+
+.ValTarget span.warning{
+    color:red;
+    font-size: .7rem;
+    position: absolute;
+    top: 35px;
+    left: 0;
+}
+
+.ValTarget div:first-child{
+    width: 120px;
+    float: left;
+}
+/* .idCheck {
     display: flex;
     justify-content: space-between;
-}
+} */
 .idCheck > input {
-    margin-left: 38px;
+    /* margin-left: 38px; */
 }
+/* 
 .pwCheck > input {
     margin-left: 39px;
     transform: translate(-0.7%);
@@ -84,18 +102,18 @@ hr {
 .emailCheck > input {
     margin-left: 56px;
     transform: translate(-1%);
-}
-.numCheck {
+} */
+/* .numCheck {
     display: flex;
     justify-content: space-between;
-}
-.numCheck > input {
+} */
+/* .numCheck > input {
     margin-left: 38px;
 }
 .numDCheck > input {
     margin-left: 110px;
     transform: translate(1.2%);
-}
+} */
 .numDCheck > button {
     width: 60px;
     margin-left: 20px;
@@ -105,7 +123,7 @@ hr {
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
-    margin-left: 110px;
+    margin-left: 121px;
 }
 .formBtn button {
     width: 120px;
@@ -122,10 +140,10 @@ hr {
 .formDate > input {
     width: 249px;
     height: 40px;
-    margin-left: 47px;
+
     border-style: none;
     border: 0.5px solid darkgray;
-    transform: translate(1%);
+
 }
 .css-1lwbda4-MuiStack-root {
     margin-left: 63px;
@@ -190,13 +208,13 @@ hr {
     margin-right: 10px;
 }
 
-#nicknameChk {
+/* #nicknameChk {
 	transform:translate(20%);	
 }
 
 #phoneChkBtn {
 	transform:translate(-1.5%);
-}
+} */
 
 .formBtn input[type="radio"] {
 	display: none;
