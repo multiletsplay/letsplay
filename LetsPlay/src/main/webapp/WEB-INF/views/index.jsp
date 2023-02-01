@@ -100,7 +100,7 @@
 <section class="rending__products">
   <div class="container inner">
     <div class="row">
-      <div class="text-center col-lg-12">
+      <div class="text-center col-lg-12" id="match">
         <p class="match-b-title">랫플 매칭이 총 <span class="count-num" data-count="425">${cnt }</span>건 성사 되었습니다!</p>
       </div>
       
@@ -201,7 +201,24 @@
 </div>
 </div>
 </section>
+<script>
+  const itemTab = document.querySelector('.home__sport');
+    const item = document.querySelectorAll('.lesson-list-l');
 
+    itemTab.addEventListener('click', (e) => {
+      const filter = e.target.dataset.filter || e.target.parentNode.dataset.filter;
+      if (filter == null) {
+        return;
+      }
+      item.forEach((item) => {
+        if (filter === '*' || filter === item.dataset.type) {
+          item.style.display = "block"
+        } else {
+          item.style.display = "none"
+        }
+      });
+    });
+</script>
 
 <section class="new__arrivals">
   <div class="container inner">
@@ -212,12 +229,12 @@
         <div class="home__sport">
           <form action="/" method="get">
 	        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
-	        <button class="sports" name="lspoId" value="1">풋살</button>
-	        <button class="sports" name="lspoId" value="2">테니스</button>
-	        <button class="sports" name="lspoId" value="3">배드민턴</button>
-	        <button class="sports" name="lspoId" value="4">탁구</button>
-	        <button class="sports" name="lspoId" value="5">수영</button>
-	        <button class="sports" name="lspoId" value="6">골프</button>
+	        <button id="1" class="sports" name="lspoId" value="1">풋살</button>
+	        <button id="2" class="sports" name="lspoId" value="2">테니스</button>
+	        <button id="3" class="sports" name="lspoId" value="3">배드민턴</button>
+	        <button id="4" class="sports" name="lspoId" value="4">탁구</button>
+	        <button id="5" class="sports" name="lspoId" value="5">수영</button>
+	        <button id="6" class="sports" name="lspoId" value="6">골프</button>
 	       </form>
         </div>
         
