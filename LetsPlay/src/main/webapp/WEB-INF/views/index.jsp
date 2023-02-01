@@ -106,7 +106,7 @@
       
       <div class="home__sport">
       	<form action="/" method="get">
-        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
+        <button type="button"  class="sports" onclick="location.href='/#match'">전체</button>
         <button class="sports" name="mspoId" value="1">풋살</button>
         <button class="sports" name="mspoId" value="2">테니스</button>
         <button class="sports" name="mspoId" value="3">배드민턴</button>
@@ -156,7 +156,7 @@
 <section class="best__sales bg">
   <div class="container inner">
     <div class="row">
-      <div class="text-center col-lg-12">
+      <div class="text-center col-lg-12" id="facility">
         <h2 class="section__title">평점 좋은 시설</h2>
       </div>
       
@@ -201,29 +201,11 @@
 </div>
 </div>
 </section>
-<script>
-  const itemTab = document.querySelector('.home__sport');
-    const item = document.querySelectorAll('.lesson-list-l');
-
-    itemTab.addEventListener('click', (e) => {
-      const filter = e.target.dataset.filter || e.target.parentNode.dataset.filter;
-      if (filter == null) {
-        return;
-      }
-      item.forEach((item) => {
-        if (filter === '*' || filter === item.dataset.type) {
-          item.style.display = "block"
-        } else {
-          item.style.display = "none"
-        }
-      });
-    });
-</script>
 
 <section class="new__arrivals">
   <div class="container inner">
       <div class="row">
-        <div class="text-center mb-5 col-lg-12">
+        <div class="text-center mb-5 col-lg-12" id="lesson">
           <h2 class="section__title">평점 좋은 레슨</h2>
         </div>
         <div class="home__sport">
