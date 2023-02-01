@@ -207,82 +207,80 @@
     
     <%-- 매치 내역 끝 --%>
     
-    <li class='listLI'>
-      <a href="#tab3" class="btn"><h2>예약 내역</h2></a>
-      <div id="tab3" class="cont">
-     	 <h3>예약 내역</h3>
-        <p>예약완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
+    
+  <li class='listLI'>
+    <a href="#tab3" class="btn"><h2>예약 내역</h2></a>
+    <div id="tab3" class="cont">
+      <h3>예약 내역</h3>
+      <p>예약완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
+      
+        <div class='PuckAge'>
+        <nav id="tab-button-nav">
+          <button class="tab-button" data-tab-section="tab-section-1">시설</button>
+          <button class="tab-button" data-tab-section="tab-section-2">레슨</button>
+        </nav>
+            
+           <c:choose>
+        <c:when test="${empty faclist and empty leslist }">
+            <td>------ 예약이 없습니다. ------</td>
+        </c:when>
+        <c:otherwise>
+          <c:if test="${not empty faclist }">
+              <c:forEach items="${faclist }" var="dto">
+          
+        <div id="tab-section-1" class="tab-section sectionDiv">
+            <div class="match-list">
+                <p><span class="sports-category">시설</span></p>
+                <a href="/facility/detail?facSeq=${dto.facSeq }"><p class="match-title">${dto.facName }</p></a>
+                <p class="match-location">${dto.facLocation }</p>
+                <p class="match-location"><fmt:parseDate value="${dto.resDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDateTime" type="both"/>
+          <fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd HH:mm" />
+        </p>
+                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancelfacres?resId=${dto.resId }'">예약취소</button>
+                <c:if test="${dto.revStatus eq 1 }">
+                  <button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 수정</button>
+                </c:if>
+                <c:if test="${dto.revStatus eq 0 }">
+                  <button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
+                </c:if>
+            </div>
+    </div>
+        </c:forEach>
+            </c:if>
         
-        	<div class='PuckAge'>
-			<nav id="tab-button-nav">
-	          <button class="tab-button" data-tab-section="tab-section-1">시설</button>
-	          <button class="tab-button" data-tab-section="tab-section-2">레슨</button>
-      	     </nav>
-      	      
-      	     <c:choose>
-	        <c:when test="${empty faclist and empty leslist }">
-	            <td>------ 예약이 없습니다. ------</td>
-	        </c:when>
-	        <c:otherwise>
-	        	<c:if test="${not empty faclist }">
-		            <c:forEach items="${faclist }" var="dto">
-      	    
-      	  <section id="tab-section-1" class="tab-section">
-         	 <div class='sectionDiv'>
-	            <div class="match-list">
-	                <p><span class="sports-category">시설</span></p>
-	                <a href="/facility/detail?facSeq=${dto.facSeq }"><p class="match-title">${dto.facName }</p></a>
-	                <p class="match-location">${dto.facLocation }</p>
-	                <p class="match-location"><fmt:parseDate value="${dto.resDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDateTime" type="both"/>
-						<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd HH:mm" />
-					</p>
-	                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancelfacres?resId=${dto.resId }'">예약취소</button>
-	                <c:if test="${dto.revStatus eq 1 }">
-	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 수정</button>
-	                </c:if>
-	                <c:if test="${dto.revStatus eq 0 }">
-	                	<button idx="${dto.facSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
-	                </c:if>
-	            </div>
-       		  </div>
-      </section>
-      	  </c:forEach>
-	            </c:if>
-      	  
-      	   
-			<c:if test="${not empty leslist }">
-		            <c:forEach items="${leslist }" var="dto">
-		            <section id="tab-section-2" class="tab-section" hidden>
-		            
-	           			<div>
-		            		 <div class="match-list" style='width:210px;'>
-				                <p><span class="sports-category">레슨</span></p>
-				                <a href="/lesson/detail?lesSeq=${dto.lesSeq }"><p class="match-title">${dto.lesName }</p></a>
-				                <p class="match-location">${dto.lesLocation }</p>
-				                <p class="match-location"><fmt:parseDate value="${dto.resDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDateTime" type="both"/>
-								<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd HH:mm" />
-								</p>
-				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancellesres?resId=${dto.resId }'">예약취소</button>
-				                <c:if test="${dto.revStatus eq 1 }">
-				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 수정</button>
-				                </c:if>
-				                <c:if test="${dto.revStatus eq 0 }">
-				                	<button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
-				                </c:if>
-				            </div>
-	            		</div>
-	            		
-	            		</section>
-		            </c:forEach>
-	            </c:if>
-        			
-        </c:otherwise>
-        </c:choose>
-        	  
-       
-        </div>
-		</div>
-    </li>
+         
+    <c:if test="${not empty leslist }">
+              <c:forEach items="${leslist }" var="dto">
+              <div id="tab-section-2" class="tab-section" hidden>
+              
+                   <div class="match-list">
+                      <p><span class="sports-category">레슨</span></p>
+                      <a href="/lesson/detail?lesSeq=${dto.lesSeq }"><p class="match-title">${dto.lesName }</p></a>
+                      <p class="match-location">${dto.lesLocation }</p>
+                      <p class="match-location"><fmt:parseDate value="${dto.resDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDateTime" type="both"/>
+              <fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd HH:mm" />
+              </p>
+                      <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/cancellesres?resId=${dto.resId }'">예약취소</button>
+                      <c:if test="${dto.revStatus eq 1 }">
+                        <button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 수정</button>
+                      </c:if>
+                      <c:if test="${dto.revStatus eq 0 }">
+                        <button idx="${dto.lesSeq }" class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
+                      </c:if>
+                  </div>
+                
+                </div>
+              </c:forEach>
+            </c:if>
+            
+      </c:otherwise>
+      </c:choose>
+          
+     
+      </div>
+  </div>
+  </li>
+
     
     
     <%-- 찜한 목록 끝 --%>
