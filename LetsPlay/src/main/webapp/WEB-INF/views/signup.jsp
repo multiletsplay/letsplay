@@ -133,7 +133,7 @@
           <span class='redColour' >*</span>
           </div>
           <input
-          type="text"
+          type="password"
           placeholder="영문,숫자,특수문자 포함 8자 이상 15자 이하"
           name="password"
           />
@@ -146,7 +146,7 @@
           <span class='redColour'>*</span>
           </div>
           <input
-          type="text"
+          type="password"
           placeholder='비밀번호를 한번 더 입력해주세요'
           id="pwChk"/>
         </div>

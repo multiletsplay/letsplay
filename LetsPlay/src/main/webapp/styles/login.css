@@ -22,6 +22,11 @@
     background-color: var(--primary-500);
 }
 
+
+.inputBox{
+    position: relative;
+}
+
 .inputBox input {
     width: 270px;
     padding-left: 10px;
@@ -31,7 +36,22 @@
     border-radius: 5px;
 }
 
+.btn__number{
+    position: absolute;
+    right: 10px;
+    top:18px;
+    background-color: var(--primary);
+    border: none;
+    padding:5px;
+    color: #fff;
+    border-radius: 5px;
+    font-size: .5rem;
+    cursor: pointer;
+}
 
+.btn__number:hover{
+    background-color: var(--primary-500);
+}
 
 .mainBtn .loginBtn:last-child{
     margin-right: 0;
@@ -82,4 +102,10 @@
 
 .ask_signup a:hover{
     color: var(--font-300);
+}
+
+
+.findid-res p{
+    color: var(--font);
+    font-size: 1.1rem;
 }

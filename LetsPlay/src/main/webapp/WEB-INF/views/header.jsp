@@ -43,6 +43,11 @@
         <div class="nav__icons">
                   
           <span>
+          
+          
+          <a href="/member/mypage">마이페이지</a>
+          
+          
            <a href="/match/insertform"><span class='btn01'>매칭만들기</span></a> 
           </span>
           <c:if test="${sessionScope.login == null }">
@@ -53,8 +58,8 @@
           </span>
           </c:if>
           <c:if test="${sessionScope.login != null }">
-          	<span class="mypage"><span class="material-symbols-outlined" onclick="location.href='/member/mypage'">mypage</span>
-          	<span class="logout"><span class="material-symbols-outlined" onclick="location.href='/member/logout'">logout</span>
+          	<span class="login"><span class="material-symbols-outlined" onclick="location.href='/member/mypage'">person</span>
+          	<span class="login"><span style="font-size:1.8rem" class="material-symbols-outlined" onclick="location.href='/member/logout'">logout</span>
           </c:if>
           <!-- <div  class='alarm'>
             <span  class="fav__icon">
