@@ -276,15 +276,18 @@ window.onload = () => {
 <section class="timer__count">
   <div class="container inner">
     <div class="row">
-      <div class="col-md-6 col-lg-6">
+      <div class="event_text">
         <div class="clock__top-content">
-          <h4 class="text-white fs-6 mb-2">Event</h4>
-          <h3 class="text-white fs-5 mb-3">렛플이벤트 들어가는 공간</h3>
+          <h4 class="text-white fs-6 mb-2">OPEN EVENT</h4>
+          <p class="text-white fs-5 mb-3 event__title">렛츠플레이 최고의<br>매치를 찾아서!</p>
         </div>
         <button class="buy__btn store__btn">
-          <a href="/shop">Visit Notice</a>
-        </button></div>
-        <div class="text-end col-md-6 col-lg-6"></div>
+          <a href="/facility/list">시설예약하기</a>
+        </button>
+      </div>
+        <div class="event_img">
+          <img src="../../img/02.png"/>
+        </div>
       </div>
     </div>
 </section>
