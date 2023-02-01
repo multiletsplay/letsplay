@@ -151,7 +151,10 @@ public class LetsMemberController {
 	}
 	
 	@RequestMapping("/findpwform")
-	public String findPwform() {
+	public String findPwform(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("pw", membiz.findpw(member.getId()));
 		return "findpw";
 	}
 	
