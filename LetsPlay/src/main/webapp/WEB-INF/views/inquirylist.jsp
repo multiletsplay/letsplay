@@ -28,7 +28,6 @@
 <div class='inqListWrapperTitle'>
 <h1>1대1 문의</h1>
 </div>
-		<input type="button" value="글 작성" onclick="location.href='/inquiry/insertform'">
         <div id='inqListWrapper'>
         <div class='inqList'>
 			<ul>
@@ -65,6 +64,17 @@
 			</c:otherwise>
 		</c:choose>	
 		</div>
+
+		<input type="button" value="글 작성" onclick="location.href='/inquiry/insertform'" style="background-color: #10a26d;
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    float: right;
+		padding:10px;
+		margin-top:10px;">
+
+		
 <div class="inqListpaging">
 	<form action="<c:url value='/inquiry/list'/>" name="pageForm">
 		<ul class="pagination" id="pagination">
