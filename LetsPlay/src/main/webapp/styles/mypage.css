@@ -70,13 +70,13 @@
 }
 
 .mypageWrapper {
-	height: 1300px;
+	height: 2000px;
 	display: flex;
 	justify-content: center;
 }
 
 .tab_menu {
-	width:1140px;
+	width:1440px;
 	position: relative;
 }
 
@@ -86,7 +86,7 @@
 	flex-direction: column;
 	margin-top:50px;
 	position: relative;
-	height: 1300px;
+	height: 2000px;
 }
 
 .tab_menu > ul > li > a > h2 {
@@ -279,6 +279,7 @@
     padding: 10px 0px;
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
 }
 
 /* .BookedMatchInform > span::after {
@@ -315,9 +316,136 @@
 	left: 46%;
 }
 
-.inquirylistContentsWrap {
-	
+ul, li {
+    list-style: none;
 }
+
+.n-prd-row {
+    display: table;
+    table-layout: fixed;
+    width: 85%;
+    min-height: 96px;
+    font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    text-align: left;
+    position: relative;
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgb(244, 244, 244);
+}
+
+.n-prd-row:last-child {
+	border-style: none;
+}
+
+.n-prd-row .img-block {
+    display: table-cell;
+    width: 400px;
+    height: 250px;
+    vertical-align: middle;
+}
+
+.n-list-row .n-prd-row {
+    width: 25%;
+}
+
+.n-list-row.my-like .n-prd-row .n-check + label {
+    top: -10px;
+    bottom: -10px;
+}
+
+.Jjiminfo {
+    display: flex;
+    flex-direction: column;
+    padding: 39px;
+}
+
+.Jjiminfo > li {
+	margin-bottom: 15px;
+}
+
+#facImageSource {
+	width: 90%;
+	height: 80%;
+	border-radius: 24px;
+}
+
+#facSpoBtn {
+	padding: 1px;
+	font-weight: bold;
+	border-style: none;
+    background-color: var(--primary-600);
+	color: white;
+	border-radius: 5px;
+}
+
+#dellikeBtn {
+	width: 30px;
+	margin-right: 20px;
+}
+
+.like-sm {
+	display: flex;
+	align-items: center;
+}
+
+.review__btn {
+	cursor: pointer;
+}
+
+.tab-button {
+	border-style: none;
+	width: 100px;
+	height: 25px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.PuckAge {
+	display: flex;
+}
+
+#tab-button-nav {
+	margin-top: 30px;
+}
+
+.tab-section {
+	display: flex;
+}
+
+.tab-section div {
+	width: 260px;
+	margin-left: 15px;
+}
+
+.tab-section div:first-child {
+	margin-left: 0;
+}
+
+#MakeSorting {
+	transform: translate(20%);
+}
+
+#sorting-tab-button-nav {
+	transform: translate(10%);
+	margin: 15px;
+	margin-bottom: 100px;
+}
+
+#sorting-tab-button-nav > button {
+	border-style: none;
+	background-color: lightgrey;
+	width: 120px;
+	height: 50px;
+	border-radius: 8px;
+	margin-left: 15px;
+    background-color: var(--primary-600);
+	color: white;
+	cursor: pointer;
+}
+
+
+
 
 
 
