@@ -25,6 +25,7 @@
 <br> -->
 
 <!-- 메인 -->
+<script defer src="../../js/home.js"></script>
 
 <section class="visual">
    <div class="inner align-contents">
