@@ -22,7 +22,5 @@ public interface LessonBiz {
 	public int insertRes(LessonResDto dto);
 	public int cancelres(String resId);
 	
-	public List<LessonDto> selectRateavg();
-	public List<LessonDto> selectRatesports(int spoId);
-
+	public List<LessonDto> selectRateavg(Integer lspoId);
 }

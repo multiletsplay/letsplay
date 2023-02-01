@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.letplay.letplaytest.biz.FacBiz;
 import com.letplay.letplaytest.biz.LessonBiz;
@@ -33,7 +34,7 @@ public class LetsPlayApplication {
 	}
 	
 	@GetMapping("/")
-	public String root(Model model) {
+	public String root(Model model, @RequestParam(required = false) Integer mspoId, @RequestParam(required = false) Integer fspoId, @RequestParam(required = false) Integer lspoId) {
 		List<MatchDto> matchlist = matchBiz.selectMainList();
 		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchlist) {
@@ -47,27 +48,9 @@ public class LetsPlayApplication {
 		model.addAttribute("ddays", dDayMap);
 		model.addAttribute("cnt",matchBiz.matchListCount());
 		model.addAttribute("matlist", matchBiz.selectMainList());
-		model.addAttribute("matlisthot", matchBiz.selectMainHot());
-		model.addAttribute("faclist", facBiz.selectRateavg());
-		model.addAttribute("leslist", lessonBiz.selectRateavg());
-		return "index";
-	}
-	
-	@GetMapping("/selectmat")
-	public String rootSelectmat(Model model, int spoId ) {
-		model.addAttribute("matlist", matchBiz.selectMainSports(spoId));
-		return "index";
-	}
-	
-	@GetMapping("/selectfac")
-	public String rootSelectfac(Model model, int spoId ) {
-		model.addAttribute("faclist", facBiz.selectRatesports(spoId));
-		return "index";
-	}
-	
-	@GetMapping("/selectles")
-	public String rootSelectles(Model model, int spoId ) {
-		model.addAttribute("leslist", lessonBiz.selectRatesports(spoId));
+		model.addAttribute("matlisthot", matchBiz.selectMainHot(mspoId));
+		model.addAttribute("faclist", facBiz.selectRateavg(fspoId));
+		model.addAttribute("leslist", lessonBiz.selectRateavg(lspoId));
 		return "index";
 	}
 }

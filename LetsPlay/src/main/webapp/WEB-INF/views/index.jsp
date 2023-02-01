@@ -105,14 +105,14 @@
       </div>
       
       <div class="home__sport">
-      	<form action="/selectmat" method="get">
-        <button type="button"  class="sports" name="spoId" onclick="location.href='/'">전체</button>
-        <button class="sports" name="spoId" value="1">풋살</button>
-        <button class="sports" name="spoId" value="2">테니스</button>
-        <button class="sports" name="spoId" value="3">배드민턴</button>
-        <button class="sports" name="spoId" value="4">탁구</button>
-        <button class="sports" name="spoId" value="5">수영</button>
-        <button class="sports" name="spoId" value="6">골프</button>
+      	<form action="/" method="get">
+        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
+        <button class="sports" name="mspoId" value="1">풋살</button>
+        <button class="sports" name="mspoId" value="2">테니스</button>
+        <button class="sports" name="mspoId" value="3">배드민턴</button>
+        <button class="sports" name="mspoId" value="4">탁구</button>
+        <button class="sports" name="mspoId" value="5">수영</button>
+        <button class="sports" name="mspoId" value="6">골프</button>
         </form>
       </div>
 
@@ -161,14 +161,14 @@
       </div>
       
       <div class="home__sport">
-      	<form action="/selectfac" method="get">
-        <button type="button"  class="sports" name="spoId" onclick="location.href='/'">전체</button>
-        <button class="sports" name="spoId" value="1">풋살</button>
-        <button class="sports" name="spoId" value="2">테니스</button>
-        <button class="sports" name="spoId" value="3">배드민턴</button>
-        <button class="sports" name="spoId" value="4">탁구</button>
-        <button class="sports" name="spoId" value="5">수영</button>
-        <button class="sports" name="spoId" value="6">골프</button>
+      	<form action="/" method="get">
+        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
+        <button class="sports" name="fspoId" value="1">풋살</button>
+        <button class="sports" name="fspoId" value="2">테니스</button>
+        <button class="sports" name="fspoId" value="3">배드민턴</button>
+        <button class="sports" name="fspoId" value="4">탁구</button>
+        <button class="sports" name="fspoId" value="5">수영</button>
+        <button class="sports" name="fspoId" value="6">골프</button>
         </form>
       </div>
       <c:forEach items="${faclist }" var="dto">
@@ -210,14 +210,14 @@
           <h2 class="section__title">평점 좋은 레슨</h2>
         </div>
         <div class="home__sport">
-          <form action="/selectles" method="get">
-	        <button type="button"  class="sports" name="spoId" onclick="location.href='/'">전체</button>
-	        <button class="sports" name="spoId" value="1">풋살</button>
-	        <button class="sports" name="spoId" value="2">테니스</button>
-	        <button class="sports" name="spoId" value="3">배드민턴</button>
-	        <button class="sports" name="spoId" value="4">탁구</button>
-	        <button class="sports" name="spoId" value="5">수영</button>
-	        <button class="sports" name="spoId" value="6">골프</button>
+          <form action="/" method="get">
+	        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
+	        <button class="sports" name="lspoId" value="1">풋살</button>
+	        <button class="sports" name="lspoId" value="2">테니스</button>
+	        <button class="sports" name="lspoId" value="3">배드민턴</button>
+	        <button class="sports" name="lspoId" value="4">탁구</button>
+	        <button class="sports" name="lspoId" value="5">수영</button>
+	        <button class="sports" name="lspoId" value="6">골프</button>
 	       </form>
         </div>
         
