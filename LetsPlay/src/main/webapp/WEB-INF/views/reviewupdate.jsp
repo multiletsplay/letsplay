@@ -26,15 +26,10 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
-	function updatereview(){
-		var frm = document.form;
-		frm.action="/member/review/update"
-		frm.target = opener.name;
-		frm.submit();
-		//self.close();
-		//window.open('', '_self').close();
-		window.close();
-	}
+	function updatereview() {
+		alert("수정 완료");
+	    $('#revUpdate').submit();
+	 }
 	
 	function delreview(){
 		location.href="/member/review/delete?revId=${dto.revId}";

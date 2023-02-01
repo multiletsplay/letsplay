@@ -319,24 +319,16 @@ public class LetsMemberController {
 			dto.setFacSeq(null);
 			
 			if(reviewBiz.reviewInsert(dto)>0) {
-				model.addAttribute("msg", "후기 작성 완료");
-				model.addAttribute("url", "/member/mypage");
-				return "alert";
+				return "winclose";
 			}else {
-				model.addAttribute("msg", "후기 작성 실패");
-				model.addAttribute("url", "/member/mypage");
-				return "alert";
+				return "winclose";
 			}
 		} else {
 			dto.setLesSeq(null);
 			if(reviewBiz.reviewInsert(dto)>0) {
-				model.addAttribute("msg", "후기 작성 완료");
-				model.addAttribute("url", "/member/mypage");
-				return "alert";
+				return "winclose";
 			}else {
-				model.addAttribute("msg", "후기 작성 실패");
-				model.addAttribute("url", "/member/mypage");
-				return "alert";
+				return "winclose";
 			}
 		}
 	}
@@ -360,24 +352,16 @@ public class LetsMemberController {
 			dto.setFacSeq(null);
 			
 			if(reviewBiz.reviewUpdate(dto)>0) {
-				model.addAttribute("msg", "후기 수정 완료");
-				model.addAttribute("url", "/member/mypage");
-				return "alert";
+				return "winclose";
 			}else {
-				model.addAttribute("msg", "후기 수정 실패");
-				model.addAttribute("url", "/member/mypage");
-				return "alert";
+				return "winclose";
 			}
 		} else {
 			dto.setLesSeq(null);
 			if(reviewBiz.reviewUpdate(dto)>0) {
-				model.addAttribute("msg", "후기 수정 완료");
-				model.addAttribute("url", "/member/mypage");
-				return "alert";
+				return "winclose";
 			}else {
-				model.addAttribute("msg", "후기 수정 실패");
-				model.addAttribute("url", "/member/mypage");
-				return "alert";
+				return "winclose";
 			}
 		}
 	}
