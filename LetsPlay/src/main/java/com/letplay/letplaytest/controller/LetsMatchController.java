@@ -46,7 +46,7 @@ public class LetsMatchController {
 		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchlist) {
 			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = dto.getMatchRegdate();
+			LocalDateTime matchRegdate = LocalDateTime.now();
 			Duration duration = Duration.between(matchEnddate, matchRegdate);
 			int days = ((int) duration.toDays()-1)*-1;
 			dto.setdDay(days);
@@ -67,7 +67,7 @@ public class LetsMatchController {
 		Map<MatchDto, Integer> dEndDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchEndlist) {
 			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = dto.getMatchRegdate();
+			LocalDateTime matchRegdate = LocalDateTime.now();
 			Duration duration = Duration.between(matchEnddate, matchRegdate);
 			int days = ((int) duration.toDays()-1)*-1;
 			dto.setdDay(days);
@@ -77,7 +77,7 @@ public class LetsMatchController {
 		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchlist) {
 			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = dto.getMatchRegdate();
+			LocalDateTime matchRegdate = LocalDateTime.now();
 			Duration duration = Duration.between(matchEnddate, matchRegdate);
 			int days = ((int) duration.toDays()-1)*-1;
 			dto.setdDay(days);
@@ -102,7 +102,7 @@ public class LetsMatchController {
 			Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 			for(MatchDto vo : matchlist) {
 				LocalDateTime matchEnddate = vo.getMatchEnddate();
-				LocalDateTime matchRegdate = vo.getMatchRegdate();
+				LocalDateTime matchRegdate = LocalDateTime.now();
 				Duration duration = Duration.between(matchEnddate, matchRegdate);
 				int days = ((int) duration.toDays()-1)*-1;
 				vo.setdDay(days);
