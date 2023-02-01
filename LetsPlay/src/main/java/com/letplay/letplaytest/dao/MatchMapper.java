@@ -120,7 +120,7 @@ public interface MatchMapper {
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
 			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
 			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
-			+ " WHERE m.SPO_ID = #{spoId} AND MATCH_ENDDATE < MATCH_REGDATE "
+			+ " WHERE m.SPO_ID = #{spoId} AND MATCH_ENDDATE < DATE(NOW())"
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
 			+ " m.MATCH_SEQ DESC ")
