@@ -78,13 +78,8 @@ public class FacImpl implements FacBiz{
 	}
 
 	@Override
-	public List<FacDto> selectRateavg() {
-		return facMapper.selectRateavg();
-	}
-
-	@Override
-	public List<FacDto> selectRatesports(int spoId) {
-		return facMapper.selectRatesports(spoId);
+	public List<FacDto> selectRateavg(Integer fspoId) {
+		return facMapper.selectRateavg(fspoId);
 	}
 
 }

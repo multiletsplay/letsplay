@@ -120,8 +120,8 @@ public class MatchImpl implements MatchBiz {
 	}
 
 	@Override
-	public List<MatchDto> selectMainHot() {
-		return matchMapper.selectMainHot();
+	public List<MatchDto> selectMainHot(Integer mspoId) {
+		return matchMapper.selectMainHot(mspoId);
 	}
 
 
