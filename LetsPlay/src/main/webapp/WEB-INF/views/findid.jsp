@@ -7,18 +7,19 @@
 <div class="container">
 	<div class="row">
 		<div class="mainContent">
-			<h2 class="section__title mb-40">ID 찾기</h2>
+			<h2 class="section__title mb-40">아이디 찾기</h2>
 <div class="findId">
 	<form action="/member/findid" method="get">
 
-		<div class="inputBox">				
-			<input type="text" placeholder="이름" name="name">
-		</div>
-		<div class="inputBox">				
-			<input type="text" name="phone" placeholder="000-0000-0000">
-		</div>
+		
 		<c:choose>
 		<c:when test="${empty id }">
+			<div class="inputBox">				
+				<input type="text" placeholder="이름" name="name">
+			</div>
+			<div class="inputBox">				
+				<input type="text" name="phone" placeholder="000-0000-0000">
+			</div>
 			<input type="submit" value="찾기" class="loginBtn" onclick="login();"> 
 		</c:when>
 			<c:otherwise> 
@@ -43,9 +44,9 @@
 		      </c:forEach>
 		</strong> 입니다.</p>
 		<input class="loginBtn" type="button" value="로그인" onclick="location.href='/member/loginform'">
-		<div><a href="/member/findpwform">비밀번호 찾기</a></div>
 	</div>
 </c:if>
+<div><a href="/member/findpwform">비밀번호 찾기</a></div>
 </div>
 </div>
 </div>
