@@ -43,6 +43,7 @@
         <div class="nav__icons">
                   
           <span>
+
            <a href="/match/insertform"><span class='btn01'>매칭만들기</span></a> 
           </span>
           <c:if test="${sessionScope.login == null }">
