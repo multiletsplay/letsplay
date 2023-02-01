@@ -8,6 +8,22 @@
 <meta charset="UTF-8">
 <title>예약내역</title>
 <link rel="stylesheet" type="text/css" href="/styles/control.css">
+<style type="text/css">
+.ReviewStartLoc input[type=radio]{ display: none;  }
+.ReviewStartLoc label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0; 
+}
+.ReviewStartLoc label:hover{ text-shadow: 0 0 0 rgb(255,234,0); }
+.ReviewStartLoc label:hover ~ label{ text-shadow: 0 0 0 rgb(255,234,0); }
+.ReviewStartLoc fieldset{
+    display: inline-block; 
+    direction: rtl; 
+    border: 0; 
+}
+.ReviewStartLoc input[type=radio]:checked ~ label{ text-shadow: 0 0 0 rgb(255,234,0); }
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	function updatereview(){
@@ -55,12 +71,13 @@
                ${dto.lesLocation}
 			</div>
 			<div class='ReviewStartLoc'>
-				<span class="star">
-	                     ★★★★★
-	                     <span>★★★★★</span>
-                     <input name="revRate" type="range" oninput="drawStar(this)" value="${dto.revRate} " step="2" min="0" max="10">
-                </span>
-				
+				<fieldset>
+	               <input type="radio" name="revRate" value="5" id="rate1"><label for="rate1">⭐</label>
+	               <input type="radio" name="revRate" value="4" id="rate2"><label for="rate2">⭐</label>
+	               <input type="radio" name="revRate" value="3" id="rate3"><label for="rate3">⭐</label>
+	               <input type="radio" name="revRate" value="2" id="rate4"><label for="rate4">⭐</label>
+	               <input type="radio" name="revRate" value="1" id="rate5"><label for="rate5">⭐</label>
+	           </fieldset>
 			</div>
 			<div class='ReviewRoom' style='margin-top:20px;'>
 				<div>Review</div>
@@ -72,22 +89,23 @@
 			</div>
 		</c:when>
 		<c:otherwise>
-			<div>
-				<div>아이디</div>
-				<div><input type="text" name="id" value="${member.id}" readonly></div>
-			</div>
+			<input type="hidden" name="facSeq" value="${dto.facSeq} ">
+			<input type="hidden" name="con" value="2">
+			<input type="hidden" name="id" value="${member.id}">
 			<div>
 				${dto.facName}
 			</div>
 			<div>
 				${dto.facLocation}
 			</div>
-			<div>
-				<span class="star">
-	                     ★★★★★
-	                     <span>★★★★★</span>
-                     <input name="revRate" type="range" oninput="drawStar(this)" value="${dto.revRate} " step="2" min="0" max="10">
-                </span>
+			<div class='ReviewStartLoc'>
+				<fieldset>
+	               <input type="radio" name="revRate" value="5" id="rate1"><label for="rate1">⭐</label>
+	               <input type="radio" name="revRate" value="4" id="rate2"><label for="rate2">⭐</label>
+	               <input type="radio" name="revRate" value="3" id="rate3"><label for="rate3">⭐</label>
+	               <input type="radio" name="revRate" value="2" id="rate4"><label for="rate4">⭐</label>
+	               <input type="radio" name="revRate" value="1" id="rate5"><label for="rate5">⭐</label>
+	           </fieldset>
 			</div>
 			<div>
 				<div>Review</div>
