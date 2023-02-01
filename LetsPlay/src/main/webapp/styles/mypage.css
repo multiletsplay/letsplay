@@ -396,10 +396,8 @@ ul, li {
 	cursor: pointer;
 }
 
-
 .PuckAge {
 	display: flex;
-	justify-content: center;
 }
 
 #tab-button-nav {
@@ -407,5 +405,14 @@ ul, li {
 }
 
 .tab-section {
+	display: flex;
 }
 
+.tab-section div {
+	width: 260px;
+	margin-left: 15px;
+}
+
+.tab-section div:first-child {
+	margin-left: 0;
+}

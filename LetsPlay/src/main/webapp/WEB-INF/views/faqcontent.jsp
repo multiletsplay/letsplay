@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
+<div id='FAQBundleTop'>
+<div class="BundleWrapper">
+<div><h2>자주 묻는 질문</h2></div>
 <div class='Bundle'>
       <span class='titleSection' onClick={Appearance}>
         <span class='TitleQs'><button type='button'>랫플 소개</button></span>
@@ -84,5 +87,6 @@
         각 시설 업체에서 준수하고 있는 환불 가능 기간을 확인하여 주시기 바랍니다.
       </div>
 </div>
+    </div>
     </div>
 <%@ include file="footer.jsp" %>

@@ -216,7 +216,7 @@
 	          <button class="tab-button" data-tab-section="tab-section-1">시설</button>
 	          <button class="tab-button" data-tab-section="tab-section-2">레슨</button>
       	    
-      	    
+      	      <section id="tab-section-1" class="tab-section">
       	     <c:choose>
 	        <c:when test="${empty faclist and empty leslist }">
 	            <td colspan="5">------ 예약이 없습니다. ------</td>
@@ -225,9 +225,9 @@
 	        	<c:if test="${not empty faclist }">
 		            <c:forEach items="${faclist }" var="dto">
       	    
-      	    <section id="tab-section-1" class="tab-section">
+      	  
          	 <div>
-	            <div class="match-list" style='width:210px;'>
+	            <div class="match-list">
 	                <p><span class="sports-category">시설</span></p>
 	                <a href="/facility/detail?facSeq=${dto.facSeq }"><p class="match-title">${dto.facName }</p></a>
 	                <p class="match-location">${dto.facLocation }</p>
@@ -236,7 +236,7 @@
 	                <button class="review__btn" style="transform: none; color:white;" onclick="openPopUp()">후기 작성</button>
 	            </div>
        		  </div>
-      	  </section>
+      
       	  </c:forEach>
 	            </c:if>
       	  
@@ -261,6 +261,7 @@
         			
         </c:otherwise>
         </c:choose>
+        	  </section>
         </nav>
         </div>
 		</div>

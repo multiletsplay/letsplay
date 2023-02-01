@@ -36,12 +36,10 @@
 }
 
 #reviewWrapping > div > div:first-child {
-	position: absolute;
-	left: 0;
 }
 
 #reviewWrapping > div > div:last-child {
-	margin-top: 100px;
+	margin-top: 30px;
 }
 
 .ReviewNameList {
