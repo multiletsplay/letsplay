@@ -181,24 +181,18 @@ public interface MatchMapper {
 	
 	//메인페이지
 	//최신순
-	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
-			+ "(SELECT COUNT(r.REP_SEQ) "
-			+ "		FROM REPLY r"
-			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
+	@Select(" SELECT m.*, s.SPO_NAME, FAC_NAME, "
 			+ "(SELECT COUNT(j.JOIN_SEQ) + 1 "
 			+ "		FROM MATCH_JOIN j "
 			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
-			+ " FROM MATCH_BOARD m "
-			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
-			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
-			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
-			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
+			+ " FROM MATCH_BOARD m, SPORTS s, FACILITY f "
+			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' AND f.FAC_SEQ=m.FAC_SEQ "
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
 			+ " m.MATCH_SEQ ASC limit 4 ")
-	List<MatchDto> selectMainList(String id);
+	List<MatchDto> selectMainList();
 	//카테고리
-	@Select("SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
+	@Select("SELECT m.*, NICKNAME, s.SPO_NAME, "
 			+ "	(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r "
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
@@ -207,15 +201,14 @@ public interface MatchMapper {
 			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
 			+ " FROM MATCH_BOARD m "
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
-			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
 			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
 			+ " WHERE m.SPO_ID = s.SPO_ID AND m.SPO_ID = #{spoId} AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE "
 			+ " GROUP BY m.MATCH_SEQ"
 			+ " ORDER BY "
-			+ " m.CNT_JOIN DESC limit 4 ")
+			+ " CNT_JOIN DESC limit 4 ")
 	List<MatchDto> selectMainSports(int spoId);
 	//참여자 수 많은 순
-	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME, ANY_VALUE(l.LIKES_STATUS) LIKES_STATUS, "
+	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME,  "
 			+ "(SELECT COUNT(r.REP_SEQ) "
 			+ "		FROM REPLY r"
 			+ "		WHERE m.MATCH_SEQ=r.MATCH_SEQ) CNT_COMMENT, "
@@ -224,13 +217,12 @@ public interface MatchMapper {
 			+ "		WHERE m.MATCH_SEQ=j.MATCH_SEQ) CNT_JOIN "
 			+ " FROM MATCH_BOARD m "
 			+ " 	LEFT OUTER JOIN SPORTS s ON m.SPO_ID=s.SPO_ID "
-			+ "		LEFT OUTER JOIN LIKES l ON m.MATCH_SEQ=l.MATCH_SEQ AND l.ID=#{id} "
 			+ "		LEFT OUTER JOIN MEMBER mb ON m.ID=mb.ID "
 			+ " WHERE m.SPO_ID = s.SPO_ID AND MATCH_REGDATE BETWEEN MATCH_REGDATE AND MATCH_ENDDATE AND MATCH_STATUS='N' "
 			+ " GROUP BY m.MATCH_SEQ "
 			+ " ORDER BY "
-			+ " m.CNT_JOIN DESC limit 4 ")
-	List<MatchDto> selectMainHot(String id);
+			+ " CNT_JOIN DESC limit 4 ")
+	List<MatchDto> selectMainHot();
 	
 	
 	

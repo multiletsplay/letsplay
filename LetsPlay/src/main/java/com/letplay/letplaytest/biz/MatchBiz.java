@@ -30,8 +30,8 @@ public interface MatchBiz {
 	public int unfixMatch(int matchSeq);		//확정취소
 	
 	//메인
-	public List<MatchDto> selectMainList(String id);
+	public List<MatchDto> selectMainList();
 	public List<MatchDto> selectMainSports(int spoId);
-	public List<MatchDto> selectMainHot(String id);
+	public List<MatchDto> selectMainHot();
 	
 }

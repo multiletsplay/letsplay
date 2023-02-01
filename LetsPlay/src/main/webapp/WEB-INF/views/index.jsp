@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ include file="header.jsp" %>
 
 <!-- <h1>letsplay</h1>
@@ -100,127 +101,53 @@
   <div class="container inner">
     <div class="row">
       <div class="text-center col-lg-12">
-        <p class="match-b-title">랫플 매칭이 총 <span class="count-num" data-count="425">0</span>건 성사 되었습니다!</p>
+        <p class="match-b-title">랫플 매칭이 총 <span class="count-num" data-count="425">${cnt }</span>건 성사 되었습니다!</p>
       </div>
       
       <div class="home__sport">
-        <button class="sports" value="all">전체</button>
-        <button class="sports" value="풋살">풋살</button>
-        <button class="sports" value="테니스">테니스</button>
-        <button class="sports" value="배드민턴">배드민턴</button>
-        <button class="sports" value="탁구">탁구</button>
-        <button class="sports" value="수영">수영</button>
-        <button class="sports" value="골프">골프</button>
+      	<form action="/selectmat" method="get">
+        <button type="button"  class="sports" name="spoId" onclick="location.href='/'">전체</button>
+        <button class="sports" name="spoId" value="1">풋살</button>
+        <button class="sports" name="spoId" value="2">테니스</button>
+        <button class="sports" name="spoId" value="3">배드민턴</button>
+        <button class="sports" name="spoId" value="4">탁구</button>
+        <button class="sports" name="spoId" value="5">수영</button>
+        <button class="sports" name="spoId" value="6">골프</button>
+        </form>
       </div>
 
+      <c:forEach items="${matlisthot }" var="dto">	
+			<div class="mb-20 lesson-list-l">
+				<div>
+					<div class="match-list">
+						<p>
+							<span class="deadline">
+								<c:forEach var="i" items="${ddays }">
+									<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+										마감 ${i.value }일 전
+									</c:if>
+								</c:forEach>
+							</span>
+							<span class="sports-category">${dto.spoName}</span>
+							<span class="num-people">${dto.cntJoin }/${dto.matchTotal }명</span>
+						</p>
+						
+						<a href="/match/detail?matchSeq=${dto.matchSeq }">
+							<p class="match-title">${dto.matchTitle }</p>
+						</a>
+						<p class="match-location">${dto.matchLocation }</p>
+						
+						<div class="match-date">
+							<span class="date">											
+								<fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
+							</span>
+							<span class="time">${dto.startTime } ~ ${dto.endTime }</span>
+						</div>
+					</div>
+				</div>
+			</div>
+	</c:forEach>
       
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div>
-          <div class="match-list">
-            <p>
-              <span class="deadline">마감 10일 전</span>
-              <span class="sports-category">테니스</span>
-              <span class="num-people">4명</span>
-            </p>
-            
-            <a href="/matching/1">
-              <p class="match-title">테니스 매칭구합니다.</p>
-            </a>
-            <p class="match-location">서울시 강서구 화곡동</p>
-            
-            <div class="match-date">
-              <span class="date">2023-01-09</span>
-              <span class="time">10</span>
-            </div>
-            
-            <div class="favorite">
-              <i class="ri-heart-line"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div>
-          <div class="match-list">
-            <p>
-              <span class="deadline">마감 4일 전</span>
-              <span class="sports-category">풋살</span>
-              <span class="num-people">8명</span>
-            </p>
-            
-            <a href="/matching/2">
-              <p class="match-title">풋살 매칭구합니다.</p>
-            </a>
-            
-            <p class="match-location">서울시 강서구 어디어디</p>
-            
-            <div class="match-date">
-              <span class="date">2023-01-20</span>
-              <span class="time">4</span>
-            </div>
-            
-            <div class="favorite">
-              <i class="ri-heart-line"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div>
-          <div class="match-list">
-            <p>
-              <span class="deadline">마감 4일 전</span>
-              <span class="sports-category">배드민턴</span>
-              <span class="num-people">8명</span>
-            </p>
-            
-            <a href="/matching/3">
-              <p class="match-title">배드민턴 매칭구합니다.</p>
-            </a>
-            
-            <p class="match-location">서울시 강남 어디 저기</p>
-            <div class="match-date">
-              <span class="date">2023-01-11</span>
-              <span class="time">4</span>
-            </div>
-            
-            <div class="favorite">
-              <i class="ri-heart-line"></i>
-            </div>
-          
-          </div>
-        </div>
-      </div>
-      
-      <div class="mb-20 col-md-4 col-lg-3">
-        <div>
-          <div class="match-list">
-            <p>
-              <span class="deadline">마감 4일 전</span>
-              <span class="sports-category">탁구</span>
-              <span class="num-people">8명</span>
-            </p>
-            
-            <a href="/matching/4">
-              <p class="match-title">탁구 매칭구합니다.</p>
-            </a>
-              <p class="match-location">서울시 강남 어디 저기</p>
-              <div class="match-date">
-                <span class="date">2023-01-11</span>
-                <span class="time">4</span>
-              </div>
-              
-              <div class="favorite">
-                <i class="ri-heart-line"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div><p class="match-btn"></p>
-      </div>
     </div>
   </div>
 </section>
@@ -344,67 +271,27 @@
       </div>
     </div>
     
+    
     <ul class="listmatch">
-      <li>
-        <span class="sports-category">테니스</span>
-        <a href="/matching/1"><p>테니스 매칭구합니다.</p></a>
-        
-        <div class="mr-30">
-          <span class="match-location">서울시 강서구 화곡동</span>
-          <span class="match-location">하나테니스장</span>
-          <span class="deadline">마감10일</span>
-          <span class="num-people">4명</span>
-        </div>
-        
-        <div class="favorite">
-          <i class="ri-heart-line"></i>
-        </div>
-      </li>
-      
-      <li>
-        <span class="sports-category">풋살</span>
-        <a href="/matching/2"><p>풋살 매칭구합니다.</p></a>
-        <div class="mr-30">
-          <span class="match-location">서울시 강서구 어디어디</span>
-          <span class="match-location">하나풋살장</span>
-          <span class="deadline">마감4일</span>
-          <span class="num-people">8명</span>
-        </div>
-        
-        <div class="favorite">
-          <i class="ri-heart-line"></i>
-        </div>
-      </li>
-      
-      <li>
-        <span class="sports-category">배드민턴</span>
-        <a href="/matching/3"><p>배드민턴 매칭구합니다.</p></a>
-        <div class="mr-30">
-          <span class="match-location">서울시 강남 어디 저기</span>
-          <span class="match-location">하나배드민턴</span>
-          <span class="deadline">마감4일</span>
-          <span class="num-people">8명</span>
-        </div>
-        
-        <div class="favorite">
-          <i class="ri-heart-line"></i>
-        </div>
-      </li>
-      
-      <li>
-        <span class="sports-category">탁구</span>
-        <a href="/matching/4"><p>탁구 매칭구합니다.</p></a>
-        <div class="mr-30">
-          <span class="match-location">서울시 강남 어디 저기</span>
-          <span class="match-location">하나탁구</span>
-          <span class="deadline">마감4일</span>
-          <span class="num-people">8명</span>
-        </div>
-        
-        <div class="favorite">
-          <i class="ri-heart-line"></i>
-        </div>
-      </li>
+    	<c:forEach items="${matlist }" var="dto">
+	      <li>
+	        <span class="sports-category">${dto.spoName }</span>
+	        <a href="/matching/1"><p>${dto.matchTitle }</p></a>
+	        
+	        <div class="mr-30">
+	          <span class="match-location">${dto.matchLocation }</span>
+	          <span class="match-location">${dto.facName }</span>
+	          <span class="deadline">
+	          	<c:forEach var="i" items="${ddays }">
+					<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+						마감 ${i.value }일 전
+					</c:if>
+				</c:forEach>
+			  </span>
+	          <span class="num-people">${dto.cntJoin }/${dto.matchTotal }명</span>
+	        </div>
+	      </li>
+	     </c:forEach>
     </ul>
   </div>
 </section>

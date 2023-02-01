@@ -275,28 +275,28 @@ public class LetsMatchController {
 	
 	//메인
 	
-	@GetMapping("/index")
-	public String selectMainList(Model model, HttpServletRequest request, int spoId, String id) {
-		HttpSession session = request.getSession();
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
-		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
-		for(MatchDto dto : matchlist) {
-			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = dto.getMatchRegdate();
-			Duration duration = Duration.between(matchEnddate, matchRegdate);
-			int days = ((int) duration.toDays()-1)*-1;
-			dto.setdDay(days);
-			dDayMap.put(dto, days);
-		}
-		model.addAttribute("ddays", dDayMap);
-		model.addAttribute("list",matchBiz.selectMatchList(member.getId()));
-		model.addAttribute("cnt",matchBiz.matchListCount());
-		model.addAttribute("endcnt",matchBiz.matchEndCount());
-		
-		model.addAttribute("spolist",matchBiz.selectMainSports(spoId));
-		model.addAttribute("Hot",matchBiz.selectMainHot(id));
-		return "index";
-	}
+//	@GetMapping("/index")
+//	public String selectMainList(Model model, HttpServletRequest request, int spoId, String id) {
+//		HttpSession session = request.getSession();
+//		MemberDto member = (MemberDto) session.getAttribute("login");
+//		List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
+//		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
+//		for(MatchDto dto : matchlist) {
+//			LocalDateTime matchEnddate = dto.getMatchEnddate();
+//			LocalDateTime matchRegdate = dto.getMatchRegdate();
+//			Duration duration = Duration.between(matchEnddate, matchRegdate);
+//			int days = ((int) duration.toDays()-1)*-1;
+//			dto.setdDay(days);
+//			dDayMap.put(dto, days);
+//		}
+//		model.addAttribute("ddays", dDayMap);
+//		model.addAttribute("list",matchBiz.selectMatchList(member.getId()));
+//		model.addAttribute("cnt",matchBiz.matchListCount());
+//		model.addAttribute("endcnt",matchBiz.matchEndCount());
+//		
+//		model.addAttribute("spolist",matchBiz.selectMainSports(spoId));
+//		model.addAttribute("Hot",matchBiz.selectMainHot(id));
+//		return "index";
+//	}
 		
 }
