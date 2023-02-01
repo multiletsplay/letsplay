@@ -52,7 +52,7 @@
 <div>
 	<a href="/member/findidform">아이디 찾기</a> &nbsp;&nbsp; <a href="/member/findpwform">비밀번호 찾기</a>
 </div>
-<div id="loginChk"></div> -->
+ -->
 
 
 <div class="container">
@@ -71,7 +71,7 @@
 
 				
 				<div class="findAccount">
-					
+					<div id="loginChk"></div>
 					<ul>
 						<li><a href="/member/findidform">아이디 찾기</a></li>
 						<li><a href="/member/findpwform">비밀번호 찾기</a></li>
