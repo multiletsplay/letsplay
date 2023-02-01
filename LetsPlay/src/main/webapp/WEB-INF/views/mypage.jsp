@@ -59,10 +59,6 @@
   .tab_menu .list li.is_on .cont{display:block;}
 </style>
 
-</head>
-<body>
-
-
 <div class='mypageWrapper'>
 <div class="tab_menu">
   <ul class="list">
@@ -124,7 +120,7 @@
       </div>
       
     </li>
-    	<!-- 회원 정보 끝 -->
+    	<%-- 회원 정보 끝 --%>
     	
    <li>
       <a href="#tab2" class="btn"><h2>매치 내역</h2></a>
@@ -202,7 +198,7 @@
     </li>
 
     
-    <!-- 매치 내역 끝 -->
+    <%-- 매치 내역 끝 --%>
     
     <li>
       <a href="#tab3" class="btn"><h2>예약 내역</h2></a>
@@ -210,10 +206,11 @@
      	 <h3>예약 내역</h3>
         <p>예약완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
         
+        	<div class='PuckAge'>
 			<nav id="tab-button-nav">
 	          <button class="tab-button" data-tab-section="tab-section-1">시설</button>
 	          <button class="tab-button" data-tab-section="tab-section-2">레슨</button>
-      	    </nav>
+      	    
       	    
       	     <c:choose>
 	        <c:when test="${empty faclist and empty leslist }">
@@ -235,9 +232,10 @@
 	            </div>
        		  </div>
       	  </section>
+      	  </c:forEach>
+	            </c:if>
       	  
       	   
-          <div>
 			<c:if test="${not empty leslist }">
 		            <c:forEach items="${leslist }" var="dto">
 		            <section id="tab-section-2" class="tab-section" hidden>
@@ -252,40 +250,35 @@
 				                <button class="review__btn" style="transform: none; color:white;" onclick="location.href='/member/reviewinsertform?lesSeq=${dto.lesSeq }'">후기 작성</button>
 				            </div>
 	            		</div>
+	            		</section>
 		            </c:forEach>
 	            </c:if>
-			</div>
-        </section>
-      	  
-      	  
-      	  </c:forEach>
-	            </c:if>
-        
+        			
         </c:otherwise>
         </c:choose>
-        
-
+        </nav>
+        </div>
+		</div>
     </li>
     
-    <!-- 예약 내역 끝 -->
+    <%-- 예약 내역 끝 --%>
     
     <li>
       <a href="#tab4" class="btn"><h2>찜한 내역</h2></a>
       <div id="tab4" class="cont">
-		<form action="/member/mypage/likeselect" method="get">
-		<button type="submit" name="type" value="M">매치</button>
-		<button type="submit" name="type" value="F">시설</button>
-		<button type="submit" name="type" value="L">레슨</button>
-</form>
-<div class="likes-list">
+		<%-- <form action="/member/mypage/likeselect" method="get">
+			<button type="submit" name="type" value="M">매치</button>
+			<button type="submit" name="type" value="F">시설</button>
+			<button type="submit" name="type" value="L">레슨</button>
+		</form>
+		<div class="likes-list">
 
 		<c:choose>
 			<c:when test="${empty likesfaclist and empty likesmatlist and empty likesleslist }">
-				<td colspan="6">------ 찜 목록이 없습니다. ------</td>
+				<span>------ 찜 목록이 없습니다. ------</span>
 			</c:when>
 			<c:otherwise>
 	        	<c:if test="${not empty likesfaclist }">
-	        	<table>
 		            <c:forEach items="${likesfaclist }" var="fac">
 	           			<li class="n-prd-row" onclick="active_list('check_1535332');">
        						<a href="/facility/detail?facSeq=${fac.facSeq }" class="img-block">
@@ -301,7 +294,6 @@
 					        </ul>
 					    </li>
 		            </c:forEach>
-		            </table>
 	            </c:if>
 	            <c:if test="${not empty likesmatlist }">
 	            <table border="1">
@@ -317,7 +309,7 @@
 		            <c:forEach items="${likesmatlist }" var="mat">
 	           		
 	           			<tr>
-<%-- 	           				<td><fmt:formatDate pattern="MM.dd" value="${mat.matchRegdate}"/></td> --%>
+	           				<td><fmt:formatDate pattern="MM.dd" value="${mat.matchRegdate}"/></td>
 							<td>
 							<fmt:parseDate  value="${mat.matchRegdate}"
 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
@@ -354,7 +346,7 @@
 		            		<td>${les.lesLocation }</td>
 		            		<td>이용자 리뷰 ${les.cntReview }개</td>
 		            		<td>
-				   					<img id="dellikeBtn" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+			   					<img id="dellikeBtn" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 		            		</td>
 	            		</tr>
 		            </c:forEach>
@@ -362,10 +354,11 @@
 	            </c:if>
 			</c:otherwise>
 		</c:choose>
+	</div> --%>
 	</div>
     </li>
     
-    <!-- 찜한 목록 끝 -->
+    <%-- 찜한 목록 끝 --%>
     
     <li>
       <a href="#tab5" class="btn"><h2>1대1 문의</h2></a>
@@ -385,7 +378,7 @@
 		<c:choose>
 			<c:when test="${empty inqlist }">
 				<div style='display:flex; justify-content: center; margin: 20px 0;'>
-					<div>---- 작성된 글이 없습니다 ----</div>
+					<span>---- 작성된 글이 없습니다 ----</span>
 				</div>
 			</c:when>
 			<c:otherwise>	
@@ -407,7 +400,7 @@
 	</div>
     </li>
     
-    <!-- 1대1 문의 끝 -->
+    <%-- 1대1 문의 끝 --%>
     
   </ul>
 </div>
