@@ -81,12 +81,7 @@ public class LessonImpl implements LessonBiz{
 	}
 
 	@Override
-	public List<LessonDto> selectRateavg() {
-		return lessonMapper.selectRateavg();
-	}
-
-	@Override
-	public List<LessonDto> selectRatesports(int spoId) {
-		return lessonMapper.selectRatesports(spoId);
+	public List<LessonDto> selectRateavg(Integer lspoId) {
+		return lessonMapper.selectRateavg(lspoId);
 	}
 }

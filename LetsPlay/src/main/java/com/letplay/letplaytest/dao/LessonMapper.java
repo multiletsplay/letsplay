@@ -90,22 +90,17 @@ public interface LessonMapper {
 	List<LessonDto> searchLesson(SearchDto dto);
 	
 	//평점 좋은 순으로 4개까지 불러오기
-	@Select(" SELECT l.*, SPO_NAME, AVG(REV_RATE) AS AVG_RATE , COUNT(REV_ID) CNT_REVIEW "
+	@Select( {"<script>"
+			+ " SELECT l.*, SPO_NAME, AVG(REV_RATE) AS AVG_RATE , COUNT(REV_ID) CNT_REVIEW "
 			+ " FROM LESSON l "
 			+ "	LEFT OUTER JOIN SPORTS s ON s.SPO_ID =l.SPO_ID  "
 			+ " LEFT OUTER JOIN REVIEW r ON l.LES_SEQ=r.LES_SEQ "
+			+ " <where>"
+			+ " 	<if test='lspoId != null'>l.SPO_ID=#{spoId} </if> "
+			+ " </where> "
 			+ " GROUP BY LES_SEQ "
 			+ " ORDER BY AVG_RATE DESC "
-			+ " LIMIT 4 ")
-	List<LessonDto> selectRateavg();
-	
-	@Select(" SELECT l.*, SPO_NAME, AVG(REV_RATE) AS AVG_RATE , COUNT(REV_ID) CNT_REVIEW "
-			+ " FROM LESSON l "
-			+ "	LEFT OUTER JOIN SPORTS s ON s.SPO_ID =l.SPO_ID  "
-			+ " LEFT OUTER JOIN REVIEW r ON l.LES_SEQ=r.LES_SEQ "
-			+ " WHERE l.SPO_ID=#{spoId} "
-			+ " GROUP BY LES_SEQ "
-			+ " ORDER BY AVG_RATE DESC "
-			+ " LIMIT 4 ")
-	List<LessonDto> selectRatesports(int spoId);
+			+ " LIMIT 4 "
+			+ " </script>" })
+	List<LessonDto> selectRateavg(Integer lspoId);
 }
