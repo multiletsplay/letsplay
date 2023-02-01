@@ -208,7 +208,7 @@
 											<p class="img">
 												<span class="sports-category">${dto.spoName}</span>
 												<img src="${dto.facImgpath }">
-												<span class="fac-review">점</span>
+												<span class="fac-review">${dto.avgRate }점</span>
 											</p>
 										</a>
 									<div>
