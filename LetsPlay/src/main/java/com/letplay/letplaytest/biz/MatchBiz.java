@@ -31,7 +31,6 @@ public interface MatchBiz {
 	
 	//메인
 	public List<MatchDto> selectMainList();
-	public List<MatchDto> selectMainSports(int spoId);
 	public List<MatchDto> selectMainHot(Integer mspoId);
 	
 }

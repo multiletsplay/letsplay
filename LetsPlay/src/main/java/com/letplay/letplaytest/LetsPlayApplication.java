@@ -34,12 +34,13 @@ public class LetsPlayApplication {
 	}
 	
 	@GetMapping("/")
-	public String root(Model model, @RequestParam(required = false) Integer mspoId, @RequestParam(required = false) Integer fspoId, @RequestParam(required = false) Integer lspoId) {
+	public String root(Model model, @RequestParam(required = false) Integer mspoId, @RequestParam(required = false) Integer fspoId, @RequestParam(required = false) Integer lspoId, 
+			@RequestParam(required = false) String match, @RequestParam(required = false) String facility, @RequestParam(required = false) String lesson) {
 		List<MatchDto> matchlist = matchBiz.selectMainList();
 		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchlist) {
 			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = dto.getMatchRegdate();
+			LocalDateTime matchRegdate = LocalDateTime.now();
 			Duration duration = Duration.between(matchEnddate, matchRegdate);
 			int days = ((int) duration.toDays()-1)*-1;
 			dto.setdDay(days);
