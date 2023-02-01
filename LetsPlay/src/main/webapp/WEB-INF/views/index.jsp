@@ -276,7 +276,7 @@
     	<c:forEach items="${matlist }" var="dto">
 	      <li>
 	        <span class="sports-category">${dto.spoName }</span>
-	        <a href="/matching/1"><p>${dto.matchTitle }</p></a>
+	        <a href="/match/detail?matchSeq=${dto.matchSeq }"><p>${dto.matchTitle }</p></a>
 	        
 	        <div class="mr-30">
 	          <span class="match-location">${dto.matchLocation }</span>
