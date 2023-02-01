@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="header.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <script>
 function fn1(){
 	if (confirm("게시글을 수정하시겠습니까?")) {
@@ -14,35 +11,40 @@ function fn1(){
 	}
 };
 </script>
-<h1>1대1문의 수정</h1>
 <div id="inquiry-update">
+<div>
+<h1>1대1문의 수정</h1>
+
     <form action="/inquiry/update" method="post">
     <input type="hidden" name="inqSeq" value="${dto.inqSeq}" >
-        <table class="inquiry-table">
-        	<tr>
-		        <th>제목</th>
-		        <td><input type="text" name="inqTitle" value="${dto.inqTitle }"></td>
-		    </tr>
-		    <tr>
-		        <th>작성자</th>
-		        <td>${dto.id }</td>
-		    </tr>
-		    <tr>	
-		    	<th>날짜</th>
-		        <td>${dto.inqDate }</td>
-		    </tr>
-		    <tr>
-		        <th>내용</th>
-		        <td><textarea rows="10" cols="80" name="inqContent">${dto.inqContent }</textarea></td>
-		    </tr>
-            <tr>
-                <td colspan="2" align="right">
+        <ul class="inquiry-table">
+      	    <li>
+		        <span>작성자</span>
+		        <span style="border:1px solid grey; border-radius:8px; margin-left:34px; padding:10px 20px; width:880px">${dto.id }</span>
+		    </li>
+		    <li>	
+		    	<span>날짜</span>
+		        <span style="border:1px solid grey; border-radius:8px; padding:10px 20px; width:880px">${dto.inqDate }</span>
+		    </li>
+		    
+        	<li>
+		        <span>제목</span>
+		        <span><input style="border:1px solid grey" type="text" name="inqTitle" value="${dto.inqTitle }"></span>
+		    </li>
+		    <li>
+		        <span>내용</span>
+		        <span><textarea class='InqTxtArea' style="border:1px solid grey; border-radius:8px;" name="inqContent">${dto.inqContent }</textarea></span>
+		    </li>
+            <li>
+            <div class='ReqConfirm'>
+                <span>
+					<input style='background-color:lightgrey; color: black' type="button" value="취소" onclick="location.href='/inquiry/list'">
 					<input type="submit" value="수정완료" onclick="javascript:fn1();">
-					<input type="button" value="취소" onclick="location.href='/inquiry/detail?inqSeq=${dto.inqSeq }'">
-				</td>
-            </tr>
-        </table>
+				</span>
+			</div>
+            </li>
+        </ul>
     </form>
+    </div>
 </div>
-</body>
-</html>
+<%@ include file="footer.jsp" %>
