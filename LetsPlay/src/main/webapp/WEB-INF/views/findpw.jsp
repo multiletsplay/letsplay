@@ -51,6 +51,42 @@
 			}
 		});
 	}
+	
+	function authChk(){
+		new Promise( (succ, fail)=>{
+			const code = $("#phoneChk").val();
+			$.ajax({
+				type: 'POST',
+				url: '/member/phoneAuthOk',
+				header: {"Content-Type":"application/json"},
+				dataType:'json',
+				data : {code : code},
+				success: function(result){
+					if(result == true){
+						alert("인증 번호가 다릅니다.");
+						$("#findpw").attr("type", "button");
+					} else{
+						alert("인증되었습니다.");
+						$(".passwordFind").show();
+						succ(result);
+					}
+				}
+			});
+		}).then((arg)=>{
+		var id = $("#findid").val();
+		console.log(id);
+        $.ajax({
+        	type: 'GET',
+			url: '/member/findpw',
+			data : {id : id},
+            success: function(result) {
+                var pw = result;
+                console.log(pw);
+                $('.passwordFind').append('<p>고객님의 비밀번호는 '+ pw +' 입니다.</p>');
+            }
+        });
+	});
+	}
 </script>
 <div class="container">
 	<div class="row">
@@ -59,7 +95,7 @@
 
 			<div class="findpw">
 				<div class="inputBox">				
-					<input type="text" placeholder="아이디" name="id" >
+					<input id="findid" type="text" placeholder="아이디" name="id" >
 				</div>
 				<div class="inputBox">				
 					<input  type="text" name="phone" id="phone" placeholder="010-0000-0000" >
@@ -72,7 +108,8 @@
 				<button type="button" id="phoneChkBtn" class="btn__number">인증번호 확인</button>
 			</div>
 			<div class="passwordFind">
-				<p>고객님의 비밀번호는</p>${pw}</div>
+				
+			</div>
 
 		</div>
 	</div>
