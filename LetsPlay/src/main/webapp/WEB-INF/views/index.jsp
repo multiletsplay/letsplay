@@ -100,13 +100,13 @@
 <section class="rending__products">
   <div class="container inner">
     <div class="row">
-      <div class="text-center col-lg-12">
+      <div class="text-center col-lg-12" id="match">
         <p class="match-b-title">랫플 매칭이 총 <span class="count-num" data-count="425">${cnt }</span>건 성사 되었습니다!</p>
       </div>
       
       <div class="home__sport">
       	<form action="/" method="get">
-        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
+        <button type="button"  class="sports" onclick="location.href='/#match'">전체</button>
         <button class="sports" name="mspoId" value="1">풋살</button>
         <button class="sports" name="mspoId" value="2">테니스</button>
         <button class="sports" name="mspoId" value="3">배드민턴</button>
@@ -156,7 +156,7 @@
 <section class="best__sales bg">
   <div class="container inner">
     <div class="row">
-      <div class="text-center col-lg-12">
+      <div class="text-center col-lg-12" id="facility">
         <h2 class="section__title">평점 좋은 시설</h2>
       </div>
       
@@ -202,22 +202,21 @@
 </div>
 </section>
 
-
 <section class="new__arrivals">
   <div class="container inner">
       <div class="row">
-        <div class="text-center mb-5 col-lg-12">
+        <div class="text-center mb-5 col-lg-12" id="lesson">
           <h2 class="section__title">평점 좋은 레슨</h2>
         </div>
         <div class="home__sport">
           <form action="/" method="get">
 	        <button type="button"  class="sports" onclick="location.href='/'">전체</button>
-	        <button class="sports" name="lspoId" value="1">풋살</button>
-	        <button class="sports" name="lspoId" value="2">테니스</button>
-	        <button class="sports" name="lspoId" value="3">배드민턴</button>
-	        <button class="sports" name="lspoId" value="4">탁구</button>
-	        <button class="sports" name="lspoId" value="5">수영</button>
-	        <button class="sports" name="lspoId" value="6">골프</button>
+	        <button id="1" class="sports" name="lspoId" value="1">풋살</button>
+	        <button id="2" class="sports" name="lspoId" value="2">테니스</button>
+	        <button id="3" class="sports" name="lspoId" value="3">배드민턴</button>
+	        <button id="4" class="sports" name="lspoId" value="4">탁구</button>
+	        <button id="5" class="sports" name="lspoId" value="5">수영</button>
+	        <button id="6" class="sports" name="lspoId" value="6">골프</button>
 	       </form>
         </div>
         
