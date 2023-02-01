@@ -118,9 +118,9 @@ function openPopUp() {
 			<p>매칭 인원 (최소인원 : 본인 포함 2명)</p>
 			<div class="match_people">
 				<span class="bseq_ea" style="display: none;">22</span>
-				<button type ="button" class="f" onclick="fnCalCount('p',this);">+</button>
-				<input type="text" name="matchTotal" min="2" max="22" value="2" style="padding-left:60px">
 				<button type="button" class="s" onclick="fnCalCount('m', this);">-</button>
+				<input type="text" name="matchTotal" min="2" max="22" value="2" style="padding-left:60px">
+				<button type ="button" class="f" onclick="fnCalCount('p',this);">+</button>
 			</div>
 		</div>
 

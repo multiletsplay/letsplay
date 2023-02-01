@@ -51,28 +51,32 @@
 
 
 	</script>
-<div class="container inner">
+<div class="container">
+
+		<div>
+			<div class="sport-div">
+			<form action="/match/category"  method="get">
+				<button type="button"  class="sport" name="spoId" onclick="location.href='/match/list'">전체</button>
+				<button type="submit"  class="sport" name="spoId" value="1">풋살</button>
+				<button type="submit"  class="sport" name="spoId" value="2">테니스</button>
+				<button type="submit"  class="sport" name="spoId" value="3">배드민턴</button>
+				<button type="submit"  class="sport" name="spoId" value="4">탁구</button>
+				<button type="submit"  class="sport" name="spoId" value="5">수영</button>
+				<button type="submit"  class="sport" name="spoId" value="6">골프</button>
+				<!-- <button type="button" name="spoId" onclick="location.href='/match/list'"><img src="../../img/football.jpg" width="35px">전체</button>
+				<button type="submit" name="spoId" value="1"><img src="../../img/football.jpg" width="35px">풋살</button>
+				<button type="submit" name="spoId" value="2"><img src="../../img/football.jpg" width="35px">테니스</button>
+				<button type="submit" name="spoId" value="3"><img src="../../img/football.jpg" width="35px">배드민턴</button>
+				<button type="submit" name="spoId" value="4"><img src="../../img/football.jpg" width="35px">탁구</button>
+				<button type="submit" name="spoId" value="5"><img src="../../img/football.jpg" width="35px">수영</button>
+				<button type="submit" name="spoId" value="6"><img src="../../img/football.jpg" width="35px">골프</button> -->
+			</form>
+			</div>
+		</div>
+
+	<div class="inner">
 	<div class="row list">
-<div>
-	<div class="sport-div">
-	<form action="/match/category"  method="get">
-		<button type="button"  class="sport" name="spoId" onclick="location.href='/match/list'">전체</button>
-		<button type="submit"  class="sport" name="spoId" value="1">풋살</button>
-		<button type="submit"  class="sport" name="spoId" value="2">테니스</button>
-		<button type="submit"  class="sport" name="spoId" value="3">배드민턴</button>
-		<button type="submit"  class="sport" name="spoId" value="4">탁구</button>
-		<button type="submit"  class="sport" name="spoId" value="5">수영</button>
-		<button type="submit"  class="sport" name="spoId" value="6">골프</button>
-		<!-- <button type="button" name="spoId" onclick="location.href='/match/list'"><img src="../../img/football.jpg" width="35px">전체</button>
-		<button type="submit" name="spoId" value="1"><img src="../../img/football.jpg" width="35px">풋살</button>
-		<button type="submit" name="spoId" value="2"><img src="../../img/football.jpg" width="35px">테니스</button>
-		<button type="submit" name="spoId" value="3"><img src="../../img/football.jpg" width="35px">배드민턴</button>
-		<button type="submit" name="spoId" value="4"><img src="../../img/football.jpg" width="35px">탁구</button>
-		<button type="submit" name="spoId" value="5"><img src="../../img/football.jpg" width="35px">수영</button>
-		<button type="submit" name="spoId" value="6"><img src="../../img/football.jpg" width="35px">골프</button> -->
-	</form>
-	</div>
-</div>
+
 <!-- 상세조건검색 -->
 <div class="wrap__filter"> 
 <div id="facility-search">
@@ -112,13 +116,13 @@
 		<div class="search__location">
 			<h4>참가인원</h4>
 			<div class="counting">
-				<input type='button' onclick="fnCalCount('p',this);"value='+'/>
+				<input type='button' onclick="fnCalCount('m', this);" value='-'/>
 			 <span class="countspan">
 				<span class="bseq_ea" style="display: none;">22</span>
 					<!-- <label for="count_people" id='result'>2</label><span> 명</span> -->
-					<input type="text" name="searchTotal" value="2" min="2" max="22" id="count_people"> 
+					<input type="text" name="searchTotal" value="2" min="2" max="22" id="count_people" style="width: 100%;"> 
 				</span>	
-				<input type='button' onclick="fnCalCount('m', this);" value='-'/>
+				<input type='button' onclick="fnCalCount('p',this);"value='+'/>
 			</div>
 		</div>
 
@@ -164,7 +168,7 @@
 												</c:if>
 											</c:forEach>
 										</span>
-										<span class="sports-category">테니스</span>
+										<span class="sports-category">${dto.spoName}</span>
 										<span class="num-people">${dto.cntJoin }/${dto.matchTotal }명</span>
 									</p>
 									
@@ -230,7 +234,7 @@
 
 
 
-
+		</div>
 	</div>
 </div>
 	<%@ include file="footer.jsp" %>
