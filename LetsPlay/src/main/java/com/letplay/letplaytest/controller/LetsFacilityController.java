@@ -4,12 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,32 +23,22 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.letplay.letplaytest.biz.FacBiz;
-import com.letplay.letplaytest.biz.InqReplyBiz;
-import com.letplay.letplaytest.biz.InquiryBiz;
 import com.letplay.letplaytest.biz.LikesBiz;
 import com.letplay.letplaytest.biz.MemberBiz;
 import com.letplay.letplaytest.biz.ReviewBiz;
-import com.letplay.letplaytest.dto.Criteria;
 import com.letplay.letplaytest.dto.FacDto;
 import com.letplay.letplaytest.dto.FacResDto;
-import com.letplay.letplaytest.dto.InqReplyDto;
-import com.letplay.letplaytest.dto.InquiryDto;
 import com.letplay.letplaytest.dto.LikesDto;
 import com.letplay.letplaytest.dto.MemberDto;
-import com.letplay.letplaytest.dto.PageDto;
 import com.letplay.letplaytest.dto.SearchDto;
 import com.letplay.letplaytest.dto.TimeDto;
 
 @Controller
 @SessionAttributes("member")
 @RequestMapping("/")
-public class LetsYunaController {
+public class LetsFacilityController {
 	@Autowired
 	private FacBiz facBiz;
-	@Autowired
-	private InquiryBiz inquiryBiz;
-	@Autowired
-	private InqReplyBiz inqreplyBiz;
 	@Autowired
 	private ReviewBiz reivewBiz;
 	@Autowired
@@ -97,8 +83,6 @@ public class LetsYunaController {
 		
 		//datetime -> 날짜와 시간으로 각각 나눠서 view에 전달
 		List<TimeDto> datelist = facBiz.selectTime(facSeq);
-		//Map<TimeDto, List<String>> datetimeMap = new HashMap<TimeDto, List<String>>();
-		//List<String> timelist = new ArrayList<String>();
 		for(TimeDto dto : datelist) {
 			Date dt = dto.getDt();
 			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -107,37 +91,16 @@ public class LetsYunaController {
 			String time = ds.substring(11);
 			dto.setDate(date);
 			dto.setTime(time);
-			//timelist.add(time);
-			//datetimeMap.put(dto, null);
 		}
-//		List<List<String>> times = new ArrayList<>();
-//		int partitionSize = 24;
-//		times.add(timelist.subList(0,18));
-//// 		for(int i=18; i<timelist.size(); i+=partitionSize) {
-////			times.add(timelist.subList(i, Math.min(i + partitionSize, timelist.size())));
-////		}
-// 		for(TimeDto dto : datelist) {
-// 			datetimeMap.put(dto, times.get(0));
-// 		}
-		//model.addAttribute("timeMap", datetimeMap);
 
 		model.addAttribute("time", datelist);
-		
 		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		model.addAttribute("dto", facBiz.selectFac(facSeq));
 		model.addAttribute("like", likesBiz.selectfac(facSeq, member.getId()));
 		model.addAttribute("reviewlist", reivewBiz.selectReviewList(facSeq));
 		return "facilitydetail";
 	}
-	
-//	@RequestMapping(value="/facility/pathfind", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
-//	@ResponseBody
-//	public RedirectView findPath(@RequestParam("facName") String facName, @RequestParam("coordsy") String coordsy, @RequestParam("coordsx") String coordsx) {
-//		RedirectView redirectView = new RedirectView();
-//		redirectView.setUrl("https://map.kakao.com/link/to/"+facName+","+coordsy+","+coordsx);
-//		return redirectView;
-//	}
-	
+
 	@PostMapping("/facility/delete")
 	public String deletFac(Model model, @RequestParam(value="delList", required=false) List<Integer> ids) {
 		if (ids == null) {
@@ -250,128 +213,6 @@ public class LetsYunaController {
 		}else {
 			model.addAttribute("msg", "예약 실패");
 			model.addAttribute("url", "/facility/detail?facSeq="+dto.getFacSeq());
-			return "alert";
-		}
-	}
-	
-	//1대1문의
-	@GetMapping("/inquiry/list")
-	public String selectInquirylist(HttpServletRequest request, Model model, Criteria criteria) {
-		//로그인정보
-		HttpSession session = request.getSession();
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		model.addAttribute("member", memBiz.selectmember(member.getId()));
-		
-		//페이징
-		int inqListCnt = inquiryBiz.getTotal();
-		PageDto paging = new PageDto();
-		paging.setCri(criteria);
-		paging.setTotal(inqListCnt);
-		model.addAttribute("inquirylist", inquiryBiz.selectList(criteria));
-		model.addAttribute("paging", paging);
-//		model.addAttribute("paging", new PageDto(10, inquiryBiz.getTotal(), criteria));
-		return "inquirylist";
-	}
-
-	@GetMapping("/inquiry/detail")
-	public String selectInquiryOne(HttpServletRequest request, Model model, int inqSeq) {
-		HttpSession session = request.getSession();
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		model.addAttribute("member", memBiz.selectmember(member.getId()));
-		model.addAttribute("dto", inquiryBiz.selectOne(inqSeq));
-		model.addAttribute("reply", inqreplyBiz.select(inqSeq));
-		return "inquirydetail";
-	}
-	
-	@GetMapping("/inquiry/insertform")
-	public String insertFormInq(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		MemberDto member = (MemberDto) session.getAttribute("login");
-		model.addAttribute("member", memBiz.selectmember(member.getId()));
-		return "inquiryinsert";
-	}
-	
-	@PostMapping("/inquiry/insert")
-	public String insertInq(Model model, InquiryDto dto) {
-		if(inquiryBiz.insert(dto)>0) {
-			model.addAttribute("msg", "등록 완료");
-			model.addAttribute("url", "/inquiry/list");
-			return "alert";
-		}else {
-			model.addAttribute("msg", "등록 실패");
-			model.addAttribute("url", "/inquiry/insertform");
-			return "alert";
-		}
-	}
-	
-	@GetMapping("/inquiry/updateform")
-	public String updateFormInq(Model model, int inqSeq) {
-		model.addAttribute("dto", inquiryBiz.selectOne(inqSeq));
-		return "inquiryupdate";
-	}
-	
-	@PostMapping("/inquiry/update")
-	public String updateInq(Model model, InquiryDto dto) {
-		if(inquiryBiz.update(dto)>0) {
-			model.addAttribute("msg", "수정 완료");
-			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());
-			return "redirect:/inquiry/detail?inqSeq="+dto.getInqSeq();
-		}else {
-			model.addAttribute("msg", "수정 실패");
-			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());
-			return "alert";
-		}
-	}
-	
-	@GetMapping("/inquiry/delete")
-	public String deleteInq(Model model, int inqSeq) {
-		if(inquiryBiz.delete(inqSeq)>0) {
-			model.addAttribute("msg", "삭제 성공");
-			model.addAttribute("url", "/inquiry/list");
-			return "alert";
-		}else {
-			model.addAttribute("msg", "삭제 실패");
-			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
-			return "alert";
-		}
-	}
-	
-	//문의 댓글
-	@PostMapping("/inquiry/reply/insert")
-	public String insertInqRep(InqReplyDto dto, int inqSeq, Model model ) {
-		if(inqreplyBiz.insert(dto)>0) {
-			model.addAttribute("msg", "등록 완료");
-			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
-			return "alert";
-		}else {
-			model.addAttribute("msg", "등록 실패");
-			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
-			return "alert";
-		}
-	}
-	
-	@PostMapping("/inquiry/reply/update")
-	public String updateInqRep(InqReplyDto dto, int inqSeq, Model model) {
-		if(inqreplyBiz.update(dto)>0) {
-			model.addAttribute("msg", "수정 완료");
-			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());
-			return "alert";
-		}else {
-			model.addAttribute("msg", "수정 실패");
-			model.addAttribute("url", "/inquiry/detail?inqSeq="+dto.getInqSeq());
-			return "alert";
-		}
-	}
-	
-	@GetMapping("/inquiry/reply/delete")
-	public String deleteInqRep(int repSeq, int inqSeq, Model model) {
-		if(inqreplyBiz.delete(repSeq)>0) {
-			model.addAttribute("msg", "삭제 성공");
-			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
-			return "alert";
-		}else {
-			model.addAttribute("msg", "삭제 실패");
-			model.addAttribute("url", "/inquiry/detail?inqSeq="+inqSeq);
 			return "alert";
 		}
 	}
