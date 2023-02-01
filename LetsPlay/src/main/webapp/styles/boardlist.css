@@ -410,7 +410,7 @@ background-color: var(--font-50);
 ul{ list-style:none; }
 #optionBtn { display: none; }
 
-#insertBtn, #updateBtn, #deleteBtn { visibility: hidden; }
+#insertBtn, #updateBtn, #deleteBtn,#writeBtn { visibility: hidden; }
 #selectAll { display: none; }
 .delList { display: none; }
 #payment-submit{ display:none;}
