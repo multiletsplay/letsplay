@@ -86,8 +86,8 @@ public interface FacMapper {
 	" 	<if test='optShower == true'>AND FAC_SHOWER=#{optShower} </if> ",
 	" 	<if test='optLocker == true'>AND FAC_LOCKER=#{optLocker} </if> ",
 	" 	<if test='optLight == true'>AND FAC_LIGHT=#{optLight} </if> ",
-	" 	<if test='optCost.equals(\"T\")'>AND FAC_COSTCHECK=1 </if> ",
-	" 	<if test='optCost.equals(\"F\")'>AND FAC_COSTCHECK=0 </if> ",
+	" 	<if test='optCost != null and optCost.equals(\"T\")'>AND FAC_COSTCHECK=1 </if> ",
+	" 	<if test='optCost != null and optCost.equals(\"F\")'>AND FAC_COSTCHECK=0 </if> ",
 	" </where> ",
 	" GROUP BY f.FAC_SEQ ",
 	" </script>" })
