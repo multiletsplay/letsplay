@@ -78,7 +78,8 @@
 #FAQBundleTop {
 	display: flex;
 	justify-content: center;
-	height:800px;
+	height:auto;
+	min-height: 800px;
 }
 
 .BundleWrapper {

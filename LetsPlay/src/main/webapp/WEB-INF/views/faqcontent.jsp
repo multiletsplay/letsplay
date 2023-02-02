@@ -2,29 +2,50 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
+<style>
+
+		.contents {
+		width: 600px;
+		}
+        ul {
+            list-style: none;
+        }
+
+        .button_wrap button {
+            outline: none;
+            border: none;
+            background-color: lightgray;
+            color: white;
+            padding: 1rem 2rem;
+            cursor: pointer;
+        }
+
+        .button_wrap .on {
+            background-color: green;
+        }
+    </style>
 <div id='FAQBundleTop'>
 <div class="BundleWrapper">
 <div><h2>자주 묻는 질문</h2></div>
-<div class='Bundle'>
-      <span class='titleSection' onClick={Appearance}>
-        <span class='TitleQs'><button type='button'>랫플 소개</button></span>
-      </span>
-      <div class='PersonalResult'>
-        다양한 스포츠를 한번에 비교, 예약, 매칭 가능한 시스템<br>
+
+    <section class="button_wrap">
+        <button class="on" data-id="1">랫플 소개</button>
+        <button data-id="2">로그인 문제</button>
+        <button data-id="3">결제 관련 문제</button>
+	    <button data-id="4">환불 관련 문제</button>
+    </section>
+    <section class="contents" style="padding-top:50px;">
+        <ul>
+            <li id="1" style="display:none">
+               <p>다양한 스포츠를 한번에 비교, 예약, 매칭 가능한 시스템<br>
 				스포츠 매칭을 통하여, 누구나 쉽고 빠르게 여러 사람들과 스포츠를 즐길 수 있다.<br>
 				원하는 운동에 대한 시설 정보와 레슨 예약을 직접 검색해서 하나씩 알아봐야 하는 번거로움을 줄여서 
 				스포츠를 즐길 수 있는 환경을 조성하고, 진입 장벽을 낮추어 생활체육의 참여를 높이는 장점이 있다.<br>
 				기존 한 종목만 예약 가능한 스포츠 예약 사이트에서 벗어나, 다양한 스포츠를 
-				한곳에서 예약하고 팀매칭까지 이뤄지는 웹서비스
-      </div>
-      </div>
-
-<div class='Bundle'>
-<span class='titleSection' onClick={Appearance}>
-        <span class='TitleQs'><button type='button'>로그인 문제</button></span>
-      </span>
-      <div class='PersonalResult'>
-        로그인이 어려우시면 다음 중 가장 관련 있는 상황을 선택해서 자세히 알아보세요.<br><br>
+				한곳에서 예약하고 팀매칭까지 이뤄지는 웹서비스</p>
+            </li>
+            <li id="2" style="display:none">
+                <p> 로그인이 어려우시면 다음 중 가장 관련 있는 상황을 선택해서 자세히 알아보세요.<br><br>
 				로그인을 어떻게 하는지 모르겠습니다<br>
 				아이디 또는 비밀번호를 잊어버렸습니다<br>
 				비밀번호 재설정 인증번호를 받지 못했습니다<br>
@@ -57,16 +78,10 @@
 
 				위에 해당 사항 없음<br>
 				위의 정보와 관계없는 로그인 문제를 겪고 계시면 고객선터에 문의하세요. <br>
-				최대한 빨리 로그인 문제를 해결하고 저희 서비스를 마음껏 사용할 수 있도록 상담원이 도와드리겠습니다.
-      </div>
-      </div>
-
-<div class='Bundle'>
-<span class='titleSection' onClick={Appearance}>
-        <span class='TitleQs'><button type='button'>결제 관련 문제</button></span>
-      </span>
-      <div class='PersonalResult'>
-        결제 거부 또는 처리 실패가 떠요<br>
+				최대한 빨리 로그인 문제를 해결하고 저희 서비스를 마음껏 사용할 수 있도록 상담원이 도와드리겠습니다.</p>
+            </li>
+            <li id="3" style="display:none">
+                <p> 결제 거부 또는 처리 실패가 떠요<br>
 				결제 수단이 거절되거나 처리되지 않을 때는 다음의 원인이 있을 수 있습니다.<br>
 
 				카드 기한 만료<br>
@@ -75,18 +90,51 @@
 				카드 발급사 지원 불가 <br>
 			
 				각 원인들을 확인 후 다시 결제를 진행해주시기 바랍니다.<br>
-				이후에도 결제 거부 또는 처리 실패가 뜰 경우, 고객센터에 문의바랍니다.
-      </div>
-      </div>
-      
-<div class='Bundle'>
-<span class='titleSection' onClick={Appearance}>
-        <span class='TitleQs'><button type='button'>환불 관련 문제</button></span>
-      </span>
-      <div class='PersonalResult'>
-        각 시설 업체에서 준수하고 있는 환불 가능 기간을 확인하여 주시기 바랍니다.
-      </div>
-</div>
+				이후에도 결제 거부 또는 처리 실패가 뜰 경우, 고객센터에 문의바랍니다.</p>
+            </li>
+ 			<li id="4" style="display:none">
+                <p>각 시설 업체에서 준수하고 있는 환불 가능 기간을 확인하여 주시기 바랍니다.</p>
+            </li>
+        </ul>
+    </section>
+
+    <script>
+        const btn = document.querySelectorAll('.button_wrap button');
+        const content = document.querySelectorAll('.contents li');
+
+        for (var i = 0; i < btn.length; i++) {
+            btn[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                let target = e.target.dataset.id
+                console.log(target);
+
+                for (var x = 0; x < content.length; x++) {
+                    content[x].style.display = 'none';
+                }
+
+                document.getElementById(target).style.display = 'block';
+
+                for (var j = 0; j < btn.length; j++) {
+                    btn[j].classList.remove('on');
+                    e.target.classList.add('on');
+                }
+            })
+
+        }
+
+
+    </script>
     </div>
     </div>
+    
+ <script type="text/javascript">
+	function Appearance() {
+		var setUp =  document.getElementsByClassName("PersonalResult");
+		if(setUp.style.display === "none"){
+			setUp.style.display === 'block'
+		}else {
+			setUp.style.display === 'none'
+		}
+	}
+</script>
 <%@ include file="footer.jsp" %>
