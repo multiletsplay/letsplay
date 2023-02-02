@@ -125,6 +125,16 @@ hr {
     margin-bottom: 25px;
     margin-left: 121px;
 }
+
+.formBtn ul{
+    display: flex;
+}
+
+.formBtn ul li.formBtnGender label{
+    padding: 2px 48px;
+}
+
+
 .formBtn button {
     width: 120px;
     border-style: none;
