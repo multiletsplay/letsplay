@@ -169,7 +169,7 @@
 
 								
 								<div class="comment">
-									<h4 style="margin: 40px auto;">댓글</h4>
+									<h4 style="margin: 40px auto;">후기</h4>
 
 									<form method="post" action="/match/insertreply?matchSeq=${dto.matchSeq}">
 										<!-- <p>작성자 : ${member.nickname }</p> -->
