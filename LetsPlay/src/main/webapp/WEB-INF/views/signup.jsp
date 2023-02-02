@@ -214,7 +214,18 @@
 
         </div>
         <div class='formBtn'>
-       	  <label class='formBtnGender'>
+          <ul>
+            <li class='formBtnGender'>
+              <input id="gender01" type="radio" name="gender" value="M"/>
+              <label for="gender01">남자</label>
+            </li>
+
+            <li class='formBtnGender'>
+              <input id="gender02" type="radio" name="gender" value="F"/>
+              <label for="gender02">여자</label>
+            </li>
+          </ul>
+       	  <!-- <label class='formBtnGender'>
 	          <input type="radio" name="gender" value="M"/>
 	          <span>남자</span>
           </label>
@@ -222,7 +233,7 @@
           <label class='formBtnGender'>
 	          <input type="radio" name="gender" value="F"/>
 	          <span>여자</span>
-           </label>
+           </label> -->
         </div>
         <div class='formDate ValTarget'>
           <div>생년월일</div>

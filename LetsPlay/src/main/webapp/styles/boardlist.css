@@ -475,7 +475,9 @@ background-color: transparent;
 margin-bottom: 0px;
 }
 
-.list-facility li label, .match__insert ul li label {
+.list-facility li label, 
+.match__insert ul li label,
+.formBtn ul li label {
   display: block;
   border-radius: 6px;
   border: 1px solid #e0e0e0;
@@ -493,7 +495,9 @@ margin-bottom: 0px;
 
 
 
-.list-facility li input:checked+label, .match__insert ul li input:checked+label {
+.list-facility li input:checked+label, 
+.match__insert ul li input:checked+label,
+.formBtn ul li input:checked+label{
     color: var(--primary);
     border-color: var(--primary);
 }
