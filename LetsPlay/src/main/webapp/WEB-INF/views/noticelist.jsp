@@ -3,19 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- <style type="text/css">
 	ul{list-style: none; }
 	li{float: left; margin-right: 10px;}
 </style> -->
-
+<style type="text/css">
+	#insertBtn { visibility: hidden; }
+	#deleteBtn { visibility: hidden; }
+	#writeBtn { visibility: hidden; }
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
-
 $(document).ready(function(){
 		var mem = '${member.type }';
 		
-		if (mem=='admin'){
+		if (mem!='admin'){
 			$("#insertBtn").css("visibility","visible");
 			$("#deleteBtn").css("visibility","visible");
 			$("#writeBtn").css("visibility","visible");
@@ -31,15 +34,14 @@ $(function() {
 			console.log(value);
 			document.pageForm.pageNum.value = value;
 			document.pageForm.submit();
-		});
+		})
 		
-	})
+	});
 	
 	function fn1(){
 	if (confirm("게시글을 삭제하시겠습니까?")) {
 		location.href='/notice/delete?noticeSeq=${dto.noticeSeq}'
-	}
-};
+	}};
 
 	function showContent() {
 		console.log("clicked")
@@ -49,7 +51,7 @@ $(function() {
 		}else {
 			Contents.style.display = 'block';
 		}
-	}
+	};
 
 </script>
 
@@ -61,7 +63,7 @@ $(function() {
 </div>
 
 <div class='LetplCompose'>
-	<input type="button" id="writeBtn" value="글쓰기" onclick="location.href='/notice/insertform'"/>
+	<button type="button" id="writeBtn" onclick="location.href='/notice/insertform'">글쓰기</button>
 </div>
 <div class='LetplNotice'>
 	<div class='LetplNum'>번호</div>
@@ -86,8 +88,8 @@ $(function() {
 	<div id='PersonalResult'>
         <div>${notice.noticeContent }</div>
         <div class='modBtn'>
-          <button type="button" id="insertBtn" onclick="location.href='/notice/updateform?noticeSeq=${notice.noticeSeq}'">수정</button>
-       	  <button style='margin-right:15px;' id="deleteBtn" type="button" onclick="javascript:fn1();">삭제</button>
+          <button type="button" id="insertBtn" value="수정" onclick="location.href='/notice/updateform?noticeSeq=${notice.noticeSeq}'"></button>
+       	  <button style='margin-right:15px;' id="deleteBtn" type="button" value="삭제" onclick="javascript:fn1();"></button>
         </div>
       </div>
       </div>
