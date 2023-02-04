@@ -54,8 +54,8 @@
 							<c:otherwise><li>답변완료</li></c:otherwise>
 						</c:choose>
 						<c:choose>
-							<c:when test="${member.id == dto.id or member.id == 'admin' }"><li class='inqListTitle'><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></li></c:when>
-							<c:otherwise><li>${dto.inqTitle } 🔒 </li></c:otherwise>
+							<c:when test="${member.id == dto.id or member.type == 'admin' }"><li class='inqListTitle'><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></li></c:when>
+							<c:otherwise><li class='inqListTitle'>${dto.inqTitle } 🔒 </li></c:otherwise>
 						</c:choose>
 						<li class='inqListID'>${dto.id }</li>
 						<li class='inqListDate'><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.inqDate }"/></li>
