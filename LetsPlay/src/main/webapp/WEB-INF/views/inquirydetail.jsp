@@ -73,7 +73,7 @@
           <textarea rows="10" cols="80" name="repContent"></textarea>
         </div>
         <div class="UploadeAnswer">
-          <input type="submit" value="댓글 등록">
+          <input type="submit" id="commentBtn" value="댓글 등록">
         </div>
     </form>
   </c:when>
