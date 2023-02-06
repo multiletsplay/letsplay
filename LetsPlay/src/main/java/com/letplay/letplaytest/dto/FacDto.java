@@ -31,6 +31,8 @@ public class FacDto {
 	private int resStatus;
 	private String date;
 	private String time;
+	private int lesSeq;
+	private String lesName;
 	
 	public FacDto() {
 		super();
@@ -40,7 +42,8 @@ public class FacDto {
 	public FacDto(int facSeq, String facName, int spoId, String spoName, String facLocation, String facContact,
 			int facCost, String facImg, String facImgpath, Date facDate, Boolean facParking, Boolean facLent,
 			Boolean facShower, Boolean facLocker, Boolean facLight, Boolean facCostcheck, int likesStatus,
-			int cntReview, double avgRate, Date dt, int resStatus, String date, String time) {
+			int cntReview, double avgRate, Date dt, int resStatus, String date, String time, int lesSeq,
+			String lesName) {
 		super();
 		this.facSeq = facSeq;
 		this.facName = facName;
@@ -65,119 +68,158 @@ public class FacDto {
 		this.resStatus = resStatus;
 		this.date = date;
 		this.time = time;
+		this.lesSeq = lesSeq;
+		this.lesName = lesName;
 	}
 
 	public int getFacSeq() {
 		return facSeq;
 	}
+
 	public void setFacSeq(int facSeq) {
 		this.facSeq = facSeq;
 	}
+
 	public String getFacName() {
 		return facName;
 	}
+
 	public void setFacName(String facName) {
 		this.facName = facName;
 	}
+
 	public int getSpoId() {
 		return spoId;
 	}
+
 	public void setSpoId(int spoId) {
 		this.spoId = spoId;
 	}
+
 	public String getSpoName() {
 		return spoName;
 	}
+
 	public void setSpoName(String spoName) {
 		this.spoName = spoName;
 	}
+
 	public String getFacLocation() {
 		return facLocation;
 	}
+
 	public void setFacLocation(String facLocation) {
 		this.facLocation = facLocation;
 	}
+
 	public String getFacContact() {
 		return facContact;
 	}
+
 	public void setFacContact(String facContact) {
 		this.facContact = facContact;
 	}
-	public Date getFacDate() {
-		return facDate;
-	}
-	public void setFacDate(Date facDate) {
-		this.facDate = facDate;
-	}
-	public Boolean getFacParking() {
-		return facParking;
-	}
-	public void setFacParking(Boolean facParking) {
-		this.facParking = facParking;
-	}
-	public Boolean getFacLent() {
-		return facLent;
-	}
-	public void setFacLent(Boolean facLent) {
-		this.facLent = facLent;
-	}
-	public Boolean getFacShower() {
-		return facShower;
-	}
-	public void setFacShower(Boolean facShower) {
-		this.facShower = facShower;
-	}
-	public Boolean getFacLocker() {
-		return facLocker;
-	}
-	public void setFacLocker(Boolean facLocker) {
-		this.facLocker = facLocker;
-	}
-	public Boolean getFacLight() {
-		return facLight;
-	}
-	public void setFacLight(Boolean facLight) {
-		this.facLight = facLight;
-	}
+
 	public int getFacCost() {
 		return facCost;
 	}
+
 	public void setFacCost(int facCost) {
 		this.facCost = facCost;
 	}
-	public Boolean getFacCostcheck() {
-		return facCostcheck;
-	}
-	public void setFacCostcheck(Boolean facCostcheck) {
-		this.facCostcheck = facCostcheck;
-	}
+
 	public String getFacImg() {
 		return facImg;
 	}
+
 	public void setFacImg(String facImg) {
 		this.facImg = facImg;
 	}
+
 	public String getFacImgpath() {
 		return facImgpath;
 	}
+
 	public void setFacImgpath(String facImgpath) {
 		this.facImgpath = facImgpath;
 	}
+
+	public Date getFacDate() {
+		return facDate;
+	}
+
+	public void setFacDate(Date facDate) {
+		this.facDate = facDate;
+	}
+
+	public Boolean getFacParking() {
+		return facParking;
+	}
+
+	public void setFacParking(Boolean facParking) {
+		this.facParking = facParking;
+	}
+
+	public Boolean getFacLent() {
+		return facLent;
+	}
+
+	public void setFacLent(Boolean facLent) {
+		this.facLent = facLent;
+	}
+
+	public Boolean getFacShower() {
+		return facShower;
+	}
+
+	public void setFacShower(Boolean facShower) {
+		this.facShower = facShower;
+	}
+
+	public Boolean getFacLocker() {
+		return facLocker;
+	}
+
+	public void setFacLocker(Boolean facLocker) {
+		this.facLocker = facLocker;
+	}
+
+	public Boolean getFacLight() {
+		return facLight;
+	}
+
+	public void setFacLight(Boolean facLight) {
+		this.facLight = facLight;
+	}
+
+	public Boolean getFacCostcheck() {
+		return facCostcheck;
+	}
+
+	public void setFacCostcheck(Boolean facCostcheck) {
+		this.facCostcheck = facCostcheck;
+	}
+
 	public int getLikesStatus() {
 		return likesStatus;
 	}
+
 	public void setLikesStatus(int likesStatus) {
 		this.likesStatus = likesStatus;
 	}
+
 	public int getCntReview() {
 		return cntReview;
 	}
+
 	public void setCntReview(int cntReview) {
 		this.cntReview = cntReview;
 	}
+
 	public double getAvgRate() {
 		return avgRate;
 	}
+
 	public void setAvgRate(double avgRate) {
 		this.avgRate = avgRate;
 	}
@@ -213,5 +255,23 @@ public class FacDto {
 	public void setTime(String time) {
 		this.time = time;
 	}
+
+	public int getLesSeq() {
+		return lesSeq;
+	}
+
+	public void setLesSeq(int lesSeq) {
+		this.lesSeq = lesSeq;
+	}
+
+	public String getLesName() {
+		return lesName;
+	}
+
+	public void setLesName(String lesName) {
+		this.lesName = lesName;
+	}
+
+	
 
 }

@@ -45,7 +45,7 @@
   </div>
   <div class="repContentWrapper">
       <span>내용</span>
-      <textarea rows="10" cols="80" name="repContent"></textarea>
+      <textarea rows="10" cols="80" name="repContent">${dto.inqContent }</textarea>
   </div>
   <div class="UploadeAnswers">
     <input type="button" value="목록" onclick="location.href='/inquiry/list'">
@@ -73,7 +73,7 @@
           <textarea rows="10" cols="80" name="repContent"></textarea>
         </div>
         <div class="UploadeAnswer">
-          <input type="submit" value="댓글 등록">
+          <input type="submit" id="commentBtn" value="댓글 등록">
         </div>
     </form>
   </c:when>
@@ -94,8 +94,8 @@
         <textarea rows="10" cols="80" readonly="readonly">${reply.repContent }</textarea>
       </div>
       <div class="ChangeAnswers">
-        <input type="button" value="삭제" onclick="location.href='/inquiry/reply/delete?repSeq=${reply.repSeq}&inqSeq=${reply.inqSeq }'">
-        <input type="button" value="수정" onclick="location.href='/inquiry/reply/updateform?repSeq=${reply.repSeq}'">
+        <input type="button" value="삭제" id="comUpdateBtn" onclick="location.href='/inquiry/reply/delete?repSeq=${reply.repSeq}&inqSeq=${reply.inqSeq }'">
+        <input type="button" value="수정" id="comDelBtn" onclick="location.href='/inquiry/reply/updateform?repSeq=${reply.repSeq}'">
       </div>
   </c:otherwise>
 </c:choose>
