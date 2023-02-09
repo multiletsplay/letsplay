@@ -1,7 +1,7 @@
 package com.letplay.letplaytest.controller;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,10 +45,10 @@ public class LetsMatchController {
 		List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
 		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchlist) {
-			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = LocalDateTime.now();
-			Duration duration = Duration.between(matchEnddate, matchRegdate);
-			int days = ((int) duration.toDays()-1)*-1;
+			LocalDate matchEnddate = dto.getMatchEnddate();
+			LocalDate matchRegdate = LocalDate.now();
+			Period period = Period.between(matchEnddate, matchRegdate);
+			int days = ((int) period.getDays()*-1);
 			dto.setdDay(days);
 			dDayMap.put(dto, days);
 		}
@@ -66,20 +66,20 @@ public class LetsMatchController {
 		List<MatchDto> matchEndlist = matchBiz.selectEndList(spoId);
 		Map<MatchDto, Integer> dEndDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchEndlist) {
-			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = LocalDateTime.now();
-			Duration duration = Duration.between(matchEnddate, matchRegdate);
-			int days = ((int) duration.toDays()-1)*-1;
+			LocalDate matchEnddate = dto.getMatchEnddate();
+			LocalDate matchRegdate = LocalDate.now();
+			Period period = Period.between(matchEnddate, matchRegdate);
+			int days = ((int) period.getDays()*-1);
 			dto.setdDay(days);
 			dEndDayMap.put(dto, days);
 		}
 		List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
 		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchlist) {
-			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = LocalDateTime.now();
-			Duration duration = Duration.between(matchEnddate, matchRegdate);
-			int days = ((int) duration.toDays()-1)*-1;
+			LocalDate matchEnddate = dto.getMatchEnddate();
+			LocalDate matchRegdate = LocalDate.now();
+			Period period = Period.between(matchEnddate, matchRegdate);
+			int days = ((int) period.getDays()*-1);
 			dto.setdDay(days);
 			dDayMap.put(dto, days);
 		}
@@ -101,10 +101,10 @@ public class LetsMatchController {
 			
 			Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 			for(MatchDto vo : matchlist) {
-				LocalDateTime matchEnddate = vo.getMatchEnddate();
-				LocalDateTime matchRegdate = LocalDateTime.now();
-				Duration duration = Duration.between(matchEnddate, matchRegdate);
-				int days = ((int) duration.toDays()-1)*-1;
+				LocalDate matchEnddate = vo.getMatchEnddate();
+				LocalDate matchRegdate = LocalDate.now();
+				Period period = Period.between(matchEnddate, matchRegdate);
+				int days = ((int) period.getDays()*-1);
 				vo.setdDay(days);
 				dDayMap.put(vo, days);
 			}
@@ -276,30 +276,6 @@ public class LetsMatchController {
 		return "facimport-pop";
 	}
 	
-	//메인
-	
-//	@GetMapping("/index")
-//	public String selectMainList(Model model, HttpServletRequest request, int spoId, String id) {
-//		HttpSession session = request.getSession();
-//		MemberDto member = (MemberDto) session.getAttribute("login");
-//		List<MatchDto> matchlist = matchBiz.selectMatchList(member.getId());
-//		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
-//		for(MatchDto dto : matchlist) {
-//			LocalDateTime matchEnddate = dto.getMatchEnddate();
-//			LocalDateTime matchRegdate = dto.getMatchRegdate();
-//			Duration duration = Duration.between(matchEnddate, matchRegdate);
-//			int days = ((int) duration.toDays()-1)*-1;
-//			dto.setdDay(days);
-//			dDayMap.put(dto, days);
-//		}
-//		model.addAttribute("ddays", dDayMap);
-//		model.addAttribute("list",matchBiz.selectMatchList(member.getId()));
-//		model.addAttribute("cnt",matchBiz.matchListCount());
-//		model.addAttribute("endcnt",matchBiz.matchEndCount());
-//		
-//		model.addAttribute("spolist",matchBiz.selectMainSports(spoId));
-//		model.addAttribute("Hot",matchBiz.selectMainHot(id));
-//		return "index";
-//	}
+
 		
 }

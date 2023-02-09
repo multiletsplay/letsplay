@@ -243,7 +243,7 @@
 								<li>
 									<p class="p_tit">매칭마감일</p>
 									<p><fmt:parseDate value="${dto.matchEnddate}" 
-										pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+										pattern="yyyy-MM-dd" var="parsedDateTime" type="both"/>
 										<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /></p>
 								</li>
 								<li>
