@@ -1,7 +1,9 @@
 package com.letplay.letplaytest.controller;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,10 +178,10 @@ public class LetsMemberController {
 		List<MatchDto> matchlist = membiz.selectMatchList(member.getId());
 		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchlist) {
-			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = dto.getMatchRegdate();
-			Duration duration = Duration.between(matchEnddate, matchRegdate);
-			int days = ((int) duration.toDays()-1)*-1;
+			LocalDate matchEnddate = dto.getMatchEnddate();
+			LocalDate matchRegdate = LocalDate.now();
+			Period period = Period.between(matchEnddate, matchRegdate);
+			int days = ((int) period.getDays()*-1);
 			dto.setdDay(days);
 			System.out.println("Remaining days: " + days);
 			dDayMap.put(dto, days);
@@ -187,10 +189,10 @@ public class LetsMemberController {
 		List<MatchDto> matchjoinlist = membiz.selectMatchjoinList(member.getId());
 		Map<MatchDto, Integer> dDayMap2 = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchjoinlist) {
-			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = dto.getMatchRegdate();
-			Duration duration = Duration.between(matchEnddate, matchRegdate);
-			int days = ((int) duration.toDays()-1)*-1;
+			LocalDate matchEnddate = dto.getMatchEnddate();
+			LocalDate matchRegdate = LocalDate.now();
+			Period period = Period.between(matchEnddate, matchRegdate);
+			int days = ((int) period.getDays()*-1);
 			dto.setdDay(days);
 			System.out.println("Remaining days: " + days);
 			dDayMap2.put(dto, days);
