@@ -4,6 +4,7 @@
 <%@ include file="header.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -151,7 +152,7 @@
       <a href="#tab2" class="btn"><h2>매치 내역</h2></a>
       <div id="tab2" class="cont">
       	<h3>매치 내역</h3>
-        <p>매치가 완료 된 목록을 한번에 확인 하실 수 있습니다.</p>
+        <p>내가 만든 매치, 참여한 매치 내역입니다.</p>
  			<div id='BookedMatch'>
 				<div class='BookedMatchInform'>
 					<span style='flex-basis:90px; text-align: center;'>작성자</span>
@@ -386,10 +387,8 @@
 						<tr>
 							<th>제목</th>
 							<th>종목</th>
-							<th>시설명</th>
-							<th>날짜</th>
+							<th>매칭일</th>
 							<th>시간</th>
-							<th>총인원</th>
 							<th>찜여부</th>
 						</tr>
 		            <c:forEach items="${likesmatlist }" var="mat">
@@ -397,14 +396,9 @@
 	           			<tr>
 	           				<td><a href="/match/detail?matchSeq=${mat.matchSeq }">${mat.matchTitle }</a></td>
 	           				<td>${mat.spoName}</td>
-	           				<td><fmt:formatDate pattern="MM.dd" value="${mat.matchRegdate}"/></td>
 							<td>
-							<fmt:parseDate  value="${mat.matchRegdate}"
-								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
-							<fmt:formatDate value="${parsedDateTime}" pattern="MM.dd" /></td>
+							<fmt:formatDate value="${mat.matchDay }" pattern="yyyy-MM-dd(E)" /></td>
 	           				<td>${mat.startTime } ~ ${mat.endTime }</td>
-		            		<td>${mat.matchTotal }</td>
-		            		<td></td>
 		            		<td>
 				   					<img id="dellikeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 		            		</td>

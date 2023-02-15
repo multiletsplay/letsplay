@@ -41,7 +41,10 @@ public class LetsCSController {
 	
 	//공지사항
 	@GetMapping("/notice/list")
-	public String selectNoticelist(NoticeDto dto, Model model, Criteria criteria) {
+	public String selectNoticelist(NoticeDto dto, Model model, Criteria criteria, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		int noticeListCnt = noticeBiz.getTotal();
 		PageDto paging = new PageDto();
 		paging.setCri(criteria);
@@ -54,16 +57,23 @@ public class LetsCSController {
 	@GetMapping("/notice/detail")
 	public String selectNoticeOne(Model model, int noticeSeq) {
 		model.addAttribute("dto", noticeBiz.selectNoticeOne(noticeSeq));
+		
 		return "noticedetail";
 	}
 	
 	@GetMapping("/notice/insertform")
-	public String insertNoticeForm() {
+	public String insertNoticeForm(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		return "noticeinsert";
 	}
 	
 	@PostMapping("/notice/insert")
-	public String insertNotice(NoticeDto dto) {
+	public String insertNotice(NoticeDto dto, HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memBiz.selectmember(member.getId()));
 		if(noticeBiz.insertNotice(dto)>0) {
 			return "redirect:/notice/list";
 		}else {
