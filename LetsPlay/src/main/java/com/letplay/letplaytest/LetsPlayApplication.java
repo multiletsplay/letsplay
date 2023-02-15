@@ -1,7 +1,7 @@
 package com.letplay.letplaytest;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,15 +39,15 @@ public class LetsPlayApplication {
 		List<MatchDto> matchlist = matchBiz.selectMainList();
 		Map<MatchDto, Integer> dDayMap = new HashMap<MatchDto, Integer>();
 		for(MatchDto dto : matchlist) {
-			LocalDateTime matchEnddate = dto.getMatchEnddate();
-			LocalDateTime matchRegdate = LocalDateTime.now();
-			Duration duration = Duration.between(matchEnddate, matchRegdate);
-			int days = ((int) duration.toDays()-1)*-1;
+			LocalDate matchEnddate = dto.getMatchEnddate();
+			LocalDate matchRegdate = LocalDate.now();
+			Period period = Period.between(matchEnddate, matchRegdate);
+			int days = ((int) period.getDays()*-1);
 			dto.setdDay(days);
 			dDayMap.put(dto, days);
 		}
 		model.addAttribute("ddays", dDayMap);
-		model.addAttribute("cnt",matchBiz.matchListCount()+55);
+		model.addAttribute("cnt",matchBiz.matchListCount());
 		model.addAttribute("matlist", matchBiz.selectMainList());
 		model.addAttribute("matlisthot", matchBiz.selectMainHot(mspoId));
 		model.addAttribute("faclist", facBiz.selectRateavg(fspoId));
