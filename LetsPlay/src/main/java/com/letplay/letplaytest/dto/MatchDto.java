@@ -1,5 +1,6 @@
 package com.letplay.letplaytest.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -32,11 +33,11 @@ public class MatchDto {
 	private String spoName;
 	private String matchTitle;
 	private String matchContent;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
-	private LocalDateTime matchRegdate;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private LocalDate matchRegdate;
 	private Date matchModidate;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
-	private LocalDateTime matchEnddate;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private LocalDate matchEnddate;
 	private int dDay;
 	private String matchLocation;
 	private int matchTotal;
@@ -61,7 +62,7 @@ public class MatchDto {
 		// TODO Auto-generated constructor stub
 	}
 	public MatchDto(int matchSeq, String id, int spoId, String spoName, String matchTitle, String matchContent,
-			LocalDateTime matchRegdate, Date matchModidate, LocalDateTime matchEnddate, int dDay, String matchLocation,
+			LocalDate matchRegdate, Date matchModidate, LocalDate matchEnddate, int dDay, String matchLocation,
 			int matchTotal, int matchCnt, int matchLevel, String matchFacility, char matchStatus, int cntComment,
 			String startTime, String endTime, int cntJoin, int joinStatus, int likesStatus, Date matchDay,
 			String nickName, int facSeq, String facName) {
@@ -129,10 +130,10 @@ public class MatchDto {
 	public void setMatchContent(String matchContent) {
 		this.matchContent = matchContent;
 	}
-	public LocalDateTime getMatchRegdate() {
+	public LocalDate getMatchRegdate() {
 		return matchRegdate;
 	}
-	public void setMatchRegdate(LocalDateTime matchRegdate) {
+	public void setMatchRegdate(LocalDate matchRegdate) {
 		this.matchRegdate = matchRegdate;
 	}
 	public Date getMatchModidate() {
@@ -141,10 +142,10 @@ public class MatchDto {
 	public void setMatchModidate(Date matchModidate) {
 		this.matchModidate = matchModidate;
 	}
-	public LocalDateTime getMatchEnddate() {
+	public LocalDate getMatchEnddate() {
 		return matchEnddate;
 	}
-	public void setMatchEnddate(LocalDateTime matchEnddate) {
+	public void setMatchEnddate(LocalDate matchEnddate) {
 		this.matchEnddate = matchEnddate;
 	}
 	public int getdDay() {
