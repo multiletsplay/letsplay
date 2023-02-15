@@ -197,9 +197,6 @@
 									<div class="match-date">
 										<span class="date">											
 											<fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
-											<%-- 							<fmt:parseDate  value="${dto.matchEnddate}"  --%>
-											<%-- 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/> --%>
-											<%-- 							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /> --%>
 										</span>
 										<span class="time">${dto.startTime } ~ ${dto.endTime }</span>
 									</div>
