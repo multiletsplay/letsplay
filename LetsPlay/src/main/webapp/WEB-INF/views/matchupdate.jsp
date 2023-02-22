@@ -29,7 +29,7 @@ function fn1(){
 
 			<div class="match__insert ">
 				<p>마감일자</p>
-				<input type="datetime-local" name="matchEnddate" value="${dto.matchEnddate }">
+				<input type="date" name="matchEnddate" value="${dto.matchEnddate }">
 			</div>	
 
 
@@ -38,7 +38,7 @@ function fn1(){
 					<p>시설등록</p>
 					<div style="position: relative;">
 						<input type="hidden" id="facSeq" name="facSeq" style="display: none;">
-						<input type="text" id="facname">			
+						<input type="text" id="facname" value="${dto.facName }">			
 						<input class="facBtn" type="button" value="시설 수정" onclick="openPopUp()" >
 						<input type="hidden" name="matchFacility" value="Y">
 					</div>
