@@ -5,12 +5,11 @@
 	<div class="m40 row">
 		<div class="match">
             <h3>1:1 등록하기</h3>
-            <div>
+           
 
 <div>
     <form action="/inquiry/insert" method="post">
-    <div >
-
+	<input type="hidden" name="id" value="${member.id}">
         <div class="match__insert">
 			<p>제목</p>
 			<input type='text' name='inqTitle'>
@@ -26,6 +25,9 @@
 		<input type="button" value="취소" id="cancelbutton" onclick="location.href='/inquiry/list'" class="cancel">
 
     </form>
+	</div>
+	</div>
+	</div>
+	
 </div>
-</body>
-</html>
+<%@ include file="footer.jsp" %>

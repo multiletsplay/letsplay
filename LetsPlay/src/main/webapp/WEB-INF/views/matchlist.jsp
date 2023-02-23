@@ -146,7 +146,7 @@
 		<input type="checkbox" id="optionBtn">
 		<label for="optionBtn" >▼ 열기</label>
 			<ul class="searchOption">
-				<li><input type="time" name="searchStartTime" min="05:00" value="" step="900"> <label>시작시간</label>
+				<li><input type="time" name="searchStartTime" min="05:00" value="11:00" step="900"> <label>시작시간</label>
 				<!-- <li><input type="checkbox" name="searchFacStatus" value="Y" checked> <label>시설확정여부</label> -->
 				<li><input type="range" name="searchLevel" value="3" min="1" max="5" oninput="document.getElementById('levelmatch').innerHTML=this.value;"> 
 					<span style="margin-left: 15px;">레벨: </span><span id="levelmatch">3</span>
@@ -197,9 +197,6 @@
 									<div class="match-date">
 										<span class="date">											
 											<fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" />
-											<%-- 							<fmt:parseDate  value="${dto.matchEnddate}"  --%>
-											<%-- 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/> --%>
-											<%-- 							<fmt:formatDate value="${parsedDateTime}" pattern="yyyy-MM-dd(E)" /> --%>
 										</span>
 										<span class="time">${dto.startTime } ~ ${dto.endTime }</span>
 									</div>
