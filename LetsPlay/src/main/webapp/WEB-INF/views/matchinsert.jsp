@@ -76,11 +76,11 @@ function openPopUp() {
 		<div>
 			<p>장소</p>
 			<div>
-				<select id="region" name="matchLocation" >
+				<select id="region1" name="matchLocation" >
 					<option value="">시/도</option>
 					<option value="서울">서울</option>
 				</select>
-				<select id="region" name="matchLocation">
+				<select id="region2" name="matchLocation">
 					<option value="">군/구</option>
 					<option value="강남구">강남구</option>
 					<option value="강동구">강동구</option>

@@ -14,13 +14,24 @@ function selectfac() {
 
 	  let facSeq = $(event.target).attr('idx');
 	  let facName = $(event.target).attr('fname');
- 
+ 	  let facLocation = $(event.target).attr('floc');
+ 	  const array = facLocation.split(' ');
 
 // 	  console.log(facSeq);
 // 	  console.log(facName);
 	  var parent = window.opener;
 	  window.opener.document.getElementById("facSeq").value = facSeq;
 	  window.opener.document.getElementById("facname").value = facName;
+	  window.opener.document.getElementById("region1").options[1].selected = true ;
+	  const el = window.opener.document.getElementById("region2");
+	  const len = el.options.length; //select box의 option 갯수
+	  //select box의 option 갯수만큼 for문 돌림
+	  for (let i=0; i<len; i++){  
+	  	//select box의 option value가 faclocation의 값과 일치할 경우 selected
+	    if(el.options[i].value == array[1]){
+	    	el.options[i].selected = true;
+	    }
+	  }  
 
 	self.close();
 	}
@@ -73,7 +84,7 @@ function selectfac() {
 		            		<td>${dto.resDatetime }</td>
 		            		<td><input type="text" value="${dto.facName }" id="facname" onclick="location.href='/facility/detail?facSeq=${dto.facSeq }'" style="padding-left: 0px;"></td>
 		            		<td>${dto.facLocation }</td>
-		            		<td><input type="button" value="시설 선택" idx="${dto.facSeq }" fname="${dto.facName }" onclick="selectfac();" style="
+		            		<td><input type="button" value="시설 선택" idx="${dto.facSeq }" fname="${dto.facName }" floc="${dto.facLocation }" onclick="selectfac();" style="
 											padding: 5px 10px;
 											background-color: var(--primary);
 											border: none;
