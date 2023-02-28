@@ -52,7 +52,6 @@ $(function() {
 			Contents.style.display = 'block';
 		}
 	};
-
 </script>
 
 <div class='NoticeTop'>
