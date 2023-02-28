@@ -218,12 +218,12 @@ p.match-b-title{
   margin-bottom: 50px;
 }
 
-.sport li:hover{
+button.sport:hover{
   background-color: #999;
 }
 
-.sport li.active{
-  background-color: rgb(133, 133, 133);
+.active{
+  background-color: var(--primary) !important;
 }
 
 

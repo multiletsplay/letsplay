@@ -4,28 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ include file="header.jsp" %>
 
-<!-- <h1>letsplay</h1>
-<br>
-각자 리스트로 이동하는 url 넣어서 테스트해보시면 될것같아요
-<h2><a href="/match/list">매치</a></h2>
-<br>
-<h2><a href="/facility/list">시설</a></h2>
-<br>
-<h2><a href="/lesson/list">레슨</a></h2>
-<br>
-<h2><a href="/notice/list">공지사항</a></h2>
-<br>
-<h2><a href="/faqcontent">faq</a></h2>
-<br>
-<h2><a href="/inquiry/list">1대1문의</a></h2>
-<br>
-<h2><a href="/member/loginform">로그인</a></h2>
-<br>
-<h2><a href="/member/mypage">마이페이지</a></h2>
-<br> -->
 
 <!-- 메인 -->
-<script defer src="../../js/home.js"></script>
+<script defer src="../../js/observer.js"></script>
 
 <section class="visual">
    <div class="inner align-contents">

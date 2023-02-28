@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="/styles/control.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+  <script defer type="text/javascript" src="/js/home.js"></script>
   <!-- CSS LINK -->
 
 <title>랫플 :: 운동매칭 서비스</title>
@@ -39,7 +39,17 @@
           </ul>
         </div>
 
+        <script>
+          const items = document.querySelector('.nav__item a');
 
+          function handleClick() {
+            items.classList.add('nav__active');
+            console.log("클릭");
+          }
+
+          items.addEventListener('click', handleClick);
+
+        </script>
         <div class="nav__icons">
                   
           <span>

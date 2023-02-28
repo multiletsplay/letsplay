@@ -32,7 +32,6 @@
 			type : "POST",
 			data : { 'facSeq' : facSeq },
 			success : function(){
-				alert("찜 성공");
 				window.location.reload();
 			}
 		});
@@ -46,7 +45,6 @@
 			type : "GET",
 			data : { 'facSeq' : facSeq },
 			success : function(){
-				alert("취소 성공");
 				window.location.reload();
 			}
 		});
@@ -58,36 +56,12 @@
 
 <div class="container inner">
 	<div class="row list">
-<div>
-	<div class="sport-div">
-		<form action="/facility/select" method="get">
-			<button type="button"  class="sport" name="spoId" onclick="location.href='/facility/list'">전체</button>
-			<button type="submit"  class="sport" name="spoId" value="1">풋살</button>
-			<button type="submit"  class="sport" name="spoId" value="2">테니스</button>
-			<button type="submit"  class="sport" name="spoId" value="3">배드민턴</button>
-			<button type="submit"  class="sport" name="spoId" value="4">탁구</button>
-			<button type="submit"  class="sport" name="spoId" value="5">수영</button>
-			<button type="submit"  class="sport" name="spoId" value="6">골프</button>
-		</form>
-	</div>
-
-	<!-- 
-		<h3>종목 선택</h3>
-<div class="select-sports">
-	<form action="/facility/select" method="get">
-		<button type="button" name="spoId" onclick="location.href='/facility/list'"><img src="https://cdn-icons-png.flaticon.com/512/443/443635.png" width="30"></button>
-		<button type="submit" name="spoId" value="1"><img src="https://cdn-icons-png.flaticon.com/512/6938/6938829.png" width="30"></button>
-		<button type="submit" name="spoId" value="2"><img src="https://cdn-icons-png.flaticon.com/512/3978/3978317.png" width="30"></button>
-		<button type="submit" name="spoId" value="3"><img src="https://cdn-icons-png.flaticon.com/512/1633/1633893.png" width="30"></button>
-		<button type="submit" name="spoId" value="4"><img src="https://cdn-icons-png.flaticon.com/512/2500/2500356.png" width="30"></button>
-		<button type="submit" name="spoId" value="5"><img src="https://cdn-icons-png.flaticon.com/512/50/50004.png" width="30"></button>
-		<button type="submit" name="spoId" value="6"><img src="https://cdn-icons-png.flaticon.com/512/1695/1695095.png" width="30"></button>
-	</form>
-</div>
-	 -->
-</div>
-<!-- 상세조건검색 -->
-
+		<div>
+			<div class="sport-div">
+				<form action="/facility/select" method="get">
+			<%@ include file="sportsFilter.jsp" %>
+			</form>
+		</div>
 
 
 
