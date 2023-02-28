@@ -30,6 +30,9 @@ public interface MemberMapper {
 	@Insert(" INSERT INTO `MEMBER` VALUES( #{id}, #{birth}, #{password}, #{name}, #{gender}, #{nickname}, #{email}, #{phone}, DEFAULT) ")
 	int insert(MemberDto dto);
 	
+	@Insert(" INSERT INTO `MEMBER` VALUES( #{id}, NULL, #{password}, #{name}, NULL, NULL, #{email}, #{phone}, 'biz' ) ")
+	int insertbiz(MemberDto dto);
+	
 	@Update(" UPDATE `MEMBER` SET NAME=#{name}, NICKNAME=#{nickname}, EMAIL=#{email}, PHONE=#{phone} WHERE ID=#{id} ")
 	int update(MemberDto dto);
 	

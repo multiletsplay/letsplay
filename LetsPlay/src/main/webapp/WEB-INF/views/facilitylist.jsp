@@ -15,6 +15,10 @@
 			$(".delList").show();
 		}
 		
+		if (mem=='biz'){
+			$("#insertBtn").css("visibility","visible");
+		}
+		
 		//전체체크 선택
 		$('#selectAll').click(function(){
 			var checked = $(this).is(':checked');

@@ -18,7 +18,8 @@ public interface MemberBiz {
 	
 	public MemberDto login(MemberDto dto);					//로그인
 	public MemberDto selectmember(String id);				//회원정보 가져오기
-	public int insert(MemberDto dto);						//회원가입
+	public int insert(MemberDto dto);						//회원가입(일반회원)
+	public int insertbiz(MemberDto dto);					//회원가입(비즈니스계정)
 	public int idcheck(String id);							//아이디중복확인
 	public String findid(String name, String phone);		//아이디찾기
 	public String findpw(String id);					//비밀번호찾기

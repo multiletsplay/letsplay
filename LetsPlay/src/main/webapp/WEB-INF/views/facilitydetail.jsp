@@ -9,8 +9,10 @@
 <script>
 	$(document).ready(function(){
 		var mem = '${member.type }';
-		if (mem=='admin'){
+		var memid = '${member.id}';
+		if (mem=='admin' || memid=='${dto.id}'){
 			$("#updateBtn").css("visibility","visible");
+			$("#deleteBtn").css("visibility","visible");
 		}
 		
 		$("#pathfinding").click(pathFinding);
@@ -105,7 +107,13 @@
 	}
 </script>
 		<div class="container inner pt40">
-			<p class="Mbtn"><input type="button" id="updateBtn" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'"></p>
+		<form action="/facility/delete" method="post">
+			<p class="Mbtn">
+				<input type="button" id="updateBtn" value="수정하기" onclick="location.href='/facility/updateform?facSeq=${dto.facSeq}'">
+				<input type="hidden" name="delList" value="${dto.facSeq }"/>
+				<input type="submit" id="deleteBtn" value="삭제하기" />
+			</p>
+		</form>
 			<form action="/facility/reserve" method="POST">
 			<div class="m40 row">
 				<input type="hidden" name="facSeq" value="${dto.facSeq }" >

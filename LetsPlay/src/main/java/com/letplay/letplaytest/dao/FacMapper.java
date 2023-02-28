@@ -49,7 +49,7 @@ public interface FacMapper {
 	@Delete(" DELETE FROM FACILITY WHERE FAC_SEQ = #{facSeq} ")
 	int deleteFac(int facSeq);
 	
-	@Insert(" INSERT INTO `FACILITY` VALUES(NULL, #{facName}, #{spoId}, #{facLocation}, #{facContact}, #{facImg}, #{facImgpath}, #{facCost}, NOW(), #{facParking}, #{facLent}, #{facShower}, #{facLocker}, #{facLight}, #{facCostcheck}) ")
+	@Insert(" INSERT INTO `FACILITY` VALUES(NULL, #{facName}, #{spoId}, #{facLocation}, #{facContact}, #{facImg}, #{facImgpath}, #{facCost}, NOW(), #{facParking}, #{facLent}, #{facShower}, #{facLocker}, #{facLight}, #{facCostcheck}, #{id} ) ")
 	int insertFac(FacDto dto);
 	
 	@Update(" UPDATE `FACILITY` "

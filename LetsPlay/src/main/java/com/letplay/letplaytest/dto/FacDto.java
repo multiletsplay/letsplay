@@ -33,6 +33,7 @@ public class FacDto {
 	private String time;
 	private int lesSeq;
 	private String lesName;
+	private String id;
 	
 	public FacDto() {
 		super();
@@ -43,7 +44,7 @@ public class FacDto {
 			int facCost, String facImg, String facImgpath, Date facDate, Boolean facParking, Boolean facLent,
 			Boolean facShower, Boolean facLocker, Boolean facLight, Boolean facCostcheck, int likesStatus,
 			int cntReview, double avgRate, Date dt, int resStatus, String date, String time, int lesSeq,
-			String lesName) {
+			String lesName, String id) {
 		super();
 		this.facSeq = facSeq;
 		this.facName = facName;
@@ -70,6 +71,7 @@ public class FacDto {
 		this.time = time;
 		this.lesSeq = lesSeq;
 		this.lesName = lesName;
+		this.id = id;
 	}
 
 	public int getFacSeq() {
@@ -270,6 +272,14 @@ public class FacDto {
 
 	public void setLesName(String lesName) {
 		this.lesName = lesName;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	
