@@ -14,11 +14,11 @@
 	#writeBtn { visibility: hidden; }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script>
+<script type="text/javascript">
 $(document).ready(function(){
-		var mem = '${member.type }';
+		var mem = '${member.id }';
 		
-		if (mem!='admin'){
+		if (mem=='admin'){
 			$("#insertBtn").css("visibility","visible");
 			$("#deleteBtn").css("visibility","visible");
 			$("#writeBtn").css("visibility","visible");
@@ -63,7 +63,7 @@ $(function() {
 </div>
 
 <div class='LetplCompose'>
-	<button type="button" id="writeBtn" onclick="location.href='/notice/insertform'">글쓰기</button>
+	<p><input type="button" id="writeBtn" value="글쓰기" onclick="location.href='/notice/insertform'"></p>
 </div>
 <div class='LetplNotice'>
 	<div class='LetplNum'>번호</div>
@@ -88,8 +88,8 @@ $(function() {
 	<div id='PersonalResult'>
         <div>${notice.noticeContent }</div>
         <div class='modBtn'>
-          <button type="button" id="insertBtn" value="수정" onclick="location.href='/notice/updateform?noticeSeq=${notice.noticeSeq}'"></button>
-       	  <button style='margin-right:15px;' id="deleteBtn" type="button" value="삭제" onclick="javascript:fn1();"></button>
+          <input type="button" id="insertBtn" value="수정" onclick="location.href='/notice/updateform?noticeSeq=${notice.noticeSeq}'">
+       	  <input style='margin-right:15px;' id="deleteBtn" type="button" value="삭제" onclick="javascript:fn1();"></button>
         </div>
       </div>
       </div>
