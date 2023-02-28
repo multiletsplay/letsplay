@@ -83,23 +83,18 @@ public class LetsMemberController {
 		return "signup";
 	}
 	
-	//@RequestMapping("/signup")
-	//public String insertRes(MemberDto dto, Model model) {
-	//	int res = membiz.insert(dto);
-	//	
-	//	if(res>0) {
-	//		model.addAttribute("msg", "회원가입 성공");
-	//		model.addAttribute("url", "/member/loginform");
-	//		return "alert";
-	//	}else {
-	//		model.addAttribute("msg", "회원가입 실패");
-	//		model.addAttribute("url", "/member/signupform");
-	//		return "alert";
-	//	}
-	//}
+	@RequestMapping("/signupformgen")
+	public String signupGeneral() {
+		return "signupgen";
+	}
+	
+	@RequestMapping("/signupformbiz")
+	public String signupBiz() {
+		return "signupbiz";
+	}
 	
 	@PostMapping(value = "/signup")
-    public String validCheck(@Valid MemberDto dto, Errors errors, Model model){
+    public String validCheck(MemberDto dto, Errors errors, Model model){
         if(errors.hasErrors()){
         	model.addAttribute("dto", dto);
         //패스워드 유효성 검사 부적합
@@ -127,7 +122,19 @@ public class LetsMemberController {
         
     }
 	
-	
+	@PostMapping(value = "/signupbiz")
+    public String signup(MemberDto dto, Model model){
+    	if(membiz.insertbiz(dto)>0) {
+            model.addAttribute("msg", "회원가입 성공");
+            model.addAttribute("url", "/member/loginform");
+            return "alert";
+        }else {
+            model.addAttribute("msg", "회원가입 실패");
+            model.addAttribute("url", "/member/signupformbiz");
+            return "alert";
+        }
+ 
+    }
 	
 	@ResponseBody
 	@RequestMapping(value="/idcheck", method=RequestMethod.GET)

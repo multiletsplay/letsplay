@@ -121,7 +121,11 @@ public class LetsFacilityController {
 	}
 	
 	@PostMapping("/facility/insert")
-	public String insertFac(Model model, FacDto dto, MultipartFile file) throws Exception {
+	public String insertFac(HttpServletRequest request, Model model, FacDto dto, MultipartFile file) throws Exception {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		dto.setId(member.getId());
+		
 		if(facBiz.insertFac(dto, file)>0) {
 			model.addAttribute("msg", "등록 완료");
 			model.addAttribute("url", "/facility/list");

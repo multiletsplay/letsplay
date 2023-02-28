@@ -43,6 +43,11 @@ public class Memberlmpl implements MemberBiz{
 	}
 	
 	@Override
+	public int insertbiz(MemberDto dto) {
+		return memberMapper.insertbiz(dto);
+	}
+	
+	@Override
 	public int idcheck(String id) {
 		return memberMapper.idcheck(id);
 	}

@@ -15,6 +15,10 @@
 			$(".delList").show();
 		}
 		
+		if (mem=='biz'){
+			$("#insertBtn").css("visibility","visible");
+		}
+		
 		$('#selectAll').click(function(){
 			var checked = $(this).is(':checked');
 			
