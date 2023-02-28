@@ -16,15 +16,16 @@ header{
   text-align: center;
 }
 
+
 .container{
   position: relative;
 }
 
-.nav__wrapper{
-  /* display: flex;
+/* .nav__wrapper{
+  display: flex;
   align-items: center;
-  justify-content: space-between; */
-}
+  justify-content: space-between;
+} */
 
 .logo{
   display: flex;
@@ -62,6 +63,15 @@ header{
   font-weight: 500;
   cursor: pointer;
 }
+
+.nav__item a:hover{
+  font-weight: 800;
+}
+
+.nav__item a.nav__active{
+  font-weight: 800;
+}
+
 
 
 .nav__icons{
@@ -166,9 +176,6 @@ header{
   display: none;
 }
 
-.nav__active{
-  font-weight: 800 !important;
-}
 
 
 span.btn01{
@@ -178,6 +185,11 @@ span.btn01{
   border-radius: 5px;
   font-size: .9rem;
 }
+
+span.btn01:hover{
+  transform: scale(1.1);
+}
+
 
 
 span.btn02{
