@@ -44,7 +44,7 @@ public interface LessonMapper {
 	@Delete(" DELETE FROM LESSON WHERE LES_SEQ = #{lesSeq} ")
 	int delete(int lesSeq);
 	
-	@Insert(" INSERT INTO `LESSON` VALUES(NULL, #{lesName}, #{spoId}, #{lesTeacher}, #{lesLocation}, #{lesContact}, #{lesImg}, #{lesImgpath}, #{lesCost}, NOW(), #{lesType}, #{lesWeekend} ) ")
+	@Insert(" INSERT INTO `LESSON` VALUES(NULL, #{lesName}, #{spoId}, #{lesTeacher}, #{lesLocation}, #{lesContact}, #{lesImg}, #{lesImgpath}, #{lesCost}, NOW(), #{lesType}, #{lesWeekend}, #{id} ) ")
 	int insertLesson(LessonDto dto);
 	
 	@Update(" UPDATE `LESSON` "

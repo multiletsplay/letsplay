@@ -9,8 +9,10 @@
 <script>
 	$(document).ready(function(){
 		var mem = '${member.type }';
-		if (mem=='admin'){
+		var memid = '${member.id}';
+		if (mem=='admin' || memid=='${dto.id}'){
 			$("#updateBtn").css("visibility","visible");
+			$("#deleteBtn").css("visibility","visible");
 		}
 		
 		$("#pathfinding").click(pathFinding);
@@ -77,7 +79,13 @@
 <div class="m40 row">
 <input type="hidden" name="lesSeq" value="${dto.lesSeq }">
 <div class="col-lg-8">
-	<input type="button" id="updateBtn" value="레슨 수정" onclick="location.href='/lesson/updateform?lesSeq=${dto.lesSeq}'">
+	<form action="/lesson/delete" method="post">
+		<p class="Mbtn">
+			<input type="button" id="updateBtn" value="레슨 수정" onclick="location.href='/lesson/updateform?lesSeq=${dto.lesSeq}'">
+			<input type="hidden" name="delList" value="${dto.lesSeq }"/>
+			<input type="submit" id="deleteBtn" value="삭제하기" />
+		</p>
+	</form>
 	<div>
 		<div class="match_detail_lay">
 			<main>
