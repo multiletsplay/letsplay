@@ -94,7 +94,7 @@ public class LetsMemberController {
 	}
 	
 	@PostMapping(value = "/signup")
-    public String validCheck(MemberDto dto, Errors errors, Model model){
+    public String validCheck(@Valid MemberDto dto, Errors errors, Model model){
         if(errors.hasErrors()){
         	model.addAttribute("dto", dto);
         //패스워드 유효성 검사 부적합
@@ -105,7 +105,7 @@ public class LetsMemberController {
 
             // 유효성 통과 못한 필드와 메시지를 핸들링
             
-            return "signup";
+            return "signupgen";
         } else {
         	if(membiz.insert(dto)>0) {
                 model.addAttribute("msg", "회원가입 성공");
@@ -113,7 +113,7 @@ public class LetsMemberController {
                 return "alert";
             }else {
                 model.addAttribute("msg", "회원가입 실패");
-                model.addAttribute("url", "/member/signupform");
+                model.addAttribute("url", "/member/signupformgen");
                 return "alert";
             }
         
