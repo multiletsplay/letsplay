@@ -93,7 +93,11 @@ public class LetsLessonController {
 	}
 	
 	@PostMapping("/lesson/insert")
-	public String insertLesson(Model model, LessonDto dto, MultipartFile file) throws Exception {
+	public String insertLesson(HttpServletRequest request, Model model, LessonDto dto, MultipartFile file) throws Exception {
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto) session.getAttribute("login");
+		dto.setId(member.getId());
+		
 		if(LessonBiz.insertLesson(dto, file)>0) {
 			model.addAttribute("msg", "등록 완료");
 			model.addAttribute("url", "/lesson/list");

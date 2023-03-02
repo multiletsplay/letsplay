@@ -20,6 +20,7 @@ public class LessonDto {
 	private int cntReview;
 	private int facName;
 	private long avgRate;
+	private String id;
 	
 	public LessonDto() {
 		super();
@@ -27,7 +28,7 @@ public class LessonDto {
 
 	public LessonDto(int lesSeq, String lesName, int spoId, String spoName, String lesTeacher, String lesLocation,
 			String lesContact, String lesImg, String lesImgpath, Date lesDate, String lesType, String lesWeekend,
-			int lesCost, int likesStatus, int cntReview, int facName, long avgRate) {
+			int lesCost, int likesStatus, int cntReview, int facName, long avgRate, String id) {
 		super();
 		this.lesSeq = lesSeq;
 		this.lesName = lesName;
@@ -46,6 +47,7 @@ public class LessonDto {
 		this.cntReview = cntReview;
 		this.facName = facName;
 		this.avgRate = avgRate;
+		this.id = id;
 	}
 
 	public int getLesSeq() {
@@ -182,6 +184,14 @@ public class LessonDto {
 
 	public void setAvgRate(long avgRate) {
 		this.avgRate = avgRate;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	
