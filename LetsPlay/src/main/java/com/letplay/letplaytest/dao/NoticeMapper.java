@@ -19,23 +19,23 @@ import com.letplay.letplaytest.dto.NoticeDto;
 @Mapper
 public interface NoticeMapper {
 //	@Select("SELECT *  FROM NOTICE ORDER BY NOTICE_SEQ DESC ")
-	@Select(" SELECT NOTICE_SEQ, ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_MODIDATE\n"
+	@Select(" SELECT NOTICE_SEQ, ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_MODIDATE "
 			+ "FROM (\n"
-			+ "	SELECT @ROWNUM := @ROWNUM + 1 AS rnum, NOTICE_SEQ, ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_MODIDATE\n"
+			+ "	SELECT @ROWNUM := @ROWNUM + 1 AS rnum, NOTICE_SEQ, ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_MODIDATE "
 			+ "	FROM `NOTICE` N, (SELECT @ROWNUM := 0 ) A\n"
-			+ "	ORDER BY NOTICE_SEQ DESC\n"
+			+ "	ORDER BY NOTICE_SEQ DESC"
 			+ ") TMP\n"
 			+ "WHERE rnum > (#{pageNum } - 1) * #{amount} \n"
 			+ "LIMIT #{amount } ")
 	List<NoticeDto> selectNoticeList(Criteria criteria);
 
-	@Select("SELECT * FROM NOTICE WHERE NOTICE_SEQ=#{noticeSeq} ")
+	@Select(" SELECT * FROM NOTICE WHERE NOTICE_SEQ=#{noticeSeq} ")
 	NoticeDto selectNoticeOne(int inqSeq);
 	
-	@Insert(" INSERT INTO `multi`.`notice` (`NOTICE_SEQ`, `ID`, `NOTICE_TITLE`, `NOTICE_CONTENT`, `NOTICE_DATE`, `NOTICE_MODIDATE`) VALUES (NULL, #{id}, #{noticeTitle}, #{noticeContent}, now(), now()) ")
+	@Insert(" INSERT INTO NOTICE () VALUES (NULL, #{id}, #{noticeTitle}, #{noticeContent}, now(), now()) ")
 	int insertNotice(NoticeDto dto);
 	
-	@Update("UPDATE NOTICE SET NOTICE_TITLE=#{noticeTitle}, NOTICE_CONTENT=#{noticeContent} WHERE NOTICE_SEQ=#{noticeSeq} ")
+	@Update("UPDATE NOTICE SET NOTICE_TITLE=#{noticeTitle}, NOTICE_CONTENT=#{noticeContent}  ")
 	int updateNotice(NoticeDto dto);
 	
 	@Delete("DELETE FROM NOTICE WHERE NOTICE_SEQ=#{noticeSeq} ")
