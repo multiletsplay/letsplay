@@ -90,7 +90,12 @@ public class LetsFacilityController {
 			String date = ds.substring(0, 10);
 			String time = ds.substring(11);
 			dto.setDate(date);
-			dto.setTime(time);
+			if (time.equals("00:00:00") || time.equals("01:00:00") || time.equals("02:00:00") || time.equals("03:00:00") ||
+					time.equals("04:00:00") || time.equals("05:00:00") || time.equals("22:00:00") || time.equals("23:00:00") ) {
+				continue;
+			}else {
+				dto.setTime(time);
+			}
 		}
 
 		model.addAttribute("time", datelist);

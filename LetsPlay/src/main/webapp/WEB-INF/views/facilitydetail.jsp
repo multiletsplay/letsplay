@@ -28,8 +28,11 @@
            	selectBox.append("<option value=''>=== 선택 ===</option>");
            	<c:forEach var="time" items="${time }">
            	<fmt:formatDate value="${time.dt}" pattern="yyyy-MM-dd" var="t"/>
-			if (date == '${t}')
-				selectBox.append("<option value='${time.time }' <c:if test='${time.resStatus eq 1}'>disabled='disabled'</c:if>>${time.time }</option>");
+			if (date == '${t}'){
+				if ("${time.time}" != ""){
+					selectBox.append("<option value='${time.time }' <c:if test='${time.resStatus eq 1}'>disabled='disabled'</c:if>>${time.time }</option>");
+				}
+			}
 			</c:forEach> 
 	    });
 	});
