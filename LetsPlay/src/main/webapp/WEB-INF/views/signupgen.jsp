@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -225,23 +224,19 @@
               <label for="gender02">여자</label>
             </li>
           </ul>
-       	  <!-- <label class='formBtnGender'>
-	          <input type="radio" name="gender" value="M"/>
-	          <span>남자</span>
-          </label>
-          
-          <label class='formBtnGender'>
-	          <input type="radio" name="gender" value="F"/>
-	          <span>여자</span>
-           </label> -->
+
         </div>
-        <div class='formDate ValTarget'>
-          <div>생년월일</div>
-        <div class='formDate'>
-          <input type="date" name="birth" style="padding-left:80px"/>
-          <span class="warning">${valid_birth }</span>
-        </div>
-        </div>
+
+        <!-- 
+          <div class='formDate ValTarget'>
+            <div>생년월일</div>
+          <div class='formDate'>
+            <input type="date" name="birth" style="padding-left:80px"/>
+            <span class="warning">${valid_birth }</span>
+          </div>
+
+          </div>
+         -->
         </div>
         </div>
         <hr style="margin-top:25px; margin-bottom:10px"/>
