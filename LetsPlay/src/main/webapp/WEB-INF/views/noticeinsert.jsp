@@ -25,7 +25,7 @@
 			</div>
 			<div style="align-items:center;">
 				<span>I D</span>
-				<span class='NoticeredColour NoticeredColourID'>*</span>
+				<span class='NoticeredColour NoticeredColourID'></span>
 				<input type='text' name='id' value="${member.id}"></input>
 			</div>
 			<div class='InsertContentBtn'>

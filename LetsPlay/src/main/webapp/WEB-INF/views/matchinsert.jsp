@@ -11,13 +11,9 @@ function openPopUp() {
 }
 
 function subtractDays() {
-    // 두 번째 input 태그에서 입력된 날짜 가져오기
+    // 첫 번째 input 태그에서 입력된 날짜 가져오기
     var date = document.getElementById("matchDay").value;
     
-    // 날짜가 선택되지 않은 경우 함수 종료
-    if (date === "") {
-        return;
-    }
     
     // 날짜를 Date 객체로 변환
     var selectedDate = new Date(date);
@@ -25,8 +21,23 @@ function subtractDays() {
     // 3일을 뺀 날짜 계산
     var newDate = new Date(selectedDate.getTime() - (3 * 24 * 60 * 60 * 1000));
     
-    // 첫 번째 input 태그의 value 변경
+    // 두 번째 input 태그의 value 변경
     document.getElementById("matchEndDate").value = newDate.toISOString().substr(0, 10);
+}
+
+function addOneHour() {
+    // 첫 번째 input 태그에서 입력된 시간 가져오기
+    var time = document.getElementById("startTime").value;
+
+    
+    // 시간을 Date 객체로 변환하기
+    var selectedTime = new Date("1970-01-01T" + time + "Z");
+    
+    // 1시간을 더한 시간 계산하기
+    var newTime = new Date(selectedTime.getTime() + (1 * 60 * 60 * 1000));
+    
+    // 두번째 input 태그의 value 변경하기
+    document.getElementById("endTime").value = newTime.toISOString().substr(11, 5);
 }
 </script>
 
@@ -151,12 +162,12 @@ function subtractDays() {
 
 		<div class="match__insert">
 			<p>매칭 시작시간</p>
-			<input type="time" name="startTime"step="30:00" value="11:00">
+			<input type="time" name="startTime" id="startTime"step="30:00" value="11:00" onchange="addOneHour()">
 		</div>
 
 		<div class="match__insert">
 			<p>매칭 종료시간</p>
-			<input type="time" name="endTime" min="06:00" max="23:59" value="14:00">
+			<input type="time" name="endTime" id="endTime" min="06:00">
 		</div>
 
 		<div class="match__insert">

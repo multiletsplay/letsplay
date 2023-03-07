@@ -78,7 +78,6 @@ public interface MatchMapper {
 		" <where>",
 		" 	<if test='searchRegion1 != null'>m.MATCH_LOCATION LIKE CONCAT(#{searchRegion1},'%') </if> ",
 		"	<if test='searchRegion2 != null'>AND m.MATCH_LOCATION LIKE CONCAT('%',#{searchRegion2},'%') </if>",
-//		"   <if test='searchDate != null'>AND m.MATCH_DAY LIKE CONCAT('%',#{searchDate},'%') </if>",
 		"   <if test='searchDate != null'>AND m.MATCH_DAY=#{searchDate} </if>",
 		"   <if test='searchStartTime != null'>AND m.START_TIME=#{searchStartTime} </if>",
 		"	<if test='searchFacStatus != null'>AND m.MATCH_FACILITY=#{searchFacStatus} </if>",
