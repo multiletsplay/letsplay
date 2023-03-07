@@ -9,6 +9,25 @@
 function openPopUp() {
     window.open("/match/facimport", "시설 선택", "width=720, height=400, top=150, left=200");
 }
+
+function subtractDays() {
+    // 두 번째 input 태그에서 입력된 날짜 가져오기
+    var date = document.getElementById("matchDay").value;
+    
+    // 날짜가 선택되지 않은 경우 함수 종료
+    if (date === "") {
+        return;
+    }
+    
+    // 날짜를 Date 객체로 변환
+    var selectedDate = new Date(date);
+    
+    // 3일을 뺀 날짜 계산
+    var newDate = new Date(selectedDate.getTime() - (3 * 24 * 60 * 60 * 1000));
+    
+    // 첫 번째 input 태그의 value 변경
+    document.getElementById("matchEndDate").value = newDate.toISOString().substr(0, 10);
+}
 </script>
 
 
@@ -113,16 +132,17 @@ function openPopUp() {
 	</div>
 
 
+	<div class="match__insert">
+			<p>매칭 날짜</p>
+			<input type="date" name="matchDay" id="matchDay" onchange="subtractDays()">
+		</div>
 
 	<div class="match__insert ">
 		<p>매칭 마감일자</p>
-		<input type="date" name="matchEnddate" required>
+		<input type="date" id="matchEndDate" name="matchEndDate" >
 	</div>
 
-		<div class="match__insert">
-			<p>매칭 날짜</p>
-			<input type="date" name="matchDay" required>
-		</div>
+		
 
 		<p style="margin-bottom: 50px; color: var(--bs-red);">
 			* 매칭 등록 유저의 시설 예약 환불 기준에 대한 불이익을 최소화하기 위해 
