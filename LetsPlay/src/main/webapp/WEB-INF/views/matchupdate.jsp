@@ -12,7 +12,38 @@ function fn1(){
 	if (confirm("게시글을 수정하시겠습니까?")) {
 		location.href='/match/detail?matchSeq=${dto.matchSeq}'
 	}
-};
+}
+function subtractDays() {
+    // 첫 번째 input 태그에서 입력된 날짜 가져오기
+    var date = document.getElementById("matchDay").value;
+    
+    
+    // 날짜를 Date 객체로 변환
+    var selectedDate = new Date(date);
+    
+    // 3일을 뺀 날짜 계산
+    var newDate = new Date(selectedDate.getTime() - (3 * 24 * 60 * 60 * 1000));
+    
+    // 두 번째 input 태그의 value 변경
+    document.getElementById("matchEnddate").value = newDate.toISOString().substr(0, 10);
+}
+
+function addOneHour() {
+    // 첫 번째 input 태그에서 입력된 시간 가져오기
+    var time = document.getElementById("startTime").value;
+
+    
+    // 시간을 Date 객체로 변환하기
+    var selectedTime = new Date("1970-01-01T" + time + "Z");
+    
+    // 1시간을 더한 시간 계산하기
+    var newTime = new Date(selectedTime.getTime() + (1 * 60 * 60 * 1000));
+    
+    // 두번째 input 태그의 value 변경하기
+    document.getElementById("endTime").value = newTime.toISOString().substr(11, 5);
+}
+
+
 </script>
 <div class="container inner pt40">
 	<div class="m40 row">	
@@ -26,19 +57,12 @@ function fn1(){
 				<p>제목</p>
 				<input type="text" name="matchTitle" value="${dto.matchTitle }">
 			</div>
-
-			<div class="match__insert ">
-				<p>마감일자</p>
-				<input type="date" name="matchEnddate" value="${dto.matchEnddate }">
-			</div>	
-
-
 			<div class="match__insert">
 				<div>
 					<p>시설등록</p>
 					<div style="position: relative;">
 						<input type="hidden" id="facSeq" name="facSeq" style="display: none;">
-						<input type="text" id="facname" value="${dto.facName }">			
+						<input type="text" id="facname" name="facname" >			
 						<input class="facBtn" type="button" value="시설 수정" onclick="openPopUp()" >
 						<input type="hidden" name="matchFacility" value="Y">
 					</div>
@@ -46,11 +70,11 @@ function fn1(){
 				<div>
 					<p>장소</p>
 					<div>
-						<select id="region" name="matchLocation" >
+						<select id="region1" name="matchLocation">
 							<option value="">시/도</option>
 							<option value="서울">서울</option>
 						</select>
-						<select id="region" name="matchLocation">
+						<select id="region2" name="matchLocation" >
 							<option value="">군/구</option>
 							<option value="강남구">강남구</option>
 							<option value="강동구">강동구</option>
@@ -84,20 +108,29 @@ function fn1(){
 				
 			</div>
 
-
 			<div class="match__insert">
 				<p>매칭 날짜</p>
-				<input type="date" name="matchDay" value="${dto.matchDay }">
+				<input type="date" name="matchDay" id="matchDay" value="${dto.matchDay }" onchange="subtractDays()">
 			</div>
 	
+			<div class="match__insert ">
+				<p>매칭 마감일자</p>
+				<input type="date" name="matchEnddate" id="matchEnddate" value="${dto.matchEnddate }">
+			</div>
+			
+			<p style="margin-bottom: 50px; color: var(--bs-red);">
+			* 매칭 등록 유저의 시설 예약 환불 기준에 대한 불이익을 최소화하기 위해 
+			시설 이용 날짜와 매칭 마감 날짜의 간격을 최소 3일 기준으로 한다. 
+			</p>
+			
 			<div class="match__insert">
 				<p>매칭 시작시간</p>
-				<input type="time" name="startTime" value="${dto.startTime }" >
+				<input type="time" name="startTime" id="startTime" value="${dto.startTime }" onchange="addOneHour()">
 			</div>
 	
 			<div class="match__insert">
 				<p>매칭 종료시간</p>
-				<input type="time" name="endTime" value="${dto.endTime }" >
+				<input type="time" name="endTime" id="endTime" value="${dto.endTime }" >
 			</div>
 	
 			<div class="match__insert">
@@ -113,7 +146,7 @@ function fn1(){
 			<div class="match__insert">
 				<p>매칭 레벨</p>
 				<div class="match_level">
-					<input type="range" name="matchLevel" min="1" max="5" value="3" oninput="document.getElementById('levelmatch').innerHTML=this.value;">
+					<input type="range" name="matchLevel" min="1" max="5" value="1" oninput="document.getElementById('levelmatch').innerHTML=this.value;">
 					<span style="margin-left: 15px;">레벨: </span><span id="levelmatch">3</span>
 				</div>
 			</div>

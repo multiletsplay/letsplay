@@ -1,5 +1,7 @@
 package com.letplay.letplaytest.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.letplay.letplaytest.biz.InqReplyBiz;
 import com.letplay.letplaytest.biz.InquiryBiz;
@@ -90,21 +93,33 @@ public class LetsCSController {
 	@PostMapping("/notice/update")
 	public String updateNotice(NoticeDto dto) {
 		if(noticeBiz.updateNotice(dto) > 0) {
-			return "redirect:/notice/detail?noticeSeq="+dto.getNoticeSeq();
-		}else {
-			return "redirect:/notice/updateform?noticeSeq="+dto.getNoticeSeq();
-		}
-	}
-	
-	@GetMapping("/notice/delete")
-	public String deleteNotice(int noticeSeq) {
-		if(noticeBiz.deleteNotice(noticeSeq)>0) {
 			return "redirect:/notice/list";
 		}else {
-			return "redirect:/notice/detail?noticeSeq="+noticeSeq;
+			return "redirect:/notice/update";
 		}
 	}
 	
+//	@GetMapping("/notice/delete")
+//	public String deleteNotice(int noticeSeq) {
+//		if(noticeBiz.deleteNotice(noticeSeq)>0) {
+//			return "redirect:/notice/list";
+//		}else {
+//			return "redirect:/notice/list";
+//		}
+//	}
+	@PostMapping("/notice/delete")
+	public String deletFac(Model model, @RequestParam(value="delList", required=false) List<Integer> ids) {
+		if (ids == null) {
+			model.addAttribute("msg", "게시글을 선택해주세요.");
+			model.addAttribute("url", "/notice/list");
+			return "alert";
+		}else {
+			for(Integer noticeSeq : ids)  noticeBiz.deleteNotice(noticeSeq);
+			model.addAttribute("msg", "삭제 성공");
+			model.addAttribute("url", "/notice/list");
+			return "alert";
+		}
+	}
 	//1대1문의
 	@GetMapping("/inquiry/list")
 	public String selectInquirylist(HttpServletRequest request, Model model, Criteria criteria) {

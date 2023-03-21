@@ -146,10 +146,10 @@
 		<input type="checkbox" id="optionBtn">
 		<label for="optionBtn" >▼ 열기</label>
 			<ul class="searchOption">
-				<li><input type="time" name="searchStartTime" min="05:00" value="11:00" step="900"> <label>시작시간</label>
+				<li><input type="time" name="searchStartTime" min="05:00"  step="900"> <label>시작시간</label>
 				<!-- <li><input type="checkbox" name="searchFacStatus" value="Y" checked> <label>시설확정여부</label> -->
-				<li><input type="range" name="searchLevel" value="3" min="1" max="5" oninput="document.getElementById('levelmatch').innerHTML=this.value;"> 
-					<span style="margin-left: 15px;">레벨: </span><span id="levelmatch">3</span>
+<!-- 				<li><input type="range" name="searchLevel" value="1" min="1" max="5" oninput="document.getElementById('levelmatch').innerHTML=this.value;">  -->
+<!-- 					<span style="margin-left: 15px;">레벨: </span><span id="levelmatch">1</span> -->
 				
 			</ul>
 		</div>
