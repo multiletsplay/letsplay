@@ -64,6 +64,7 @@ $(function() {
 <div class='LetplCompose'>
 	<p><input type="button" id="writeBtn" value="글쓰기" onclick="location.href='/notice/insertform'"></p>
 </div>
+<form action="notice/list" method="post">
 <div class='LetplNotice'>
 	<div class='LetplNum'>번호</div>
 	<div class='LetplWriter'>작성자</div>
@@ -79,6 +80,7 @@ $(function() {
 <c:forEach items="${noticelist}" var="notice">
 	<div id='listSection'>
 	<li>
+		<div><input type="checkbox" class="delList" name="delList" value="${notice.noticeSeq }"></div>
 		<div class='listNum'>${notice.noticeSeq }</div>
 		<div class='listWriter'>${notice.id }</div>
  		<div  class='listTitle' onclick='showContent();'>${notice.noticeTitle }</div>
@@ -96,7 +98,7 @@ $(function() {
 </c:otherwise>
 </c:choose>	
 </ul>
-
+</form>
 
 <div class="NoticeListPaging">
 	<form action="<c:url value='/notice/list'/>" name="pageForm">

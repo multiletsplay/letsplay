@@ -22,7 +22,7 @@ function subtractDays() {
     var newDate = new Date(selectedDate.getTime() - (3 * 24 * 60 * 60 * 1000));
     
     // 두 번째 input 태그의 value 변경
-    document.getElementById("matchEndDate").value = newDate.toISOString().substr(0, 10);
+    document.getElementById("matchEnddate").value = newDate.toISOString().substr(0, 10);
 }
 
 function addOneHour() {
@@ -150,7 +150,7 @@ function addOneHour() {
 
 	<div class="match__insert ">
 		<p>매칭 마감일자</p>
-		<input type="date" id="matchEndDate" name="matchEndDate" >
+		<input type="date" id="matchEnddate" name="matchEnddate" >
 	</div>
 
 		
@@ -162,12 +162,12 @@ function addOneHour() {
 
 		<div class="match__insert">
 			<p>매칭 시작시간</p>
-			<input type="time" name="startTime" id="startTime"step="30:00" value="11:00" onchange="addOneHour()">
+			<input type="time" name="startTime" id="startTime" step="30:00"  onchange="addOneHour()">
 		</div>
 
 		<div class="match__insert">
 			<p>매칭 종료시간</p>
-			<input type="time" name="endTime" id="endTime" min="06:00">
+			<input type="time" name="endTime" id="endTime"  min="06:00">
 		</div>
 
 		<div class="match__insert">
@@ -183,8 +183,8 @@ function addOneHour() {
 		<div class="match__insert">
 			<p>매칭 레벨</p>
 			<div class="match_level">
-				<input type="range" name="matchLevel" min="1" max="5" value="3" oninput="document.getElementById('levelmatch').innerHTML=this.value;">
-				<span style="margin-left: 15px;">레벨: </span><span id="levelmatch">3</span>
+				<input type="range" name="matchLevel" min="1" max="5" value="1" oninput="document.getElementById('levelmatch').innerHTML=this.value;">
+				<span style="margin-left: 15px;">레벨: </span><span id="levelmatch">1</span>
 			</div>
 		</div>
 
