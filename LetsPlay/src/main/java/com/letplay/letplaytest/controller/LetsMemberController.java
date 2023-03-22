@@ -97,14 +97,13 @@ public class LetsMemberController {
     public String validCheck(@Valid MemberDto dto, Errors errors, Model model){
         if(errors.hasErrors()){
         	model.addAttribute("dto", dto);
-        //패스워드 유효성 검사 부적합
+        	//패스워드 유효성 검사 부적합
             Map<String, String> validatorResult = membiz.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
                 model.addAttribute(key, validatorResult.get(key));
             }
 
             // 유효성 통과 못한 필드와 메시지를 핸들링
-            
             return "signupgen";
         } else {
         	if(membiz.insert(dto)>0) {
@@ -112,6 +111,7 @@ public class LetsMemberController {
                 model.addAttribute("url", "/member/loginform");
                 return "alert";
             }else {
+            	System.out.println("회원가입 실패");
                 model.addAttribute("msg", "회원가입 실패");
                 model.addAttribute("url", "/member/signupformgen");
                 return "alert";
