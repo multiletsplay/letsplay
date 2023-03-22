@@ -9,7 +9,6 @@ public class MemberDto {
 	@NotBlank(message = "아이디는 필수 입력값입니다.")
 	@Size(min = 6, max = 20, message = "id는 최소 6자 , 최대 20자로 생성하세요.")
 	private String id;
-	@NotBlank(message = "생년월일은 필수 입력값입니다.")
 	private String birth;
 	@NotBlank(message = "비밀번호는 필수 입력값입니다.")
 	@Pattern(regexp="(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,15}",
