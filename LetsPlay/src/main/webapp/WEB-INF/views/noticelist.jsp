@@ -16,14 +16,22 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-		var mem = '${member.id }';
+		var mem = '${member.type }';
 		
 		if (mem=='admin'){
 			$("#insertBtn").css("visibility","visible");
 			$("#deleteBtn").css("visibility","visible");
 			$("#writeBtn").css("visibility","visible");
+			$("#selectAll").show();
+			$(".delList").show();
 		}
 		
+		//전체체크 선택
+		$('#selectAll').click(function(){
+			var checked = $(this).is(':checked');
+			
+			$('.delList').prop("checked", checked);
+		});
 	});
 
 $(function() {
@@ -38,10 +46,6 @@ $(function() {
 		
 	});
 	
-	function fn1(){
-	if (confirm("게시글을 삭제하시겠습니까?")) {
-		location.href='/notice/delete?noticeSeq=${dto.noticeSeq}'
-	}};
 
 	function showContent() {
 		console.log("clicked")
@@ -64,13 +68,13 @@ $(function() {
 <div class='LetplCompose'>
 	<p><input type="button" id="writeBtn" value="글쓰기" onclick="location.href='/notice/insertform'"></p>
 </div>
-<form action="notice/list" method="post">
-<div class='LetplNotice'>
+	<div class='LetplNotice'>
 	<div class='LetplNum'>번호</div>
 	<div class='LetplWriter'>작성자</div>
 	<div class='LetplTitle'>제목</div>
 	<div class='LetplDate'>작성일</div>
 </div>
+<form action="/notice/delete" method="post">
 <ul class='LetplList'>
 <c:choose>
 <c:when test="${empty noticelist }">
@@ -80,8 +84,8 @@ $(function() {
 <c:forEach items="${noticelist}" var="notice">
 	<div id='listSection'>
 	<li>
-		<div><input type="checkbox" class="delList" name="delList" value="${notice.noticeSeq }"></div>
-		<div class='listNum'>${notice.noticeSeq }</div>
+		<div class='listNum'>
+		<input type="checkbox" class="delList" name="delList" value="${notice.noticeSeq }"/>${notice.noticeSeq }</div>
 		<div class='listWriter'>${notice.id }</div>
  		<div  class='listTitle' onclick='showContent();'>${notice.noticeTitle }</div>
  		<div class='listDate'><fmt:formatDate value="${notice.noticeDate }" pattern="yyyy-MM-dd(E)" /></div>
@@ -90,13 +94,13 @@ $(function() {
         <div>${notice.noticeContent }</div>
         <div class='modBtn'>
           <input type="button" id="insertBtn" value="수정" onclick="location.href='/notice/updateform?noticeSeq=${notice.noticeSeq}'">
-       	  <input style='margin-right:15px;' id="deleteBtn" type="button" value="삭제" onclick="javascript:fn1();"></button>
+       	  <input style='margin-right:15px;' id="deleteBtn" type="submit" value="삭제" >
         </div>
       </div>
       </div>
 </c:forEach>
 </c:otherwise>
-</c:choose>	
+</c:choose>
 </ul>
 </form>
 
