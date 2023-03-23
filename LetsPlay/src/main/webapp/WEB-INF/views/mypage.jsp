@@ -102,10 +102,6 @@
 			<div style='background-color:lightgrey'>${member.id}</div>
 		</div>
 		<div class='memberMod'>
-			<p>생년월일</p>
-			<div style='background-color:lightgrey'>${member.birth}</div>
-		</div>
-		<div class='memberMod'>
 			<p>비밀번호</p>
 			<div style='background-color:lightgrey'>${member.password}</div>
 		</div>
