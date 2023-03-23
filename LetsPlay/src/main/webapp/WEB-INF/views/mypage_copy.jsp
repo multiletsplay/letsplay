@@ -102,6 +102,10 @@
 			<div style='background-color:lightgrey'>${member.id}</div>
 		</div>
 		<div class='memberMod'>
+			<p>생년월일</p>
+			<div style='background-color:lightgrey'>${member.birth}</div>
+		</div>
+		<div class='memberMod'>
 			<p>비밀번호</p>
 			<div style='background-color:lightgrey'>${member.password}</div>
 		</div>
@@ -150,6 +154,18 @@
       	<h3>매치 내역</h3>
         <p>내가 만든 매치, 참여한 매치 내역입니다.</p>
  			<div id='BookedMatch'>
+				<!-- <div class='BookedMatchInform'>
+					<span style='flex-basis:90px; text-align: center;'>작성자</span>
+					<span style='flex-basis:80px; text-align: center;'>종목</span>
+					<span style='flex-basis:200px; text-align: center;'>제목</span>
+					<span style='flex-basis:140px; text-align: center;'>매칭날짜</span>
+					<span style='flex-basis:140px; text-align: center;'>남은날짜</span>
+					<span style='flex-basis:100px; text-align: center;'>장소</span>
+					<span style='flex-basis:120px; text-align: center;'>시작시간 ~ 종료시간</span>
+					<span style='flex-basis:70px; text-align: center;'>참여인원/총인원</span>
+					<span>레벨</span>
+					<span>댓글 수</span>
+				</div> -->
 			<c:choose>
 				<c:when test="${empty list and empty joinlist }">
 					<div class='BookedMatchSport'>
@@ -159,10 +175,35 @@
 				<c:otherwise>
 				<c:if test="${not empty list }">
 					<c:forEach items="${list }" var="dto">
+						<!-- <div id='bookedMatchFirst'>
+							<span>${dto.nickName }</span>
+							<span>${dto.spoName}</span>
+							<span><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></span>
+							<span><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" /></span>
+							<span>
+							  <c:forEach var="i" items="${ddays }">
+							    <c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+							      마감 ${i.value }일 전
+							    </c:if>
+							  </c:forEach>
+							</span>
+							<span>${dto.matchLocation }</span>
+							<span>${dto.startTime } ~ ${dto.endTime }</span>
+							<span>${dto.cntJoin }/${dto.matchTotal }</span>
+							<span>${dto.matchLevel }</span>
+							<span>${dto.cntComment }</span>
+						</div> -->
 						<div class="mb-20 lesson-list-l">
 							<div>
 								<div class="match-list">
 									<p>
+										<span class="deadline">
+											<c:forEach var="i" items="${ddays }">
+												<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+													마감 ${i.value }일 전
+												</c:if>
+											</c:forEach>
+										</span>
 										<span class="sports-category">${dto.spoName}</span>
 										<span class="num-people">${dto.cntJoin }/${dto.matchTotal }명</span>
 									</p>
@@ -179,7 +220,16 @@
 										<span class="time">${dto.startTime } ~ ${dto.endTime }</span>
 									</div>
 									
-									
+									<div class="favorite">
+										<c:choose>
+												<c:when test="${dto.likesStatus eq 1 }">
+													<img onclick="dellike()" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+												</c:when>
+												<c:otherwise>
+													<img onclick="like()" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+												</c:otherwise>
+											</c:choose>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -187,10 +237,35 @@
 					</c:if>
 					<c:if test ="${not empty joinlist }">
 						<c:forEach items="${joinlist }" var="dto">
+						<!-- <div id='bookedMatchSecond'>
+							<span>${dto.nickName }</span>
+							<span>${dto.spoName}</span>
+							<span><a href="/match/detail?matchSeq=${dto.matchSeq }">${dto.matchTitle }</a></span>
+							<span><fmt:formatDate value="${dto.matchDay }" pattern="yyyy-MM-dd(E)" /></span>
+							<span>
+								<c:forEach var="i" items="${ddays2 }">
+									<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+										마감 ${i.value }일 전
+									</c:if>
+								</c:forEach>
+							</span>
+							<span>${dto.matchLocation }</span>
+							<span>${dto.startTime } ~ ${dto.endTime }</span>
+							<span>${dto.cntJoin }/${dto.matchTotal }</span>
+							<span>${dto.matchLevel }</span>
+							<span>${dto.cntComment }</span>
+						</div> -->
 						<div class="mb-20 lesson-list-l">
 							<div>
 								<div class="match-list">
 									<p>
+										<span class="deadline">
+											<c:forEach var="i" items="${ddays }">
+												<c:if test="${dto.matchSeq eq i.key.matchSeq }" >
+													마감 ${i.value }일 전
+												</c:if>
+											</c:forEach>
+										</span>
 										<span class="sports-category">${dto.spoName}</span>
 										<span class="num-people">${dto.cntJoin }/${dto.matchTotal }명</span>
 									</p>
@@ -207,7 +282,16 @@
 										<span class="time">${dto.startTime } ~ ${dto.endTime }</span>
 									</div>
 									
-							
+									<div class="favorite">
+										<c:choose>
+												<c:when test="${dto.likesStatus eq 1 }">
+													<img onclick="dellike()" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+												</c:when>
+												<c:otherwise>
+													<img onclick="like()" idx="${dto.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+												</c:otherwise>
+											</c:choose>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -310,9 +394,9 @@
         <div class='inqList'>
 			<ul>
 				<li class='inqListNum'>번호</li>
+				<li class='inqListChk'>답변상태</li>
 				<li class='inqListTitle'>제목</li>
 				<li class='inqListID'>ID</li>
-				<li class='inqListChk'>답변상태</li>
 				<li class='inqListDate'>날짜</li>
 			</ul>
 		</div>
@@ -326,12 +410,12 @@
 				<c:forEach items="${inqlist}" var="dto">
 					<ul id='inqContentsList'>
 						<li class='inqListNum'>${dto.inqSeq }</li>
-						<li class='inqListTitle'><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></li>
-						<li class='inqListID'>${dto.id }</li>
-							<c:choose>
+						<c:choose>
 							<c:when test="${dto.replyCheck == 0 }"><li class='inqListChk'>답변대기</li></c:when>
 							<c:otherwise><li class='inqListChk'>답변완료</li></c:otherwise>
 						</c:choose>
+						<li class='inqListTitle'><a href="/inquiry/detail?inqSeq=${dto.inqSeq }">${dto.inqTitle }</a></li>
+						<li class='inqListID'>${dto.id }</td>
 						<li class='inqListDate'><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.inqDate }"/></li>
 					</ul>
 				</c:forEach>
