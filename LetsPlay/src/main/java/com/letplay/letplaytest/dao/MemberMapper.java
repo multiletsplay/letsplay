@@ -98,7 +98,7 @@ public interface MemberMapper {
 	
 	@Select(" SELECT i.*, (SELECT COUNT(*) FROM INQUIRY_REPLY r WHERE i.INQ_SEQ = r.INQ_SEQ) REPLY_CHECK "
 			+ " FROM `ONE-ON-ONE INQUIRY` i"
-			+ " WHERE i.ID = 'user1' ")
+			+ " WHERE i.ID = #{id} ")
 	List<InquiryDto> selectInq(String id);
 
 	@Select(" SELECT m.*, NICKNAME, s.SPO_NAME,"
