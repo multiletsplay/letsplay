@@ -103,15 +103,12 @@
 		</div>
 		<div class='memberMod'>
 			<p>비밀번호</p>
-			<div style='background-color:lightgrey'>${member.password}</div>
+			<input type="password" id="clientNickname" name="nickname" value="${member.password}">
+			<!-- <div style='background-color:lightgrey'>${member.password}</div> -->
 		</div>
 		<div class='memberMod'>
 			<p>이름</p>
 			<input id='clientName' type="text" name="name" value="${member.name}">
-		</div>
-		<div class='memberMod'>
-			<p>성별</p>
-			<div style='background-color:lightgrey'>${member.gender}</div>
 		</div>
 		<div class='memberMod'>
 			<p>닉네임</p>
