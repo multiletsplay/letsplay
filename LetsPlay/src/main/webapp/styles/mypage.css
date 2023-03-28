@@ -390,6 +390,12 @@ ul, li {
 	cursor: pointer;
 }
 
+
+.color_review{
+	background-color:var(--font-100) !important;
+	color:var(--font-200);
+}
+
 .tab-button {
 	border-style: none;
 	width: 100px;
@@ -431,15 +437,7 @@ ul, li {
 	margin-left: 0;
 }
 
-#MakeSorting {
-	transform: translate(20%);
-}
 
-#sorting-tab-button-nav {
-	transform: translate(10%);
-	margin: 15px;
-	margin-bottom: 100px;
-}
 
 #sorting-tab-button-nav > button {
 	border-style: none;
@@ -447,8 +445,7 @@ ul, li {
 	width: 120px;
 	height: 50px;
 	border-radius: 8px;
-	margin-left: 15px;
-  background-color: var(--primary-600);
+ 	background-color: var(--primary-600);
 	color: white;
 	cursor: pointer;
 }
@@ -465,6 +462,17 @@ ul, li {
 
 
 
+.PuckAge{
+	display: flex;
+    flex-direction: initial;
+}
 
+.PuckAge div.div_wrap{
+	margin-right:10px;
+}
+
+.mr10{
+	margin-right:10px !important; 
+}
 
 
