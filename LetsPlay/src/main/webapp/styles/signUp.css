@@ -76,11 +76,15 @@ hr {
 }
 
 .ValTarget span.warning{
-    color:red;
+	color: red;
     font-size: .7rem;
-    position: absolute;
-    top: 35px;
-    left: 0;
+    display: block;
+    line-height: 18px;
+    margin-left: 130px;
+}
+
+.color_green{
+	color:green !important;
 }
 
 .ValTarget div:first-child{
