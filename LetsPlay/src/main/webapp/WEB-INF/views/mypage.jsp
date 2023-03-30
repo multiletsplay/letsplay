@@ -10,8 +10,10 @@
 	$(document).ready(function(){
 		$("#nicknameChk").click(nicknameChk);
 	
-		//찜
-		$("#dellikeBtn").click(dellike);
+		//찜취소
+		$("#facdellikeBtn").click(facdellike);
+		$("#lesdellikeBtn").click(lesdellike);
+		$("#matdellikeBtn").click(matdellike);
 	});
 	
 	function openPopUpf() {
@@ -59,8 +61,35 @@
 		});
 		
 	}
+	
+	function facdellike(){
+		let facSeq = $(event.target).attr('idx');
 
-	function dellike(){
+		$.ajax({
+			url : "/facility/dellikes",
+			type : "GET",
+			data : { 'facSeq' : facSeq },
+			success : function(){
+				window.location.reload();
+			}
+		});
+	}
+	
+	function lesdellike(){
+		let lesSeq = $(event.target).attr('idx');
+		$.ajax({
+			url : "/lesson/dellikes",
+			type : "GET",
+			data : { 'lesSeq' : lesSeq },
+			success : function(){
+				alert("취소 성공");
+				window.location.reload();
+			}
+		});
+	}
+	
+	function matdellike(){
+		
 		let matchSeq = $(this).attr('idx');
 		$.ajax({
 			url : "/match/dellikes",
@@ -373,7 +402,24 @@
 					            <li class="price">
 					                <em>${fac.facLocation }</em>
 					            </li>
-					            <li class="like"><div class="n-like like-sm"><img id="dellikeBtn" idx="${fac.facSeq }" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="좋아요"><span>이용자 리뷰 ${fac.cntReview }개</span></div></li>
+					            <li class="like"><div class="n-like like-sm"><img id="facdellikeBtn" idx="${fac.facSeq }" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="좋아요"><span>이용자 리뷰 ${fac.cntReview }개</span></div></li>
+					        </ul>
+					    </div>
+		            </c:forEach>
+	            </c:if>
+	            <c:if test="${not empty likesleslist }">
+		            <c:forEach items="${likesleslist }" var="les">
+	           			<div class="n-prd-row" onclick="active_list('check_1535332');">
+       						<a href="/lesson/detail?lesSeq=${les.lesSeq }" class="img-block">
+        					    <img id="lesImageSource" src="${les.lesImgpath}" alt="레슨 사진">
+      					    </a>
+	         			    <ul class="Jjiminfo">
+					            <li class="brand"><button id="lesSpoBtn">${les.spoName}</button></li>
+					            <li class="name"><a style='font-size:24px; font-weight:bold;' href="/lesson/detail?lesSeq=${les.lesSeq }">${les.lesName }</a></li>
+					            <li class="price">
+					                <em>${les.lesLocation }</em>
+					            </li>
+					            <li class="like"><div class="n-like like-sm"><img id="lesdellikeBtn" idx="${les.lesSeq }" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png" alt="좋아요"><span>이용자 리뷰 ${les.cntReview }개</span></div></li>
 					        </ul>
 					    </div>
 		            </c:forEach>
@@ -396,7 +442,7 @@
 							<fmt:formatDate value="${mat.matchDay }" pattern="yyyy-MM-dd(E)" /></td>
 	           				<td>${mat.startTime } ~ ${mat.endTime }</td>
 		            		<td>
-				   					<img id="dellikeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+				   					<img id="matdellikeBtn" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 		            		</td>
 	            		</tr>
 		            </c:forEach>
