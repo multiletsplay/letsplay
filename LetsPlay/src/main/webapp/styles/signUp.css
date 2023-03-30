@@ -1,10 +1,10 @@
-.SigningMain {
+/* .SigningMain {
     display: flex;
     justify-content: center;
-}
+} */
 .Signing {
-    margin: 50px 0px;
-    width:600px;
+    margin: 0 auto;
+    width: 650px;
 }
 .Signing > span {
     position: relative;
@@ -76,11 +76,15 @@ hr {
 }
 
 .ValTarget span.warning{
-    color:red;
+	color: red;
     font-size: .7rem;
-    position: absolute;
-    top: 35px;
-    left: 0;
+    display: block;
+    line-height: 18px;
+    margin-left: 130px;
+}
+
+.color_green{
+	color:green !important;
 }
 
 .ValTarget div:first-child{
@@ -128,18 +132,11 @@ hr {
     transform: translate(1.2%);
 } */
 
-.formBtn {
-    /* width: 249px; */
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
-    margin-left: 129px;
-}
 
-.formBtn ul{
+
+.formBtn ul {
     display: flex;
 }
-
 .formBtn ul li.formBtnGender label{
     padding: 2px 46px;
 }
@@ -151,7 +148,6 @@ hr {
     border-radius: 5px;
     height: 35px;
     background-color: rgb(219, 219, 219);
-    transform: translate(1.8%);
 }
 .formDate {
     display: flex;
@@ -214,7 +210,7 @@ hr {
     border-style: none;
     margin: 50px auto 20px auto;
     border-radius: 20px;
-    background-color: aquamarine;
+    background-color: var(--primary);
     color: white;
 }
 .signUpBtn > button:disabled {
@@ -228,13 +224,11 @@ hr {
     margin-right: 10px;
 }
 
-/* #nicknameChk {
-	transform:translate(20%);	
+div.formBtnGender{
+    margin-left:130px;
 }
 
-#phoneChkBtn {
-	transform:translate(-1.5%);
-} */
+
 
 .formBtn input[type="radio"] {
 	display: none;
@@ -280,4 +274,37 @@ hr {
 }
 .VNUM {
     top: 455px;
+}
+
+
+.tab-content{
+	display: none;
+	padding: 15px;
+    margin-top:50px;
+}
+
+.tab-content.current{
+	display: inherit;
+}
+
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 15px;
+	cursor: pointer;
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--font-200);
+}
+
+ul.tabs li.current{
+	color: var(--font);
+    border:1px solid var(--font);
 }
