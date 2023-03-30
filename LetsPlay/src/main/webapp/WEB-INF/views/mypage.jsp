@@ -9,9 +9,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#nicknameChk").click(nicknameChk);
-	
-		//찜
-		$("#dellikeBtn").click(dellike);
 	});
 	
 	function openPopUpf() {
@@ -60,7 +57,34 @@
 		
 	}
 
-	function dellike(){
+	function facdellike(){
+		let facSeq = $(event.target).attr('idx');
+
+		$.ajax({
+			url : "/facility/dellikes",
+			type : "GET",
+			data : { 'facSeq' : facSeq },
+			success : function(){
+				window.location.reload();
+			}
+		});
+	}
+	
+	function lesdellike(){
+		let lesSeq = $(event.target).attr('idx');
+		$.ajax({
+			url : "/lesson/dellikes",
+			type : "GET",
+			data : { 'lesSeq' : lesSeq },
+			success : function(){
+				alert("취소 성공");
+				window.location.reload();
+			}
+		});
+	}
+	
+	function matdellike(){
+		
 		let matchSeq = $(this).attr('idx');
 		$.ajax({
 			url : "/match/dellikes",
@@ -71,7 +95,7 @@
 				window.location.reload();
 			}
 		});
-}
+	}
 	
 </script>
 
@@ -385,10 +409,49 @@
 										<div class="favorite">
 											<c:choose>
 												<c:when test="${fac.likesStatus eq 1 }">
-													<img onclick="dellike()" idx="${fac.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+													<img onclick="facdellike()" idx="${fac.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 												</c:when>
 												<c:otherwise>
 													<img onclick="like()" idx="${dto.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</div>
+								</div>
+							</div>
+
+		            </c:forEach>
+	            </c:if>
+	            <c:if test="${not empty likesleslist }">
+		            <c:forEach items="${likesleslist }" var="les">					    
+					    
+					    <div class="facility-list-fl mr10">
+									<input type="checkbox" class="delList" name="delList" value="${dto.lesSeq }"/>
+									<div class="lesson">
+										<a href="/lesson/detail?lesSeq=${les.lesSeq }">
+											<p class="img">
+												<span class="sports-category">${les.spoName}</span>
+												<img src="${les.lesImgpath }">
+												<span class="les-review">${les.avgRate }점</span>
+											</p>
+										</a>
+									<div>
+										<a href="/lesson/detail?lesSeq=${les.lesSeq }">
+											<p class="les-title">${les.lesName }</p>
+										</a>
+										
+										<p class="review-count">이용자 리뷰  ${les.cntReview }개</p>
+										
+										<p style=" height: 19px; width: 240px;">
+											<span class="lesson-location">${les.lesLocation }</span>
+										</p>
+										<div class="favorite">
+											<c:choose>
+												<c:when test="${les.likesStatus eq 1 }">
+													<img onclick="lesdellike()" idx="${les.lesSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+												</c:when>
+												<c:otherwise>
+													<img onclick="like()" idx="${dto.lescSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
 												</c:otherwise>
 											</c:choose>
 										</div>
@@ -424,7 +487,7 @@
 									<div class="favorite">
 											<c:choose>
 												<c:when test="${mat.likesStatus eq 1 }">
-													<img onclick="dellike()" idx="${mat.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+													<img onclick="matdellike()" idx="${mat.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 												</c:when>
 												<c:otherwise>
 													<img onclick="like()" idx="${mat.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
