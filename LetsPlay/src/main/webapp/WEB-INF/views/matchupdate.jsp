@@ -62,7 +62,7 @@ function addOneHour() {
 					<p>시설등록</p>
 					<div style="position: relative;">
 						<input type="hidden" id="facSeq" name="facSeq" style="display: none;">
-						<input type="text" id="facname" name="facname" >			
+						<input type="text" id="facname" required>			
 						<input class="facBtn" type="button" value="시설 수정" onclick="openPopUp()" >
 						<input type="hidden" name="matchFacility" value="Y">
 					</div>
@@ -147,7 +147,7 @@ function addOneHour() {
 				<p>매칭 레벨</p>
 				<div class="match_level">
 					<input type="range" name="matchLevel" min="1" max="5" value="1" oninput="document.getElementById('levelmatch').innerHTML=this.value;">
-					<span style="margin-left: 15px;">레벨: </span><span id="levelmatch">3</span>
+					<span style="margin-left: 15px;">레벨: </span><span id="levelmatch">1</span>
 				</div>
 			</div>
 	
