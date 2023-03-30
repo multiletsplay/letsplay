@@ -14,8 +14,8 @@
 		<h2 class="section__title mb-40">Sign Up</h2>
 		<div class="container">
 			<ul class="tabs">
-					<li class="tab-link current" data-tab="tab-1">일반회원</li>
-					<li class="tab-link" data-tab="tab-2">비즈니스회원</li>
+					<li class="tab-link current" data-tab="tab-1" onclick="location.href='/member/signupform'" >일반회원</li>
+					<li class="tab-link" data-tab="tab-2"onclick="location.href='/member/signupformbiz'" >비즈니스회원</li>
 			</ul>
 
 			<div id="tab-1" class="tab-content current">
@@ -341,7 +341,7 @@
 	    </li>
 	  </ul> -->
 
-		<script>
+<!-- 		<script>
 			$(document).ready(function(){
 					$('ul.tabs li').click(function(){
 							var tab_id = $(this).attr('data-tab');
@@ -355,7 +355,7 @@
 
 			});
 			
-		</script>
+		</script> -->
 	</div>
 </div>
 </div>
