@@ -487,10 +487,10 @@
 									<div class="favorite">
 											<c:choose>
 												<c:when test="${mat.likesStatus eq 1 }">
-													<img onclick="matdellike()" idx="${mat.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
+													<img onclick="matdellike()" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
 												</c:when>
 												<c:otherwise>
-													<img onclick="like()" idx="${mat.facSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
+													<img onclick="like()" idx="${mat.matchSeq }" width="20" src="https://cdn-icons-png.flaticon.com/512/2589/2589197.png">
 												</c:otherwise>
 											</c:choose>
 										</div>
