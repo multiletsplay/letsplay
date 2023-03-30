@@ -104,7 +104,7 @@ public class LetsMemberController {
             }
 
             // 유효성 통과 못한 필드와 메시지를 핸들링
-            return "signupgen";
+            return "signup";
         } else {
         	if(membiz.insert(dto)>0) {
                 model.addAttribute("msg", "회원가입 성공");
@@ -113,7 +113,7 @@ public class LetsMemberController {
             }else {
             	System.out.println("회원가입 실패");
                 model.addAttribute("msg", "회원가입 실패");
-                model.addAttribute("url", "/member/signupformgen");
+                model.addAttribute("url", "/member/signup");
                 return "alert";
             }
         

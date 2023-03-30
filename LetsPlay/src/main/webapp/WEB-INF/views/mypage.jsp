@@ -82,7 +82,7 @@
 			}
 		});
 	}
-	
+
 	function matdellike(){
 		
 		let matchSeq = $(this).attr('idx');
