@@ -84,8 +84,7 @@
 	}
 
 	function matdellike(){
-		
-		let matchSeq = $(this).attr('idx');
+		let matchSeq = $(event.target).attr('idx');
 		$.ajax({
 			url : "/match/dellikes",
 			type : "GET",
