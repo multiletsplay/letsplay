@@ -78,13 +78,17 @@ hr {
 .ValTarget span.warning{
 	color: red;
     font-size: .7rem;
-    display: block;
+    display: flex;
     line-height: 18px;
     margin-left: 130px;
 }
 
-.color_green{
+.success{
 	color:green !important;
+    font-size: .7rem;
+    display: flex;
+    line-height: 18px;
+    margin-left: 130px;
 }
 
 .ValTarget div:first-child{
@@ -307,4 +311,8 @@ ul.tabs li{
 ul.tabs li.current{
 	color: var(--font);
     border:1px solid var(--font);
+}
+
+.hide{
+    display: none !important;
 }
