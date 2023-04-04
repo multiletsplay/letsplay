@@ -4,7 +4,8 @@
 <%@ include file="header.jsp" %>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script type="text/javascript">
+<script defer type="text/javascript" src="../../js/validator.js"></script>
+<!-- <script type="text/javascript">
 	$(document).ready(function(){
 		$("#idChk").click(idChk);
 		$("#phoneBtn").click(auth);
@@ -23,6 +24,8 @@
 				if(data == 1){
 					alert("이미 사용중인 ID입니다.");
 					$("#signup").attr("type", "button");
+				}else if(data == 0){
+					alert("아이디를 입력해주세요");
 				}else{
 					alert("사용 가능한 ID입니다.");
 				}
@@ -82,7 +85,7 @@
 	    }
 	  }
 	
-</script>
+</script> -->
 
 <div class='SigningMain inner'>
 <div class='Signing'>
