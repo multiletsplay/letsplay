@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script defer type="text/javascript" src="../../js/validator.js"></script>
 
 <div class='SigningMain inner'>
 <div class='Signing'>
@@ -19,25 +20,21 @@
 			</ul>
 
 			<div id="tab-1" class="tab-content current">
-				<form action="/member/signup" method="post">
+				<form action="/member/signup" method="post" name="myform">
 					<div>
 						<span style="color:red">*필수입력사항</span>
 								<hr/>
 								<div class='formBoxTop'>
 								<div class='formBox'>
-								<div class='ValTarget idCheck'>
+								<div class='ValTarget'>
 									<div>
-									<span>아이디</span>
-									<span class='redColour'>*</span>
+										<span>아이디</span>
+										<span class='redColour'>*</span>
 									</div>
-									<input
-									type="text"
-									placeholder='아이디를 입력해주세요'
-									id="id"
-									name="id"/>
-									
-									<button type='button' id="idChk">중복확인</button>
-									<span class="warning"></span>
+										<input type="text" placeholder='아이디를 입력해주세요' id="id" name="id"/>
+										<button type='button' id="idChk">중복확인</button>
+										<span class="hide warning">아이디는 네글자 이상이여야 합니다.</span>
+										<span class="hide success">사용할 수 있는 ID 입니다.</span>
 								</div>
 								
 								<div class='ValTarget pwCheck'>
@@ -50,7 +47,8 @@
 									placeholder="영문,숫자,특수문자 포함 8자 이상 15자 이하"
 									name="password"
 									/>
-									<span class="warning">${valid_password}</span>
+									<span class="hide warning">아이디는 네글자 이상이여야 합니다.</span>
+									<span class="hide success">사용할 수 있는 ID 입니다.</span>
 								</div>
 							 
 								<div class='ValTarget pwDCheck'>
@@ -179,7 +177,9 @@
 		<span class='agrChk'>만 14세 이상입니다.(필수)</span></label>
 	</div>
 	<div class='signUpBtn'>
-		<button type="submit" id="signup" style="width:350px; cursor: pointer">가입하기</button>
+		<!-- <button type="submit" id="signup" style="width:350px; cursor: pointer">가입하기</button> -->
+					<input type="submit" value="가입하기" onClick="return check()">
+		
 	</div>
 	</div>
 				</form>
@@ -313,7 +313,8 @@
 		<span class='agrChk'>만 14세 이상입니다.(필수)</span></label>
 	</div>
 	<div class='signUpBtn'>
-		<button type="submit" id="signup" style="width:350px; cursor: pointer">가입하기</button>
+		<!-- <button type="submit" id="signup" style="width:350px; cursor: pointer">가입하기</button> -->
+		<input type="submit" value="가입하기" onClick="return check()">
 	</div>
 	</div>
 				</form>
@@ -362,14 +363,10 @@
 </div>
 
 
-<script type="text/javascript">
 
-const alertHtml = document.querySelector("span.warning");
-
-
-function classAdd(event) {
-	alertHtml.classList.add('color_green'); 
-}
+const alertHtml = document.querySelector(".warning");
+const inputText = document.querySelectorAll(".ValTarget input[type=text]");
+const inputPassword = document.querySelectorAll(".ValTarget input[type=password]");
 
 
 	$(document).ready(function(){
@@ -383,18 +380,19 @@ function classAdd(event) {
 	function idChk(){
 		let id = $("#id").val().trim();
 		
+		checkID();
+		
 		$.ajax({
 			url:"/member/idcheck",
 			type:"get",
 			data:{ "id" : id },	
 			success:function(data){
 				if(data == 1){
+					alertHtml.classList.remove('color_green'); 
 					alertHtml.innerText = "이미 사용중인 아이디 입니다.";
 					$("#signup").attr("type", "button");
-				}else if(data == 0){
-					alertHtml.innerText = "아이디를 입력해주세요";
 				}else{
-					classAdd(event);
+					alertHtml.classList.add('color_green'); 
 					alertHtml.innerText = "사용 가능한 ID입니다.";
 				}
 			},
@@ -417,8 +415,6 @@ function classAdd(event) {
 				if(result == true){
 					alertHtml.innerText = "이미 가입된 전화번호입니다.";
 					$("#signup").attr("type", "button");
-				}else if(data == 0){
-					alertHtml.innerText = "전화번호를 입력해주세요";
 				}else{
 					classAdd(event);
 					alertHtml.innerText = "인증 번호를 전송했습니다.";
@@ -456,10 +452,8 @@ function classAdd(event) {
 			data:{ "nickname" : nickname },	
 			success:function(data){
 				if(data == 1){
-					alertHtml.innerText = "이미 사용중인 닉네임입니";
+					alertHtml.innerText = "이미 사용중인 닉네임입니다";
 					$("#signup").attr("type", "button");
-				}else if(data == 0){
-					alertHtml.innerText = "닉네임을 입력해주세요";
 				}else{
 					classAdd(event);
 					alertHtml[4].innerText = "사용가능한 닉네임 입니다.";
@@ -480,5 +474,18 @@ function classAdd(event) {
 	    }
 	  }
 	
-</script>
+	
+	function checkID(){
+		if(myform.id.value.length == 0){ // myform.id.value == "" 이것도 가능
+			alertHtml.classList.remove('color_green'); 
+			alertHtml.innerText = "이미 사용중인 아이디 입니다.";
+			myform.id.focus(); // 포커스를 이동시켜 바로 아이디를 입력할 수 있게
+			return false;
+		}
+	}
+	
+	
+	
+	
+</script> -->
 <%@ include file="footer.jsp" %>
