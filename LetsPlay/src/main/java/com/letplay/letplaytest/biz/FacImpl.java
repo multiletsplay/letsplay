@@ -23,7 +23,7 @@ import com.letplay.letplaytest.dto.TimeDto;
 @Service
 public class FacImpl implements FacBiz{
 	
-	@Value("{cloud.aws.s3.bucket}")
+	@Value("${cloud.aws.s3.bucket}")
 	private String bucket ; //Bucket 이름
 	
 	@Autowired
