@@ -1,6 +1,12 @@
 const alertHtml = document.querySelector("input span");
 const ID = document.querySelector('input#id');
-
+const REGPASSSWORD = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,15}$/;
+const passwordInputBox = document.querySelector('#password');
+const passwordError = document.querySelector("span.password");
+const passwordErrorRetype = document.querySelector("span.password-retype");
+const passwordDouble = document.getElementById("pwChk");
+const phoneInput = document.getElementById("phone");
+const phoneNumSpan = document.querySelector("span.phone-number");
 
 const warningMessage = document.querySelector('.warning');
 const successMessage = document.querySelector('.success');
@@ -34,6 +40,73 @@ function isMoreThan4Length(value) {
 }
 
 
+// 비밀번호체크
+function passwordCheck(){
+	if(passwordInputBox.value.length< 8 || passwordInputBox.value.length >15) {
+		passwordError.innerText = "8이상 15자 이내로 입력해주세요";
+	}else if(!REGPASSSWORD.test(passwordInputBox.value)){
+		passwordError.innerText = "비밀번호는 문자, 숫자, 특수문자 포함입니다";
+	}else{passwordError.style.display='none';} };
+
+	passwordInputBox.addEventListener("keyup",passwordCheck);
+
+
+passwordDouble.onkeyup = function () {
+  if (isMatch(passwordInputBox.value, passwordDouble.value) ) {
+    passwordErrorRetype.innerText = ""
+  }
+  else {
+    passwordErrorRetype.innerText = "두 비밀번호가 일치하지 않습니다."
+  }
+}
+
+//비밀번호 값과 비밀번호 확인값이 일치하는지 판별하는 함수
+function isMatch (password1, password2) {
+  if ( password1 === password2 ) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+
+
+//휴대폰
+function autoHypenPhone(str){
+	str = str.replace(/[^0-9]/g, '');
+	var tmp = '';
+	if( str.length < 4){
+			return str;
+	}else if(str.length < 7){
+			tmp += str.substr(0, 3);
+			tmp += '-';
+			tmp += str.substr(3);
+			return tmp;
+	}else if(str.length < 11){
+			tmp += str.substr(0, 3);
+			tmp += '-';
+			tmp += str.substr(3, 3);
+			tmp += '-';
+			tmp += str.substr(6);
+			return tmp;
+	}else{              
+			tmp += str.substr(0, 3);
+			tmp += '-';
+			tmp += str.substr(3, 4);
+			tmp += '-';
+			tmp += str.substr(7);
+			return tmp;
+	}
+	return str;
+}
+phoneInput.onkeyup = function(event){
+event = event || window.event;
+var _val = this.value.trim();
+this.value = autoHypenPhone(_val) ;
+}
+
+
 
 
 	function idChk(){
@@ -47,7 +120,7 @@ function isMoreThan4Length(value) {
 			data:{ "id" : id },	
 			success:function(data){
 				if(data == 1){
-					alertHtml.innerText = "이미 사용중인 ID입니다.";
+					alert("이미 사용중인 ID입니다.");
 					$("#signup").attr("type", "button");
 				}else{
 					successMessage.classList.remove('hide');
@@ -72,11 +145,10 @@ function isMoreThan4Length(value) {
 			data : {tel : phoneNum},
 			success: function(result){
 				if(result == true){
-					alertHtml.innerText = "이미 가입된 전화번호입니다.";
+					alert("이미 가입된 전화번호입니다.");
 					$("#signup").attr("type", "button");
 				}else{
-					classAdd(event);
-					alertHtml.innerText = "인증 번호를 전송했습니다.";
+					alert("인증 번호를 전송했습니다.");
 				}
 			}
 		});
@@ -92,11 +164,11 @@ function isMoreThan4Length(value) {
 			data : {code : code},
 			success: function(result){
 				if(result == true){
-					alertHtml.innerText = "인증 번호가 다릅니다.";
+					alert("인증 번호가 다릅니다.");
 					$("#signup").attr("type", "button");
 				} else{
 					classAdd(event);
-					alertHtml.innerText = "인증되었습니다.";
+					alert("인증되었습니다.");
 				}
 			}
 		});
