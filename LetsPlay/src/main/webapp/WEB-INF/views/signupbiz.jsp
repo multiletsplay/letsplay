@@ -106,7 +106,6 @@
 			<div id="tab-1" class="tab-content current">
 				<form action="/member/signupbiz" method="post">
 					<div>
-						<!-- <div><h1>비즈니스계정 회원가입</h1></div> -->
 						<span style="color:red">*필수입력사항</span>
 						<hr/>
 						<div class='formBoxTop'>
@@ -122,7 +121,8 @@
 							name="id"/>
 							
 							<button type='button' id="idChk">중복확인</button>
-							<span class="warning">${valid_id}</span>
+							<span class="hide warning">아이디는 네글자 이상이여야 합니다.</span>
+							<span class="hide success">사용할 수 있는 ID 입니다.</span>
 						</div>
 						
 						<div class='ValTarget pwCheck'>
@@ -134,9 +134,9 @@
 							required
 							type="password"
 							placeholder="영문,숫자,특수문자 포함 8자 이상 15자 이하"
-							name="password"
+							name="password" id="password-retype"
 							/>
-							<span class="warning">${valid_password}</span>
+							<span class="password warning"></span>
 						</div>
 					 
 						<div class='ValTarget pwDCheck'>
@@ -144,7 +144,7 @@
 							<span>비밀번호확인</span>
 							<span class='redColour'>*</span>
 							</div>
-							<input
+							<input required
 							type="password"
 							placeholder='비밀번호를 한번 더 입력해주세요'
 							id="pwChk"/>
