@@ -9,6 +9,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,7 @@ import com.letplay.letplaytest.dto.MatchDto;
 
 @Controller
 @SpringBootApplication
-public class LetsPlayApplication {
+public class LetsPlayApplication extends SpringBootServletInitializer{
 	@Autowired
 	private FacBiz facBiz;
 	@Autowired
@@ -32,6 +34,11 @@ public class LetsPlayApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LetsPlayApplication.class, args);
 	}
+	
+//	@Override
+//	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//		return builder.sources(LetsPlayApplication.class);
+//	}
 	
 	@GetMapping("/")
 	public String root(Model model, @RequestParam(required = false) Integer mspoId, @RequestParam(required = false) Integer fspoId, @RequestParam(required = false) Integer lspoId, 
