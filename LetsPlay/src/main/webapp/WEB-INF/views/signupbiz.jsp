@@ -130,11 +130,10 @@
 							<span >비밀번호</span>
 							<span class='redColour' >*</span>
 							</div>
-							<input
-							required
+							<input required
 							type="password"
 							placeholder="영문,숫자,특수문자 포함 8자 이상 15자 이하"
-							name="password" id="password-retype"
+							name="password" id="password"
 							/>
 							<span class="password warning"></span>
 						</div>
@@ -144,10 +143,12 @@
 							<span>비밀번호확인</span>
 							<span class='redColour'>*</span>
 							</div>
-							<input required
+							<input 
+							required
 							type="password"
 							placeholder='비밀번호를 한번 더 입력해주세요'
 							id="pwChk"/>
+							<span class="password-retype warning"></span>
 						</div>
 						
 						<div class='ValTarget nameCheck'>
@@ -169,7 +170,7 @@
 							</div>
 							<input
 							type="text"
-							placeholder='ex) multi_7@campus.com'
+							placeholder='e.g multi_7@campus.com'
 							name="email"/>
 							<span class="warning">${valid_email }</span>
 						</div>
@@ -180,12 +181,14 @@
 							<span class='redColour'>*</span>
 							</div>
 							<input
+							required
 							type="text"
 							placeholder='숫자만 입력해주세요'
 							name="phone"
 							id="phone"/>
-							<span class="warning">${valid_phone }</span>
+
 							<button type='button' id="phoneBtn">인증받기</button>
+							<span class="warning phone-number">${valid_phone }</span>
 						</div>
 					 
 						<div class='ValTarget numDCheck'>
@@ -227,7 +230,8 @@
 		<span class='agrChk'>만 14세 이상입니다.(필수)</span></label>
 	</div>
 	<div class='signUpBtn'>
-		<button type="submit" id="signup" style="width:350px; cursor: pointer">가입하기</button>
+		<!-- <button type="submit" id="signup" style="width:350px; cursor: pointer">가입하기</button> -->
+		<input type="submit" value="가입하기" onClick="return check()">
 	</div>
 	</div>
 				</form>

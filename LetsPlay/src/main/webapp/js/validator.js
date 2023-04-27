@@ -5,7 +5,7 @@ const passwordInputBox = document.querySelector('#password');
 const passwordError = document.querySelector("span.password");
 const passwordErrorRetype = document.querySelector("span.password-retype");
 const passwordDouble = document.getElementById("pwChk");
-const phoneInput = document.getElementById("phone");
+const phoneInput = document.querySelector("input#phone");
 const phoneNumSpan = document.querySelector("span.phone-number");
 
 const warningMessage = document.querySelector('.warning');
@@ -18,10 +18,6 @@ const successMessage = document.querySelector('.success');
 		$("#nicknameChk").click(nicknameChk);
 	});
 	
-	function checkId(){
-
-  }
-
 
   //아이디 입력창에 글자를 키보드로 입력할 때, 메세지를 보여주는 함수
   ID.onkeyup = function () {
@@ -110,8 +106,6 @@ this.value = autoHypenPhone(_val) ;
 
 
 	function idChk(){
-    checkId();
-
 		let id = $("#id").val().trim();
 
 		$.ajax({
@@ -167,7 +161,6 @@ this.value = autoHypenPhone(_val) ;
 					alert("인증 번호가 다릅니다.");
 					$("#signup").attr("type", "button");
 				} else{
-					classAdd(event);
 					alert("인증되었습니다.");
 				}
 			}
@@ -177,17 +170,17 @@ this.value = autoHypenPhone(_val) ;
 	
 	function nicknameChk(){
 		let nickname = $("#nickname").val().trim();
+		
 		$.ajax({
 			url:"/member/nicknamecheck",
 			type:"get",
 			data:{ "nickname" : nickname },	
 			success:function(data){
 				if(data == 1){
-					alertHtml.innerText = "이미 사용중인 닉네임입니다";
+					alert("이미 사용중인 닉네임입니다.");
 					$("#signup").attr("type", "button");
 				}else{
-					classAdd(event);
-					alertHtml[4].innerText = "사용가능한 닉네임 입니다.";
+					alert("사용 가능한 닉네임입니다.");
 				}
 			},
 			error:function(){
