@@ -209,14 +209,21 @@ hr {
     align-items: center;
     transform: translate(-15%);
 }
-.signUpBtn button {
+.signUpBtn input[type="submit"] {
+    width: 150px;
     height: 50px;
     border-style: none;
     margin: 50px auto 20px auto;
     border-radius: 20px;
     background-color: var(--primary);
     color: white;
+    cursor: pointer;
 }
+
+.signUpBtn input[type="submit"]:hover{
+    background-color: var(--primary-200);
+}
+
 .signUpBtn > button:disabled {
     background-color: #DADADA;
     color: white;
@@ -315,4 +322,9 @@ ul.tabs li.current{
 
 .hide{
     display: none !important;
+}
+
+
+div.signUpLink{
+    text-align: center;
 }

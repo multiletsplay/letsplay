@@ -98,7 +98,7 @@
 									<input
 									required
 									type="text"
-									placeholder='ex) multi_7@campus.com'
+									placeholder='e.g multi_7@campus.com'
 									name="email"/>
 									<span class="warning">${valid_email }</span>
 								</div>
