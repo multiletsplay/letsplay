@@ -2,7 +2,6 @@
 
 <p align="center">
  <img src="https://user-images.githubusercontent.com/66414424/231442346-2219686e-1090-42b5-ac49-b0f6b65da761.png">
- ![image](https://user-images.githubusercontent.com/114376453/234912007-dd32fda6-87fe-4f6a-a04a-cc79a9a9d947.png)
 
 </p>
 
