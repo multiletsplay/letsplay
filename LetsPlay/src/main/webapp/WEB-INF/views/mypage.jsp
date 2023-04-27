@@ -126,7 +126,7 @@
 		</div>
 		<div class='memberMod'>
 			<p>비밀번호</p>
-			<input type="password" id="clientNickname" name="nickname" value="${member.password}">
+			<input type="password" id="clientNickname" name="password" value="${member.password}">
 			<!-- <div style='background-color:lightgrey'>${member.password}</div> -->
 		</div>
 		<div class='memberMod'>
