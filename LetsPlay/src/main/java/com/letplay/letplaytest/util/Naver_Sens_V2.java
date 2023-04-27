@@ -22,9 +22,9 @@ public class Naver_Sens_V2 {
         String hostNameUrl = "https://sens.apigw.ntruss.com";     		// 호스트 URL
         String requestUrl= "/sms/v2/services/";                   		// 요청 URL
         String requestUrlType = "/messages";                      		// 요청 URL
-        String accessKey = "cLdqfNxUPpetW9KdGgru";                     						// 개인 인증키
-        String secretKey = "1oA7zbdF1dSe1VifB5X9mRKzsKOdwzoddcVdrRXo";  										// 2차 인증을 위해 서비스마다 할당되는 service secret
-        String serviceId = "ncp:sms:kr:299988969996:letsplay";        									// 프로젝트에 할당된 SMS 서비스 ID
+        String accessKey = "";                     						// 개인 인증키
+        String secretKey = "";  										// 2차 인증을 위해 서비스마다 할당되는 service secret
+        String serviceId = "";        									// 프로젝트에 할당된 SMS 서비스 ID
         String method = "POST";											// 요청 method
         String timestamp = Long.toString(System.currentTimeMillis()); 	// current timestamp (epoch)
         requestUrl += serviceId + requestUrlType;
@@ -44,7 +44,7 @@ public class Naver_Sens_V2 {
 	    bodyJson.put("contentType","COMM");
 	    bodyJson.put("content","Letsplay 본인인증 ["+rand+"]");
 	    bodyJson.put("countryCode","82");
-	    bodyJson.put("from","01099398869");	// 발신번호 * 사전에 인증/등록된 번호만 사용할 수 있습니다.		
+	    bodyJson.put("from","");	// 발신번호 * 사전에 인증/등록된 번호만 사용할 수 있습니다.		
 	    bodyJson.put("messages", toArr);		
 	    
 	    
